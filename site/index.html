@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Explore chemical vapour deposition with a rotatable 3D chamber cutaway, six precursors, nine reference recipes and animated molecular reactions.">
+  <title>CVD Lab — 3D Chemical Vapour Deposition</title>
+  <meta name="author" content="S L RICHRIS">
+  <meta name="copyright" content="© 2026 S L RICHRIS. All rights reserved.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://richris-cvd-lab.greylyric32.chatgpt.site">
+  <meta property="og:title" content="CVD Lab">
+  <meta property="og:description" content="Explore 3D CVD chambers, precursor reactions and the role of deposited films.">
+  <meta property="og:url" content="https://richris-cvd-lab.greylyric32.chatgpt.site">
+  <style>
+    html { color-scheme:light dark; background-color:light-dark(#f3f5f9,#0b1322); scroll-padding-top:24px; }
+    body { margin:0; padding:32px 40px 46px; }
+    main { width:100%; max-width:1440px; margin:0 auto; }
+    @media(max-width:1000px) { body { padding:24px; } }
+    @media(max-width:700px) { body { padding:22px 16px 30px; } }
+    @media(max-width:400px) { body { padding:20px 12px 28px; } }
+  </style>
+  <style>
+    #cvd-recipe-accuracy {
+      --cv-panel:light-dark(#ffffff,#142139); --cv-text:light-dark(#172b4a,#eff4ff); --cv-muted:light-dark(#52627a,#b0bed2); --cv-line:light-dark(#dce3ed,#334562); --cv-active:light-dark(#244bc2,#87b0ff); --cv-active-text:light-dark(#ffffff,#10204b);
+      --cv-metal:light-dark(#bac7d1,#9cacb8); --cv-case:light-dark(#dce4ea,#677c8a); --cv-dark:light-dark(#344958,#304654); --cv-wafer:light-dark(#38435d,#566482); --cv-glass:light-dark(#b6dce3,#93bac6); --cv-heat:light-dark(#b46b33,#dd9961); --cv-plasma:light-dark(#8868bf,#bb9ae8); --cv-gas:light-dark(#377cad,#7eafd2); --cv-film:light-dark(#267f76,#70bcb0); --cv-floor:light-dark(#e9edf1,#202b34);
+      --cv-film-poly:light-dark(#62687b,#9da6b9); --cv-film-epi:light-dark(#555e70,#9aa7bc); --cv-film-oxide:light-dark(#bdd7dd,#aacbd4); --cv-film-nitride:light-dark(#c1c5ae,#d6dcc0); --cv-film-tungsten:light-dark(#969fa7,#bdc7cf); --cv-film-tin:light-dark(#b19b5f,#d6c48c);
+      --cv-atom-H:light-dark(#e1e8ee,#c5d3dc); --cv-atom-Si:light-dark(#aa8057,#bd956e); --cv-atom-O:light-dark(#d46b6d,#d8787b); --cv-atom-N:light-dark(#6d94cf,#85a4d8); --cv-atom-Cl:light-dark(#78a768,#93bb83); --cv-atom-F:light-dark(#79b5ad,#8cc5bc); --cv-atom-C:light-dark(#7e8f9d,#86939d); --cv-atom-W:light-dark(#8e9ca8,#aebecb); --cv-atom-Ti:light-dark(#a789b6,#bba3c9); --cv-atom-ink:light-dark(#162632,#152430);
+      --cv-soft:light-dark(#f6f8fc,#192840); --cv-accent:light-dark(#086b65,#66ded1); --cv-accent-soft:light-dark(#edf8f4,#123b35); --cv-stage:light-dark(#f8fafb,#13222c);
+      --cv-blue:light-dark(#1c47b1,#9dbbff); --cv-blue-soft:light-dark(#f0f4ff,#192c4c); --cv-violet:light-dark(#6536b6,#c6a3ff); --cv-violet-soft:light-dark(#f6f1fc,#2b2045); --cv-teal-line:light-dark(#c6e3d8,#356b61);
+      color:var(--cv-text); font:14px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    #cvd-recipe-accuracy * { box-sizing:border-box; }
+    #cvd-recipe-accuracy :is(h1,h2,p) { margin:0; }
+    #cvd-recipe-accuracy .cv-head { display:flex; justify-content:space-between; align-items:flex-end; gap:28px; padding:4px 0 28px; }
+    #cvd-recipe-accuracy .cv-overline { color:var(--cv-muted); font-size:11px; line-height:1.5; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+    #cvd-recipe-accuracy .cv-brand .cv-overline { margin-bottom:8px; }
+    #cvd-recipe-accuracy .cv-name { font-size:42px; line-height:1.12; letter-spacing:-1.8px; font-weight:600; }
+    #cvd-recipe-accuracy .cv-byline { margin-top:8px; color:var(--cv-muted); font-size:13px; }
+    #cvd-recipe-accuracy .cv-head-note { max-width:320px; padding-bottom:2px; text-align:right; }
+    #cvd-recipe-accuracy .cv-head-note p:first-child { font-size:16px; font-weight:500; letter-spacing:-.2px; }
+    #cvd-recipe-accuracy .cv-secondary { color:var(--cv-muted); font-size:12px; }
+    #cvd-recipe-accuracy .cv-head-note .cv-secondary { margin-top:4px; }
+    #cvd-recipe-accuracy .cv-setup { background:var(--cv-panel); border:1px solid var(--cv-line); border-radius:14px; padding:20px 24px 14px; margin-bottom:20px; box-shadow:0 3px 14px rgb(15 39 43 / 2%); }
+    #cvd-recipe-accuracy .cv-setup-row { display:grid; grid-template-columns:minmax(250px,1.25fr) minmax(290px,1fr) auto; gap:28px; align-items:end; }
+    #cvd-recipe-accuracy .cv-chem-controls { min-width:0; }
+    #cvd-recipe-accuracy label { color:var(--cv-muted); font-size:12px; }
+    #cvd-recipe-accuracy .cv-chem-controls>label { display:flex; flex-direction:column; gap:8px; align-items:stretch; font-weight:500; }
+    #cvd-recipe-accuracy .cv-control-label { display:block; color:var(--cv-muted); font-size:12px; font-weight:500; margin-bottom:8px; }
+    #cvd-recipe-accuracy :is(button,select,input) { font:inherit; }
+    #cvd-recipe-accuracy button { color:var(--cv-text); background:transparent; border:1px solid var(--cv-line); border-radius:8px; padding:9px 14px; min-height:42px; font-size:13px; font-weight:500; cursor:pointer; transition:background .15s,border-color .15s,color .15s; }
+    #cvd-recipe-accuracy button:hover:not(:disabled) { background:var(--cv-soft); border-color:var(--cv-muted); }
+    #cvd-recipe-accuracy button:disabled { opacity:.34; cursor:not-allowed; }
+    #cvd-recipe-accuracy select { width:100%; max-width:100%; min-height:44px; padding:9px 12px; background:var(--cv-soft); color:var(--cv-text); border:1px solid var(--cv-line); border-radius:8px; font-size:14px; cursor:pointer; }
+    #cvd-recipe-accuracy .cv-modes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); padding:3px; gap:3px; border:1px solid var(--cv-line); background:var(--cv-soft); border-radius:9px; }
+    #cvd-recipe-accuracy .cv-modes button { min-width:0; min-height:36px; padding:6px 14px; border-color:transparent; border-radius:6px; }
+    #cvd-recipe-accuracy .cv-modes button[aria-pressed="true"] { color:var(--cv-active-text); background:var(--cv-active); border-color:var(--cv-active); box-shadow:0 1px 3px rgb(0 0 0 / 8%); }
+    #cvd-recipe-accuracy .cv-modes button[aria-pressed="true"]:hover { background:var(--cv-active); }
+    #cvd-recipe-accuracy #cv-play { min-width:156px; min-height:44px; color:var(--cv-active-text); background:var(--cv-active); border-color:var(--cv-active); }
+    #cvd-recipe-accuracy #cv-play:hover { filter:brightness(1.1); }
+    #cvd-recipe-accuracy .cv-preset-note { margin-top:12px; font-size:12px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-effect { display:flex; gap:18px; align-items:baseline; margin:0 2px 20px; font-size:13px; }
+    #cvd-recipe-accuracy .cv-effect .cv-overline { color:var(--cv-accent); white-space:nowrap; }
+    #cvd-recipe-accuracy #cv-effect { color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-workspace { display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:24px; align-items:start; }
+    #cvd-recipe-accuracy .cv-chamber, #cvd-recipe-accuracy .cv-reaction { min-width:0; background:var(--cv-panel); border:1px solid var(--cv-line); border-radius:16px; overflow:hidden; box-shadow:0 8px 32px rgb(15 39 43 / 3%); }
+    #cvd-recipe-accuracy .cv-chamber { display:flex; flex-direction:column; }
+    #cvd-recipe-accuracy .cv-chamber-head { display:flex; justify-content:space-between; gap:20px; padding:22px 24px 18px; align-items:center; }
+    #cvd-recipe-accuracy .cv-panel-title { font-size:16px; line-height:1.5; font-weight:600; letter-spacing:-.25px; margin-top:4px; }
+    #cvd-recipe-accuracy .cv-text-button { border:0; min-height:36px; padding:6px 0 6px 10px; font-size:12px; color:var(--cv-muted); white-space:nowrap; }
+    #cvd-recipe-accuracy .cv-text-button:hover:not(:disabled) { background:transparent; color:var(--cv-accent); }
+    #cvd-recipe-accuracy .cv-viewport { width:100%; height:470px; min-height:470px; max-height:470px; flex:0 0 470px; position:relative; background:var(--cv-stage); border-top:1px solid var(--cv-line); border-bottom:1px solid var(--cv-line); }
+    /* Bitmap dimensions must not contribute to the size observed by ResizeObserver. */
+    #cvd-recipe-accuracy canvas { position:absolute; inset:0; display:block; width:100%; height:100%; cursor:grab; touch-action:none; }
+    #cvd-recipe-accuracy canvas:active { cursor:grabbing; }
+    #cvd-recipe-accuracy .cv-callouts { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+    #cvd-recipe-accuracy .cv-callouts text { fill:var(--cv-text); font:12px system-ui,sans-serif; }
+    #cvd-recipe-accuracy .cv-callouts polyline { fill:none; stroke:var(--cv-muted); stroke-width:1; opacity:.45; }
+    #cvd-recipe-accuracy .cv-callouts circle { fill:var(--cv-accent); }
+    #cvd-recipe-accuracy .cv-camera-hint { padding:12px 24px 0; color:var(--cv-muted); font-size:11px; text-align:right; }
+    #cvd-recipe-accuracy .cv-caption { display:grid; grid-template-columns:minmax(150px,230px) minmax(0,1fr); align-items:center; gap:20px; padding:16px 24px 20px; }
+    #cvd-recipe-accuracy .cv-caption label { display:flex; flex-direction:column; gap:6px; align-items:stretch; font-size:11px; }
+    #cvd-recipe-accuracy .cv-caption select { font-size:12px; min-height:40px; }
+    #cvd-recipe-accuracy .cv-part-description { color:var(--cv-muted); font-size:12px; line-height:1.7; overflow-wrap:break-word; }
+    #cvd-recipe-accuracy .cv-growth { margin-top:auto; padding:14px 24px 18px; background:var(--cv-soft); border-top:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-growth-row { display:flex; align-items:baseline; justify-content:space-between; gap:8px 18px; flex-wrap:wrap; color:var(--cv-muted); font-size:11px; }
+    #cvd-recipe-accuracy #cv-growth-status { color:var(--cv-text); font-weight:500; }
+    #cvd-recipe-accuracy .cv-growth-track { margin-top:10px; height:3px; background:var(--cv-line); border-radius:3px; overflow:hidden; }
+    #cvd-recipe-accuracy .cv-growth-fill { height:100%; width:0%; background:var(--cv-accent); border-radius:3px; }
+    #cvd-recipe-accuracy .cv-reaction { padding:22px 24px; display:flex; flex-direction:column; }
+    #cvd-recipe-accuracy .cv-reaction-head { display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+    #cvd-recipe-accuracy .cv-reaction-title { font-size:16px; line-height:1.5; font-weight:600; letter-spacing:-.2px; }
+    #cvd-recipe-accuracy .cv-reaction-phase { color:var(--cv-accent); font-size:11px; line-height:1.6; }
+    #cvd-recipe-accuracy .cv-molecules { position:relative; width:100%; height:330px; min-height:330px; max-height:330px; flex:0 0 330px; margin:10px 0 0; }
+    #cvd-recipe-accuracy #cv-reaction-canvas { cursor:default; touch-action:auto; }
+    #cvd-recipe-accuracy .cv-equation { display:flex; flex-wrap:wrap; gap:2px 5px; justify-content:center; font-size:12px; line-height:1.8; padding:10px 0 15px; }
+    #cvd-recipe-accuracy .cv-equation span { white-space:nowrap; }
+    #cvd-recipe-accuracy .cv-deposit-role { padding:13px 15px; background:var(--cv-accent-soft); border:1px solid light-dark(#d9ebe3,#2c4f4b); border-radius:9px; font-size:12px; line-height:1.75; }
+    #cvd-recipe-accuracy .cv-role-label { display:block; font-weight:600; color:var(--cv-text); margin-bottom:4px; }
+    #cvd-recipe-accuracy .cv-role-use { display:block; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-atoms { display:flex; flex-wrap:wrap; gap:6px 14px; margin:14px 0 0; color:var(--cv-muted); font-size:11px; }
+    #cvd-recipe-accuracy .cv-atoms span { display:inline-flex; gap:5px; align-items:center; }
+    #cvd-recipe-accuracy .cv-atoms i { width:7px; height:7px; display:inline-block; flex:none; border-radius:50%; background:var(--atom-color); border:1px solid rgb(0 0 0 / 6%); }
+    #cvd-recipe-accuracy .cv-seek { border-top:1px solid var(--cv-line); padding-top:15px; margin-top:17px; }
+    #cvd-recipe-accuracy .cv-seek label { display:block; font-size:12px; font-weight:500; color:var(--cv-text); }
+    #cvd-recipe-accuracy input[type="range"] { display:block; width:100%; min-width:0; margin:10px 0 0; accent-color:var(--cv-accent); cursor:pointer; }
+    #cvd-recipe-accuracy .cv-seek input { min-height:24px; }
+    #cvd-recipe-accuracy details { margin-top:24px; background:var(--cv-panel); border:1px solid var(--cv-line); border-radius:14px; padding:0 24px; }
+    #cvd-recipe-accuracy summary { padding:20px 0; font-size:14px; font-weight:600; cursor:pointer; }
+    #cvd-recipe-accuracy summary::marker { color:var(--cv-accent); font-size:11px; }
+    #cvd-recipe-accuracy .cv-detail-controls { display:flex; align-items:center; gap:14px 28px; flex-wrap:wrap; border-top:1px solid var(--cv-line); padding:18px 0; }
+    #cvd-recipe-accuracy .cv-detail-controls label { display:flex; gap:10px; align-items:center; }
+    #cvd-recipe-accuracy .cv-detail-controls select { width:auto; min-width:136px; min-height:38px; font-size:12px; }
+    #cvd-recipe-accuracy .cv-flow-control { display:flex; flex-direction:column; gap:2px; }
+    #cvd-recipe-accuracy .cv-flow-control .cv-secondary { font-size:11px; padding-left:25px; }
+    #cvd-recipe-accuracy input[type="checkbox"] { accent-color:var(--cv-accent); width:14px; height:14px; margin:0; cursor:pointer; }
+    #cvd-recipe-accuracy .cv-recipe { display:grid; grid-template-columns:1fr .85fr 1.2fr 1.05fr; margin:0 0 18px; gap:0; border:1px solid var(--cv-line); border-radius:10px; overflow:hidden; }
+    #cvd-recipe-accuracy .cv-recipe>div { min-width:0; padding:18px 20px; background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-recipe>div+div { border-left:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-recipe dt, #cvd-recipe-accuracy .cv-recipe dt label { color:var(--cv-muted); font-size:11px; font-weight:500; }
+    #cvd-recipe-accuracy .cv-recipe dd { margin:7px 0 0; font-size:14px; font-variant-numeric:tabular-nums; font-weight:500; overflow-wrap:break-word; }
+    #cvd-recipe-accuracy .cv-setting-note { display:block; font-size:11px; color:var(--cv-muted); margin-top:5px; font-weight:400; }
+    #cvd-recipe-accuracy .cv-rf { display:flex; align-items:center; gap:8px; margin-top:7px; font-size:11px; font-weight:400; }
+    #cvd-recipe-accuracy [hidden] { display:none !important; }
+    #cvd-recipe-accuracy .cv-detail-line { color:var(--cv-muted); font-size:12px; line-height:1.8; padding-bottom:10px; }
+    #cvd-recipe-accuracy .cv-source-line { padding:4px 0 17px; font-size:11px; }
+    #cvd-recipe-accuracy a { color:var(--cv-accent); text-underline-offset:4px; }
+    #cvd-recipe-accuracy .cv-source-line a { display:inline-block; padding:3px 0; }
+    #cvd-recipe-accuracy .cv-model-note { padding:18px 3px 0; color:var(--cv-muted); font-size:11px; }
+    #cvd-recipe-accuracy .cv-footer { margin-top:24px; padding:16px 3px 0; border-top:1px solid var(--cv-line); color:var(--cv-muted); font-size:12px; line-height:1.7; overflow-wrap:break-word; }
+    #cvd-recipe-accuracy :is(button,select,input,summary,a,canvas):focus-visible { outline:2px solid var(--cv-accent); outline-offset:4px; }
+    @media(max-width:1279px) {
+      #cvd-recipe-accuracy .cv-workspace { grid-template-columns:minmax(0,1fr); gap:20px; }
+      #cvd-recipe-accuracy .cv-reaction { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(250px,1fr); column-gap:28px; align-items:start; }
+      #cvd-recipe-accuracy .cv-reaction-head { grid-column:1; grid-row:1; }
+      #cvd-recipe-accuracy .cv-molecules { grid-column:1; grid-row:2 / span 3; height:290px; min-height:290px; max-height:290px; flex:0 0 290px; }
+      #cvd-recipe-accuracy .cv-equation { grid-column:2; grid-row:1; padding-top:0; }
+      #cvd-recipe-accuracy .cv-deposit-role { grid-column:2; grid-row:2; }
+      #cvd-recipe-accuracy .cv-atoms { grid-column:2; grid-row:3; }
+      #cvd-recipe-accuracy .cv-seek { grid-column:2; grid-row:4; }
+    }
+    @media(max-width:900px) {
+      #cvd-recipe-accuracy .cv-setup-row { grid-template-columns:minmax(230px,1fr) minmax(270px,1fr); gap:18px 24px; }
+      #cvd-recipe-accuracy .cv-run { grid-column:1 / -1; }
+      #cvd-recipe-accuracy #cv-play { width:100%; }
+    }
+    @media(max-width:700px) {
+      #cvd-recipe-accuracy .cv-head-note { display:none; }
+      #cvd-recipe-accuracy .cv-head { padding-bottom:24px; }
+      #cvd-recipe-accuracy .cv-name { font-size:36px; }
+      #cvd-recipe-accuracy .cv-setup { padding:18px; border-radius:12px; }
+      #cvd-recipe-accuracy .cv-setup-row { grid-template-columns:minmax(0,1fr); gap:16px; }
+      #cvd-recipe-accuracy .cv-run { grid-column:auto; }
+      #cvd-recipe-accuracy .cv-effect { display:block; }
+      #cvd-recipe-accuracy .cv-effect .cv-overline { margin-bottom:5px; }
+      #cvd-recipe-accuracy .cv-chamber-head { padding:18px; gap:10px; }
+      #cvd-recipe-accuracy .cv-panel-title { font-size:14px; }
+      #cvd-recipe-accuracy .cv-viewport { height:350px; min-height:350px; max-height:350px; flex:0 0 350px; }
+      #cvd-recipe-accuracy .cv-caption { grid-template-columns:minmax(0,1fr); gap:12px; padding:16px 18px 18px; }
+      #cvd-recipe-accuracy .cv-camera-hint { padding:10px 18px 0; text-align:left; }
+      #cvd-recipe-accuracy .cv-growth { padding:14px 18px 18px; }
+      #cvd-recipe-accuracy .cv-reaction { display:flex; padding:20px 18px; }
+      #cvd-recipe-accuracy .cv-molecules { height:340px; min-height:340px; max-height:340px; flex:0 0 340px; }
+      #cvd-recipe-accuracy .cv-equation { padding-top:10px; }
+      #cvd-recipe-accuracy .cv-recipe { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #cvd-recipe-accuracy .cv-recipe>div { padding:14px; }
+      #cvd-recipe-accuracy .cv-recipe>div:nth-child(3) { border-left:0; }
+      #cvd-recipe-accuracy .cv-recipe>div:nth-child(n+3) { border-top:1px solid var(--cv-line); }
+      #cvd-recipe-accuracy details { padding:0 18px; }
+      #cvd-recipe-accuracy summary { font-size:13px; }
+      #cvd-recipe-accuracy .cv-detail-controls { align-items:flex-start; gap:14px 20px; }
+    }
+    @media(pointer:coarse) {
+      #cvd-recipe-accuracy :is(button,select,summary) { min-height:44px; }
+      #cvd-recipe-accuracy select { font-size:16px; }
+      #cvd-recipe-accuracy .cv-caption select, #cvd-recipe-accuracy .cv-detail-controls select { font-size:16px; }
+      #cvd-recipe-accuracy .cv-source-line a { padding:10px 0; }
+    }
+    #cvd-recipe-accuracy .cv-about { margin-bottom:22px; }
+    #cvd-recipe-accuracy .cv-about-title { font-size:16px; font-weight:600; letter-spacing:-.2px; margin-bottom:7px; }
+    #cvd-recipe-accuracy .cv-about-definition { max-width:980px; color:var(--cv-muted); font-size:14px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-about-definition strong { color:var(--cv-text); font-weight:600; }
+    #cvd-recipe-accuracy details.cv-cvd-guide { margin-top:12px; }
+    #cvd-recipe-accuracy .cv-guide-grid { display:grid; grid-template-columns:1.15fr 1fr; gap:32px; padding:18px 0 22px; border-top:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-guide-heading { margin:0 0 10px; color:var(--cv-text); font-size:13px; font-weight:600; }
+    #cvd-recipe-accuracy .cv-guide-steps { margin:0; padding-left:21px; color:var(--cv-muted); font-size:13px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-guide-steps li { padding:0 0 8px 4px; }
+    #cvd-recipe-accuracy .cv-guide-steps strong { color:var(--cv-text); font-weight:500; }
+    #cvd-recipe-accuracy .cv-guide-terms { display:grid; grid-template-columns:108px minmax(0,1fr); gap:9px 14px; margin:0; font-size:12px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-guide-terms dt { color:var(--cv-text); font-weight:500; }
+    #cvd-recipe-accuracy .cv-guide-terms dd { margin:0; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-guide-silicon { padding-bottom:22px; }
+    #cvd-recipe-accuracy .cv-silicon-terms { display:grid; grid-template-columns:145px minmax(0,1fr); gap:14px 24px; margin:0 0 14px; font-size:13px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-silicon-terms dt { color:var(--cv-blue); font-weight:600; }
+    #cvd-recipe-accuracy .cv-silicon-terms dd { margin:0; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-silicon-terms dd p+p { margin-top:6px; }
+    @media(max-width:700px) { #cvd-recipe-accuracy .cv-silicon-terms { grid-template-columns:minmax(0,1fr); gap:6px; } #cvd-recipe-accuracy .cv-silicon-terms dd { margin-bottom:10px; } }
+    #cvd-recipe-accuracy .cv-guide-example { padding:16px 18px; margin-bottom:22px; border-radius:9px; background:var(--cv-accent-soft); border:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-guide-example p { font-size:12px; line-height:1.8; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-guide-equation { display:flex; flex-wrap:wrap; align-items:center; gap:5px 9px; margin:8px 0; font-size:15px; color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-guide-equation span { white-space:nowrap; }
+    #cvd-recipe-accuracy .cv-guide-table-wrap { overflow-x:auto; border:1px solid var(--cv-line); border-radius:9px; margin-bottom:12px; }
+    #cvd-recipe-accuracy .cv-guide-table { width:100%; min-width:620px; border-collapse:collapse; font-size:12px; line-height:1.8; text-align:left; }
+    #cvd-recipe-accuracy .cv-guide-table :is(th,td) { padding:12px 14px; vertical-align:top; border-bottom:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-guide-table thead { background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-guide-table th { font-weight:500; color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-guide-table td { color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-guide-table tbody tr:last-child :is(th,td) { border-bottom:0; }
+    #cvd-recipe-accuracy .cv-guide-takeaway { padding:4px 0 12px; color:var(--cv-text); font-size:13px; }
+    #cvd-recipe-accuracy .cv-guide-footer { padding:0 0 18px; font-size:11px; color:var(--cv-muted); line-height:1.8; }
+    #cvd-recipe-accuracy .cv-guide-table-wrap:focus-visible { outline:2px solid var(--cv-accent); outline-offset:4px; }
+    @media(max-width:800px) { #cvd-recipe-accuracy .cv-guide-grid { grid-template-columns:minmax(0,1fr); gap:18px; } }
+    @media(max-width:400px) { #cvd-recipe-accuracy .cv-guide-terms { grid-template-columns:92px minmax(0,1fr); gap:8px 10px; } }
+    #cvd-recipe-accuracy .cv-fabrication { margin-bottom:20px; padding:18px 22px; background:var(--cv-panel); border:1px solid var(--cv-line); border-radius:14px; }
+    #cvd-recipe-accuracy .cv-fab-heading { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
+    #cvd-recipe-accuracy .cv-fab-title { font-size:14px; font-weight:600; letter-spacing:-.15px; }
+    #cvd-recipe-accuracy .cv-fab-heading .cv-secondary { color:var(--cv-accent); font-size:11px; }
+    #cvd-recipe-accuracy .cv-fab-track { overflow-x:auto; padding:2px 0 7px; scrollbar-width:thin; scrollbar-color:var(--cv-line) transparent; }
+    #cvd-recipe-accuracy .cv-fab-flow { display:grid; grid-template-columns:repeat(7,minmax(126px,1fr)); gap:18px; margin:0; padding:0; list-style:none; }
+    #cvd-recipe-accuracy .cv-fab-node { min-width:0; min-height:84px; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; padding:12px 10px; background:var(--cv-soft); border:1px solid var(--cv-line); border-radius:8px; text-align:center; font-size:12px; font-weight:500; line-height:1.5; }
+    #cvd-recipe-accuracy .cv-fab-item { position:relative; min-width:0; display:flex; }
+    #cvd-recipe-accuracy .cv-fab-item:not(:last-child)::before { content:""; position:absolute; height:1px; width:12px; top:50%; right:-15px; background:var(--cv-muted); opacity:.6; }
+    #cvd-recipe-accuracy .cv-fab-item:not(:last-child)::after { content:""; position:absolute; width:5px; height:5px; top:calc(50% - 2px); right:-15px; border-top:1px solid var(--cv-muted); border-right:1px solid var(--cv-muted); transform:rotate(45deg); opacity:.8; }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"] { color:var(--cv-active-text); background:var(--cv-active); border-color:var(--cv-active); }
+    #cvd-recipe-accuracy .cv-fab-node small { font-size:11px; font-weight:400; opacity:.85; }
+    #cvd-recipe-accuracy .cv-fab-track:focus-visible { outline:2px solid var(--cv-accent); outline-offset:4px; }
+    #cvd-recipe-accuracy .cv-fab-note { margin-top:11px; color:var(--cv-muted); font-size:11px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-fab-swipe { display:none; color:var(--cv-muted); font-size:11px; margin-top:7px; }
+    #cvd-recipe-accuracy .cv-fab-description { display:flex; align-items:center; min-height:64px; margin-top:10px; padding:10px 14px; color:var(--cv-text); background:var(--cv-blue-soft); border-left:3px solid var(--cv-active); border-radius:0 6px 6px 0; font-size:12px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-fab-hint { margin-top:7px; color:var(--cv-muted); font-size:11px; }
+    @media(max-width:1120px) { #cvd-recipe-accuracy .cv-fab-swipe { display:block; } }
+    @media(max-width:700px) { #cvd-recipe-accuracy .cv-fabrication { padding:16px 18px; } #cvd-recipe-accuracy .cv-fab-heading { flex-wrap:wrap; gap:4px; } #cvd-recipe-accuracy .cv-fab-description { min-height:84px; } }
+    #cvd-recipe-accuracy .cv-refs-intro { color:var(--cv-muted); font-size:13px; border-top:1px solid var(--cv-line); padding:16px 0 20px; }
+    #cvd-recipe-accuracy .cv-refs-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 36px; padding-bottom:20px; }
+    #cvd-recipe-accuracy .cv-refs-grid>section:first-child { grid-row:span 2; }
+    #cvd-recipe-accuracy .cv-ref-heading { font-size:13px; font-weight:600; margin-bottom:8px; color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-ref-list { margin:0; padding-left:22px; }
+    #cvd-recipe-accuracy .cv-ref-list li { padding:10px 0 12px 4px; border-bottom:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-ref-list li:last-child { border-bottom:0; }
+    #cvd-recipe-accuracy .cv-ref-list li::marker { color:var(--cv-muted); font-size:11px; }
+    #cvd-recipe-accuracy .cv-ref-list a { font-size:13px; font-weight:500; overflow-wrap:anywhere; }
+    #cvd-recipe-accuracy .cv-ref-use { display:block; margin-top:4px; color:var(--cv-muted); font-size:12px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-ref-note { font-size:11px; color:var(--cv-muted); padding:14px 0 18px; border-top:1px solid var(--cv-line); }
+    @media(max-width:800px) { #cvd-recipe-accuracy .cv-refs-grid { grid-template-columns:minmax(0,1fr); gap:24px; } #cvd-recipe-accuracy .cv-refs-grid>section:first-child { grid-row:auto; } }
+    @media(pointer:coarse) { #cvd-recipe-accuracy .cv-ref-list a { display:inline-block; padding:7px 0; } }
+    /* Interface colours provide hierarchy; atom and film colours retain their scientific key. */
+    #cvd-recipe-accuracy .cv-head { display:block; padding:20px 28px 28px; margin-bottom:24px; border:1px solid #233e59; border-radius:18px; color:#ffffff; background:linear-gradient(120deg,#101e39,#123051 68%,#124348); box-shadow:0 8px 24px rgb(16 30 57 / 10%); }
+    #cvd-recipe-accuracy .cv-topbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px 28px; padding-bottom:16px; margin-bottom:26px; border-bottom:1px solid rgb(221 238 255 / 18%); }
+    #cvd-recipe-accuracy .cv-wordmark { display:flex; align-items:center; gap:14px; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:.02em; }
+    #cvd-recipe-accuracy .cv-wordmark span { padding-left:14px; border-left:1px solid rgb(221 238 255 / 25%); color:#d5e4f2; font-weight:400; }
+    #cvd-recipe-accuracy .cv-nav { display:flex; gap:24px; flex-wrap:wrap; }
+    #cvd-recipe-accuracy .cv-nav a { display:inline-block; padding:4px 0; color:#d5e4f2; font-size:12px; font-weight:500; text-decoration:none; }
+    #cvd-recipe-accuracy .cv-nav a:hover { color:#ffffff; text-decoration:underline; }
+    #cvd-recipe-accuracy .cv-nav a:focus-visible { outline-color:#ffffff; }
+    #cvd-recipe-accuracy .cv-hero { display:flex; justify-content:space-between; align-items:center; gap:28px; }
+    #cvd-recipe-accuracy .cv-name { font-size:52px; font-weight:700; letter-spacing:-2.2px; }
+    #cvd-recipe-accuracy .cv-title-point { color:#63dfcb; }
+    #cvd-recipe-accuracy .cv-head :is(.cv-overline,.cv-byline,.cv-secondary) { color:#d5e4f2; }
+    #cvd-recipe-accuracy .cv-head .cv-overline { font-size:10px; font-weight:600; letter-spacing:.14em; }
+    #cvd-recipe-accuracy .cv-byline { font-size:12px; }
+    #cvd-recipe-accuracy .cv-head-note { max-width:390px; text-align:left; }
+    #cvd-recipe-accuracy .cv-head-note p:first-child { font-size:20px; line-height:1.5; font-weight:500; letter-spacing:-.4px; }
+    #cvd-recipe-accuracy .cv-head-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:16px; }
+    #cvd-recipe-accuracy .cv-head-facts span { display:flex; flex-direction:column; gap:3px; color:#d5e4f2; font-size:11px; white-space:nowrap; }
+    #cvd-recipe-accuracy .cv-head-facts b { color:#ffffff; font-size:19px; line-height:1.3; font-weight:600; font-variant-numeric:tabular-nums; }
+    #cvd-recipe-accuracy .cv-head-facts .cv-recipe-link { display:flex; flex-direction:column; gap:3px; min-height:44px; color:#d5e4f2; font-size:11px; text-decoration:none; }
+    #cvd-recipe-accuracy .cv-head-facts .cv-recipe-link:hover span { text-decoration:underline; }
+    #cvd-recipe-accuracy .cv-head-facts .cv-recipe-link:focus-visible { outline-color:#ffffff; }
+    #cvd-recipe-accuracy .cv-about { display:grid; grid-template-columns:180px minmax(0,1fr); gap:12px 28px; padding:20px 24px 10px; border:1px solid var(--cv-line); border-radius:14px; background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-about-title { color:var(--cv-text); font-size:18px; font-weight:650; }
+    #cvd-recipe-accuracy .cv-about-definition { max-width:1100px; font-size:13px; }
+    #cvd-recipe-accuracy details.cv-cvd-guide { grid-column:1 / -1; margin-top:0; padding:0; border:0; border-top:1px solid var(--cv-line); border-radius:0; }
+    #cvd-recipe-accuracy .cv-cvd-guide>summary { padding:12px 0; color:var(--cv-blue); font-size:12px; font-weight:600; }
+    #cvd-recipe-accuracy details.cv-recipes-guide { grid-column:1 / -1; min-width:0; margin:0; padding:0; border:0; border-top:1px solid var(--cv-line); border-radius:0; }
+    #cvd-recipe-accuracy .cv-recipes-guide>summary { padding:12px 0; color:var(--cv-blue); font-size:12px; font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-summary-note { display:inline-block; margin-left:12px; color:var(--cv-muted); font-size:11px; font-weight:400; }
+    #cvd-recipe-accuracy .cv-recipes-definition { padding:4px 0 16px; color:var(--cv-muted); font-size:13px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-recipes-scroll { max-width:100%; overflow-x:auto; border:1px solid var(--cv-line); border-radius:9px; }
+    #cvd-recipe-accuracy .cv-recipes-table { width:100%; min-width:760px; border-collapse:collapse; text-align:left; font-size:12px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-recipes-table caption { padding:10px 14px; text-align:left; color:var(--cv-muted); font-size:11px; background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-recipes-table :is(th,td) { padding:11px 14px; border-bottom:1px solid var(--cv-line); vertical-align:middle; }
+    #cvd-recipe-accuracy .cv-recipes-table th { font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-table thead, #cvd-recipe-accuracy .cv-recipes-table tfoot { color:#ffffff; background:#101e39; }
+    #cvd-recipe-accuracy .cv-recipes-table thead th:first-child { width:34%; }
+    #cvd-recipe-accuracy .cv-recipes-table :is(td,thead th:not(:first-child)) { text-align:center; }
+    #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-ap { color:var(--cv-blue); background:var(--cv-blue-soft); font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-lp { color:var(--cv-accent); background:var(--cv-accent-soft); font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-pe { color:var(--cv-violet); background:var(--cv-violet-soft); font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-count { font-weight:650; font-variant-numeric:tabular-nums; }
+    #cvd-recipe-accuracy .cv-recipes-table tfoot :is(th,td) { border-bottom:0; font-weight:650; }
+    #cvd-recipe-accuracy .cv-recipes-total { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:7px 24px; padding:15px 0 8px; font-size:12px; }
+    #cvd-recipe-accuracy .cv-recipes-total strong { color:var(--cv-accent); font-size:15px; font-weight:650; }
+    #cvd-recipe-accuracy .cv-recipes-total span { color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-recipes-note { padding:0 0 16px; color:var(--cv-muted); font-size:12px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-recipes-scroll:focus-visible { outline:2px solid var(--cv-accent); outline-offset:4px; }
+    #cvd-recipe-accuracy .cv-preset-info { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:6px 18px; margin-top:12px; }
+    #cvd-recipe-accuracy .cv-preset-info .cv-preset-note { margin-top:0; }
+    #cvd-recipe-accuracy .cv-preset-info>.cv-recipe-link { font-size:12px; font-weight:500; }
+    #cvd-recipe-accuracy .cv-guide-heading { color:var(--cv-blue); }
+    #cvd-recipe-accuracy .cv-guide-steps li::marker { color:var(--cv-blue); font-weight:700; }
+    #cvd-recipe-accuracy .cv-guide-example { border-color:var(--cv-teal-line); }
+    #cvd-recipe-accuracy .cv-guide-example .cv-guide-heading { color:var(--cv-accent); }
+    #cvd-recipe-accuracy .cv-guide-table thead { background:var(--cv-blue-soft); }
+    #cvd-recipe-accuracy .cv-guide-table thead th { color:var(--cv-blue); font-weight:600; }
+    #cvd-recipe-accuracy .cv-fabrication { padding:18px 24px; box-shadow:0 2px 4px rgb(22 54 112 / 2%); }
+    #cvd-recipe-accuracy .cv-fab-title { color:var(--cv-text); font-weight:650; }
+    #cvd-recipe-accuracy .cv-fab-node { width:100%; flex:1; align-items:flex-start; text-align:left; gap:6px; padding:12px 14px; color:var(--cv-text); background:var(--cv-soft); border-color:var(--cv-line); box-shadow:none; font-size:11px; font-weight:600; }
+    #cvd-recipe-accuracy .cv-fab-number { display:inline-block; padding:2px 6px; border-radius:4px; color:var(--cv-node-ink,var(--cv-blue)); background:var(--cv-node-bg,var(--cv-blue-soft)); font-size:10px; font-weight:650; line-height:1.5; font-variant-numeric:tabular-nums; }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(1) { --cv-node-ink:light-dark(#244cb1,#a7c2ff); --cv-node-bg:light-dark(#e4edff,#1a2d50); --cv-node-line:light-dark(#bbcdf4,#3b5381); }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(2) { --cv-node-ink:light-dark(#984109,#ffc393); --cv-node-bg:light-dark(#fff0dc,#432c1d); --cv-node-line:light-dark(#efd2ad,#80563a); }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(3) { --cv-node-ink:light-dark(#6536b6,#c6a3ff); --cv-node-bg:light-dark(#f1eaff,#2b2045); --cv-node-line:light-dark(#d7c4f7,#5d457f); }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(4) { --cv-node-ink:light-dark(#a32961,#ffadce); --cv-node-bg:light-dark(#ffe8f1,#402039); --cv-node-line:light-dark(#f0bdd2,#76465e); }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(6) { --cv-node-ink:light-dark(#086874,#8ce2ec); --cv-node-bg:light-dark(#e1f6fa,#15373f); --cv-node-line:light-dark(#afdce6,#3b6671); }
+    #cvd-recipe-accuracy .cv-fab-item:nth-child(7) { --cv-node-ink:light-dark(#4445a0,#b7b6ff); --cv-node-bg:light-dark(#ebebff,#29294a); --cv-node-line:light-dark(#c9caf0,#53537b); }
+    #cvd-recipe-accuracy .cv-fab-node:hover:not(:disabled) { background:var(--cv-soft); border-color:var(--cv-node-ink,var(--cv-active)); }
+    #cvd-recipe-accuracy .cv-fab-node[data-inspected="true"] { border-color:var(--cv-node-ink,var(--cv-active)); box-shadow:inset 0 0 0 1px var(--cv-node-ink,var(--cv-active)); }
+    #cvd-recipe-accuracy .cv-fab-node:focus-visible { outline:2px solid var(--cv-node-ink,var(--cv-active)); outline-offset:-4px; }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"] { color:#ffffff; background:linear-gradient(120deg,#2448ab,#075f71); border-color:#175fad; box-shadow:0 3px 8px rgb(22 74 173 / 10%); }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"]:hover:not(:disabled) { background:linear-gradient(120deg,#2448ab,#075f71); border-color:#175fad; }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"][data-inspected="true"] { box-shadow:inset 0 0 0 1px rgb(255 255 255 / 40%),0 3px 8px rgb(22 74 173 / 10%); }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"]:focus-visible { outline-color:#ffffff; }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"] .cv-fab-number { color:#ffffff; background:rgb(255 255 255 / 14%); }
+    #cvd-recipe-accuracy .cv-fab-node[aria-current="step"] small { opacity:1; font-size:10px; color:#d8efef; }
+    #cvd-recipe-accuracy .cv-setup { padding:20px 24px 16px; border-top:1px solid var(--cv-line); box-shadow:0 3px 12px rgb(22 54 112 / 3%); }
+    #cvd-recipe-accuracy :is(.cv-chem-controls>label,.cv-control-label) { color:var(--cv-text); font-size:11px; font-weight:600; }
+    #cvd-recipe-accuracy select { border-radius:8px; background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-chem-controls select { min-height:48px; background:var(--cv-blue-soft); border-color:light-dark(#bdcce9,#48638d); border-left:1px solid light-dark(#bdcce9,#48638d); font-weight:500; }
+    #cvd-recipe-accuracy .cv-modes { padding:4px; border-radius:9px; }
+    #cvd-recipe-accuracy .cv-modes button { min-height:38px; }
+    #cvd-recipe-accuracy .cv-modes button[aria-pressed="true"] { font-weight:600; box-shadow:0 2px 5px rgb(22 54 112 / 12%); }
+    #cvd-recipe-accuracy #cv-play { min-height:48px; color:#ffffff; background:linear-gradient(110deg,#076d69,#08745f); border-color:#087064; font-weight:600; box-shadow:0 2px 6px rgb(8 112 100 / 12%); }
+    #cvd-recipe-accuracy #cv-play:hover { filter:brightness(.95); }
+    #cvd-recipe-accuracy .cv-effect { margin:0 0 20px; padding:12px 18px; border:1px solid var(--cv-teal-line); border-radius:10px; background:var(--cv-accent-soft); }
+    #cvd-recipe-accuracy .cv-effect .cv-overline { font-size:10px; font-weight:700; }
+    #cvd-recipe-accuracy #cv-effect { color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-chamber, #cvd-recipe-accuracy .cv-reaction { border-top:1px solid var(--cv-line); box-shadow:0 2px 4px rgb(16 30 57 / 2%),0 12px 30px rgb(16 30 57 / 4%); }
+    #cvd-recipe-accuracy .cv-chamber-head { background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-chamber-head .cv-overline { display:inline-block; padding:3px 7px; border-radius:4px; color:var(--cv-blue); background:var(--cv-blue-soft); font-size:10px; letter-spacing:.07em; }
+    #cvd-recipe-accuracy .cv-chamber-head .cv-panel-title { font-size:18px; font-weight:650; margin-top:8px; }
+    #cvd-recipe-accuracy .cv-text-button { padding:7px 11px; border:1px solid var(--cv-line); border-radius:7px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-text-button:hover:not(:disabled) { background:var(--cv-soft); border-color:var(--cv-blue); color:var(--cv-blue); }
+    #cvd-recipe-accuracy .cv-reaction-head .cv-overline { padding:3px 7px; border-radius:4px; color:var(--cv-violet); background:var(--cv-violet-soft); font-size:10px; letter-spacing:.07em; }
+    #cvd-recipe-accuracy .cv-reaction-phase { color:var(--cv-violet); }
+    #cvd-recipe-accuracy .cv-reaction-title { font-size:17px; font-weight:650; }
+    #cvd-recipe-accuracy .cv-growth { background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-growth-row { font-size:12px; }
+    #cvd-recipe-accuracy .cv-growth-track { height:4px; background:light-dark(#dce4f2,#334968); border-radius:4px; }
+    #cvd-recipe-accuracy .cv-growth-fill { background:linear-gradient(90deg,#2853d5,#0b8072); border-radius:4px; }
+    #cvd-recipe-accuracy .cv-equation { padding:12px; margin-bottom:15px; border-radius:8px; color:var(--cv-violet); background:var(--cv-violet-soft); font-weight:500; }
+    #cvd-recipe-accuracy .cv-deposit-role { padding:14px; border-color:var(--cv-teal-line); border-left:1px solid var(--cv-teal-line); border-radius:8px; }
+    #cvd-recipe-accuracy .cv-role-label { color:var(--cv-accent); font-weight:650; }
+    #cvd-recipe-accuracy .cv-seek input { accent-color:var(--cv-violet); }
+    #cvd-recipe-accuracy #cv-details-summary { color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-recipe>div { background:var(--cv-soft); box-shadow:none; }
+    #cvd-recipe-accuracy .cv-recipe>div:nth-child(1) { --cv-metric-bg:light-dark(#fff2e1,#392c21); --cv-metric-ink:light-dark(#984109,#ffc393); }
+    #cvd-recipe-accuracy .cv-recipe>div:nth-child(2) { --cv-metric-bg:light-dark(#e8efff,#192c4c); --cv-metric-ink:light-dark(#1c47b1,#9dbbff); }
+    #cvd-recipe-accuracy .cv-recipe>div:nth-child(3) { --cv-metric-bg:light-dark(#e1f7ef,#123b35); --cv-metric-ink:light-dark(#086b65,#66ded1); }
+    #cvd-recipe-accuracy .cv-recipe>div:nth-child(4) { --cv-metric-bg:light-dark(#f1eaff,#2b2045); --cv-metric-ink:light-dark(#6536b6,#c6a3ff); }
+    #cvd-recipe-accuracy .cv-recipe :is(dt,dt label) { color:var(--cv-metric-ink); font-weight:600; font-size:11px; }
+    #cvd-recipe-accuracy .cv-recipe dd { font-size:16px; font-weight:600; }
+    #cvd-recipe-accuracy #cv-references>summary { color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-ref-heading { color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-ref-list li::marker { color:var(--cv-violet); font-weight:600; }
+    #cvd-recipe-accuracy .cv-footer { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; padding-top:20px; }
+    #cvd-recipe-accuracy .cv-footer-brand { color:var(--cv-text); font-size:13px; font-weight:650; }
+    #cvd-recipe-accuracy .cv-footer-brand span { display:block; margin-top:2px; color:var(--cv-muted); font-size:11px; font-weight:400; }
+    @media(max-width:900px) { #cvd-recipe-accuracy .cv-about { grid-template-columns:150px minmax(0,1fr); gap:12px 20px; } }
+    @media(max-width:700px) {
+      #cvd-recipe-accuracy .cv-head { padding:18px 20px 22px; border-radius:14px; }
+      #cvd-recipe-accuracy .cv-topbar { gap:12px; margin-bottom:22px; padding-bottom:14px; }
+      #cvd-recipe-accuracy .cv-nav { gap:20px; }
+      #cvd-recipe-accuracy .cv-hero { display:block; }
+      #cvd-recipe-accuracy .cv-name { font-size:40px; letter-spacing:-1.5px; }
+      #cvd-recipe-accuracy .cv-head-note { display:block; margin-top:20px; }
+      #cvd-recipe-accuracy .cv-head-note p:first-child { font-size:15px; }
+      #cvd-recipe-accuracy .cv-head-note br { display:none; }
+      #cvd-recipe-accuracy .cv-head-facts { gap:16px; margin-top:14px; }
+      #cvd-recipe-accuracy .cv-head-facts b { font-size:17px; }
+      #cvd-recipe-accuracy .cv-about { display:block; padding:18px 18px 8px; }
+      #cvd-recipe-accuracy .cv-about-definition { margin-top:8px; }
+      #cvd-recipe-accuracy details.cv-cvd-guide { margin-top:12px; }
+      #cvd-recipe-accuracy .cv-fabrication { padding:16px 18px; }
+      #cvd-recipe-accuracy .cv-setup { padding:18px; }
+      #cvd-recipe-accuracy .cv-chamber-head .cv-panel-title { font-size:15px; }
+      #cvd-recipe-accuracy .cv-growth-row { font-size:11px; }
+      #cvd-recipe-accuracy .cv-footer { align-items:flex-start; flex-direction:column; gap:12px; }
+    }
+    @media(max-width:400px) {
+      #cvd-recipe-accuracy .cv-nav { gap:14px; }
+      #cvd-recipe-accuracy .cv-head-facts { gap:10px; }
+      #cvd-recipe-accuracy .cv-head-facts span { font-size:10px; }
+      #cvd-recipe-accuracy .cv-setup-row { min-width:0; }
+    }
+    @media(pointer:coarse) { #cvd-recipe-accuracy .cv-nav a { padding:12px 0; } #cvd-recipe-accuracy .cv-modes button { min-height:44px; } }
+    @media(prefers-reduced-motion:reduce) { #cvd-recipe-accuracy button { transition:none; } }
+  </style>
+</head>
+<body>
+<main aria-label="CVD learning simulator">
+<div id="cvd-recipe-accuracy">
+  <header class="cv-head">
+    <div class="cv-topbar"><span class="cv-wordmark">CVD Lab<span>Process studio</span></span><nav class="cv-nav" aria-label="Site sections"><a href="#cv-studio">Simulator</a><a href="#cv-cvd-guide">CVD explained</a><a href="#cv-references">References</a></nav></div>
+    <div class="cv-hero">
+      <div class="cv-brand"><p class="cv-overline">Semiconductor process lab</p><h1 class="cv-name">CVD Lab<span class="cv-title-point">.</span></h1><p class="cv-byline">By S L RICHRIS</p></div>
+      <div class="cv-head-note"><p>Chemical vapour deposition,<br> made visible.</p><div class="cv-head-facts" aria-label="Six precursors, nine reference recipes, three CVD techniques"><span><b>06</b>Precursors</span><a href="#cv-recipes-guide" class="cv-recipe-link" aria-label="Why 9 reference recipes? View the recipe matrix"><b>09</b><span>Reference recipes</span></a><span><b>03</b>CVD techniques</span></div></div>
+    </div>
+  </header>
+  <section class="cv-about" aria-labelledby="cv-about-title">
+    <h2 id="cv-about-title" class="cv-about-title">What is CVD?</h2>
+    <p class="cv-about-definition"><strong>CVD means Chemical Vapour Deposition.</strong> It forms a thin solid film on a wafer through chemical reactions involving gases or vapours. The film stays on the wafer; volatile reaction products and unused gases leave through the exhaust. These films can insulate, connect or protect chip features, or form semiconductor layers.</p>
+    <details id="cv-cvd-guide" class="cv-cvd-guide">
+      <summary>How CVD works · gas roles · CVD types</summary>
+      <div class="cv-guide-grid">
+        <section aria-labelledby="cv-guide-steps-title">
+          <h3 id="cv-guide-steps-title" class="cv-guide-heading">How the film forms</h3>
+          <ol class="cv-guide-steps">
+            <li><strong>Prepare the surface.</strong> Load the prepared wafer and establish the recipe’s temperature and pressure.</li>
+            <li><strong>Deliver the chemicals.</strong> Feed the precursor and required co-reactants. Liquid precursors, such as TEOS, are vaporised first.</li>
+            <li><strong>Activate the reaction.</strong> Heat drives thermal CVD. In PECVD, RF plasma assists the chemistry, usually with wafer heating too.</li>
+            <li><strong>Grow the solid film.</strong> Species react at the wafer surface. Atoms become part of the growing layer.</li>
+            <li><strong>Remove reaction products.</strong> Exhaust carries away volatile by-products and unused gases during growth. Finish by stopping reactants, purging and cooling.</li>
+          </ol>
+        </section>
+        <section aria-labelledby="cv-guide-terms-title">
+          <h3 id="cv-guide-terms-title" class="cv-guide-heading">What each term means</h3>
+          <dl class="cv-guide-terms">
+            <dt>Wafer</dt><dd>The silicon base used to build the chip.</dd>
+            <dt>Precursor</dt><dd>A starting compound that supplies atoms for the film.</dd>
+            <dt>Co-reactant</dt><dd>Another chemical that reacts with the precursor to form the desired deposit.</dd>
+            <dt>Carrier / diluent</dt><dd>Moves or dilutes the feed. Examples here are argon (Ar) and helium (He).</dd>
+            <dt>Plasma</dt><dd>Plasma is an ionised gas, often called the fourth state of matter. It forms when energy frees electrons from gas atoms or molecules. In PECVD, it contains free electrons, ions and neutral particles.</dd>
+            <dt>RF power</dt><dd>RF means radio frequency. The RF generator supplies electrical power that creates and sustains the plasma in these PECVD presets.</dd>
+            <dt>Deposit / film</dt><dd>The solid layer that remains. Its material determines its function.</dd>
+            <dt>By-product</dt><dd>Other reaction products. Volatile products leave through the exhaust.</dd>
+          </dl>
+        </section>
+      </div>
+      <section class="cv-guide-silicon" aria-labelledby="cv-guide-silicon-title">
+        <h3 id="cv-guide-silicon-title" class="cv-guide-heading">Polysilicon and epitaxial silicon</h3>
+        <dl class="cv-silicon-terms">
+          <dt>Polysilicon</dt>
+          <dd><p id="cv-polysilicon-definition"><strong>Polysilicon, or polycrystalline silicon,</strong> is silicon made up of many small crystal grains separated by grain boundaries. The grains can have different crystal orientations.</p><p>The silane LPCVD preset deposits a polysilicon film on the heated wafer. With suitable doping and patterning, polysilicon can form gate electrodes and resistors.</p></dd>
+          <dt>Epitaxial silicon</dt>
+          <dd><p id="cv-epitaxial-definition"><strong>Epitaxial silicon</strong> is a single-crystal silicon layer grown on a crystalline silicon wafer. Its atomic lattice follows the underlying wafer’s crystal orientation.</p><p>The SiCl₄/H₂ APCVD preset grows this layer on a prepared crystalline silicon surface. It provides a crystalline layer for building semiconductor devices.</p></dd>
+        </dl>
+        <p class="cv-guide-takeaway"><strong>Purity is a separate property.</strong> Polysilicon's name describes its crystal-grain structure. High-purity bulk polysilicon can be produced by purifying metallurgical-grade silicon for wafer manufacture. This simulator shows a thin polysilicon film deposited from silane.</p>
+        <p class="cv-guide-footer">The material grade and manufacturing process determine chemical purity. <a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm" target="_blank" rel="noopener noreferrer">Crystal structures</a> · <a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm" target="_blank" rel="noopener noreferrer">Polysilicon films</a> · <a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">Epitaxial growth</a> · <a href="https://www.osha.gov/semiconductors/silicon/substrate-manufacture" target="_blank" rel="noopener noreferrer">Bulk silicon and wafer manufacture</a></p>
+      </section>
+      <section class="cv-guide-example" aria-labelledby="cv-guide-example-title">
+        <h3 id="cv-guide-example-title" class="cv-guide-heading">One clear example · silane / LPCVD</h3>
+        <div class="cv-guide-equation" aria-label="Silane gas forms solid silicon and hydrogen gas"><span>SiH<sub>4</sub> (gas)</span><span>→</span><span>Si (solid)</span><span>+</span><span>2H<sub>2</sub> (gas)</span></div>
+        <p>Silicon stays in the polysilicon film; hydrogen leaves as gas. This recipe uses thermal activation. Different co-reactants can produce a different film from the same precursor.</p>
+      </section>
+      <section aria-labelledby="cv-guide-pecvd-title">
+        <h3 id="cv-guide-pecvd-title" class="cv-guide-heading">What is PECVD?</h3>
+        <p id="cv-pecvd-definition" class="cv-guide-takeaway"><strong>Plasma-enhanced chemical vapour deposition (PECVD)</strong> uses plasma to make precursor gases and other reactants more reactive. Energetic electrons help break gas molecules into reactive particles. These particles react at the wafer surface to form a thin solid film. Plasma activation often allows lower wafer temperatures than thermal CVD.</p>
+        <p class="cv-guide-footer">A common RF frequency is <strong>13.56 MHz</strong>. Equipment can use other frequencies or combinations. The wafer temperature depends on the recipe. In this lab, the silane oxide PECVD example uses <strong>300 °C</strong>, and the TEOS oxide example starts at <strong>350 °C</strong> within its 350–400 °C reference window. <a href="https://www.pppl.gov/about/about-plasmas-and-fusion" target="_blank" rel="noopener noreferrer">Plasma explained</a> · <a href="https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition" target="_blank" rel="noopener noreferrer">PECVD and RF activation</a> · <a href="https://plasma.oxinst.com/technologies/pecvd" target="_blank" rel="noopener noreferrer">PECVD equipment</a></p>
+      </section>
+      <h3 id="cv-guide-types-title" class="cv-guide-heading">The three CVD techniques in this lab</h3>
+      <div class="cv-guide-table-wrap" tabindex="0" role="region" aria-labelledby="cv-guide-types-title">
+        <table class="cv-guide-table">
+          <thead><tr><th scope="col">Technique</th><th scope="col">Pressure and activation</th><th scope="col">Typical benefit</th><th scope="col">Main tradeoff</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">APCVD</th><td>Atmospheric pressure; thermal activation in these presets.</td><td>Simple equipment and potentially high throughput.</td><td>Uniformity is sensitive to gas flow and gas-phase reactions.</td></tr>
+            <tr><th scope="row">LPCVD</th><td>Reduced pressure; thermal activation.</td><td>Often good uniformity and film quality.</td><td>Many recipes require high wafer temperatures.</td></tr>
+            <tr><th scope="row">PECVD</th><td>Reduced pressure; RF plasma assists the reaction.</td><td>Lower wafer temperatures for many dielectric films.</td><td>Plasma damage and film properties depend on the recipe.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cv-guide-takeaway">The precursor, co-reactants, activation and process conditions work together to determine the film.</p>
+      <p class="cv-guide-footer">Choose a precursor and an available CVD technique, then play or inspect the reaction below. <a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">CVD principles</a> · <a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html" target="_blank" rel="noopener noreferrer">Net reaction examples</a></p>
+    </details>
+    <details id="cv-recipes-guide" class="cv-recipes-guide">
+      <summary>Why 9 recipes?<span class="cv-recipes-summary-note">6 precursors, 9 process presets</span></summary>
+      <p class="cv-recipes-definition">A CVD recipe specifies the precursor and other gases, the CVD technique, temperature, pressure and activation conditions. The same precursor can have more than one recipe.</p>
+      <div class="cv-recipes-scroll" tabindex="0" role="region" aria-labelledby="cv-recipes-caption">
+        <table class="cv-recipes-table">
+          <caption id="cv-recipes-caption">Deposited film for each included precursor and CVD technique</caption>
+          <thead><tr><th scope="col">Precursor</th><th scope="col">APCVD</th><th scope="col">LPCVD</th><th scope="col">PECVD</th><th scope="col">Recipes</th></tr></thead>
+          <tbody>
+            <tr data-precursor="silane"><th scope="row">Silane (SiH₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap">SiO₂</td><td data-cvd-type="LPCVD" class="cv-recipe-lp">Polysilicon</td><td data-cvd-type="PECVD" class="cv-recipe-pe">SiO₂</td><td class="cv-recipes-count">3</td></tr>
+            <tr data-precursor="dcs"><th scope="row">Dichlorosilane (SiH₂Cl₂)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">Si₃N₄</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="teos"><th scope="row">TEOS [Si(OC₂H₅)₄]</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">SiO₂</td><td data-cvd-type="PECVD" class="cv-recipe-pe">SiO₂</td><td class="cv-recipes-count">2</td></tr>
+            <tr data-precursor="sicl4"><th scope="row">Silicon tetrachloride (SiCl₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap">Epitaxial Si</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="wf6"><th scope="row">Tungsten hexafluoride (WF₆)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">W</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="ticl4"><th scope="row">Titanium tetrachloride (TiCl₄)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">TiN</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+          </tbody>
+          <tfoot><tr><th scope="row">Total selected recipes</th><td>2</td><td>5</td><td>2</td><td>9</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="cv-recipes-total"><strong>3 + 1 + 2 + 1 + 1 + 1 = 9 recipes</strong><span>Each coloured cell is one recipe. Its label names the deposited film.</span></p>
+      <p class="cv-recipes-note">For example, the silane LPCVD preset forms polysilicon. The silane PECVD preset uses nitrous oxide (N₂O) to help form silicon dioxide (SiO₂). These are selected teaching presets. Other CVD recipes exist.</p>
+    </details>
+  </section>
+  <section class="cv-fabrication" aria-labelledby="cv-fab-title" aria-describedby="cv-fab-note">
+    <div class="cv-fab-heading"><h2 id="cv-fab-title" class="cv-fab-title">VLSI fabrication flow</h2><span class="cv-secondary">Thin-film deposition · current view</span></div>
+    <div class="cv-fab-track" tabindex="0" role="region" aria-label="Fabrication pipeline, scroll horizontally to see all seven steps">
+      <ol class="cv-fab-flow" role="list" aria-label="Illustrative VLSI fabrication pipeline">
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Cleans and prepares a flat silicon wafer for device fabrication." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">01</span><span>Wafer<br>preparation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Grows silicon dioxide on the silicon surface for insulation and protection." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">02</span><span>Oxidation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Transfers a pattern into photoresist using light exposure and development." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">03</span><span>Photolithography</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Removes selected material to transfer the pattern into the layer below." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">04</span><span>Etching</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" aria-current="step" data-inspected="true" data-fab-summary="Uses gas reactions to deposit a solid thin film on the wafer." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">05</span><span>Thin-film<br>deposition (CVD)</span><small>Current view</small></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Adds controlled impurities to silicon to set its electrical properties." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">06</span><span>Doping / ion<br>implantation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Builds metal contacts and wiring that connect devices on the chip." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">07</span><span>Metallization<br>&amp; interconnects</span></button></li>
+      </ol>
+    </div>
+    <p class="cv-fab-swipe">Scroll or swipe horizontally to follow the flow.</p>
+    <p id="cv-fab-description" class="cv-fab-description" role="status" aria-live="polite" aria-atomic="true">Uses gas reactions to deposit a solid thin film on the wafer.</p>
+    <p class="cv-fab-hint">Hover or tap a step to see what it does.</p>
+    <p id="cv-fab-note" class="cv-fab-note">Simplified overview. Deposition, lithography and etching repeat across layers; the exact sequence depends on the device process. <a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html" target="_blank" rel="noopener noreferrer">Process integration reference</a></p>
+  </section>
+  <section id="cv-studio" class="cv-setup" aria-label="Choose a deposition recipe">
+    <div class="cv-setup-row">
+      <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option></select></label></div>
+      <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD technique</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button></div></div>
+      <div class="cv-run"><button type="button" id="cv-play">Play reaction</button></div>
+    </div>
+    <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 9 recipes</a></div>
+  </section>
+  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" aria-live="polite">SiO₂ forms an insulating layer; H₂ and N₂ leave through the exhaust.</p></div>
+  <div class="cv-workspace">
+    <section class="cv-chamber" aria-labelledby="cv-machine">
+      <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
+      <div class="cv-viewport"><canvas id="cv-canvas" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" role="img" aria-label="Rotatable 3D PECVD reactor design">3D CVD reactor with gas delivery and exhaust equipment.</canvas><svg id="cv-callouts" class="cv-callouts" role="img" aria-label="Machine part names"></svg></div>
+      <p id="cv-hint" class="cv-camera-hint">Drag to rotate · scroll to zoom</p>
+      <div class="cv-caption"><label for="cv-component">Inspect a machine part<select id="cv-component"></select></label><div id="cv-inspector" class="cv-part-description" aria-live="polite">Silicon wafer · surface on which the film forms.</div></div>
+      <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
+    </section>
+    <section class="cv-reaction" aria-labelledby="cv-reaction-title">
+      <div class="cv-reaction-head"><p class="cv-overline">Surface chemistry</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Reactants approach the surface</span></div>
+      <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Molecular reaction at the wafer surface">Ball-and-stick reactants change into solid film atoms and gaseous by-products.</canvas></div>
+      <div id="cv-equation" class="cv-equation" aria-label="Overall reaction"></div>
+      <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" class="cv-role-use">Separates metal wiring layers and prevents unintended current flow.</span></div>
+      <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
+      <div class="cv-seek"><label for="cv-reaction-progress">Inspect the reaction</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Reaction animation position"></div>
+    </section>
+  </div>
+  <details open>
+    <summary id="cv-details-summary">Process details · Silane / PECVD</summary>
+    <div class="cv-detail-controls"><label for="cv-stage">Process stage<select id="cv-stage"><option value="load">Load</option><option value="condition">Condition</option><option value="deposit" selected>Deposit</option><option value="purge">Purge and cool</option><option value="unload">Unload</option></select></label><div class="cv-flow-control"><label><input id="cv-flow" class="cv-check" type="checkbox">Gas path overlay</label><span class="cv-secondary">Schematic inlet-to-exhaust guide</span></div></div>
+    <dl class="cv-recipe">
+      <div><dt><label for="cv-temperature">Reference wafer setpoint</label></dt><dd><output id="cv-temp" for="cv-temperature">300 °C</output><span id="cv-temp-window" class="cv-setting-note">Documented example</span><input id="cv-temperature" type="range" min="300" max="300" step="5" value="300" hidden disabled></dd></div>
+      <div><dt>Reference pressure</dt><dd id="cv-pressure">1.0 Torr</dd></div>
+      <div><dt>Reactant delivery</dt><dd id="cv-feed">5% SiH₄ in N₂ + N₂O</dd></div>
+      <div><dt>Activation</dt><dd><span id="cv-activation-state">RF plasma</span><label class="cv-rf"><input id="cv-rf-on" type="checkbox" checked>Enable RF during deposition</label><span id="cv-rf-reference" class="cv-setting-note">RF example: 30 W</span></dd></div>
+    </dl>
+    <div id="cv-reference-note" class="cv-detail-line">Reference conditions · University of Toronto oxide recipe</div>
+    <div id="cv-stage-detail" class="cv-detail-line" aria-live="polite">Idealised reaction by-products: H₂ + N₂.</div>
+    <div class="cv-detail-line cv-source-line"><a id="cv-setup-source" target="_blank" rel="noopener noreferrer">Process conditions</a> · <a id="cv-window-source" target="_blank" rel="noopener noreferrer" hidden>Temperature range</a><span id="cv-window-divider" hidden> · </span><a id="cv-chem-source" target="_blank" rel="noopener noreferrer">Reaction</a> · <a id="cv-role-source" target="_blank" rel="noopener noreferrer">Deposit role</a></div>
+  </details>
+  <details id="cv-references">
+    <summary>References · 22 sources</summary>
+    <p class="cv-refs-intro">Sources used to build the recipe settings, chemical reaction schematics and deposit-role explanations in CVD Lab. Each entry identifies what the source supports.</p>
+    <div class="cv-refs-grid">
+      <section aria-labelledby="cv-ref-settings">
+        <h2 id="cv-ref-settings" class="cv-ref-heading">Process conditions and equipment</h2>
+        <ol class="cv-ref-list">
+          <li><a href="https://www.ece.utoronto.ca/equipmentcapabilities/" target="_blank" rel="noopener noreferrer">University of Toronto · Equipment Capabilities</a><span class="cv-ref-use">Used for: the silane/N₂O PECVD oxide example, nitrogen dilution, temperature, pressure and RF power.</span></li>
+          <li><a href="https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/" target="_blank" rel="noopener noreferrer">National Yang Ming Chiao Tung University · LPCVD system</a><span class="cv-ref-use">Used for: nominal temperatures, pressures and feeds for polysilicon, DCS/ammonia nitride and thermal TEOS oxide.</span></li>
+          <li><a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">Alan Doolittle, Georgia Tech · ECE6450, lectures 13–14 (PDF)</a><span class="cv-ref-use">Used for: CVD reactor concepts, epitaxial growth following the substrate crystal structure, and LPCVD temperature windows for polysilicon, silicon nitride and TEOS oxide.</span></li>
+          <li><a href="https://www.m-watanabe.co.jp/en/product/apcvd/" target="_blank" rel="noopener noreferrer">M. Watanabe · APCVD systems</a><span class="cv-ref-use">Used for: the atmospheric silane/oxygen oxide process and its published temperature window.</span></li>
+          <li><a href="https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf" target="_blank" rel="noopener noreferrer">European Patent Office · EP0114876B1, silicon epitaxy (PDF)</a><span class="cv-ref-use">Used for: atmospheric SiCl₄/H₂ epitaxy, the crystalline substrate requirement and reference temperature conditions.</span></li>
+          <li><a href="https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor" target="_blank" rel="noopener noreferrer">NIST · W CVD process diagnostics and thickness metrology (2000)</a><span class="cv-ref-use">Used for: the WF₆/H₂ tungsten process, low-pressure temperature window, HF by-product and nucleation context.</span></li>
+          <li><a href="https://patents.google.com/patent/US5348587A/en" target="_blank" rel="noopener noreferrer">US5348587A · TiCl₄/NH₃ CVD apparatus</a><span class="cv-ref-use">Used for: thermal TiN deposition, argon carrier, reference conditions and the balanced overall reaction.</span></li>
+          <li><a href="https://patents.google.com/patent/US7923376B1/en" target="_blank" rel="noopener noreferrer">US7923376B1 · Reducing defects in PECVD TEOS films</a><span class="cv-ref-use">Used for: the TEOS/O₂/He PECVD recipe, temperature and pressure windows, and equipment-specific RF example.</span></li>
+        </ol>
+      </section>
+      <section aria-labelledby="cv-ref-chemistry">
+        <h2 id="cv-ref-chemistry" class="cv-ref-heading">Chemistry and CVD background</h2>
+        <ol class="cv-ref-list" start="9">
+          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html" target="_blank" rel="noopener noreferrer">NPTEL · Chemical Vapor Deposition, lecture 11</a><span class="cv-ref-use">Used for: selected net reactions for silicon, silicon dioxide and tungsten, plus chamber-operation concepts.</span></li>
+          <li><a href="https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf" target="_blank" rel="noopener noreferrer">Micromachining Processes · ENE5400 lecture notes, NTHU-hosted (PDF)</a><span class="cv-ref-use">Used for: the idealised thermal TEOS decomposition equation, oxide chemistry and the LPCVD furnace schematic.</span></li>
+          <li><a href="https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2" target="_blank" rel="noopener noreferrer">Stanford Nanofabrication Facility · Silicon Dioxide</a><span class="cv-ref-use">Used for: oxide precursor/process pairings and silicon-dioxide deposition background.</span></li>
+          <li><a href="https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride" target="_blank" rel="noopener noreferrer">Stanford Nanofabrication Facility · Tystar B2T7 nitride tube</a><span class="cv-ref-use">Used for: LPCVD silicon-nitride equipment and the dichlorosilane/ammonia precursor pairing.</span></li>
+          <li><a href="https://plasma.oxinst.com/technologies/pecvd" target="_blank" rel="noopener noreferrer">Oxford Instruments · PECVD</a><span class="cv-ref-use">Used for: plasma-assisted deposition, lower wafer temperatures, equipment-dependent RF frequencies and TEOS oxide application background.</span></li>
+          <li><a href="https://www.pppl.gov/about/about-plasmas-and-fusion" target="_blank" rel="noopener noreferrer">Princeton Plasma Physics Laboratory · About Plasmas and Fusion</a><span class="cv-ref-use">Used for: the plasma definition, ionisation, free electrons, ions and neutral particles.</span></li>
+          <li><a href="https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition" target="_blank" rel="noopener noreferrer">CORIAL / Plasma-Therm · PECVD technology</a><span class="cv-ref-use">Used for: the PECVD definition, plasma activation of gas mixtures, the 13.56 MHz RF example and film formation at the substrate surface.</span></li>
+          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm" target="_blank" rel="noopener noreferrer">NPTEL · CMOS fabrication: Crystals and Growth</a><span class="cv-ref-use">Used for: the polycrystalline-silicon definition, crystal grains, grain boundaries and crystal orientation.</span></li>
+          <li><a href="https://www.osha.gov/semiconductors/silicon/substrate-manufacture" target="_blank" rel="noopener noreferrer">OSHA · Semiconductor Substrate Manufacture</a><span class="cv-ref-use">Used for: high-purity bulk polysilicon production and subsequent single-crystal ingot and wafer manufacture.</span></li>
+        </ol>
+      </section>
+      <section aria-labelledby="cv-ref-roles">
+        <h2 id="cv-ref-roles" class="cv-ref-heading">VLSI deposit roles</h2>
+        <ol class="cv-ref-list" start="18">
+          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html" target="_blank" rel="noopener noreferrer">NPTEL · BEOL issues and aluminium metallization, lecture 30</a><span class="cv-ref-use">Used for: SiO₂ insulation, Ti/TiN barriers, tungsten via filling and repeated interconnect patterning/deposition.</span></li>
+          <li><a href="https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html" target="_blank" rel="noopener noreferrer">TU Wien, Institute for Microelectronics · Annual Review 2006</a><span class="cv-ref-use">Used for: silicon-nitride passivation and moisture-barrier context.</span></li>
+          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm" target="_blank" rel="noopener noreferrer">NPTEL · CMOS fabrication: LPCVD</a><span class="cv-ref-use">Used for: polysilicon gate contacts, short interconnects and resistor applications.</span></li>
+          <li><a href="https://www.appliedmaterials.com/us/en/semiconductor/products/processes/epitaxy.html" target="_blank" rel="noopener noreferrer">Applied Materials · Epitaxy</a><span class="cv-ref-use">Used for: crystalline epitaxial layers and their role in semiconductor devices.</span></li>
+          <li><a href="https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html" target="_blank" rel="noopener noreferrer">Zhebo Chen, Applied Materials · Introducing a Breakthrough in 2D Scaling (2020)</a><span class="cv-ref-use">Used for: tungsten contact-metal filling and conventional TiN liner/nucleation context.</span></li>
+        </ol>
+      </section>
+    </div>
+    <p class="cv-ref-note">These sources support representative recipes and process concepts. Chamber geometry, molecular motion and demonstration thickness are schematic. Links reviewed 13 October 2026.</p>
+  </details>
+  <p id="cv-model-note" class="cv-model-note">Net reaction schematic · enlarged atoms and film · playback speed is not a deposition rate</p>
+  <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p></footer>
+  <script>
+    (() => {
+      const root=document.getElementById('cvd-recipe-accuracy'),canvas=root.querySelector('#cv-canvas'),ctx=canvas.getContext('2d'),viewport=root.querySelector('.cv-viewport');
+      const state={process:'PECVD',precursor:'silane',stage:'deposit',component:'wafer',yaw:.64,pitch:.31,zoom:1,growth:0,temperature:300,rfOn:true,running:false};
+      const precursors={
+        silane:{name:'Silane',formula:'SiH₄',phase:'gas',presets:{
+          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂ + N₂',chamber:'single',effect:'SiO₂ forms an insulating layer; hydrogen and nitrogen leave through the exhaust.',equation:'SiH4 + 2N2O -> SiO2 + 2N2 + 2H2',source:'https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2'},
+          LPCVD:{film:'Poly-Si',material:'poly',property:'Semiconductor',byproducts:'H₂',chamber:'batch',effect:'Silane decomposes to silicon. This thermal preset forms polysilicon and releases hydrogen.',equation:'SiH4 -> Si + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'},
+          APCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂',chamber:'single',effect:'Silane reacts with oxygen to form an insulating SiO₂ film on the heated wafer.',equation:'SiH4 + O2 -> SiO2 + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
+        }},
+        dcs:{name:'Dichlorosilane',formula:'SiH₂Cl₂',phase:'gas',presets:{
+          LPCVD:{film:'Si₃N₄',material:'nitride',property:'Insulator / barrier',byproducts:'HCl + H₂',chamber:'batch',effect:'Dichlorosilane and ammonia form a silicon-nitride barrier layer; HCl and hydrogen leave in the exhaust.',equation:'3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2',source:'https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride'}
+        }},
+        teos:{name:'TEOS',formula:'Si(OC₂H₅)₄',phase:'liquid',presets:{
+          LPCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'C₂H₄ + H₂O (idealised)',chamber:'batch',effect:'Liquid TEOS is vaporised before delivery. Thermal decomposition forms SiO₂ and organic gaseous by-products.',equation:'Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O',source:'https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf'},
+          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'Oxidised organic gases',chamber:'single',effect:'Oxygen plasma activates the TEOS feed to form an insulating oxide at a lower wafer temperature.',equation:'TEOS + oxygen plasma -> SiO2 + oxidised organic by-products',source:'https://plasma.oxinst.com/technologies/pecvd'}
+        }},
+        sicl4:{name:'Silicon tetrachloride',formula:'SiCl₄',phase:'liquid',presets:{
+          APCVD:{film:'Epitaxial Si',material:'epi',property:'Semiconductor',byproducts:'HCl',chamber:'single',effect:'On a prepared crystalline silicon surface, hydrogen reduction deposits epitaxial silicon; HCl exits in the exhaust.',equation:'SiCl4 + 2H2 -> Si + 4HCl',source:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf'}
+        }},
+        wf6:{name:'Tungsten hexafluoride',formula:'WF₆',phase:'gas',presets:{
+          LPCVD:{film:'W',material:'tungsten',property:'Metal conductor',byproducts:'HF',chamber:'single',effect:'Hydrogen reduces WF₆ to conductive tungsten on a nucleated surface. HF is the reaction by-product.',equation:'WF6 + 3H2 -> W + 6HF',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
+        }},
+        ticl4:{name:'Titanium tetrachloride',formula:'TiCl₄',phase:'liquid',presets:{
+          LPCVD:{film:'TiN',material:'tin',property:'Conductive diffusion barrier',byproducts:'HCl + N₂',chamber:'single',effect:'Titanium tetrachloride and ammonia form a conductive TiN barrier coating; HCl and nitrogen leave in the exhaust.',equation:'6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl',source:'https://patents.google.com/patent/US5348587A/en'}
+        }}
+      };
+      const furnaceSource='https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/';
+      const lectureSource='https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf';
+      const operatingConditions={
+        silane:{
+          PECVD:{temp:300,tempRange:[300,300],pressure:'1.0 Torr (1000 mTorr)',feed:'5% SiH₄ in N₂ + N₂O',rfReference:'30 W',setupName:'University of Toronto · SiO₂ PECVD example',setupSource:'https://www.ece.utoronto.ca/equipmentcapabilities/',deliveryNote:'Nitrogen diluent is omitted from the net reaction.'},
+          LPCVD:{temp:620,tempRange:[575,650],pressure:'0.300 Torr (300 mTorr)',feed:'SiH₄',setupName:'NYCU · polysilicon LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'The polysilicon temperature window is shown; lower-temperature amorphous silicon is a different recipe.'},
+          APCVD:{temp:400,tempRange:[350,450],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiH₄ + O₂',chamber:'single',effect:'Silane reacts with oxygen to deposit an insulating SiO₂ film on the heated wafer.',setupName:'M. Watanabe · SiH₄/O₂ APCVD operating window',setupSource:'https://www.m-watanabe.co.jp/en/product/apcvd/',deliveryNote:'400 °C is a teaching setpoint within the published 350–450 °C window.'}
+        },
+        dcs:{LPCVD:{temp:800,tempRange:[700,800],pressure:'0.120 Torr (120 mTorr)',feed:'SiH₂Cl₂ + NH₃',setupName:'NYCU · silicon nitride LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'Gas ratio also controls nitride composition and film stress.'}},
+        teos:{
+          LPCVD:{temp:700,tempRange:[650,750],pressure:'0.120 Torr (120 mTorr)',feed:'TEOS vapour',setupName:'NYCU · thermal TEOS oxide example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'Liquid TEOS is vaporised; inert delivery gas, when used, is omitted from the net reaction.'},
+          PECVD:{temp:350,tempRange:[350,400],pressure:'2–4 Torr (published window)',feed:'TEOS vapour + O₂ + He',rfReference:'2–3 kW (source equipment)',setupName:'US7923376B1 · TEOS/O₂/He PECVD window',setupSource:'https://patents.google.com/patent/US7923376B1/en',deliveryNote:'Helium is a diluent. Oxygen feed and organic exhaust composition depend on the plasma recipe.'}
+        },
+        sicl4:{APCVD:{temp:1200,tempRange:[1150,1250],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiCl₄ vapour in H₂',setupName:'EP0114876B1 · atmospheric silicon epitaxy',setupSource:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf',deliveryNote:'Requires a prepared crystalline Si surface; hydrogen is both carrier and reducing reactant.'}},
+        wf6:{LPCVD:{temp:400,tempRange:[400,500],pressure:'0.500 Torr (500 mTorr)',feed:'WF₆ + H₂',setupName:'NIST · low-pressure W CVD study',setupSource:'https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor',deliveryNote:'The sourced temperature window is 400–500 °C. Bulk growth is shown on a prepared nucleation surface.'}},
+        ticl4:{LPCVD:{temp:650,tempRange:[450,650],pressure:'0.150 Torr (150 mTorr)',feed:'TiCl₄ vapour + NH₃ + Ar',setupName:'US5348587A · thermal TiN growth example',setupSource:'https://patents.google.com/patent/US5348587A/en',deliveryNote:'Argon is a carrier. This preset uses thermal surface chemistry.'}}
+      };
+      // Chemistry and operating conditions resolve through one selected recipe.
+      for(const [precursor,modes] of Object.entries(operatingConditions))for(const [process,conditions] of Object.entries(modes))Object.assign(precursors[precursor].presets[process],conditions);
+      const recipe=()=>precursors[state.precursor].presets[state.process];
+      const depositRoles={
+        oxide:{role:'Electrical insulator',use:'Separates metal wiring layers and prevents unintended current flow.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'},
+        nitride:{role:'Protective insulator and barrier',use:'Protects the chip from moisture; also masks selected areas during oxidation.',source:'https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html'},
+        poly:{role:'Semiconductor layer',use:'Contains many silicon crystal grains. With suitable doping and patterning, forms gate electrodes and resistors.',source:'https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm'},
+        epi:{role:'Crystalline device layer',use:'A single-crystal silicon layer that follows the wafer’s crystal orientation and supports building semiconductor devices.',source:'https://www.appliedmaterials.com/us/en/semiconductor/products/processes/epitaxy.html'},
+        tungsten:{role:'Electrical conductor',use:'Used in contact and via plugs to connect devices with metal wiring.',source:'https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html'},
+        tin:{role:'Conductive diffusion barrier',use:'Lines contacts beneath metal, limiting interdiffusion and protecting underlying layers.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'}
+      };
+      const depositRole=()=>depositRoles[recipe().material];
+      const reactionCanvas=root.querySelector('#cv-reaction-canvas'),reactionCtx=reactionCanvas.getContext('2d'),reactionViewport=root.querySelector('.cv-molecules');
+      const atomNames={H:'hydrogen',Si:'silicon',O:'oxygen',N:'nitrogen',Cl:'chlorine',F:'fluorine',C:'carbon',W:'tungsten',Ti:'titanium'};
+      const subscript=value=>value.replace(/\d/g,digit=>'₀₁₂₃₄₅₆₇₈₉'[Number(digit)]);
+      const clamp=(value,min=0,max=1)=>Math.max(min,Math.min(max,value));
+      const smooth=value=>{const t=clamp(value);return t*t*(3-2*t);};
+      const mix=(a,b,t)=>a+(b-a)*t;
+      let reactionScene=null,reactionCache='';
+      function formulaAtoms(formula){
+        let index=0;
+        function group(){
+          const atoms=[];
+          while(index<formula.length&&formula[index]!==')'){
+            let part;
+            if(formula[index]==='('){index++;part=group();index++;}
+            else{const match=formula.slice(index).match(/^[A-Z][a-z]?/);if(!match)throw new Error('Unknown formula '+formula);index+=match[0].length;part=[match[0]];}
+            const number=formula.slice(index).match(/^\d+/),count=number?Number(number[0]):1;if(number)index+=number[0].length;
+            for(let repeat=0;repeat<count;repeat++)atoms.push(...part);
+          }
+          return atoms;
+        }
+        return group();
+      }
+      function reactionSpec(){
+        if(state.precursor==='teos'&&state.process==='PECVD')return {inputs:[{count:1,formula:'Si(OC2H5)4'},{count:1,formula:'O2'}],solid:{count:1,formula:'SiO2'},outputs:[],qualitative:true};
+        const parse=side=>side.split('+').map(term=>{const match=term.trim().match(/^(\d+)?(.+)$/);return {count:Number(match[1]||1),formula:match[2].trim()};});
+        const [left,right]=recipe().equation.split('->'),products=parse(right);
+        return {inputs:parse(left),solid:products[0],outputs:products.slice(1),qualitative:false};
+      }
+      function molecule(formula){
+        const atoms=[],bonds=[];
+        const add=(symbol,p)=>{atoms.push({symbol,p});return atoms.length-1;};
+        const link=(a,b,order=1)=>bonds.push({a,b,order});
+        const norm=p=>{const length=Math.hypot(...p);return p.map(v=>v/length);};
+        const scale=(p,s)=>p.map(v=>v*s),plus=(a,b)=>a.map((v,i)=>v+b[i]);
+        const tetra=[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]].map(norm);
+        if(['SiH4','SiH2Cl2','SiCl4','TiCl4'].includes(formula)){
+          const core=formula.startsWith('Ti')?'Ti':'Si',ligands=formula==='SiH4'?['H','H','H','H']:formula==='SiH2Cl2'?['H','H','Cl','Cl']:['Cl','Cl','Cl','Cl'];
+          add(core,[0,0,0]);ligands.forEach((symbol,i)=>link(0,add(symbol,scale(tetra[i],1.25))));
+        }else if(formula==='WF6'){
+          add('W',[0,0,0]);[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].forEach(p=>link(0,add('F',scale(p,1.3))));
+        }else if(formula==='Si(OC2H5)4'){
+          add('Si',[0,0,0]);
+          tetra.forEach((direction,i)=>{
+            const side=norm([-direction[1],direction[0],.12]),normal=norm([direction[1]*side[2]-direction[2]*side[1],direction[2]*side[0]-direction[0]*side[2],direction[0]*side[1]-direction[1]*side[0]]);
+            const oxygen=add('O',scale(direction,1.1)),c1p=plus(scale(direction,2.0),scale(side,.26)),c2p=plus(scale(direction,2.85),scale(side,.72));
+            const c1=add('C',c1p),c2=add('C',c2p);link(0,oxygen);link(oxygen,c1);link(c1,c2);
+            for(const sign of [-1,1])link(c1,add('H',plus(c1p,plus(scale(normal,sign*.55),scale(side,-.35)))));
+            [plus(scale(direction,.5),scale(side,.35)),plus(scale(normal,.52),scale(side,-.38)),plus(scale(normal,-.52),scale(side,-.38))].forEach(p=>link(c2,add('H',plus(c2p,p))));
+          });
+        }else if(formula==='NH3'){
+          add('N',[0,-.25,0]);[[1,.18,.57],[-1,.18,.57],[0,.18,-1.15]].forEach(p=>link(0,add('H',p)));
+        }else if(formula==='N2O'){
+          add('N',[-1.15,0,0]);add('N',[0,0,0]);add('O',[1.15,0,0]);link(0,1,2);link(1,2,2);
+        }else if(formula==='H2O'){
+          add('O',[0,.15,0]);add('H',[-.8,.73,0]);add('H',[.8,.73,0]);link(0,1);link(0,2);
+        }else if(formula==='C2H4'){
+          add('C',[-.58,0,0]);add('C',[.58,0,0]);link(0,1,2);
+          for(const [core,x] of [[0,-1.17],[1,1.17]])for(const y of [-.7,.7])link(core,add('H',[x,y,0]));
+        }else if(['H2','N2','O2','HCl','HF'].includes(formula)){
+          const elements=formulaAtoms(formula);add(elements[0],[-.58,0,0]);add(elements[1],[.58,0,0]);link(0,1,formula==='N2'?3:formula==='O2'?2:1);
+        }else throw new Error('No molecular structure for '+formula);
+        // A fixed oblique projection reveals tetrahedral and octahedral bonds.
+        const yaw=.53,pitch=.37;
+        atoms.forEach(atom=>{const [x,y,z]=atom.p,x1=x*Math.cos(yaw)+z*Math.sin(yaw),z1=z*Math.cos(yaw)-x*Math.sin(yaw);atom.q=[x1,y*Math.cos(pitch)-z1*Math.sin(pitch),y*Math.sin(pitch)+z1*Math.cos(pitch)];});
+        return {atoms,bonds};
+      }
+      function speciesLayout(species,w,h,products=false){
+        const result={atoms:[],bonds:[],labels:[]},small=w<580,groupWidth=w/Math.max(1,species.length);
+        species.forEach((species,group)=>{
+          const model=molecule(species.formula),n=species.count;
+          const columns=n===1?1:Math.min(n,n>4?(small?3:4):(small?2:3)),rows=Math.ceil(n/columns);
+          const cellWidth=(groupWidth-16)/columns,cellHeight=(h-(products?140:88))/rows;
+          const xs=model.atoms.map(atom=>atom.q[0]),ys=model.atoms.map(atom=>atom.q[1]),modelWidth=Math.max(...xs)-Math.min(...xs),modelHeight=Math.max(...ys)-Math.min(...ys);
+          const scale=Math.max(5,Math.min(n===1?42:28,(cellWidth-18)/(modelWidth+.7),(cellHeight-16)/(modelHeight+.7)));
+          const centerX=(Math.min(...xs)+Math.max(...xs))/2,centerY=(Math.min(...ys)+Math.max(...ys))/2;
+          result.labels.push({text:(n>1?n+' × ':'')+subscript(species.formula),x:groupWidth*(group+.5),y:31});
+          for(let copy=0;copy<n;copy++){
+            const column=copy%columns,row=Math.floor(copy/columns),rowCount=Math.min(columns,n-row*columns);
+            const cx=group*groupWidth+(groupWidth-rowCount*cellWidth)/2+(column+.5)*cellWidth,cy=47+(row+.5)*cellHeight;
+            const offset=result.atoms.length;
+            for(const atom of model.atoms)result.atoms.push({symbol:atom.symbol,x:cx+(atom.q[0]-centerX)*scale,y:cy+(atom.q[1]-centerY)*scale,z:atom.q[2],r:atom.symbol==='H'?clamp(scale*.18,3.1,6.6):clamp(scale*.37,6.8,13.5),solid:false});
+            for(const bond of model.bonds)result.bonds.push({...bond,a:bond.a+offset,b:bond.b+offset});
+          }
+        });
+        return result;
+      }
+      function filmSites(spec,w,h){
+        const counts={};for(let repeat=0;repeat<spec.solid.count;repeat++)for(const element of formulaAtoms(spec.solid.formula))counts[element]=(counts[element]||0)+1;
+        const symbols=[];while(Object.values(counts).some(count=>count>0))for(const element of Object.keys(counts))if(counts[element]>0){symbols.push(element);counts[element]--;}
+        const baseline=h-37,columns=Math.min(symbols.length,6),spacing=28,rows=Math.ceil(symbols.length/columns);
+        return symbols.map((symbol,i)=>{const row=Math.floor(i/columns),rowCount=Math.min(columns,symbols.length-row*columns),column=row%2?rowCount-1-i%columns:i%columns;return {symbol,x:w/2+(column-(rowCount-1)/2)*spacing,y:baseline-12-(rows-1-row)*26,z:0,r:symbol==='W'?13:11,solid:true};});
+      }
+      function buildReaction(w,h){
+        const key=state.precursor+'|'+state.process+'|'+w+'|'+h;if(key===reactionCache)return reactionScene;
+        reactionCache=key;
+        const spec=reactionSpec(),input=speciesLayout(spec.inputs,w,h),output=speciesLayout(spec.outputs,w,h,true),solid=filmSites(spec,w,h);
+        const atoms=input.atoms.map((atom,id)=>({...atom,id,target:null})),pool={};
+        for(const atom of atoms)(pool[atom.symbol]??=[]).push(atom.id);
+        const allocate=target=>{const id=pool[target.symbol]?.shift();if(id===undefined)throw new Error('Unbalanced reaction: '+recipe().equation);atoms[id].target=target;return id;};
+        const solidIds=solid.map(allocate),productIds=output.atoms.map(allocate);
+        const productBonds=output.bonds.map(bond=>({...bond,a:productIds[bond.a],b:productIds[bond.b]}));
+        const remaining=Object.values(pool).flat();
+        if(spec.qualitative){
+          // The plasma exhaust is a mixture. Keep all C/H/O atoms in a labelled
+          // unbonded fragment pool instead of inventing exact product molecules.
+          const columns=Math.min(8,Math.ceil(Math.sqrt(remaining.length*1.8))),spacing=Math.min(27,(w-38)/columns),rows=Math.ceil(remaining.length/columns);
+          remaining.forEach((id,i)=>{atoms[id].target={symbol:atoms[id].symbol,x:w/2+((i%columns)-(columns-1)/2)*spacing,y:64+Math.floor(i/columns)*32,z:0,r:atoms[id].symbol==='H'?4.2:8,solid:false};});
+          output.labels=[{text:'C / H / O fragment pool',x:w/2,y:31}];
+        }else if(remaining.length)throw new Error('Unassigned atoms in '+recipe().equation);
+        reactionScene={spec,atoms,inputBonds:input.bonds,productBonds,inputLabels:input.labels,productLabels:output.labels,solidIds,w,h};
+        return reactionScene;
+      }
+      function reactionPhase(){
+        if(state.stage!=='deposit')return 'Reaction paused · '+state.stage;
+        if(state.process==='PECVD'&&!state.rfOn)return 'Reaction paused · RF off';
+        const g=state.growth;
+        return g<.24?'Reactants approach the wafer':g<.49?(state.process==='PECVD'?'Plasma activation · bonds rearrange':'Surface activation · bonds rearrange'):g<.75?'Film atoms attach · gas bonds form':g<1?'By-products move toward the exhaust':'Solid film remains · gases leave';
+      }
+      function reactionLabels(){
+        const spec=reactionSpec(),equation=root.querySelector('#cv-equation');equation.replaceChildren();
+        const precursor=precursors[state.precursor];
+        root.querySelector('#cv-reaction-title').textContent=precursor.name+' ('+precursor.formula+') · '+state.process;
+        const deposited=depositRole();
+        root.querySelector('#cv-role-label').textContent='Role of '+recipe().film+' deposit · '+deposited.role;
+        root.querySelector('#cv-role-use').textContent=deposited.use;
+        root.querySelector('#cv-role-source').setAttribute('href',deposited.source);
+        const term=(text)=>{const span=document.createElement('span');span.textContent=text;equation.appendChild(span);};
+        const speciesText=species=>(species.count>1?species.count+' ':'')+subscript(species.formula);
+        spec.inputs.forEach((species,i)=>{if(i)term('+');term(speciesText(species));});term('→');term(speciesText(spec.solid)+' (solid)');
+        if(spec.qualitative){term('+');term('organic gas mixture');}
+        else spec.outputs.forEach(species=>{term('+');term(speciesText(species)+' (gas)');});
+        const legend=root.querySelector('#cv-atoms');legend.replaceChildren();
+        const elements=[...new Set(spec.inputs.flatMap(species=>formulaAtoms(species.formula)))];
+        for(const element of elements){const span=document.createElement('span'),dot=document.createElement('i');dot.style.setProperty('--atom-color','var(--cv-atom-'+element+')');dot.setAttribute('aria-hidden','true');span.appendChild(dot);const label=document.createElement('span');label.textContent=element+' '+atomNames[element];span.appendChild(label);legend.appendChild(span);}
+        root.querySelector('#cv-model-note').textContent=spec.qualitative?'Species schematic · oxygen and organic exhaust vary · playback speed is not a deposition rate':'Net reaction schematic · enlarged atoms and film · playback speed is not a deposition rate';
+      }
+      function ball(context,atom,opacity=1,labels=true){
+        const color='atom-'+atom.symbol,r=atom.r;context.globalAlpha=opacity;
+        const gradient=context.createRadialGradient(atom.x-r*.34,atom.y-r*.38,r*.08,atom.x,atom.y,r);
+        gradient.addColorStop(0,rgb(color,1.2));gradient.addColorStop(.4,rgb(color,1.04));gradient.addColorStop(1,rgb(color,.74));
+        context.beginPath();context.arc(atom.x,atom.y,r,0,Math.PI*2);context.fillStyle=gradient;context.fill();
+        if(labels&&atom.symbol!=='H'&&r>=8.4){context.font='11px system-ui,sans-serif';context.textAlign='center';context.textBaseline='middle';context.fillStyle=rgb('atom-ink');context.fillText(atom.symbol,atom.x,atom.y+.3);}
+        context.globalAlpha=1;
+      }
+      function molecularBond(context,a,b,order=1,opacity=1){
+        if(opacity<=0)return;context.globalAlpha=opacity;context.strokeStyle=rgb('muted');context.lineWidth=1.7;
+        const length=Math.hypot(b.x-a.x,b.y-a.y)||1,nx=-(b.y-a.y)/length,ny=(b.x-a.x)/length;
+        for(let i=0;i<order;i++){const shift=(i-(order-1)/2)*3;context.beginPath();context.moveTo(a.x+nx*shift,a.y+ny*shift);context.lineTo(b.x+nx*shift,b.y+ny*shift);context.stroke();}context.globalAlpha=1;
+      }
+      function atomPositions(scene){
+        const g=state.growth,arrival=smooth(g/.24),travel=smooth((g-.26)/.48),escape=smooth((g-.74)/.26);
+        return scene.atoms.map(atom=>{
+          const target=atom.target,gasOffset=target.solid?0:30;
+          return {...atom,x:mix(atom.x,target.x,travel)+Math.sin(travel*Math.PI)*((atom.id%5)-2)*4,y:mix(atom.y+arrival*19,target.y+gasOffset,travel)+Math.sin(travel*Math.PI)*27-gasOffset*escape,z:mix(atom.z,0,travel),r:mix(atom.r,target.r,travel)};
+        });
+      }
+      function drawReaction(){
+        const bounds=reactionViewport.getBoundingClientRect(),w=Math.max(200,bounds.width),h=bounds.height||280,dpr=Math.min(window.devicePixelRatio||1,2);
+        if(reactionCanvas.width!==Math.round(w*dpr)||reactionCanvas.height!==Math.round(h*dpr)){reactionCanvas.width=Math.round(w*dpr);reactionCanvas.height=Math.round(h*dpr);}
+        const c=reactionCtx;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+        const scene=buildReaction(w,h),positions=atomPositions(scene),g=state.growth,baseline=h-37;
+        c.fillStyle=rgb('wafer',.92);c.beginPath();c.moveTo(12,baseline+7);c.lineTo(w-23,baseline+7);c.lineTo(w-9,baseline+23);c.lineTo(23,baseline+23);c.closePath();c.fill();
+        c.fillStyle=rgb('film-'+recipe().material);c.globalAlpha=.35;c.fillRect(20,baseline+3,w-42,5);c.globalAlpha=1;
+        const filmElements=[...new Set(formulaAtoms(scene.spec.solid.formula))],background=[];
+        for(let row=0;row<2;row++)for(let i=0;i<8;i++)background.push({symbol:filmElements[(i+row)%filmElements.length],x:w/2+(i-3.5)*27,y:baseline-2+row*8,r:6,z:0});
+        if(!['tungsten','tin'].includes(recipe().material))for(let i=1;i<background.length;i++)if(i%8)molecularBond(c,background[i-1],background[i],1,.25);
+        background.forEach(atom=>ball(c,atom,.32,false));
+        for(const bond of scene.inputBonds)molecularBond(c,positions[bond.a],positions[bond.b],bond.order,1-smooth((g-.26)/.25));
+        for(const bond of scene.productBonds)molecularBond(c,positions[bond.a],positions[bond.b],bond.order,smooth((g-.49)/.22));
+        const solidOpacity=smooth((g-.5)/.24),solidAtoms=scene.solidIds.map(id=>positions[id]);
+        if(!['tungsten','tin'].includes(recipe().material)){
+          for(let i=0;i<solidAtoms.length;i++)for(let j=i+1;j<solidAtoms.length;j++){const a=solidAtoms[i],b=solidAtoms[j];if(Math.hypot(a.x-b.x,a.y-b.y)<42&&(filmElements.length===1||a.symbol!==b.symbol))molecularBond(c,a,b,1,solidOpacity*.7);}
+          for(const atom of solidAtoms){const site=background.filter(site=>filmElements.length===1||site.symbol!==atom.symbol).sort((a,b)=>Math.hypot(a.x-atom.x,a.y-atom.y)-Math.hypot(b.x-atom.x,b.y-atom.y))[0];if(site)molecularBond(c,atom,site,1,solidOpacity*.45);}
+        }
+        positions.sort((a,b)=>a.z-b.z).forEach(atom=>ball(c,atom));
+        c.textAlign='center';c.textBaseline='alphabetic';c.font='13px system-ui,sans-serif';c.fillStyle=rgb('text');
+        const inputOpacity=1-smooth((g-.27)/.21),productOpacity=smooth((g-.56)/.19);
+        c.globalAlpha=inputOpacity;scene.inputLabels.forEach(label=>c.fillText(label.text,label.x,label.y));
+        c.globalAlpha=productOpacity;scene.productLabels.forEach(label=>c.fillText(label.text,label.x,label.y));c.globalAlpha=1;
+        c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'Organic fragments · mixture varies':'Gaseous by-products',8,13);
+        c.textAlign='center';c.fillText('Wafer surface · '+recipe().film+(g<.5?' growth sites':' solid'),w/2,h-5);
+        const phase=reactionPhase(),phaseElement=root.querySelector('#cv-reaction-phase');if(phaseElement.textContent!==phase)phaseElement.textContent=phase;
+        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'TEOS and oxygen plasma form a silicon dioxide solid. Organic C, H and O fragments represent a variable exhaust mixture.':recipe().equation+'. All reactant atoms are tracked into the solid film or gas molecules.'));
+      }
+      function drawChamberMolecules(project){
+        if(state.stage!=='deposit')return;
+        const spec=reactionSpec(),model=molecule(spec.inputs[0].formula),progress=clamp(state.growth/.65);
+        let center;
+        if(recipe().chamber==='single')center=[-.18,3.02-progress*.56,.55];
+        else if(recipe().chamber==='batch')center=[-.5+progress*.6,3.4-progress*.2,.92];
+        else center=[0,2.77-progress*.55,.48];
+        const atomScale=state.precursor==='teos'?.085:.14;
+        const points=model.atoms.map(atom=>{const p=project([center[0]+atom.q[0]*atomScale,center[1]-atom.q[1]*atomScale,center[2]+atom.q[2]*atomScale]);return {...p,symbol:atom.symbol,r:atom.symbol==='H'?2:3.6};});
+        const opacity=1-smooth((state.growth-.24)/.34);
+        for(const bond of model.bonds)molecularBond(ctx,points[bond.a],points[bond.b],1,opacity*.75);
+        points.forEach(atom=>ball(ctx,atom,opacity,false));
+        const surface=project(parts().find(part=>part.id==='film')?.p||[0,2.25,0]);
+        ctx.strokeStyle=rgb('gas');ctx.lineWidth=1;ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(surface.x,surface.y,7,0,Math.PI*2);ctx.moveTo(surface.x,surface.y+7);ctx.lineTo(width/2,height-31);ctx.lineTo(width/2,height-22);ctx.stroke();ctx.globalAlpha=1;
+        ctx.font='12px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle=rgb('muted');ctx.fillText('Molecular zoom',width/2,height-7);
+      }
+      let frameId=0,previousTime=0,lastDraw=0;
+      const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+      function relativeActivity(){
+        if(state.stage!=='deposit'||(state.process==='PECVD'&&!state.rfOn))return 0;
+        // Playback speed is independent of temperature. Real growth kinetics
+        // require a calibrated model for this reactor, chemistry and gas flow.
+        return 1;
+      }
+      function growthText(){
+        const r=recipe(),percent=Math.round(state.growth*100),activity=relativeActivity();
+        root.querySelector('#cv-growth-fill').style.width=percent+'%';
+        root.querySelector('#cv-growth-value').textContent=percent+'% of demonstration thickness';
+        root.querySelector('#cv-growth-track').setAttribute('aria-valuenow',percent);
+        root.querySelector('#cv-reaction-progress').value=Math.round(state.growth*1000);
+        root.querySelector('#cv-reaction-progress').setAttribute('aria-valuetext',reactionPhase());
+        const status=state.stage!=='deposit'?'growth paused outside deposition':state.process==='PECVD'&&!state.rfOn?'growth paused: RF off':state.growth>=1?'demonstration complete':state.running?'layer forming':'demonstration paused';
+        root.querySelector('#cv-growth-status').textContent=r.film+' · '+status;
+        root.querySelector('#cv-play').textContent=state.running?'Pause reaction':state.growth>=1?'Replay reaction':'Play reaction';
+      }
+      function tick(timestamp){
+        if(!state.running)return;
+        const dt=previousTime?Math.min(.25,(timestamp-previousTime)/1000):0;previousTime=timestamp;
+        state.growth=Math.min(1,state.growth+dt*relativeActivity()/8);
+        if(timestamp-lastDraw>90||state.growth>=1){lastDraw=timestamp;growthText();draw();}
+        if(state.growth>=1){state.running=false;growthText();return;}
+        frameId=requestAnimationFrame(tick);
+      }
+      function stop(){state.running=false;cancelAnimationFrame(frameId);previousTime=0;growthText();}
+      function start(replay=false){
+        stop();if(replay||state.growth>=1)state.growth=0;
+        state.stage='deposit';root.querySelector('#cv-stage').value='deposit';
+        if(state.process==='PECVD'&&!state.rfOn){update();return;}
+        if(reducedMotion.matches){state.growth=1;update();return;}
+        state.running=true;previousTime=0;lastDraw=0;update();frameId=requestAnimationFrame(tick);
+      }
+      function selectPrecursor(){
+        stop();state.precursor=root.querySelector('#cv-precursor').value;
+        const presets=precursors[state.precursor].presets;
+        if(!presets[state.process])state.process=Object.keys(presets)[0];
+        state.temperature=recipe().temp;state.rfOn=state.process==='PECVD';root.querySelector('#cv-rf-on').checked=state.rfOn;
+        state.component='wafer';state.yaw=.64;state.pitch=.31;state.zoom=1;state.growth=0;
+        configureControls();start(true);
+      }
+      function configureControls(){
+        const r=recipe(),slider=root.querySelector('#cv-temperature');
+        slider.min=r.tempRange[0];slider.max=r.tempRange[1];slider.step=5;
+        state.temperature=clamp(Number(state.temperature),slider.min,slider.max);slider.value=state.temperature;
+        slider.hidden=slider.disabled=slider.min===slider.max;
+        root.querySelector('#cv-rf-on').disabled=state.process!=='PECVD';
+        const available=['APCVD','LPCVD','PECVD'].filter(process=>precursors[state.precursor].presets[process]);
+        root.querySelector('#cv-preset-note').textContent='Reference recipes: '+available.join(' · ');
+        root.querySelectorAll('[data-process]').forEach(button=>{button.disabled=!precursors[state.precursor].presets[button.dataset.process];button.setAttribute('aria-pressed',String(button.dataset.process===state.process));});
+      }
+      function addFilm(){
+        if(state.stage==='unload'||state.growth<=0)return;
+        const r=recipe(),key='film-'+r.material,amount=.07*state.growth,alpha=r.material==='oxide'?.48:1;
+        if(r.chamber==='single')tube([0,2.225,0],[0,2.225+amount,0],.913,key,'film',{segments:48,alpha});
+        else if(r.chamber==='batch')for(let i=0;i<13;i++){const x=-2.55+i*.41;for(const direction of [-1,1])tube([x+(direction<0?-amount:.025),3.04,0],[x+(direction<0?0:.025+amount),3.04,0],.783,key,'film',{segments:24,alpha});}
+        else for(const x of [-3.15,-1.6,0,1.6,3.15])tube([x,1.885,0],[x,1.885+amount,0],.652,key,'film',{segments:36,alpha});
+      }
+      const V={add:(a,b)=>a.map((v,i)=>v+b[i]),sub:(a,b)=>a.map((v,i)=>v-b[i]),scale:(a,k)=>a.map(v=>v*k),dot:(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0),cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]};V.norm=a=>V.scale(a,1/(Math.hypot(...a)||1));
+      let faces=[],lines=[],labels=[],projected=[],palette={},width=800,height=400,eye;
+      const descriptions={gas:'Gas delivery · flow controllers meter each reactant.',chamber:'Chamber · directs gas through the deposition region.',wafer:'Wafer holder · supports and heats the wafer.',pump:'Vacuum exhaust · pumping and a throttle valve regulate pressure.',rf:'RF chain · generator and matching network power the showerhead.',heater:'Heater zones · heat the quartz tube and wafer batch.',exhaust:'Exhaust · removes residual gases and reaction by-products.',vaporizer:'Vapour delivery · TEOS is vaporised and carried through heated lines.',belt:'Conveyor · moves wafers through the atmospheric deposition zones.'};
+      function parts(){
+        const part=(id,text,p,side,group,role)=>({id,text,p,side,group,role});
+        const loaded=state.stage!=='unload',shift=state.stage==='load'||state.stage==='unload'?.75:0;
+        if(recipe().chamber==='single')return [
+          part('gasInlet','Gas inlet',[0,4.05,-.2],'left','gas','feeds reactants into the showerhead.'),
+          part('flowControllers',precursors[state.precursor].phase==='liquid'?'Vapour delivery + MFC':'Flow controllers (MFC)',[-2.3,2.65,-.2],'left','gas',precursors[state.precursor].phase==='liquid'?'vaporises the liquid precursor and meters the feed.':'meter the flow of each reactant gas.'),
+          part('chamber','Chamber wall',[0,2.95,-1.17],'left','chamber','encloses the deposition region.'),
+          part('showerhead',state.process==='PECVD'?'Showerhead electrode':'Gas distribution plate',[0,3.26+shift,-.55],'left',state.process==='PECVD'?'rf':'gas',state.process==='PECVD'?'distributes gas and receives RF power.':'distributes reactants above the heated wafer.'),
+          ...(loaded?[part('wafer',state.precursor==='wf6'?'Nucleated wafer':state.precursor==='sicl4'?'Crystalline silicon wafer':'Silicon wafer',[0,2.224,.45],'left','wafer',state.precursor==='wf6'?'has a prepared nucleation surface for tungsten growth.':state.precursor==='sicl4'?'is a prepared crystal that seeds the epitaxial silicon layer.':'surface on which the film forms.'),part('film',recipe().film+' film',[0,2.23+.07*state.growth,.72],'left','film',recipe().property+' · thickness is enlarged in this demonstration.')]:[]),
+          part('holder','Heated wafer holder',[0,2.1,.85],'left','wafer','supports the wafer and controls its temperature.'),
+          part('gauge','Pressure gauge',[.65,3.91,-.97],'right','chamber','measures chamber pressure.'),
+          ...(state.process==='PECVD'?[part('matching','RF matching network',[1.93,3.43,-.72],'right','rf','matches the RF generator to the plasma load.'),part('rfGenerator','RF generator',[2.2,.59,-.89],'right','rf','supplies electrical power for the discharge.')]:[]),
+          ...(state.process==='PECVD'&&state.stage==='deposit'&&state.rfOn?[part('plasma','Plasma region',[0,2.72,0],'right','rf','contains reactive species activated by the discharge.')]:[]),
+          ...(state.process!=='APCVD'?[part('throttle','Throttle valve',[1.82,2.7,0],'right','pump','adjusts exhaust conductance to control pressure.'),part('pump','Vacuum pump',[3.25,.74,.1],'right','pump','removes gas from the chamber.')]:[part('exhaust','Exhaust outlet',[2.55,3.4,0],'right','exhaust','removes gases at atmospheric pressure.')])
+        ];
+        if(recipe().chamber==='batch')return [
+          part('vaporizer',precursors[state.precursor].phase==='liquid'?'Precursor vaporiser':'Gas flow controller',[-4.08,2.5,-.22],'left','vaporizer',precursors[state.precursor].phase==='liquid'?'converts the liquid precursor into vapour.':'meters the gaseous precursor.'),
+          part('gasInlet','Gas inlet',[-3.58,2.88,0],'left','vaporizer','introduces precursor vapour and carrier gas.'),
+          part('chamber','Quartz tube',[.7,3,.92],'left','chamber','contains the heated wafer batch.'),
+          part('boat','Wafer boat',[0,2.4,.55],'left','wafer','holds wafers upright with controlled spacing.'),
+          ...(loaded?[part('wafer','Wafer batch',[.4,3.04,.70],'left','wafer','receives the deposited film.'),part('film',recipe().film+' film',[.42+.07*state.growth,3.05,.7],'left','film',recipe().property+' · growth is shown on both wafer faces.')]:[]),
+          part('heater','Furnace heater zones',[-1.9,3.5,-.7],'right','heater','heat different sections of the tube.'),
+          part('gauge','Pressure gauge',[3.2,4.1,0],'right','chamber','measures the pressure inside the tube.'),
+          part('throttle','Throttle valve',[4.2,3,0],'right','pump','regulates gas removal to control pressure.'),
+          part('pump','Vacuum pump',[4.4,.74,.1],'right','pump','maintains reduced pressure and removes gases.')
+        ];
+        return [
+          part('gasSupply','Gas supply cabinet',[-5,1.22,.61],'left','gas','houses the reactant gas delivery equipment.'),
+          part('gasInlet','Gas inlet manifold',[0,4.1,-.25],'left','gas','supplies the injector heads.'),
+          part('injectors','Injector heads',[-1.7,3.09,.5],'left','gas','deliver reactants above the wafers.'),
+          part('chamber','Process hood',[0,2.86,-1.08],'left','chamber','encloses the atmospheric deposition zones.'),
+          ...(loaded?[part('wafer','Silicon wafer',[1.6,1.884,.4],'right','wafer','receives the deposited film.'),part('film',recipe().film+' film',[1.6,1.885+.07*state.growth,.55],'right','film',recipe().property+' · film growth is enlarged for visibility.')]:[]),
+          part('belt','Conveyor belt',[3,1.85,.7],'right','belt','sets wafer travel and exposure time.'),
+          part('heater','Heater',[0,1.48,.95],'right','wafer','heats wafers in the deposition zones.'),
+          part('exhaust','Exhaust duct',[3.55,4.2,-.6],'right','exhaust','removes residual gases and by-products.')
+        ];
+      }
+      function drawPartLabels(project){
+        const overlay=root.querySelector('#cv-callouts');overlay.setAttribute('viewBox','0 0 '+width+' '+height);
+        const all=parts(),chosen=all.find(part=>part.id===state.component)||all[0];
+        const shown=width>=700?all:[chosen];
+        const labels=shown.map(part=>({...part,target:project(part.p)}));
+        ctx.font='13px system-ui,sans-serif';
+        let markup='<title>Machine parts</title>';
+        const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;');
+        if(width<700){
+          const label=labels[0],p=label.target,textWidth=ctx.measureText(label.text).width,x=18,y=34,start=x+textWidth+8;
+          const px=Math.max(8,Math.min(width-8,p.x)),py=Math.max(50,Math.min(height-12,p.y));
+          markup+='<polyline points="'+start+','+(y-4)+' '+(start+12)+','+(y-4)+' '+px+','+py+'"/><circle cx="'+px+'" cy="'+py+'" r="2"/><text x="'+x+'" y="'+y+'">'+escape(label.text)+'</text>';
+        }else{
+          for(const side of ['left','right']){
+            const column=labels.filter(label=>label.side===side).sort((a,b)=>a.target.y-b.target.y);
+            let previous=25;
+            for(const label of column){label.y=Math.max(previous+26,Math.min(height-25,label.target.y));previous=label.y;}
+            if(column.length&&column.at(-1).y>height-24){const shift=column.at(-1).y-(height-24);column.forEach(label=>label.y-=shift);}
+            for(const label of column){
+              const left=side==='left',x=left?18:width-18,textWidth=ctx.measureText(label.text).width;
+              const start=left?x+textWidth+8:x-textWidth-8,elbow=left?Math.max(start+10,174):Math.min(start-10,width-174);
+              const px=Math.max(10,Math.min(width-10,label.target.x)),py=Math.max(12,Math.min(height-12,label.target.y));
+              markup+='<polyline points="'+start+','+(label.y-4)+' '+elbow+','+(label.y-4)+' '+px+','+py+'"/><circle cx="'+px+'" cy="'+py+'" r="2"/><text x="'+x+'" y="'+label.y+'" text-anchor="'+(left?'start':'end')+'" font-weight="'+(label.id===state.component?'500':'400')+'">'+escape(label.text)+'</text>';
+            }
+          }
+        }
+        overlay.innerHTML=markup;
+      }
+      function colors(){const probe=document.createElement('span');probe.style.position='absolute';probe.style.visibility='hidden';root.appendChild(probe);for(const name of ['metal','case','dark','wafer','glass','heat','plasma','gas','film','floor','line','text','muted','panel','film-poly','film-epi','film-oxide','film-nitride','film-tungsten','film-tin','atom-ink',...Object.keys(atomNames).map(symbol=>'atom-'+symbol)]){probe.style.color='var(--cv-'+name+')';const values=getComputedStyle(probe).color.match(/[\d.]+/g);palette[name]=values?values.slice(0,3).map(Number):[120,130,140];}probe.remove();}
+      const face=(p,material,component,alpha=1)=>faces.push({p,material,component,alpha});
+      function box(center,size,material,component){const [cx,cy,cz]=center,[a,b,c]=size.map(v=>v/2),p=(x,y,z)=>[cx+x*a,cy+y*b,cz+z*c];const sides=[[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]],[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]],[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]],[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]],[[-1,-1,-1],[-1,1,-1],[1,1,-1],[1,-1,-1]],[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]];sides.forEach(s=>face(s.map(a=>p(...a)),material,component));}
+      function tube(p0,p1,r,material,component,{segments=24,alpha=1,caps=true,start=0,end=Math.PI*2}={}){const axis=V.norm(V.sub(p1,p0)),helper=Math.abs(axis[1])<.9?[0,1,0]:[1,0,0],e1=V.norm(V.cross(axis,helper)),e2=V.cross(axis,e1),point=(p,t)=>V.add(p,V.add(V.scale(e1,r*Math.cos(t)),V.scale(e2,r*Math.sin(t))));const a=[],b=[];for(let i=0;i<=segments;i++){const t=start+(end-start)*i/segments;a.push(point(p0,t));b.push(point(p1,t));}for(let i=0;i<segments;i++)face([a[i],a[i+1],b[i+1],b[i]],material,component,alpha);if(caps){face(a.slice(0,-1).reverse(),material,component,alpha);face(b.slice(0,-1),material,component,alpha);}}
+      function ring(center,outer,inner,thickness,material,component,axis='y',start=0,end=Math.PI*2){const n=28,point=(r,t,d)=>axis==='y'?[center[0]+r*Math.sin(t),center[1]+d,center[2]-r*Math.cos(t)]:[center[0]+d,center[1]+r*Math.cos(t),center[2]+r*Math.sin(t)];for(let i=0;i<n;i++){const a=start+(end-start)*i/n,b=start+(end-start)*(i+1)/n;for(const d of [-thickness/2,thickness/2])face([point(inner,a,d),point(outer,a,d),point(outer,b,d),point(inner,b,d)],material,component);face([point(outer,a,-thickness/2),point(outer,b,-thickness/2),point(outer,b,thickness/2),point(outer,a,thickness/2)],material,component);}}
+      const pipe=(points,r=.065,component='gas',material='metal')=>{for(let i=1;i<points.length;i++)tube(points[i-1],points[i],r,material,component,{segments:12});};
+      const trace=points=>lines.push({points,color:'gas',width:2.5});
+      function cabinet(x,z,component='gas'){box([x,1.15,z],[1.12,2.3,1.2],'case',component);box([x,1.22,z+.613],[.93,1.85,.025],'metal',component);box([x+.37,1.14,z+.64],[.04,.39,.035],'dark',component);box([x,2.2,z+.64],[.4,.14,.035],'dark',component);for(let i=0;i<5;i++)box([x-.2+i*.10,.42,z+.64],[.045,.23,.015],'dark',component);}
+      function pump(x,z){box([x,.3,z],[1.7,.4,.95],'case','pump');tube([x-.57,.74,z],[x+.46,.74,z],.42,'metal','pump',{segments:28});tube([x+.46,.74,z],[x+.77,.74,z],.34,'dark','pump');for(let i=0;i<7;i++)ring([x-.5+i*.14,.74,z],.44,.40,.035,'metal','pump','x');tube([x-.5,.75,z],[x-.5,1.4,z],.12,'metal','pump');}
+      function base(w=2.8,d=2.6){box([0,.85,0],[w,1.55,d],'case','chamber');box([0,1.65,0],[w+.1,.12,d+.1],'metal','chamber');box([0,.92,d/2+.012],[w*.92,1.12,.02],'metal','chamber');box([0,1.20,d/2+.04],[.6,.26,.035],'dark','chamber');for(let i=0;i<6;i++)box([-.72+i*.27,.52,d/2+.04],[.12,.06,.02],'dark','chamber');for(const x of [-w*.4,w*.4])for(const z of [-d*.4,d*.4])tube([x,.02,z],[x,.22,z],.09,'dark','chamber',{segments:10});}
+      function pecvd(){const cut=true,plasmaMode=state.process==='PECVD',vacuum=state.process!=='APCVD',open=state.stage==='load'||state.stage==='unload',shift=open?.75:0;base();cabinet(-3.2,0);if(vacuum)pump(3.25,.1);box([-2.05,2.65,-.2],[.42,.7,.42],precursors[state.precursor].phase==='liquid'?'heat':'metal','gas');box([-2.62,2.65,-.2],[.42,.7,.42],'metal','gas');pipe([[-3.2,2.3,-.2],[-3.2,2.8,-.2],[-1.6,2.8,-.2],[-1.6,4.05,-.2],[0,4.05,-.2],[0,3.6,-.2]],.045);tube([0,1.82,0],[0,3.60,0],1.17,'metal','chamber',{caps:false,start:cut?-Math.PI/2:0,end:cut?Math.PI/2:Math.PI*2,segments:40});ring([0,1.85,0],1.23,1.12,.12,'metal','chamber');ring([0,3.60+shift,0],1.26,.12,.12,'metal','chamber','y',cut?-Math.PI/2:0,cut?Math.PI/2:Math.PI*2);for(let i=0;i<12;i++){const a=i*Math.PI/6;tube([1.2*Math.sin(a),3.64+shift,-1.2*Math.cos(a)],[1.2*Math.sin(a),3.70+shift,-1.2*Math.cos(a)],.04,'dark','chamber',{segments:8});}tube([0,1.66,0],[0,2.02,0],.25,'metal','wafer');tube([0,2.02,0],[0,2.20,0],.98,'dark','wafer',{segments:40});ring([0,2.10,0],1.03,.99,.055,state.stage==='condition'||state.stage==='deposit'?'heat':'metal','wafer');if(state.stage!=='unload')tube([0,2.205,0],[0,2.224,0],.91,'wafer','wafer',{segments:48});ring([0,3.26+shift,0],1,.02,.08,'metal',plasmaMode?'rf':'gas','y',cut?-Math.PI/2:0,cut?Math.PI/2:Math.PI*2);for(let i=0;i<21;i++){const a=i*2.399,r=.18+.7*Math.sqrt(i/21),x=r*Math.sin(a),z=-r*Math.cos(a);if(!cut||z<0)tube([x,3.2+shift,z],[x,3.225+shift,z],.025,'dark',plasmaMode?'rf':'gas',{segments:8});}if(state.stage==='deposit'&&cut&&plasmaMode&&state.rfOn){tube([0,2.4,0],[0,3.03,0],.91,'plasma','rf',{segments:32,alpha:.09,caps:false});for(const y of [2.48,2.72,2.96])tube([0,y,0],[0,y+.015,0],.92,'plasma','rf',{segments:32,alpha:.05});}if(plasmaMode){box([2.2,.55,-1.4],[1.22,.93,1],'case','rf');box([2.2,.59,-.89],[.66,.21,.035],'dark','rf');box([1.93,3.43,-.72],[.67,.64,.60],'case','rf');pipe([[2.2,1.03,-1.4],[2.2,2.25,-1.4],[1.93,3.43,-1]],.027,'rf','dark');pipe([[1.59,3.43,-.72],[.92,3.43,-.72]],.04,'rf');}if(vacuum){pipe([[1.12,2.47,0],[2.55,2.47,0],[2.55,1.43,0]],.145,'pump');box([1.82,2.47,0],[.18,.53,.47],'metal','pump');box([1.82,2.89,0],[.39,.25,.29],'dark','pump');pipe([[2.55,1.43,0],[2.75,1.43,.1]],.14,'pump');}else{pipe([[1.12,2.47,0],[2.55,2.47,0],[2.55,4.1,0]],.15,'exhaust');}pipe([[.65,3.25,-.97],[.65,3.78,-.97]],.065,'chamber');box([.65,3.91,-.97],[.33,.33,.26],'case','chamber');if(root.querySelector('#cv-flow').checked)trace([[-3.2,2.35,-.2],[-3.2,2.8,-.2],[-1.6,2.8,-.2],[-1.6,4.05,-.2],[0,4.05,-.2],[0,3.34,0],[0,2.39,0],[1.1,2.39,0],[2.55,2.39,0],[2.55,vacuum?1.3:4.1,0]]);}
+      function lpcvd(){const cut=true;base(6.7,2.65);cabinet(-4.75,-.1,'vaporizer');pump(4.4,.1);if(!cut){box([0,3,0],[6.5,2.45,2.6],'case','heater');box([0,3.06,1.31],[6.1,1.87,.02],'metal','heater');for(const x of [-1.04,1.04])box([x,3.06,1.34],[.025,1.87,.03],'dark','heater');}else{tube([-3.2,3,0],[3.2,3,0],1.2,'case','heater',{caps:false,start:Math.PI/2,end:Math.PI*1.5,segments:32});for(let j=0;j<3;j++)for(let i=0;i<8;i++)ring([-2.6+j*2+i*.15,3,0],1.08,1.045,.032,state.stage==='deposit'||state.stage==='condition'?'heat':'metal','heater','x',Math.PI,Math.PI*2);}tube([-3.5,3,0],[3.5,3,0],.98,'glass','chamber',{caps:false,alpha:cut?.08:.35,segments:32});for(const x of [-3.55,3.55])ring([x,3,0],1.04,.89,.1,'metal','chamber','x');for(const z of [-.55,.55])pipe([[-2.9,2.40,z],[2.9,2.40,z]],.042,'wafer','glass');if(state.stage!=='unload')for(let i=0;i<13;i++){const x=-2.55+i*.41;tube([x,3.04,0],[x+.025,3.04,0],.78,'wafer','wafer',{segments:32});}box([-4.08,2.5,-.22],[.39,.6,.39],precursors[state.precursor].phase==='liquid'?'heat':'metal','vaporizer');pipe([[-4.75,2.3,-.10],[-4.75,2.88,-.1],[-3.58,2.88,0]],.06,'vaporizer');pipe([[3.55,3,0],[4.68,3,0],[4.68,1.5,0],[3.9,1.5,.1]],.13,'pump');box([4.2,3,0],[.2,.44,.38],'metal','pump');pipe([[3.2,3.4,0],[3.2,3.98,0]],.06,'chamber');box([3.2,4.1,0],[.26,.25,.26],'case','chamber');if(root.querySelector('#cv-flow').checked)trace([[-4.75,2.4,-.1],[-4.75,2.88,-.1],[-3.58,2.88,0],[-2.8,3.04,.15],[2.8,3.04,.15],[4.68,3,0],[4.68,1.4,0]]);}
+      function apcvd(){const cut=true;base(7.4,2.6);cabinet(-5,-.1);box([0,1.78,0],[8.3,.12,2],'dark','belt');for(let i=0;i<27;i++)box([-3.95+i*.3,1.85,0],[.035,.016,1.97],'metal','belt');for(const x of [-4.1,4.1])tube([x,1.74,-1.05],[x,1.74,1.05],.16,'metal','belt',{segments:20});box([0,2.86,-1.08],[5.3,2.02,.12],'case','chamber');if(!cut){box([0,3.85,0],[5.5,.16,2.32],'case','chamber');box([0,2.90,1.08],[5.3,1.83,.12],'metal','chamber');}else for(const x of [-2.68,2.68])box([x,2.9,-.25],[.08,1.98,1.85],'metal','chamber');if(state.stage!=='unload')for(const x of [-3.15,-1.6,0,1.6,3.15])tube([x,1.87,0],[x,1.884,0],.65,'wafer','wafer',{segments:36});for(const x of [-1.7,0,1.7]){box([x,3.09,0],[.56,.23,1.9],'metal','gas');box([x,2.968,0],[.045,.025,1.82],'dark','gas');pipe([[x,3.22,-.25],[x,4.08,-.25]],.055,'gas');}pipe([[-5,2.3,-.1],[-5,4.1,-.1],[1.7,4.1,-.25]],.065,'gas');box([0,1.48,0],[5.2,.14,1.85],state.stage==='condition'||state.stage==='deposit'?'heat':'dark','wafer');pipe([[2.65,3.2,-.6],[3.55,3.2,-.6],[3.55,4.8,-.6]],.22,'exhaust');box([3.55,4.7,-.6],[.7,.27,.7],'case','exhaust');if(root.querySelector('#cv-flow').checked)trace([[-5,2.3,-.1],[-5,4.1,-.1],[0,4.1,-.25],[0,3.1,0],[0,2.12,0],[2.7,2.12,0],[3.55,3.2,-.6],[3.55,4.8,-.6]]);}
+
+      function geometry(){faces=[];lines=[];labels=[];if(recipe().chamber==='single')pecvd();else if(recipe().chamber==='batch')lpcvd();else apcvd();addFilm();}
+      function projection(){const target=[0,2,0],distance=(recipe().chamber==='single'?13.5:18.7)/state.zoom;eye=V.add(target,[distance*Math.sin(state.yaw)*Math.cos(state.pitch),distance*Math.sin(state.pitch),distance*Math.cos(state.yaw)*Math.cos(state.pitch)]);const forward=V.norm(V.sub(target,eye)),right=V.norm(V.cross(forward,[0,1,0])),up=V.cross(right,forward),f=Math.min(width-(width>=700?320:0),height*1.75)*1.19;return p=>{const v=V.sub(p,eye),z=V.dot(v,forward);return {x:width/2+V.dot(v,right)*f/z,y:height*.54-V.dot(v,up)*f/z,z};};}
+      function rgb(name,light=1){return 'rgb('+(palette[name]||palette.metal).map(v=>Math.max(0,Math.min(255,Math.round(v*light)))).join(',')+')';}
+      function polygon(points,fill,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1;}
+      function draw(){const bounds=viewport.getBoundingClientRect();width=Math.max(200,bounds.width);height=bounds.height||400;const ratio=Math.min(window.devicePixelRatio||1,2);if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);geometry();const project=projection();polygon([[-14,-.02,-7],[14,-.02,-7],[14,-.02,7],[-14,-.02,7]].map(project),rgb('floor'),.23);for(const [x,z,rx,rz]of (recipe().chamber==='single'?[[0,0,1.8,1.65],[-3.2,0,.8,.8],[3.25,.1,1.2,.7]]:[[0,0,4.3,1.7],[-4.8,0,.8,.8],[4.4,0,1.1,.7]])){const points=Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return project([x+rx*Math.cos(a),.01,z+rz*Math.sin(a)]);});polygon(points,rgb('dark'),.065);}const light=V.norm([-.4,.9,.6]);projected=faces.map(face=>{const points=face.p.map(project),center=V.scale(face.p.reduce((a,p)=>V.add(a,p),[0,0,0]),1/face.p.length),normal=V.norm(V.cross(V.sub(face.p[1],face.p[0]),V.sub(face.p[2],face.p[0]))),toward=V.norm(V.sub(eye,center)),base=.56+.36*Math.max(0,V.dot(normal,light)),half=V.norm(V.add(light,toward)),spec=(face.material==='metal'?.14:.04)*Math.pow(Math.max(0,V.dot(normal,half)),18);return {...face,points,depth:points.reduce((s,p)=>s+p.z,0)/points.length,shade:face.material==='plasma'?1:base+spec};}).filter(f=>f.points.every(p=>p.z>.1)).sort((a,b)=>b.depth-a.depth);for(const face of projected)polygon(face.points,rgb(face.material,face.shade),face.alpha);for(const line of lines){const points=line.points.map(project);ctx.strokeStyle=rgb(line.color);ctx.lineWidth=line.width;ctx.globalAlpha=.7;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.globalAlpha=1;}drawChamberMolecules(project);drawPartLabels(project);drawReaction();canvas.setAttribute('aria-label',state.process+' chamber cutaway. Parts: '+parts().map(p=>p.text).join(', '));}
+      function componentOptions(){const names=parts();if(!names.some(p=>p.id===state.component))state.component=names[0].id;const select=root.querySelector('#cv-component');select.replaceChildren();for(const part of names){const option=document.createElement('option');option.value=part.id;option.textContent=part.text;select.appendChild(option);}select.value=state.component;}
+      function text(){
+        const r=recipe(),p=state.process;
+        root.querySelector('#cv-machine').textContent=p+' · '+(r.chamber==='single'?(p==='PECVD'?'parallel-plate plasma reactor':'single-wafer thermal reactor'):r.chamber==='batch'?'horizontal batch furnace':'inline conveyor');
+        root.querySelector('#cv-hint').textContent='Drag to rotate · scroll to zoom';
+        root.querySelector('#cv-temp').textContent=state.temperature+' °C';
+        root.querySelector('#cv-temp-window').textContent=r.tempRange[0]===r.tempRange[1]?'Documented example · fixed reference':'Reference window: '+r.tempRange[0]+'–'+r.tempRange[1]+' °C';
+        root.querySelector('#cv-pressure').textContent=r.pressure;
+        root.querySelector('#cv-feed').textContent=r.feed;
+        root.querySelector('.cv-rf').hidden=p!=='PECVD';
+        root.querySelector('#cv-activation-state').textContent=p==='PECVD'?(state.stage!=='deposit'?'RF off · non-deposition stage':state.rfOn?'RF plasma':'RF off · reaction paused'):'Thermal heat · no deposition plasma';
+        root.querySelector('#cv-rf-reference').hidden=p!=='PECVD';
+        root.querySelector('#cv-rf-reference').textContent=p==='PECVD'?'RF reference: '+r.rfReference:'';
+        root.querySelector('#cv-details-summary').textContent='Process details · '+precursors[state.precursor].name+' / '+p;
+        root.querySelector('#cv-reference-note').textContent='Reference: '+r.setupName+'. '+r.deliveryNote;
+        root.querySelector('#cv-setup-source').setAttribute('href',r.setupSource);
+        const windowLink=root.querySelector('#cv-window-source'),windowDivider=root.querySelector('#cv-window-divider');
+        windowLink.hidden=windowDivider.hidden=!r.windowSource;
+        if(r.windowSource)windowLink.setAttribute('href',r.windowSource);
+        const selected=parts().find(part=>part.id===state.component);
+        root.querySelector('#cv-inspector').textContent=selected?selected.text+' · '+selected.role:'';
+        root.querySelector('#cv-effect').textContent=r.effect;
+        reactionLabels();
+        root.querySelector('#cv-chem-source').setAttribute('href',r.source);
+        const stages={load:r.chamber==='conveyor'?'Wafers enter on the conveyor.':'Position the prepared wafer or wafer boat.',condition:p==='APCVD'?'Establish temperature and atmospheric gas flow.':'Pump down and establish wafer temperature.',deposit:p==='PECVD'?(state.rfOn?'RF sustains the plasma-assisted reaction.':'RF is off; plasma-assisted target growth is paused.'):'Thermal surface reactions form the selected film.',purge:p==='PECVD'?'Stop RF and reactants, purge and cool.':'Stop reactants, purge and cool.',unload:p==='APCVD'?'Remove the coated wafers.':'After cooling, vent and unload the coated wafer.'};
+        root.querySelector('#cv-stage-detail').textContent=(reactionSpec().qualitative?'Variable organic exhaust: ':'Idealised reaction by-products: ')+r.byproducts+' · '+stages[state.stage];
+        growthText();
+      }
+      function update(){componentOptions();text();draw();}
+      root.querySelectorAll('[data-process]').forEach(button=>button.addEventListener('click',()=>{
+        if(!precursors[state.precursor].presets[button.dataset.process])return;
+        stop();state.process=button.dataset.process;state.temperature=recipe().temp;state.rfOn=state.process==='PECVD';root.querySelector('#cv-rf-on').checked=state.rfOn;state.yaw=.64;state.pitch=.31;state.zoom=1;configureControls();start(true);
+      }));
+      root.querySelector('#cv-stage').addEventListener('change',event=>{state.stage=event.target.value;if(state.stage!=='deposit')stop();if(state.stage==='load'||state.stage==='condition')state.growth=0;update();});
+      root.querySelector('#cv-component').addEventListener('change',event=>{state.component=event.target.value;text();draw();});root.querySelector('#cv-flow').addEventListener('change',draw);
+      root.querySelector('#cv-precursor').addEventListener('change',selectPrecursor);
+      root.querySelector('#cv-play').addEventListener('click',()=>{if(state.running)stop();else start(state.growth>=1);});
+      root.querySelector('#cv-reset-view').addEventListener('click',()=>{state.yaw=.64;state.pitch=.31;state.zoom=1;draw();});
+      root.querySelector('#cv-reaction-progress').addEventListener('input',event=>{const progress=Number(event.target.value)/1000;stop();state.growth=progress;state.stage='deposit';root.querySelector('#cv-stage').value='deposit';update();});
+      root.querySelector('#cv-temperature').addEventListener('input',event=>{state.temperature=clamp(Number(event.target.value),...recipe().tempRange);event.target.value=state.temperature;text();draw();});
+      root.querySelector('#cv-rf-on').addEventListener('change',event=>{if(state.process!=='PECVD')return;state.rfOn=event.target.checked;if(!state.rfOn)stop();update();if(state.rfOn&&state.growth<1&&state.stage==='deposit')start(false);});
+      canvas.addEventListener('keydown',event=>{const key=event.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(key)){event.preventDefault();if(key==='ArrowLeft')state.yaw-=.1;if(key==='ArrowRight')state.yaw+=.1;if(key==='ArrowUp')state.pitch=Math.min(.8,state.pitch+.05);if(key==='ArrowDown')state.pitch=Math.max(.05,state.pitch-.05);if(key==='+'||key==='=')state.zoom=Math.min(1.65,state.zoom*1.1);if(key==='-')state.zoom=Math.max(.65,state.zoom/1.1);draw();}});let drag=null;canvas.addEventListener('pointerdown',event=>{drag={x:event.clientX,y:event.clientY,yaw:state.yaw,pitch:state.pitch,moved:false};canvas.setPointerCapture(event.pointerId);});canvas.addEventListener('pointermove',event=>{if(!drag)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.hypot(dx,dy)>3)drag.moved=true;state.yaw=drag.yaw-dx*.008;state.pitch=Math.max(.05,Math.min(.8,drag.pitch+dy*.006));draw();});function inside(p,points){let hit=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const a=points[i],b=points[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)hit=!hit;}return hit;}canvas.addEventListener('pointerup',event=>{if(drag&&!drag.moved){const bounds=canvas.getBoundingClientRect(),p={x:event.clientX-bounds.left,y:event.clientY-bounds.top},hit=[...projected].reverse().find(face=>face.alpha>.4&&inside(p,face.points));if(hit){const project=projection(),candidates=parts().filter(part=>part.group===hit.component),nearest=candidates.sort((a,b)=>{const x=project(a.p),y=project(b.p);return Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y);})[0];if(nearest)state.component=nearest.id;componentOptions();text();draw();}}drag=null;});canvas.addEventListener('pointercancel',()=>{drag=null;});canvas.addEventListener('wheel',event=>{event.preventDefault();state.zoom=Math.max(.65,Math.min(1.65,state.zoom*Math.exp(-event.deltaY*.001)));draw();},{passive:false});colors();new ResizeObserver(draw).observe(viewport);window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{colors();draw();});configureControls();update();
+    })();
+  </script>
+  <script>
+    (() => {
+      const steps=[...document.querySelectorAll('.cv-fab-node[data-fab-summary]')];
+      const description=document.getElementById('cv-fab-description');
+      const explain=step => {
+        if(description.textContent===step.dataset.fabSummary) return;
+        steps.forEach(item => item.setAttribute('data-inspected',String(item===step)));
+        description.textContent=step.dataset.fabSummary;
+      };
+      steps.forEach(step => {
+        step.addEventListener('pointerenter',event => { if(event.pointerType!=='touch') explain(step); });
+        step.addEventListener('focus',() => explain(step));
+        step.addEventListener('click',() => explain(step));
+      });
+      const revealSection=hash => {
+        const target=document.getElementById(hash.slice(1));
+        if(target?.tagName==='DETAILS') target.open=true;
+      };
+      document.querySelectorAll('.cv-nav a, .cv-recipe-link').forEach(link => {
+        link.addEventListener('click', () => revealSection(link.hash));
+      });
+      revealSection(window.location.hash);
+      window.addEventListener('hashchange', () => revealSection(window.location.hash));
+    })();
+  </script>
+</div>
+</main>
+</body>
+</html>
