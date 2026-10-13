@@ -85,7 +85,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 
 | File | Purpose |
 | --- | --- |
-| `app.py` | Streamlit launcher; scopes the page styles and renders its JavaScript |
+| `app.py` | Streamlit launcher; embeds the complete simulator with JavaScript |
 | `requirements.txt` | Pinned Streamlit dependency |
 | `.streamlit/config.toml` | Streamlit appearance and toolbar settings |
 | `site/index.html` | Complete HTML, CSS, and JavaScript simulator |
@@ -100,11 +100,10 @@ in a modern browser.
 
 ## How it works
 
-Python starts the Streamlit app. `st.html(..., unsafe_allow_javascript=True)`
-renders the bundled trusted HTML and runs its JavaScript. The chamber,
-chemical animation, recipe selection, and controls run in the browser.
-The launcher scopes the standalone page's body styles to the simulator
-root, keeping normal scrolling without an extra iframe scrollbar.
+Python starts the Streamlit app. `st.iframe(SITE / "index.html", height="content")`
+embeds the complete bundled document with JavaScript enabled. The chamber,
+chemical animation, recipe selection, and controls run together inside the
+iframe. Its height adapts to the content, including expanded teaching guides.
 
 The animation is an educational schematic. Film thickness and playback
 speed are normalised demonstration values, not measured deposition
@@ -113,17 +112,16 @@ and original scientific references remain in the simulator.
 
 ## Validation
 
-The refreshed launcher passed Streamlit's AppTest using Python 3.12 and Streamlit
-1.65.0. JavaScript execution is enabled, the simulator scripts are
-unchanged, and the configuration parses successfully. AppTest does not
-execute browser JavaScript; a full browser visual review was unavailable
-in the export environment.
+The original launcher passed AppTest, but the deployed app displayed blank
+animation canvases. The launcher now uses Streamlit 1.65.0's native iframe
+API to preserve the complete document and its JavaScript context. Live visual
+verification of this fix is pending.
 
 ## Hosting documentation
 
 - [Streamlit deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy)
 - [Streamlit dependencies](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies)
-- [Streamlit HTML and JavaScript rendering](https://docs.streamlit.io/develop/api-reference/text/st.html)
+- [Streamlit HTML and JavaScript rendering](https://docs.streamlit.io/develop/api-reference/text/st.iframe)
 - [GitHub file uploads](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
 
 © 2026 S L RICHRIS. All rights reserved.
