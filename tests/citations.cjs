@@ -115,6 +115,7 @@ const { chromium } = require('playwright');
   assert.equal(await page.evaluate(() => document.activeElement.id), 'cv-ref-7');
   await page.locator('#cv-ref-7 [data-evidence-back]').click();
   assert.equal(await page.evaluate(() => document.activeElement.closest('[id]').id), 'cv-pressure');
+  await page.locator('#cv-fabrication-guide > summary').click();
   for (const key of ['fab-prepare', 'fab-oxidation', 'fab-lithography', 'fab-etch', 'cvd-definition', 'fab-doping', 'fab-metal']) {
     await page.locator(`[data-fab-cite="${key}"]`).click();
     assert.equal(await page.locator('#cv-fab-description').getAttribute('data-cite'), key);

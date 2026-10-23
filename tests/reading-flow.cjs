@@ -1,0 +1,167 @@
+/* Navigation, readable teaching copy and shrinking Streamlit frame regression.
+ * --streamlit starts the pinned Python app locally; it does not test a deployment.
+ */
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const {pathToFileURL}=require('node:url');
+const {spawn}=require('node:child_process');
+const {chromium}=require('playwright');
+
+(async()=>{
+  const output=process.env.CVD_QA_OUTPUT||path.resolve(__dirname,'../test-results');
+  fs.mkdirSync(output,{recursive:true});
+  const browser=await chromium.launch({headless:true,args:['--no-sandbox',...(process.env.CVD_SINGLE_PROCESS?['--single-process','--no-zygote','--disable-gpu']:[])],...(process.env.CVD_CHROMIUM_EXECUTABLE?{executablePath:process.env.CVD_CHROMIUM_EXECUTABLE}:{})});
+  let server;
+  try {
+    const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),errors=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(pathToFileURL(path.resolve(__dirname,'../site/index.html')).href);
+    await page.waitForFunction(()=>window.CVDLab&&window.CVDEvidence);
+    const links=page.locator('.cv-contents a');
+    assert.equal(await links.count(),8);
+    await page.selectOption('#cv-precursor','tmga');
+    for(let i=0;i<await links.count();i++) {
+      const link=links.nth(i),hash=await link.getAttribute('href');
+      await link.focus();await link.press('Enter');
+      await page.waitForFunction(hash=>{
+        const target=document.querySelector(hash);
+        return target.tagName==='DETAILS'?document.activeElement===target.querySelector('summary'):document.activeElement===target;
+      },hash);
+      assert.equal(await page.locator(hash).isVisible(),true,hash+' is hidden');
+      assert.equal(await page.evaluate(()=>window.CVDLab.snapshot().precursor),'tmga','Navigation changed the recipe');
+      if(['#cv-environment','#cv-hardware-view','#cv-defects'].includes(hash)) {
+        const id=await page.locator('[data-lab-view][aria-pressed="true"]').getAttribute('aria-controls');
+        assert.equal('#'+id,hash);
+      }
+    }
+    // A transport jump opens its disclosure and its containing environment view.
+    await page.locator('.cv-contents a[href="#cv-transport-guide"]').click();
+    assert.equal(await page.locator('#cv-transport-guide').evaluate(el=>el.open),true);
+    assert.equal(await page.locator('#cv-environment').isVisible(),true);
+    await page.locator('[data-env-da="10"]').click();
+    assert.equal(await page.locator('#cv-env-cs').textContent(),'9.1%');
+    await page.locator('.cv-contents a[href="#cv-defects"]').click();
+    await page.goBack();
+    await page.waitForFunction(()=>document.activeElement===document.querySelector('#cv-transport-guide>summary'));
+    assert.equal(await page.locator('#cv-environment').isVisible(),true);
+    // Nested learning topics and references can still be reached directly.
+    await page.locator('.cv-recipe-link[href="#cv-recipes-guide"]').first().click();
+    assert.equal(await page.locator('#cv-recipes-guide').evaluate(el=>el.open),true);
+    await page.locator('#cv-film-guide>summary').click();
+    assert.equal(await page.locator('#cv-film-guide tbody tr').count(),7);
+    assert.equal(await page.locator('#cv-film-guide tbody td>.cv-citations').count(),7);
+    assert.equal(await page.locator('#cv-net-example .cv-guide-equation>.cv-citations a[data-reference="9"]').count(),1);
+    assert.equal((await page.locator('body').innerText()).includes('\u2014'),false);
+
+    // Check real computed contrast for the main explanation and muted prose.
+    for(const colorScheme of ['light','dark']) {
+      await page.emulateMedia({colorScheme});
+      const measurements=await page.evaluate(()=>{
+        const luminance=color=>{
+          const channels=color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});
+          return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
+        };
+        return ['#cv-env-explanation','#cv-env-observe','.cv-about-definition','.cv-learning-path p','.cv-example-limit'].map(selector=>{
+          const el=document.querySelector(selector),style=getComputedStyle(el);
+          let bg=el;
+          while(bg.parentElement&&getComputedStyle(bg).backgroundColor==='rgba(0, 0, 0, 0)')bg=bg.parentElement;
+          const a=luminance(style.color),b=luminance(getComputedStyle(bg).backgroundColor);
+          return {selector,size:parseFloat(style.fontSize),contrast:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+        });
+      });
+      for(const m of measurements) {
+        assert.ok(m.size>=13,`${colorScheme} ${m.selector}: text too small`);
+        assert.ok(m.contrast>=4.5,`${colorScheme} ${m.selector}: ${m.contrast.toFixed(2)} contrast`);
+      }
+    }
+    for(const [width,colorScheme] of [[1440,'light'],[768,'light'],[390,'light'],[390,'dark'],[320,'light']]) {
+      await page.setViewportSize({width,height:1000});await page.emulateMedia({colorScheme});
+      await page.evaluate(()=>document.querySelectorAll('details').forEach(el=>el.open=false));
+      await page.locator('.cv-contents a[href="#cv-environment"]').click();
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,width+' px overflow');
+      assert.equal(await page.locator('.cv-head-facts').evaluate(el=>[...el.children].every(cell=>{
+        const box=cell.getBoundingClientRect();
+        return [...cell.children].every(child=>{const r=child.getBoundingClientRect();return r.left>=box.left-1&&r.right<=box.right+1;});
+      })),true,width+' px hero labels overlap their columns');
+      await page.locator('.cv-back-top').click();
+      await page.evaluate(()=>window.scrollTo(0,0));
+      await page.screenshot({path:path.join(output,`reading-${width}-${colorScheme}.png`)});
+    }
+
+    if(process.argv.includes('--streamlit')) {
+      const port=Number(process.env.CVD_STREAMLIT_PORT||8510);
+      const url=`http://127.0.0.1:${port}`;
+      server=spawn(process.env.CVD_STREAMLIT_EXECUTABLE||'streamlit',['run','app.py','--server.address','127.0.0.1','--server.port',String(port),'--server.headless','true'],{cwd:path.resolve(__dirname,'..'),stdio:['ignore','pipe','pipe']});
+      let serverOutput='';server.on('error',e=>{serverOutput+=e.message;});
+      server.stdout.on('data',d=>{serverOutput+=d;});server.stderr.on('data',d=>{serverOutput+=d;});
+      let ready=false;
+      for(let i=0;i<200;i++) {
+        try {ready=(await fetch(url+'/_stcore/health')).ok;}catch{}
+        if(ready)break;
+        if(server.exitCode!==null)break;
+        await new Promise(resolve=>setTimeout(resolve,200));
+      }
+      assert.ok(ready,'Streamlit did not start: '+serverOutput);
+      await page.setViewportSize({width:1440,height:1000});
+      await page.goto(url);await page.waitForSelector('iframe.stIFrame');
+      const frame=page.frameLocator('iframe.stIFrame');
+      await frame.locator('#cvd-recipe-accuracy').waitFor();
+      const fitted=async label=>{
+        await page.waitForFunction(()=>{
+          const frame=document.querySelector('iframe.stIFrame');
+          const body=frame?.contentDocument?.body;
+          return body&&Math.abs(frame.clientHeight-Math.ceil(body.getBoundingClientRect().height))<=1;
+        });
+        const gap=await page.evaluate(()=>{
+          const frame=document.querySelector('iframe.stIFrame'),main=document.querySelector('[data-testid="stMain"]');
+          const footer=frame.contentDocument.querySelector('footer');
+          const footerBottom=frame.getBoundingClientRect().top-main.getBoundingClientRect().top+main.scrollTop+footer.getBoundingClientRect().bottom;
+          return {tail:main.scrollHeight-footerBottom,frameHeight:frame.clientHeight};
+        });
+        assert.ok(gap.tail<=64,label+': unused footer space '+gap.tail);
+        return gap.frameHeight;
+      };
+      await fitted('initial');
+      const padding=await page.locator('[data-testid="stMainBlockContainer"]').evaluate(el=>getComputedStyle(el).paddingBottom);
+      assert.ok(parseFloat(padding)<=24,'Host footer padding is excessive');
+      // srcdoc may forbid history writes; every contents route must still work.
+      for(const hash of ['#cv-hardware-view','#cv-defects','#cv-transport-guide','#cv-net-example','#cv-learn','#cv-references','#cv-studio','#cv-environment']) {
+        await frame.locator(`.cv-contents a[href="${hash}"]`).click();await fitted('contents '+hash);
+        assert.equal(await frame.locator(hash).isVisible(),true,hash+' is hidden in Streamlit');
+        const box=await frame.locator(hash).boundingBox();
+        assert.ok(box.y>=0&&box.y<1000,hash+' is outside the host viewport');
+      }
+      await frame.locator('#cv-references').evaluate(el=>el.open=false);await fitted('close references');
+      await frame.locator('[data-env-stage="transport"]').click();
+      await frame.locator('#cv-env-explanation .cv-citations a[data-reference="33"]').click();await fitted('citation');
+      assert.equal(await frame.locator('#cv-ref-33').evaluate(el=>document.activeElement===el),true);
+      const citationBox=await frame.locator('#cv-ref-33').boundingBox();
+      assert.ok(citationBox.y>=0&&citationBox.y<1000,'Citation is outside the host viewport');
+      await frame.locator('#cv-ref-33 [data-evidence-back]').click();await fitted('citation return');
+      assert.equal(await frame.locator('#cv-env-explanation').evaluate(el=>document.activeElement.closest('[id]')===el),true);
+      await frame.locator('#cv-references').evaluate(el=>el.open=false);await fitted('close citation list');
+      await frame.locator('#cv-cvd-guide>summary').click();
+      const expanded=await fitted('expanded guide');
+      await frame.locator('#cv-cvd-guide>summary').click();
+      const collapsed=await fitted('collapsed guide');
+      assert.ok(expanded-collapsed>1000,'The long disclosure should release its height');
+      for(const view of ['hardware','defects','environment']) {
+        await frame.locator(`[data-lab-view="${view}"]`).click();await fitted(view);
+      }
+      for(const width of [390,1440]) {
+        await page.setViewportSize({width,height:1000});await fitted(width+' px');
+        await frame.locator('#cv-references>summary').click();await fitted('references expanded');
+        await frame.locator('#cv-references>summary').click();await fitted('references collapsed');
+        await page.locator('[data-testid="stMain"]').evaluate(el=>el.scrollTop=el.scrollHeight);
+        await page.screenshot({path:path.join(output,`streamlit-footer-${width}.png`)});
+      }
+      console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop resizing, compact host padding and no unused footer tail.');
+    }
+    assert.deepEqual(errors,[],'Browser JavaScript errors');
+    console.log('Reading-flow checks passed: eight keyboard-accessible contents routes, hidden-view reveal, preserved recipe, history navigation, seven cited film roles, light/dark prose contrast and 320/390/768/1440 px layouts.');
+  } finally {
+    await browser.close();
+    if(server)server.kill('SIGTERM');
+  }
+})().catch(error=>{console.error(error);process.exitCode=1;});

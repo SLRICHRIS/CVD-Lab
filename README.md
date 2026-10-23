@@ -18,6 +18,13 @@ with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations, fabrication descriptions and twelve
 scoped defect examples covering all ten presets.
 
+The reading flow starts with a compact definition, an eight-link contents list
+and a four-step learning path. Choose a recipe before opening the longer
+background guide. A worked silane/LPCVD atom balance and a cited seven-film
+application table connect the animation to the chemistry and device purpose.
+Contents links reveal the requested view or disclosure and move keyboard focus
+to it without changing the selected recipe.
+
 ## Upload to GitHub
 
 1. Extract `CVD-Lab-GitHub-Streamlit.zip` on your computer.
@@ -121,6 +128,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 | `tests/citations.cjs` | Browser regression checks across recipes and citation navigation |
 | `tests/environment.cjs` | Conservation, boundary conditions, environment citations, playback and rendering |
 | `tests/defects.cjs` | All defect mappings, diagram selection, evidence limits, citations and accessible playback |
+| `tests/reading-flow.cjs` | Contents navigation, prose contrast, responsive layout and optional local Streamlit resizing checks |
 | `package.json` | Optional development dependencies; no frontend build is required |
 | `.gitignore` | Keeps local environments and secrets out of Git |
 | `LICENSE.txt` | Copyright notice |
@@ -292,11 +300,34 @@ teaching-reveal playback and desktop/mobile light/dark layouts. Defect diagrams
 and the full atlas were visually reviewed. These checks verify implementation
 and citation integrity; they do not establish experimental defect validation.
 
-The Streamlit launcher is unchanged by this audit. It uses the documented
-[`st.iframe` API](https://docs.streamlit.io/develop/api-reference/text/st.iframe)
+Reading-flow checks cover all eight contents routes with keyboard activation,
+view/disclosure reveal, preserved recipe selection, browser-history navigation,
+seven cited film roles, light/dark prose contrast and layouts at 320, 390, 768
+and 1440 px. Main explanations use 15 px text with stronger neutral colours;
+secondary copy uses 13 or 14 px. The larger reference material follows the lab,
+with the transport model and background topics available as disclosures.
+
+The Streamlit launcher uses the documented
+[`st.iframe` API](https://docs.streamlit.io/1.65.0/develop/api-reference/text/st.iframe)
 to embed the bundled HTML with JavaScript enabled and content-based height.
-Standalone-browser verification is distinct from testing a deployed Community
-Cloud instance; the live deployment has not been verified in this audit.
+The host now uses compact gutters and footer padding. A Streamlit-specific
+body-size observer lets the same-origin iframe shrink after a disclosure closes
+or the selected view changes. This avoids the viewport-height floor in the
+pinned 1.65.0 frontend's document-height measurement. The helper is inactive
+for standalone pages and cross-origin frames; its host detection and padding
+selectors should be rechecked when changing the Streamlit version.
+
+The local Streamlit 1.65.0 browser check verifies guide/reference expansion and
+collapse, all three view heights, mobile/desktop resizing and a compact footer:
+
+```bash
+npm run test:streamlit
+```
+
+Run this after installing `requirements.txt` in the active Python environment.
+Set `CVD_STREAMLIT_EXECUTABLE` when Streamlit is installed in another environment.
+These are local app checks. The deployed Community Cloud instance has not been
+verified in this pass.
 
 ## Hosting documentation
 

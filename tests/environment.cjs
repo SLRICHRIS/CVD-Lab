@@ -73,6 +73,7 @@ const {chromium}=require('playwright');
         await page.check('#cv-rf-on');
       }
     }
+    await page.locator('#cv-transport-guide>summary').click();
     for(const [da,cs,flux] of [['0.1','90.9%','9.1%'],['10','9.1%','90.9%'],['1','50.0%','50.0%']]){
       await page.locator(`[data-env-da="${da}"]`).click();
       assert.equal(await page.locator('#cv-env-cs').textContent(),cs);assert.equal(await page.locator('#cv-env-flux').textContent(),flux);
