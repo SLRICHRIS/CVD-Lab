@@ -3878,7 +3878,7 @@
         });
       }
       function drawReaction(){
-        const bounds=reactionViewport.getBoundingClientRect(),w=Math.max(200,bounds.width),h=bounds.height||280,dpr=Math.min(window.devicePixelRatio||1,2);
+        const bounds=reactionCanvas.getBoundingClientRect(),w=Math.max(200,bounds.width),h=bounds.height||280,dpr=Math.min(3,Math.max(1,window.devicePixelRatio||1));
         if(reactionCanvas.width!==Math.round(w*dpr)||reactionCanvas.height!==Math.round(h*dpr)){reactionCanvas.width=Math.round(w*dpr);reactionCanvas.height=Math.round(h*dpr);}
         const c=reactionCtx;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
         const scene=buildReaction(w,h),positions=atomPositions(scene),g=state.growth,baseline=h-37;
@@ -4123,7 +4123,7 @@
       function projection(){const target=[0,2,0],distance=(recipe().chamber==='single'?13.5:18.7)/state.zoom;eye=V.add(target,[distance*Math.sin(state.yaw)*Math.cos(state.pitch),distance*Math.sin(state.pitch),distance*Math.cos(state.yaw)*Math.cos(state.pitch)]);const forward=V.norm(V.sub(target,eye)),right=V.norm(V.cross(forward,[0,1,0])),up=V.cross(right,forward),f=Math.min(width-(width>=700?320:0),height*1.75)*1.19;return p=>{const v=V.sub(p,eye),z=V.dot(v,forward);return {x:width/2+V.dot(v,right)*f/z,y:height*.54-V.dot(v,up)*f/z,z};};}
       function rgb(name,light=1){return 'rgb('+(palette[name]||palette.metal).map(v=>Math.max(0,Math.min(255,Math.round(v*light)))).join(',')+')';}
       function polygon(points,fill,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1;}
-      function draw(){const bounds=viewport.getBoundingClientRect();width=Math.max(200,bounds.width);height=bounds.height||400;const ratio=Math.min(window.devicePixelRatio||1,2);if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);geometry();const project=projection();polygon([[-14,-.02,-7],[14,-.02,-7],[14,-.02,7],[-14,-.02,7]].map(project),rgb('floor'),.23);for(const [x,z,rx,rz]of (recipe().chamber==='single'?[[0,0,1.8,1.65],[-3.2,0,.8,.8],[3.25,.1,1.2,.7]]:[[0,0,4.3,1.7],[-4.8,0,.8,.8],[4.4,0,1.1,.7]])){const points=Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return project([x+rx*Math.cos(a),.01,z+rz*Math.sin(a)]);});polygon(points,rgb('dark'),.065);}const light=V.norm([-.4,.9,.6]);projected=faces.map(face=>{const points=face.p.map(project),center=V.scale(face.p.reduce((a,p)=>V.add(a,p),[0,0,0]),1/face.p.length),normal=V.norm(V.cross(V.sub(face.p[1],face.p[0]),V.sub(face.p[2],face.p[0]))),toward=V.norm(V.sub(eye,center)),base=.56+.36*Math.max(0,V.dot(normal,light)),half=V.norm(V.add(light,toward)),spec=(face.material==='metal'?.14:.04)*Math.pow(Math.max(0,V.dot(normal,half)),18);return {...face,points,depth:points.reduce((s,p)=>s+p.z,0)/points.length,shade:face.material==='plasma'?1:base+spec};}).filter(f=>f.points.every(p=>p.z>.1)).sort((a,b)=>b.depth-a.depth);for(const face of projected)polygon(face.points,rgb(face.material,face.shade),face.alpha);for(const line of lines){const points=line.points.map(project);ctx.strokeStyle=rgb(line.color);ctx.lineWidth=line.width;ctx.globalAlpha=.7;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.globalAlpha=1;}drawChamberMolecules(project);drawPartLabels(project);drawReaction();canvas.setAttribute('aria-label',state.process+' chamber cutaway. Parts: '+parts().map(p=>p.text).join(', '));}
+      function draw(){const bounds=canvas.getBoundingClientRect();width=Math.max(200,bounds.width);height=bounds.height||400;const ratio=Math.min(3,Math.max(1,window.devicePixelRatio||1));if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);geometry();const project=projection();polygon([[-14,-.02,-7],[14,-.02,-7],[14,-.02,7],[-14,-.02,7]].map(project),rgb('floor'),.23);for(const [x,z,rx,rz]of (recipe().chamber==='single'?[[0,0,1.8,1.65],[-3.2,0,.8,.8],[3.25,.1,1.2,.7]]:[[0,0,4.3,1.7],[-4.8,0,.8,.8],[4.4,0,1.1,.7]])){const points=Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return project([x+rx*Math.cos(a),.01,z+rz*Math.sin(a)]);});polygon(points,rgb('dark'),.065);}const light=V.norm([-.4,.9,.6]);projected=faces.map(face=>{const points=face.p.map(project),center=V.scale(face.p.reduce((a,p)=>V.add(a,p),[0,0,0]),1/face.p.length),normal=V.norm(V.cross(V.sub(face.p[1],face.p[0]),V.sub(face.p[2],face.p[0]))),toward=V.norm(V.sub(eye,center)),base=.56+.36*Math.max(0,V.dot(normal,light)),half=V.norm(V.add(light,toward)),spec=(face.material==='metal'?.14:.04)*Math.pow(Math.max(0,V.dot(normal,half)),18);return {...face,points,depth:points.reduce((s,p)=>s+p.z,0)/points.length,shade:face.material==='plasma'?1:base+spec};}).filter(f=>f.points.every(p=>p.z>.1)).sort((a,b)=>b.depth-a.depth);for(const face of projected)polygon(face.points,rgb(face.material,face.shade),face.alpha);for(const line of lines){const points=line.points.map(project);ctx.strokeStyle=rgb(line.color);ctx.lineWidth=line.width;ctx.globalAlpha=.7;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.globalAlpha=1;}drawChamberMolecules(project);drawPartLabels(project);drawReaction();canvas.setAttribute('aria-label',state.process+' chamber cutaway. Parts: '+parts().map(p=>p.text).join(', '));}
       function componentOptions(){const names=parts();if(!names.some(p=>p.id===state.component))state.component=names[0].id;const select=root.querySelector('#cv-component');select.replaceChildren();for(const part of names){const option=document.createElement('option');option.value=part.id;option.textContent=part.text;select.appendChild(option);}select.value=state.component;}
       function text(){
         const r=recipe(),p=state.process;
@@ -4189,6 +4189,7 @@
         redraw:()=>draw(),
         setPlaybackOptions:options=>{if([.25,.5,1,2].includes(options.speed))state.speed=options.speed;if(typeof options.loop==='boolean')state.loop=options.loop;growthText();}
       };
+      window.addEventListener('cvd:display',draw);
       reducedMotion.addEventListener('change',event=>{if(event.matches){stop();draw();}});
       canvas.addEventListener('keydown',event=>{const key=event.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(key)){event.preventDefault();if(key==='ArrowLeft')state.yaw-=.1;if(key==='ArrowRight')state.yaw+=.1;if(key==='ArrowUp')state.pitch=Math.min(.8,state.pitch+.05);if(key==='ArrowDown')state.pitch=Math.max(.05,state.pitch-.05);if(key==='+'||key==='=')state.zoom=Math.min(1.65,state.zoom*1.1);if(key==='-')state.zoom=Math.max(.65,state.zoom/1.1);draw();}});let drag=null;canvas.addEventListener('pointerdown',event=>{drag={x:event.clientX,y:event.clientY,yaw:state.yaw,pitch:state.pitch,moved:false};canvas.setPointerCapture(event.pointerId);});canvas.addEventListener('pointermove',event=>{if(!drag)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.hypot(dx,dy)>3)drag.moved=true;state.yaw=drag.yaw-dx*.008;state.pitch=Math.max(.05,Math.min(.8,drag.pitch+dy*.006));draw();});function inside(p,points){let hit=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const a=points[i],b=points[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)hit=!hit;}return hit;}canvas.addEventListener('pointerup',event=>{if(drag&&!drag.moved){const bounds=canvas.getBoundingClientRect(),p={x:event.clientX-bounds.left,y:event.clientY-bounds.top},hit=[...projected].reverse().find(face=>face.alpha>.4&&inside(p,face.points));if(hit){const project=projection(),candidates=parts().filter(part=>part.group===hit.component),nearest=candidates.sort((a,b)=>{const x=project(a.p),y=project(b.p);return Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y);})[0];if(nearest)state.component=nearest.id;componentOptions();text();draw();}}drag=null;});canvas.addEventListener('pointercancel',()=>{drag=null;});canvas.addEventListener('wheel',event=>{event.preventDefault();state.zoom=Math.max(.65,Math.min(1.65,state.zoom*Math.exp(-event.deltaY*.001)));draw();},{passive:false});colors();new ResizeObserver(draw).observe(viewport);window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{colors();draw();});configureControls();update();
     })();
@@ -4266,7 +4267,7 @@
       }
       function clock(now){return snapshot.elapsed+(snapshot.running?Math.min(.3,Math.max(0,(now-received)/1000))*snapshot.speed:0);}
       function render(now=performance.now()){
-        const rect=viewport.getBoundingClientRect(),w=Math.max(260,rect.width||800),h=rect.height||465,dpr=Math.min(2,window.devicePixelRatio||1);
+        const rect=canvas.getBoundingClientRect(),w=Math.max(260,rect.width||800),h=rect.height||465,dpr=Math.min(3,Math.max(1,window.devicePixelRatio||1));
         if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
         ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
         const s=snapshot,t=clock(now),small=w<500,scale=Math.min(w/8.8,h/6.9)*ui.zoom,cy=h*.63;
@@ -4386,6 +4387,7 @@
       canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(event.key))return;event.preventDefault();if(event.key==='ArrowLeft')ui.yaw-=.1;if(event.key==='ArrowRight')ui.yaw+=.1;if(event.key==='ArrowUp')ui.pitch=clamp(ui.pitch+.06,.15,1.1);if(event.key==='ArrowDown')ui.pitch=clamp(ui.pitch-.06,.15,1.1);if(event.key==='+'||event.key==='=')ui.zoom=clamp(ui.zoom*1.1,.65,1.65);if(event.key==='-')ui.zoom=clamp(ui.zoom/1.1,.65,1.65);render();});
       document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else{render();schedule();}});
       new ResizeObserver(()=>{if(!lab.hidden)render();}).observe(viewport);
+      window.addEventListener('cvd:display',()=>{if(!lab.hidden)render();});
       window.CVDEnvironment=Object.freeze({solveTransport,snapshot:()=>({stage:ui.stage,lens:ui.lens,da:ui.da,view:ui.view,camera:{yaw:ui.yaw,pitch:ui.pitch,zoom:ui.zoom}})});
       conditions();stateText();modelText();render();schedule();
       if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!snapshot.running)q('#cv-play').click();
@@ -4586,6 +4588,26 @@
       revealSection(window.location.hash,Boolean(window.location.hash));
       window.addEventListener('hashchange',()=>revealSection(window.location.hash,true));
       window.addEventListener('popstate',()=>revealSection(window.location.hash,true));
+
+      // A fixed-width, paused canvas may keep the same CSS size when browser
+      // zoom or monitor density changes. ResizeObserver alone misses that case.
+      // Re-arm the resolution query after each change and repaint all canvases.
+      let displayQuery,displayRatio=window.devicePixelRatio||1;
+      const refreshDisplay=()=>{displayRatio=window.devicePixelRatio||1;window.dispatchEvent(new Event('cvd:display'));};
+      const watchResolution=()=>{
+        if(displayQuery) displayQuery.removeEventListener('change',resolutionChanged);
+        displayQuery=window.matchMedia('(resolution: '+(window.devicePixelRatio||1)+'dppx)');
+        displayQuery.addEventListener('change',resolutionChanged);
+      };
+      function resolutionChanged(){watchResolution();refreshDisplay();}
+      watchResolution();
+      window.addEventListener('resize',refreshDisplay);
+      window.addEventListener('pageshow',refreshDisplay);
+      // Some display/automation paths update devicePixelRatio without a media
+      // event. Read it twice per second while visible; repaint only if it changed.
+      const checkResolution=()=>{if(!document.hidden&&(window.devicePixelRatio||1)!==displayRatio)resolutionChanged();};
+      window.setInterval(checkResolution,500);
+      document.addEventListener('visibilitychange',checkResolution);
 
       // Streamlit 1.65 measures documentElement.scrollHeight, which cannot shrink
       // below the current iframe viewport. Measure the body instead so closing a

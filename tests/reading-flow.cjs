@@ -16,6 +16,47 @@ const {chromium}=require('playwright');
   try {
     const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),errors=[];
     page.on('pageerror',error=>errors.push(error.message));
+    // Change pixel density without changing the CSS viewport. This reproduces
+    // the paused-canvas blur after zooming on a fixed-width desktop layout.
+    const checkCanvasResolution=async(scope,label)=>{
+      await page.setViewportSize({width:1906,height:1000});
+      const session=await page.context().newCDPSession(page);
+      const root=scope.locator('#cvd-recipe-accuracy');
+      const pixels=()=>root.evaluate(el=>[...el.querySelectorAll('canvas')].filter(c=>c.getClientRects().length).map(c=>({
+        id:c.id,width:c.width,height:c.height,cssWidth:c.getBoundingClientRect().width,cssHeight:c.getBoundingClientRect().height
+      })));
+      try {
+        for(const view of ['environment','hardware']) {
+          await scope.locator(`[data-lab-view="${view}"]`).click();
+          const state=await root.evaluate(()=>window.CVDLab.snapshot());
+          assert.equal(state.running,false,label+': resolution checks require paused playback');
+          const before=await pixels();
+          assert.equal(before.length,view==='environment'?1:2,label+': missing visible canvas');
+          for(const density of [1/3,1,1.25,2,3,1]) {
+            await session.send('Emulation.setDeviceMetricsOverride',{width:1906,height:1000,deviceScaleFactor:density,mobile:false});
+            const ratio=Math.min(3,Math.max(1,density));
+            let measured;
+            for(let attempt=0;attempt<30;attempt++) {
+              measured=await pixels();
+              if(measured.every(c=>Math.abs(c.width-c.cssWidth*ratio)<=1&&Math.abs(c.height-c.cssHeight*ratio)<=1))break;
+              await page.waitForTimeout(50);
+            }
+            for(const c of measured) {
+              assert.ok(Math.abs(c.width-c.cssWidth*ratio)<=1&&Math.abs(c.height-c.cssHeight*ratio)<=1,
+                `${label} ${c.id}: stale bitmap at density ${density} (${c.width} x ${c.height})`);
+              const original=before.find(old=>old.id===c.id);
+              assert.ok(Math.abs(c.cssWidth-original.cssWidth)<1&&Math.abs(c.cssHeight-original.cssHeight)<1,
+                label+': the canvas CSS size changed, so the density-only regression was not exercised');
+            }
+            assert.deepEqual(await root.evaluate(()=>window.CVDLab.snapshot()),state,label+': resizing changed simulation state');
+          }
+          for(const c of await pixels()) await scope.locator('#'+c.id).screenshot({path:path.join(output,`resolution-${label}-${c.id}.png`),timeout:60000});
+        }
+      } finally {
+        await session.send('Emulation.clearDeviceMetricsOverride');await session.detach();
+        await page.setViewportSize({width:1440,height:1000});
+      }
+    };
     await page.goto(pathToFileURL(path.resolve(__dirname,'../site/index.html')).href);
     await page.waitForFunction(()=>window.CVDLab&&window.CVDEvidence);
     const links=page.locator('.cv-contents a');
@@ -118,6 +159,7 @@ const {chromium}=require('playwright');
         assert.ok(m.contrast>=7,`${colorScheme} ${m.selector}: ${m.contrast.toFixed(2)} contrast`);
       }
     }
+    await checkCanvasResolution(page,'standalone');
     for(const [width,colorScheme] of [[2560,'light'],[1906,'light'],[1906,'dark'],[1440,'light'],[768,'light'],[390,'light'],[390,'dark'],[320,'light']]) {
       await page.setViewportSize({width,height:1000});await page.emulateMedia({colorScheme});
       await page.evaluate(()=>document.querySelectorAll('details').forEach(el=>el.open=false));
@@ -194,6 +236,7 @@ const {chromium}=require('playwright');
         return gap.frameHeight;
       };
       await fitted('initial');
+      await checkCanvasResolution(frame,'streamlit');await fitted('display resolution changes');
       const padding=await page.locator('[data-testid="stMainBlockContainer"]').evaluate(el=>getComputedStyle(el).paddingBottom);
       assert.ok(parseFloat(padding)<=24,'Host footer padding is excessive');
       // srcdoc may forbid history writes; every contents route must still work.
@@ -252,7 +295,7 @@ const {chromium}=require('playwright');
       console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop/wide-screen resizing, centered usable workspace width, compact host padding and no unused footer tail.');
     }
     assert.deepEqual(errors,[],'Browser JavaScript errors');
-    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast, bounded reading widths and 320/390/768/1440/1906/2560 px layouts.');
+    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast, three paused canvas buffers across display-density changes, bounded reading widths and 320/390/768/1440/1906/2560 px layouts.');
   } finally {
     await browser.close();
     if(server)server.kill('SIGTERM');
