@@ -62,17 +62,21 @@ const {chromium}=require('playwright');
           const channels=color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});
           return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
         };
-        return ['#cv-env-explanation','#cv-env-observe','.cv-about-definition','.cv-learning-path p','.cv-example-limit'].map(selector=>{
+        return [
+          ['#cv-env-explanation',18],['#cv-env-observe',18],['.cv-about-definition',18],
+          ['.cv-learning-path p',17],['.cv-example-limit',18],['.cv-env-bounds',16],
+          ['.cv-detail-line',16],['.cv-ref-use',18],['.cv-part-description',18]
+        ].map(([selector,minSize])=>{
           const el=document.querySelector(selector),style=getComputedStyle(el);
           let bg=el;
           while(bg.parentElement&&getComputedStyle(bg).backgroundColor==='rgba(0, 0, 0, 0)')bg=bg.parentElement;
           const a=luminance(style.color),b=luminance(getComputedStyle(bg).backgroundColor);
-          return {selector,size:parseFloat(style.fontSize),contrast:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+          return {selector,minSize,size:parseFloat(style.fontSize),contrast:(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
         });
       });
       for(const m of measurements) {
-        assert.ok(m.size>=13,`${colorScheme} ${m.selector}: text too small`);
-        assert.ok(m.contrast>=4.5,`${colorScheme} ${m.selector}: ${m.contrast.toFixed(2)} contrast`);
+        assert.ok(m.size>=m.minSize,`${colorScheme} ${m.selector}: text too small (${m.size} px)`);
+        assert.ok(m.contrast>=7,`${colorScheme} ${m.selector}: ${m.contrast.toFixed(2)} contrast`);
       }
     }
     for(const [width,colorScheme] of [[1440,'light'],[768,'light'],[390,'light'],[390,'dark'],[320,'light']]) {
@@ -84,6 +88,11 @@ const {chromium}=require('playwright');
         const box=cell.getBoundingClientRect();
         return [...cell.children].every(child=>{const r=child.getBoundingClientRect();return r.left>=box.left-1&&r.right<=box.right+1;});
       })),true,width+' px hero labels overlap their columns');
+      for(const selector of ['#cv-play','.cv-modes button','.cv-lab-views button']) {
+        assert.equal(await page.locator(selector).evaluateAll(els=>els.every(el=>{
+          const box=el.getBoundingClientRect();return box.height>=44&&parseFloat(getComputedStyle(el).fontSize)>=16;
+        })),true,width+' px: small controls at '+selector);
+      }
       await page.locator('.cv-back-top').click();
       await page.evaluate(()=>window.scrollTo(0,0));
       await page.screenshot({path:path.join(output,`reading-${width}-${colorScheme}.png`)});
