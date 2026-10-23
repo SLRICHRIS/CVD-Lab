@@ -303,9 +303,14 @@ and citation integrity; they do not establish experimental defect validation.
 Reading-flow checks cover all eight contents routes with keyboard activation,
 view/disclosure reveal, preserved recipe selection, browser-history navigation,
 seven cited film roles, light/dark prose contrast and layouts at 320, 390, 768
-and 1440 px. Main explanations use 15 px text with stronger neutral colours;
-secondary copy uses 13 or 14 px. The larger reference material follows the lab,
-with the transport model and background topics available as disclosures.
+and 1440 px. Main reading text now uses 18 px type and near-black text in light
+mode; supporting copy uses 16 or 17 px. Selected prose is checked for at least
+7:1 contrast in light and dark modes. Primary controls use at least 16 px text
+and 44 px target heights, with the process choices arranged in two columns on
+narrow phones. The three lab views have descriptive selection cards, and the
+reactor/atom-balance panels share the available width more evenly. Figure keys
+and citation numbers use 14 px type. The larger reference material follows the
+lab, with the transport model and background topics available as disclosures.
 
 The Streamlit launcher uses the documented
 [`st.iframe` API](https://docs.streamlit.io/1.65.0/develop/api-reference/text/st.iframe)
