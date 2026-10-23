@@ -75,6 +75,7 @@ def markdown(data: dict) -> str:
         "- Checked all 31 references against their linked assertions. Replaced the broken vapour-delivery URL with the official 1150C datasheet, corrected bibliography dates, rebound wafer cleaning and silicon-substrate claims, and removed the TEOS-specific attribution to an Oxford page that does not establish that feed pairing.",
         "- Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.",
         "- Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.",
+        "- Added a continuous local growth environment with fifty recipe/region explanations, three overlays and shared recipe provenance. The 1D transport explorer derives normalised concentration and flux from the cited SFU coupled-resistance equation; its input ratio and tracer paths are explicitly exploratory.",
         "",
         "## Claim register",
         "",

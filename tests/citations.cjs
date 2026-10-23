@@ -17,6 +17,7 @@ const { chromium } = require('playwright');
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(pathToFileURL(path.resolve(__dirname, '../site/index.html')).href);
   await page.waitForFunction(() => window.CVDEvidence && document.querySelectorAll('#cv-component option').length > 0);
+  await page.locator('[data-lab-view="hardware"]').click();
 
   async function expectReferences(selector, expected) {
     const actual = await page.locator(selector).locator(':scope > .cv-citations a').evaluateAll(links => links.map(link => Number(link.dataset.reference)));
@@ -106,7 +107,7 @@ const { chromium } = require('playwright');
   assert.deepEqual(integrity.duplicateIds, []);
   assert.deepEqual(integrity.missing, []);
   assert.deepEqual(integrity.bareClaims, []);
-  assert.equal(integrity.sources, 32);
+  assert.equal(integrity.sources, 33);
   // Hidden reference details must open when a claim is selected, with focus and return.
   await page.locator('#cv-pressure > .cv-citations a').click();
   assert.equal(await page.locator('#cv-references').evaluate(element => element.open), true);

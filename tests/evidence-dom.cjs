@@ -36,7 +36,7 @@ const dom = new JSDOM(observedHtml, {
     window.HTMLCanvasElement.prototype.getContext = function () {
       const reaction = this.id === 'cv-reaction-canvas';
       const context = {
-        measureText: text => ({ width: String(text).length * 7 }), createRadialGradient: () => ({ addColorStop() {} }),
+        measureText: text => ({ width: String(text).length * 7 }), createRadialGradient: () => ({ addColorStop() {} }), createLinearGradient: () => ({ addColorStop() {} }),
         clearRect() { if (reaction) window.__reactionTexts = []; },
         fillText(text) { if (reaction && context.globalAlpha > 0) window.__reactionTexts.push(text); },
       };
@@ -109,6 +109,7 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   change('#cv-precursor', precursor);
   query(`[data-process="${mode}"]`).click();
   for (const field of ['#cv-temp', '#cv-pressure', '#cv-feed']) expectRefs(field, conditions);
+  for (const field of ['#cv-env-temp', '#cv-env-pressure', '#cv-env-feed']) expectRefs(field, conditions);
   expectRefs('#cv-temp-window', range);
   expectRefs('#cv-equation', chemistry);
   expectRefs('#cv-chemistry-note', precursor === 'silane' && mode === 'PECVD' ? [...chemistry, 32] : chemistry);
@@ -160,7 +161,7 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   for (const component of options) { change('#cv-component', component); assert.ok(refs('#cv-inspector').length, component); parts++; }
   for (const stage of ['load', 'condition', 'deposit', 'purge', 'unload', 'deposit']) { change('#cv-stage', stage); expectRefs('#cv-equation', chemistry); }
   const temperature = query('#cv-temperature');
-  if (!temperature.disabled) { temperature.value = Number(temperature.value) === Number(temperature.max) ? temperature.min : temperature.max; temperature.dispatchEvent(new dom.window.Event('input', { bubbles: true })); expectRefs('#cv-temp', range); expectRefs('#cv-temp-window', range); }
+  if (!temperature.disabled) { temperature.value = Number(temperature.value) === Number(temperature.max) ? temperature.min : temperature.max; temperature.dispatchEvent(new dom.window.Event('input', { bubbles: true })); expectRefs('#cv-temp', range); expectRefs('#cv-temp-window', range); expectRefs('#cv-env-temp', range); }
   if (mode === 'PECVD') {
     query('#cv-rf-on').checked = false; query('#cv-rf-on').dispatchEvent(new dom.window.Event('change', { bubbles: true }));
     assert.match(query('#cv-growth-status').textContent, /animation paused: RF off/);
@@ -169,7 +170,7 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   }
 }
 assert.equal(equations, 9);
-assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 32);
+assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 33);
 assert.equal(query('#cv-precursor').options.length, 7);
 assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
 assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Explore chemical vapour deposition with rotatable 3D chamber cutaways, seven precursors, ten reference recipes, GaN MOCVD and animated molecular reactions.">
+  <meta name="description" content="Explore continuous 3D CVD reaction environments, ten cited recipes, GaN MOCVD, reactor cutaways, atom-balanced chemistry and an interactive transport model.">
   <title>CVD Lab — 3D Chemical Vapour Deposition</title>
   <meta name="author" content="S L RICHRIS">
   <meta name="copyright" content="© 2026 S L RICHRIS. All rights reserved.">
@@ -410,6 +410,79 @@
     #cvd-recipe-accuracy .cv-evidence-list .cv-ref-use { display:block; margin-top:4px; font-size:12px; }
     @media(max-width:700px) { #cvd-recipe-accuracy .cv-evidence-list { grid-template-columns:minmax(0,1fr); gap:18px; } #cvd-recipe-accuracy .cv-drawing-note { padding:0 18px 14px; } }
   </style>
+  <style>
+    #cvd-recipe-accuracy .cv-lab-views { display:flex; align-items:center; gap:6px; margin:0 0 15px; flex-wrap:wrap; }
+    #cvd-recipe-accuracy .cv-lab-views button { border-radius:8px; padding:10px 18px; }
+    #cvd-recipe-accuracy .cv-lab-views button[aria-pressed="true"] { background:var(--cv-text); color:var(--cv-panel); border-color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-lab-views>span { margin-left:auto; font-size:11px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-env-lab { border:1px solid var(--cv-line); border-radius:18px; background:var(--cv-panel); overflow:hidden; box-shadow:0 12px 42px rgb(15 39 43 / 5%); }
+    #cvd-recipe-accuracy .cv-env-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:23px 26px 20px; }
+    #cvd-recipe-accuracy .cv-env-heading .cv-overline { color:var(--cv-accent); margin-bottom:5px; }
+    #cvd-recipe-accuracy .cv-env-heading h2 { font-size:23px; line-height:1.35; letter-spacing:-.6px; }
+    #cvd-recipe-accuracy #cv-env-subtitle { margin-top:6px; }
+    #cvd-recipe-accuracy .cv-env-label { flex:none; border:1px solid var(--cv-line); border-radius:20px; padding:5px 10px; font-size:10px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-env-conditions { display:grid; grid-template-columns:.8fr 1.1fr 1.4fr 1fr; border-block:1px solid var(--cv-line); background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-env-conditions>div { padding:13px 24px; min-width:0; }
+    #cvd-recipe-accuracy .cv-env-conditions>div+div { border-left:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-env-conditions span { display:block; font-size:10px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-env-conditions strong { display:block; font-size:12px; font-weight:600; margin-top:4px; overflow-wrap:anywhere; }
+    #cvd-recipe-accuracy .cv-env-conditions .cv-citations { display:inline; }
+    #cvd-recipe-accuracy .cv-env-grid { display:grid; grid-template-columns:minmax(0,1fr) 310px; }
+    #cvd-recipe-accuracy .cv-env-scene { min-width:0; background:#091629; color:#dce9f8; }
+    #cvd-recipe-accuracy .cv-env-scene-bar { display:flex; justify-content:space-between; align-items:center; padding:12px 18px; gap:10px; border-bottom:1px solid #24364a; font-size:11px; }
+    #cvd-recipe-accuracy .cv-env-lenses { display:flex; gap:3px; }
+    #cvd-recipe-accuracy .cv-env-lenses button { min-height:30px; border-color:transparent; padding:4px 10px; border-radius:5px; color:#98adc7; font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-lenses button[aria-pressed="true"] { color:#a7f2eb; border-color:#37586d; background:#183145; }
+    #cvd-recipe-accuracy .cv-env-lenses button:hover { background:#233b51; border-color:#53718a; }
+    #cvd-recipe-accuracy .cv-env-viewport { position:relative; height:465px; overflow:hidden; isolation:isolate; }
+    #cvd-recipe-accuracy .cv-env-hud { position:absolute; top:17px; left:20px; right:20px; display:flex; justify-content:space-between; gap:12px; pointer-events:none; color:#7795b4; font-size:9px; letter-spacing:1px; }
+    #cvd-recipe-accuracy .cv-env-hud span+span { color:#8cd4dc; letter-spacing:0; font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-camera-hint { position:absolute; top:39px; right:20px; font-size:9px; color:#7d97b2; pointer-events:none; }
+    #cvd-recipe-accuracy .cv-env-legend { padding:11px 20px; display:flex; gap:9px 18px; flex-wrap:wrap; border-block:1px solid #24364a; color:#afc1d7; font-size:10px; min-height:44px; }
+    #cvd-recipe-accuracy .cv-env-legend>span { display:inline-flex; align-items:center; gap:6px; }
+    #cvd-recipe-accuracy .cv-env-legend i { display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--swatch); box-shadow:0 0 8px var(--swatch); }
+    #cvd-recipe-accuracy .cv-env-tools { padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+    #cvd-recipe-accuracy .cv-env-tools label { display:flex; align-items:center; gap:8px; color:#a8bed5; font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-tools select { width:66px; min-height:30px; padding:3px 6px; background:#152a3e; border-color:#34506a; color:#e1eef9; font-size:11px; }
+    #cvd-recipe-accuracy .cv-env-tools button { min-height:30px; padding:3px 8px; border-color:#304860; color:#a8bed5; font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-tools button:hover { background:#203b53; }
+    #cvd-recipe-accuracy #cv-env-play { min-height:34px; padding:5px 13px; background:#90e2d7; border-color:#90e2d7; color:#0b2633; font-weight:600; }
+    #cvd-recipe-accuracy .cv-env-inspector { padding:24px; border-left:1px solid var(--cv-line); min-width:0; display:flex; flex-direction:column; }
+    #cvd-recipe-accuracy .cv-env-step { font-size:10px; color:var(--cv-accent); letter-spacing:.7px; text-transform:uppercase; font-weight:600; }
+    #cvd-recipe-accuracy .cv-env-inspector h3 { font-size:19px; line-height:1.35; letter-spacing:-.3px; margin:12px 0 13px; }
+    #cvd-recipe-accuracy #cv-env-explanation { color:var(--cv-text); font-size:12px; line-height:1.85; }
+    #cvd-recipe-accuracy :is(.cv-env-observation,.cv-env-evidence) { margin-top:22px; border-top:1px solid var(--cv-line); padding-top:17px; }
+    #cvd-recipe-accuracy :is(.cv-env-observation,.cv-env-evidence)>span { font-size:9px; text-transform:uppercase; letter-spacing:.8px; font-weight:600; color:var(--cv-muted); }
+    #cvd-recipe-accuracy :is(.cv-env-observation,.cv-env-evidence)>p { font-size:11px; color:var(--cv-muted); line-height:1.8; margin-top:6px; }
+    #cvd-recipe-accuracy .cv-env-bounds { margin-top:auto; padding-top:24px; font-size:10px; line-height:1.8; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-env-stages { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-block:1px solid var(--cv-line); background:var(--cv-soft); }
+    #cvd-recipe-accuracy .cv-env-stages button { border:0; border-radius:0; padding:15px 12px; font-size:12px; min-width:0; }
+    #cvd-recipe-accuracy .cv-env-stages button+button { border-left:1px solid var(--cv-line); }
+    #cvd-recipe-accuracy .cv-env-stages button>span { margin-right:9px; color:var(--cv-muted); font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-stages button[aria-pressed="true"] { color:var(--cv-accent); background:var(--cv-accent-soft); box-shadow:inset 0 -3px 0 var(--cv-accent); }
+    #cvd-recipe-accuracy .cv-env-model { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.85fr); column-gap:60px; padding:26px; }
+    #cvd-recipe-accuracy .cv-env-model h3 { margin:5px 0 8px; font-size:17px; line-height:1.4; letter-spacing:-.3px; }
+    #cvd-recipe-accuracy #cv-env-model-intro { max-width:490px; color:var(--cv-muted); font-size:11px; line-height:1.8; }
+    #cvd-recipe-accuracy .cv-env-regimes { display:flex; gap:6px; margin:17px 0; flex-wrap:wrap; }
+    #cvd-recipe-accuracy .cv-env-regimes button { min-height:32px; padding:5px 10px; font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-regimes button[aria-pressed="true"] { color:var(--cv-accent); background:var(--cv-accent-soft); border-color:var(--cv-accent); }
+    #cvd-recipe-accuracy .cv-env-model-control>label { display:flex; justify-content:space-between; align-items:center; gap:3px; font-size:11px; }
+    #cvd-recipe-accuracy .cv-env-model-control output { margin-left:auto; color:var(--cv-accent); font-weight:600; font-size:15px; font-variant-numeric:tabular-nums; }
+    #cvd-recipe-accuracy .cv-env-sub { vertical-align:sub; font-size:.8em; }
+    #cvd-recipe-accuracy .cv-env-range-labels { display:flex; justify-content:space-between; color:var(--cv-muted); font-size:9px; margin-top:5px; }
+    #cvd-recipe-accuracy .cv-env-model-metrics { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    #cvd-recipe-accuracy .cv-env-model-metrics span { display:block; color:var(--cv-muted); font-size:10px; }
+    #cvd-recipe-accuracy .cv-env-model-metrics strong { display:block; font-size:25px; letter-spacing:-.5px; line-height:1.5; color:var(--cv-accent); font-variant-numeric:tabular-nums; }
+    #cvd-recipe-accuracy #cv-env-profile { width:100%; height:150px; display:block; color:var(--cv-muted); margin:6px 0; }
+    #cvd-recipe-accuracy #cv-env-profile text { font:9px system-ui,sans-serif; fill:currentColor; }
+    #cvd-recipe-accuracy #cv-env-regime-text { font-size:10px; line-height:1.7; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-env-equations { grid-column:1/-1; margin-top:16px; padding:0 16px; border-radius:8px; }
+    #cvd-recipe-accuracy .cv-env-equations summary { padding:12px 0; font-size:11px; }
+    #cvd-recipe-accuracy .cv-env-equations p { font-size:11px; color:var(--cv-muted); padding:0 0 12px; overflow-wrap:anywhere; }
+    #cvd-recipe-accuracy #cv-env-model-scope { grid-column:1/-1; margin-top:13px; font-size:10px; line-height:1.75; color:var(--cv-muted); }
+    @media(max-width:1000px) { #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr) 280px; } #cvd-recipe-accuracy .cv-env-conditions>div { padding:12px 16px; } #cvd-recipe-accuracy .cv-env-model { gap:20px 30px; } }
+    @media(max-width:760px) { #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr); } #cvd-recipe-accuracy .cv-env-inspector { border-left:0; border-top:1px solid var(--cv-line); display:block; padding:22px; } #cvd-recipe-accuracy .cv-env-inspector h3 { margin-top:7px; } #cvd-recipe-accuracy .cv-env-bounds { padding-top:16px; } #cvd-recipe-accuracy .cv-env-viewport { height:400px; } #cvd-recipe-accuracy .cv-env-heading { padding:20px; } #cvd-recipe-accuracy .cv-env-heading h2 { font-size:20px; } #cvd-recipe-accuracy .cv-env-label { display:none; } #cvd-recipe-accuracy .cv-env-conditions { grid-template-columns:1fr 1fr; } #cvd-recipe-accuracy .cv-env-conditions>div:nth-child(3) { border-left:0; } #cvd-recipe-accuracy .cv-env-conditions>div:nth-child(n+3) { border-top:1px solid var(--cv-line); } #cvd-recipe-accuracy .cv-env-model { grid-template-columns:minmax(0,1fr); padding:22px; } #cvd-recipe-accuracy .cv-env-stages button { font-size:10px; padding:12px 2px; } #cvd-recipe-accuracy .cv-env-stages button>span { display:block; margin:0 0 3px; } #cvd-recipe-accuracy .cv-lab-views>span { display:none; } #cvd-recipe-accuracy .cv-lab-views button { padding:9px 12px; font-size:12px; } #cvd-recipe-accuracy .cv-env-scene-bar { padding:10px 12px; } #cvd-recipe-accuracy #cv-env-status { font-size:10px; } }
+  </style>
 </head>
 <body>
 <main aria-label="CVD learning simulator">
@@ -543,7 +616,27 @@
     <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
   </section>
   <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; H₂ and N₂ leave through the exhaust.</p></div>
-  <div class="cv-workspace">
+  <div class="cv-lab-views" role="group" aria-label="Laboratory scale">
+    <button type="button" data-lab-view="environment" aria-pressed="true" aria-controls="cv-environment">Reaction environment</button>
+    <button type="button" data-lab-view="hardware" aria-pressed="false" aria-controls="cv-hardware-view">Reactor &amp; atom balance</button>
+    <span>One recipe. Two connected scales.</span>
+  </div>
+  <section id="cv-environment" class="cv-env-lab" aria-labelledby="cv-env-title">
+    <header class="cv-env-heading"><div><p class="cv-overline">Inside the growth zone</p><h2 id="cv-env-title">Follow the species. Understand the film.</h2><p id="cv-env-subtitle" class="cv-secondary"></p></div><span class="cv-env-label">Interactive 3D environment</span></header>
+    <div class="cv-env-conditions" aria-label="Selected source conditions"><div><span>Wafer setpoint</span><strong id="cv-env-temp"></strong></div><div><span>Chamber pressure</span><strong id="cv-env-pressure"></strong></div><div><span>Feed chemistry</span><strong id="cv-env-feed"></strong></div><div><span>Activation</span><strong id="cv-env-activation"></strong></div></div>
+    <div class="cv-env-grid">
+      <div class="cv-env-scene">
+        <div class="cv-env-scene-bar"><span id="cv-env-status">Paused · inspect any region</span><div class="cv-env-lenses" role="group" aria-label="Environment overlay"><button type="button" data-env-lens="species" aria-pressed="true">Species</button><button type="button" data-env-lens="energy" aria-pressed="false">Energy</button><button type="button" data-env-lens="transport" aria-pressed="false">Transport</button></div></div>
+        <div class="cv-env-viewport"><canvas id="cv-env-canvas" tabindex="0" role="img" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" aria-label="Interactive local CVD growth environment">Local growth-zone illustration showing incoming feed, activation, surface encounters and outgoing products.</canvas><div class="cv-env-hud"><span>LOCAL SURFACE VIEW</span><span id="cv-env-view-label">Species trajectories</span></div><div class="cv-env-camera-hint">Drag to orbit · scroll to zoom</div></div>
+        <div class="cv-env-legend" id="cv-env-legend" aria-label="Environment colour key"></div>
+        <div class="cv-env-tools"><button id="cv-env-play" type="button">Play environment</button><label>Playback speed<select id="cv-env-speed" aria-label="Environment playback speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label><input id="cv-env-loop" type="checkbox" checked>Continuous environment</label><button id="cv-env-reset" type="button">Reset camera</button></div>
+      </div>
+      <aside class="cv-env-inspector" aria-labelledby="cv-env-focus-title"><p class="cv-env-step" id="cv-env-step">01 / 05 · Delivery</p><h3 id="cv-env-focus-title">From source to chamber</h3><p id="cv-env-explanation"></p><div class="cv-env-observation"><span>Follow in the animation</span><p id="cv-env-observe"></p></div><div class="cv-env-evidence"><span>Evidence &amp; scope</span><p id="cv-env-evidence"></p></div><p class="cv-env-bounds">Species paths and dwell times are enlarged illustrations. The cited conditions are source values; this view does not solve reactor CFD or an elementary reaction network.</p></aside>
+    </div>
+    <div class="cv-env-stages" role="group" aria-label="Inspect an environment process"><button type="button" data-env-stage="delivery" aria-pressed="true"><span>01</span>Delivery</button><button type="button" data-env-stage="activation" aria-pressed="false"><span>02</span>Activation</button><button type="button" data-env-stage="transport" aria-pressed="false"><span>03</span>Transport</button><button type="button" data-env-stage="surface" aria-pressed="false"><span>04</span>Surface</button><button type="button" data-env-stage="exhaust" aria-pressed="false"><span>05</span>Exhaust</button></div>
+    <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. D is diffusivity, δ is layer thickness, and kₛ and kₘ have units of velocity.</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
+  </section>
+  <div id="cv-hardware-view" class="cv-workspace" hidden>
     <section class="cv-chamber" aria-labelledby="cv-machine">
       <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" data-cite="part-showerhead" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
       <div class="cv-viewport"><canvas id="cv-canvas" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" role="img" aria-label="Rotatable 3D PECVD reactor design">3D CVD reactor with gas delivery and exhaust equipment.</canvas><svg id="cv-callouts" class="cv-callouts" role="img" aria-label="Machine part names"></svg></div>
@@ -553,7 +646,7 @@
       <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
     </section>
     <section class="cv-reaction" aria-labelledby="cv-reaction-title">
-      <div class="cv-reaction-head"><p class="cv-overline">Net chemistry schematic</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Net-reaction illustration · reactants</span></div>
+      <div class="cv-reaction-head"><p class="cv-overline">Atom balance</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Net-reaction illustration · reactants</span></div>
       <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Idealised net-reaction illustration">Schematic atom redistribution from reactants into an idealised film composition and gas products; atomic positions do not depict a crystal structure.</canvas></div>
       <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
       <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
@@ -591,7 +684,7 @@
   <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p></footer>
   <script id="cv-evidence-data" type="application/json">
 {
-  "version": 2,
+  "version": 3,
   "reviewed": "2026-10-23",
   "sources": [
     {
@@ -1203,6 +1296,24 @@
         "method": "University-hosted teaching PDF and visual inspection",
         "url": "https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf#page=11",
         "note": "PDF p. 11 was read and visually checked: N≡N⁺–O⁻ has a positive formal charge on the central N and a negative formal charge on O. Only the stated bonding/resonance material is used."
+      }
+    },
+    {
+      "id": 33,
+      "author": "Simon Fraser University, School of Engineering Science",
+      "title": "Chemical Vapour Deposition: CVD — ENSC 495 lecture notes",
+      "year": "n.d.",
+      "kind": "University teaching notes",
+      "url": "https://www.sfu.ca/~gchapman/e495/e495l10m.pdf",
+      "locator": "PDF pp. 5–10: process steps, boundary-layer transport and coupled surface-reaction flux",
+      "scope": "Diffusive supply and first-order surface reaction treated as coupled resistances; limiting regimes. The lab derives its normalised outputs from the displayed flux relation.",
+      "limits": "Reduced steady 1D model only. No reactor-specific constants, gas-phase chemistry, plasma sheath, adsorption coverage, CFD field or recipe-calibrated growth rate is established.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University-hosted lecture PDF and equation inspection",
+        "url": "https://www.sfu.ca/~gchapman/e495/e495l10m.pdf#page=9",
+        "note": "Final coupled flux equation on PDF p. 9 and limiting cases on p. 10 checked, with diffusion relation on p. 8. The isolated surface-flux line is typographically inconsistent with its surface concentration; the lab uses the final coupled expression."
       }
     }
   ],
@@ -2058,7 +2169,7 @@
           "locator": "Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs"
         }
       ],
-      "note": "Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. Rotation is described, not mechanically simulated."
+      "note": "Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. The local environment illustrates time-scaled rotation; the hardware cutaway does not simulate the drive mechanics."
     },
     "part-mo-delivery": {
       "statement": "Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control.",
@@ -2089,6 +2200,50 @@
         }
       ],
       "note": "Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic."
+    },
+    "environment-transport": {
+      "statement": "Under a steady boundary-layer model with first-order surface consumption, J = D Cb ks / (D + delta ks).",
+      "evidence": [
+        {
+          "source": 33,
+          "locator": "PDF p. 8, diffusive flux; p. 9, final coupled flux equation; p. 10, limiting cases"
+        }
+      ],
+      "note": "The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe."
+    },
+    "environment-surface": {
+      "statement": "CVD involves delivery to the surface, film formation and desorption/transport of gaseous products.",
+      "evidence": [
+        {
+          "source": 33,
+          "locator": "PDF p. 5, Major CVD Processes"
+        },
+        {
+          "source": 10,
+          "locator": "PDF p. 9, slide 18: transport, surface reaction and product removal"
+        }
+      ],
+      "note": "The continuously animated tracer encounters teach these process categories, not an elementary atomistic pathway or measured dwell time."
+    },
+    "environment-plasma": {
+      "statement": "In the depicted PECVD architecture, RF sustains a discharge that creates reactive species by collisions; surface interactions form a film and the exhaust removes products.",
+      "evidence": [
+        {
+          "source": 15,
+          "locator": "PECVD technology paragraphs: RF discharge, collision-created reactive species, surface interaction and pumping"
+        }
+      ],
+      "note": "Generic R* markers indicate a reactive-species population. Their identities, abundances, electron energies and trajectories are not calculated."
+    },
+    "environment-w-exhaust": {
+      "statement": "The cited H2/WF6 study measured HF formation and depletion of the reactants during W deposition.",
+      "evidence": [
+        {
+          "source": 6,
+          "locator": "Abstract: quadrupole mass spectrometry, HF signal and reactant depletion"
+        }
+      ],
+      "note": "The animation illustrates bulk deposition on a prepared surface. It does not reproduce the measured mass spectrum or transient nucleation chemistry."
     }
   },
   "model_choices": [
@@ -2096,11 +2251,15 @@
     "Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.",
     "Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.",
     "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.",
-    "Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.",
+    "Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.",
     "Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.",
     "Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.",
     "Reactor drawings and load/purge/cool/vent stages do not reproduce a source tool or provide an operating procedure.",
-    "The MOCVD view combines one cited GaN final-layer setpoint with a separately sourced showerhead architecture. The prepared buffer/template is already present; delivery, crystal geometry and layer thickness are schematic."
+    "The MOCVD view combines one cited GaN final-layer setpoint with a separately sourced showerhead architecture. The prepared buffer/template is already present; delivery, crystal geometry and layer thickness are schematic.",
+    "The environment shows continuous local-surface process categories. Incoming molecular glyphs, generic reactive-species markers, surface patches and outgoing gas glyphs are explanatory tracers, not a simulated elementary chemical network.",
+    "The 1D transport explorer solves the stated diffusion/first-order-reaction model analytically. Its user-selected Damkohler ratio is independent of the documented recipe conditions; it does not fit kinetic constants or predict a physical film thickness.",
+    "Environment colour fields represent qualitative thermal/plasma zones or the explicitly normalised concentration solution. No gas temperature map, plasma potential, electron-energy distribution or full-reactor CFD solution is asserted.",
+    "Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment and hardware/atom-balance views share the same selected recipe."
   ]
 }
   </script>
@@ -2194,7 +2353,7 @@
   <script>
     (() => {
       const root=document.getElementById('cvd-recipe-accuracy'),canvas=root.querySelector('#cv-canvas'),ctx=canvas.getContext('2d'),viewport=root.querySelector('.cv-viewport');
-      const state={process:'PECVD',precursor:'silane',stage:'deposit',component:'wafer',yaw:.64,pitch:.31,zoom:1,growth:0,temperature:300,rfOn:true,running:false};
+      const state={process:'PECVD',precursor:'silane',stage:'deposit',component:'wafer',yaw:.64,pitch:.31,zoom:1,growth:0,temperature:300,rfOn:true,running:false,elapsed:0,speed:1,loop:true};
       const precursors={
         silane:{name:'Silane',formula:'SiH₄',phase:'gas',presets:{
           PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂ + N₂',chamber:'single',effect:'The idealised net reaction forms SiO₂, with H₂ and N₂ as by-products.',equation:'SiH4 + 2N2O -> SiO2 + 2N2 + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'},
@@ -2501,24 +2660,26 @@
         root.querySelector('#cv-growth-track').setAttribute('aria-valuenow',percent);
         root.querySelector('#cv-reaction-progress').value=Math.round(state.growth*1000);
         root.querySelector('#cv-reaction-progress').setAttribute('aria-valuetext',reactionPhase());
-        const status=state.stage!=='deposit'?'animation paused outside deposition':state.process==='PECVD'&&!state.rfOn?'animation paused: RF off':state.growth>=1?'demonstration complete':state.running?'animation playing':'demonstration paused';
+        const status=state.stage!=='deposit'?'animation paused outside deposition':state.process==='PECVD'&&!state.rfOn?'animation paused: RF off':state.running?(state.growth>=1?'environment playing · thickness capped':'animation playing'):state.growth>=1?'demonstration complete':'demonstration paused';
         root.querySelector('#cv-growth-status').textContent=r.film+' · '+status;
-        root.querySelector('#cv-play').textContent=state.running?'Pause animation':state.growth>=1?'Replay animation':'Play animation';
+        root.querySelector('#cv-play').textContent=state.running?'Pause animation':state.growth>=1&&state.loop?'Resume environment':state.growth>=1?'Replay animation':'Play animation';
+        if(window.CVDLab)root.dispatchEvent(new CustomEvent('cvd:state',{detail:window.CVDLab.snapshot()}));
       }
       function tick(timestamp){
         if(!state.running)return;
         const dt=previousTime?Math.min(.25,(timestamp-previousTime)/1000):0;previousTime=timestamp;
-        state.growth=Math.min(1,state.growth+dt*relativeActivity()/8);
-        if(timestamp-lastDraw>90||state.growth>=1){lastDraw=timestamp;growthText();draw();}
-        if(state.growth>=1){state.running=false;growthText();return;}
+        const increment=dt*state.speed*relativeActivity();state.elapsed+=increment;
+        state.growth=Math.min(1,state.growth+increment/8);
+        if(timestamp-lastDraw>90||(state.growth>=1&&!state.loop)){lastDraw=timestamp;growthText();if(!root.querySelector('#cv-hardware-view').hidden)draw();}
+        if(state.growth>=1&&!state.loop){state.running=false;growthText();return;}
         frameId=requestAnimationFrame(tick);
       }
       function stop(){state.running=false;cancelAnimationFrame(frameId);previousTime=0;growthText();}
       function start(replay=false){
-        stop();if(replay||state.growth>=1)state.growth=0;
+        stop();if(replay||(state.growth>=1&&!state.loop)){state.growth=0;state.elapsed=0;}
         state.stage='deposit';root.querySelector('#cv-stage').value='deposit';
         if(state.process==='PECVD'&&!state.rfOn){update();return;}
-        if(reducedMotion.matches){state.growth=1;update();return;}
+        if(reducedMotion.matches){state.growth=1;state.elapsed=8;update();return;}
         state.running=true;previousTime=0;lastDraw=0;update();frameId=requestAnimationFrame(tick);
       }
       function selectPrecursor(){
@@ -2560,7 +2721,7 @@
           part('chamber','MOCVD chamber',[0,2.8,-1.17],'left','chamber','encloses the reduced-pressure growth region.'),
           part('showerhead','Water-cooled showerhead',[0,2.84+shift,-.55],'left','gas','distributes separated precursor streams near the heated substrate.'),
           ...(loaded?[part('wafer','GaN template on sapphire',[0,2.224,.45],'left','wafer','is a prepared buffer/template stack; initial nucleation is omitted.'),part('film','GaN growth layer',[0,2.23+.07*state.growth,.72],'left','film','is the compound-semiconductor layer added in this demonstration.')]:[]),
-          part('holder','Heated rotating susceptor',[0,2.1,.85],'right','wafer','supports the substrate; rotation is described but not mechanically animated.'),
+          part('holder','Heated rotating susceptor',[0,2.1,.85],'right','wafer','supports the substrate; the local environment view illustrates time-scaled rotation.'),
           part('heater','Resistance heater',[0,1.92,.72],'right','wafer','heats the susceptor for thermal growth.'),
           part('gauge','Pressure gauge',[.65,3.91,-.97],'right','chamber','measures chamber pressure.'),
           part('throttle','Throttle valve',[1.82,2.47,0],'right','pump','adjusts exhaust conductance for pressure control.'),
@@ -2744,14 +2905,220 @@
       root.querySelector('#cv-stage').addEventListener('change',event=>{state.stage=event.target.value;if(state.stage!=='deposit')stop();if(state.stage==='load'||state.stage==='condition')state.growth=0;update();});
       root.querySelector('#cv-component').addEventListener('change',event=>{state.component=event.target.value;text();draw();});root.querySelector('#cv-flow').addEventListener('change',draw);
       root.querySelector('#cv-precursor').addEventListener('change',selectPrecursor);
-      root.querySelector('#cv-play').addEventListener('click',()=>{if(state.running)stop();else start(state.growth>=1);});
+      root.querySelector('#cv-play').addEventListener('click',()=>{if(state.running)stop();else start(state.growth>=1&&!state.loop);});
       root.querySelector('#cv-reset-view').addEventListener('click',()=>{state.yaw=.64;state.pitch=.31;state.zoom=1;draw();});
-      root.querySelector('#cv-reaction-progress').addEventListener('input',event=>{const progress=Number(event.target.value)/1000;stop();state.growth=progress;state.stage='deposit';root.querySelector('#cv-stage').value='deposit';update();});
+      root.querySelector('#cv-reaction-progress').addEventListener('input',event=>{const progress=Number(event.target.value)/1000;stop();state.growth=progress;state.elapsed=progress*8;state.stage='deposit';root.querySelector('#cv-stage').value='deposit';update();});
       root.querySelector('#cv-temperature').addEventListener('input',event=>{state.temperature=clamp(Number(event.target.value),...recipe().tempRange);event.target.value=state.temperature;text();draw();});
       root.querySelector('#cv-rf-on').addEventListener('change',event=>{if(state.process!=='PECVD')return;state.rfOn=event.target.checked;if(!state.rfOn)stop();update();if(state.rfOn&&state.growth<1&&state.stage==='deposit')start(false);});
+      window.CVDLab={
+        snapshot:()=>{const r=recipe();return {process:state.process,precursor:state.precursor,precursorName:precursors[state.precursor].name,formula:precursors[state.precursor].formula,stage:state.stage,temperature:state.temperature,temperatureClaims:state.temperature===r.temp?r.evidence.conditions:r.evidence.window,rfOn:state.rfOn,running:state.running,elapsed:state.elapsed,speed:state.speed,loop:state.loop,growth:state.growth,film:r.film,material:r.material,feed:r.feed,pressure:r.pressure,rfReference:r.rfReference||'',byproducts:r.byproducts,chamber:r.chamber,evidence:r.evidence,spec:reactionSpec()};},
+        molecularStructure:formula=>molecule(formula),
+        redraw:()=>draw(),
+        setPlaybackOptions:options=>{if([.25,.5,1,2].includes(options.speed))state.speed=options.speed;if(typeof options.loop==='boolean')state.loop=options.loop;growthText();}
+      };
+      reducedMotion.addEventListener('change',event=>{if(event.matches){stop();draw();}});
       canvas.addEventListener('keydown',event=>{const key=event.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(key)){event.preventDefault();if(key==='ArrowLeft')state.yaw-=.1;if(key==='ArrowRight')state.yaw+=.1;if(key==='ArrowUp')state.pitch=Math.min(.8,state.pitch+.05);if(key==='ArrowDown')state.pitch=Math.max(.05,state.pitch-.05);if(key==='+'||key==='=')state.zoom=Math.min(1.65,state.zoom*1.1);if(key==='-')state.zoom=Math.max(.65,state.zoom/1.1);draw();}});let drag=null;canvas.addEventListener('pointerdown',event=>{drag={x:event.clientX,y:event.clientY,yaw:state.yaw,pitch:state.pitch,moved:false};canvas.setPointerCapture(event.pointerId);});canvas.addEventListener('pointermove',event=>{if(!drag)return;const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(Math.hypot(dx,dy)>3)drag.moved=true;state.yaw=drag.yaw-dx*.008;state.pitch=Math.max(.05,Math.min(.8,drag.pitch+dy*.006));draw();});function inside(p,points){let hit=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const a=points[i],b=points[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)hit=!hit;}return hit;}canvas.addEventListener('pointerup',event=>{if(drag&&!drag.moved){const bounds=canvas.getBoundingClientRect(),p={x:event.clientX-bounds.left,y:event.clientY-bounds.top},hit=[...projected].reverse().find(face=>face.alpha>.4&&inside(p,face.points));if(hit){const project=projection(),candidates=parts().filter(part=>part.group===hit.component),nearest=candidates.sort((a,b)=>{const x=project(a.p),y=project(b.p);return Math.hypot(x.x-p.x,x.y-p.y)-Math.hypot(y.x-p.x,y.y-p.y);})[0];if(nearest)state.component=nearest.id;componentOptions();text();draw();}}drag=null;});canvas.addEventListener('pointercancel',()=>{drag=null;});canvas.addEventListener('wheel',event=>{event.preventDefault();state.zoom=Math.max(.65,Math.min(1.65,state.zoom*Math.exp(-event.deltaY*.001)));draw();},{passive:false});colors();new ResizeObserver(draw).observe(viewport);window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{colors();draw();});configureControls();update();
     })();
   </script>
+  <script>
+    (() => {
+      'use strict';
+      const root=document.getElementById('cvd-recipe-accuracy'),lab=document.getElementById('cv-environment'),bridge=window.CVDLab;
+      const canvas=document.getElementById('cv-env-canvas'),ctx=canvas.getContext('2d'),viewport=canvas.parentElement;
+      const q=selector=>root.querySelector(selector),cite=window.CVDEvidence.cite;
+      const ui={stage:'delivery',lens:'species',yaw:.30,pitch:.56,zoom:1,da:1,view:'environment'};
+      let snapshot=bridge.snapshot(),received=performance.now(),frame=0,lastKey='',drag=null;
+      const sub=value=>String(value).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[+d]);
+      const fract=x=>x-Math.floor(x),seed=n=>fract(Math.sin(n*127.1+311.7)*43758.5453);
+      const lerp=(a,b,t)=>a+(b-a)*t,clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+      const atomColours={Si:'#c59c74',H:'#dce8f4',O:'#e58489',N:'#8aaee8',C:'#9aaebb',Ga:'#e5a67f',Ti:'#bda0da',W:'#c8d3df',F:'#80d5bf',Cl:'#9ac580'};
+      const filmColours={oxide:'#7ac6df',nitride:'#c9d69d',poly:'#a1b4ce',epi:'#8fa9c7',tungsten:'#b9c9d7',tin:'#d5be76',gan:'#6cd5cc'};
+      const structureCache=new Map();
+      function structure(formula){if(!structureCache.has(formula))structureCache.set(formula,bridge.molecularStructure(formula));return structureCache.get(formula);}
+      function solveTransport(da){
+        if(typeof da!=='number'||!Number.isFinite(da)||da<=0)throw new RangeError('The rate ratio must be a finite positive number.');
+        const cs=1/(1+da),fraction=da/(1+da);
+        return {da,cs,fraction,profile:Array.from({length:21},(_,i)=>({z:i/20,c:cs+(1-cs)*i/20}))};
+      }
+      function modelText(){
+        const m=solveTransport(ui.da);
+        q('#cv-env-da-value').textContent=ui.da.toFixed(ui.da<10?2:1);
+        q('#cv-env-da').setAttribute('aria-valuetext','Rate ratio '+ui.da.toFixed(2)+'. Surface concentration '+(100*m.cs).toFixed(1)+' percent of bulk.');
+        q('#cv-env-cs').textContent=(100*m.cs).toFixed(1)+'%';q('#cv-env-flux').textContent=(100*m.fraction).toFixed(1)+'%';
+        q('#cv-env-cs').dataset.value=String(m.cs);q('#cv-env-flux').dataset.value=String(m.fraction);
+        const x=45+275*m.cs;q('#cv-env-profile-line').setAttribute('d',`M${x} 113L320 15`);
+        q('#cv-env-profile-area').setAttribute('d',`M45 113L${x} 113L320 15H45Z`);
+        q('#cv-env-profile').setAttribute('aria-label',`Normalised concentration rises linearly from ${m.cs.toFixed(4)} at the surface to 1 in the bulk; constant diffusivity and no gas-phase reaction are assumed.`);
+        q('#cv-env-regime-text').textContent=ui.da<=.10001?'Surface reaction is slower: little precursor depletion at the surface.':ui.da>=9.999?'Mass transfer is slower: strong precursor depletion at the surface.':'Both resistances contribute; the surface concentration lies between zero and the bulk value.';
+        root.querySelectorAll('[data-env-da]').forEach(b=>b.setAttribute('aria-pressed',String(Math.abs(Math.log10(+b.dataset.envDa)-Math.log10(ui.da))<.001)));
+      }
+      function selectedContext(){
+        const s=snapshot,pe=s.process==='PECVD',mo=s.process==='MOCVD',ev=s.evidence;
+        const delivery=mo?{
+          title:'Separated feeds, shared growth zone',text:'Carrier gas transports TMGa vapour from a temperature-controlled bubbler. Ammonia is delivered separately; the showerhead keeps the streams apart until injection.',claims:'part-mo-delivery part-mocvd',
+          observe:'Follow the amber TMGa stream and blue NH₃ stream through separate inlet openings.',scope:'Delivery follows Zhu’s bubbler description; the separated, cooled showerhead follows AIXTRON. The local drawing does not reconstruct Liang et al.’s reactor.'
+        }:{title:'From source to chamber',text:s.feed+'. '+(['teos','sicl4','ticl4'].includes(s.precursor)?'The precursor enters as vapour; gas-flow metering is distinct from vapour generation.':'Flow controllers meter the gas feed before it reaches the deposition region.'),claims:ev.conditions+' part-flow'+(s.precursor==='teos'?' delivery':''),observe:s.chamber==='batch'?'Follow the lateral feed across the local wafer surface. Use the hardware view to inspect the full furnace and wafer boat.':'Follow the molecular feed from the distribution plate toward the heated wafer.',scope:'Feed composition and nominal conditions come from the selected recipe source. Molecular counts in this view do not specify a feed ratio.'};
+        const activation=pe?{title:s.rfOn?'RF creates reactive species':'RF off in this demonstration',text:s.rfOn?'Collisions in the RF discharge create reactive and energetic species. These interact with the heated substrate to form the film.':'The plasma overlay is off and playback is paused. Residual thermal chemistry is outside this demonstration.',claims:'environment-plasma',observe:'Violet R* markers represent a generic reactive population; small bright e⁻ markers identify the electron illustration.',scope:'CORIAL describes RF activation, collision-created species and surface interactions. Radical identities, electron energies and plasma densities are not calculated.'}:{title:mo?'Heat drives GaN growth':'Thermal activation at the wafer',text:mo?'TMGa and ammonia supply Ga and N for thermal growth on the prepared GaN template. The substrate sits on a heated, rotating susceptor.':'The selected wafer temperature provides thermal activation for the cited chemistry. Temperature is a wafer setpoint, not a calculated temperature of every gas molecule.',claims:mo?'mocvd-definition part-mocvd':('thermal-activation '+ev.conditions),observe:mo?'Watch the susceptor’s orientation marks rotate below the local growth zone. Its angular speed is time-scaled.':'Switch to Energy to distinguish the heated surface from the surrounding gas region.',scope:mo?'AIXTRON supports the heated rotating susceptor; the GaN reference setpoint is cited above. Rotation speed and spatial temperature fields are illustrative.':s.precursor==='ticl4'?'This view illustrates the primary thermal TiN reaction. The cited patent also uses a secondary wall-heating plasma, which is omitted here.':'The recipe source supports the wafer condition. Warm colour indicates a qualitative thermal zone; no temperature-field solver is implied.'};
+        const surface={title:mo?'Incorporation on a prepared template':'Surface encounter → solid film',text:mo?'The final GaN layer grows over an existing buffer/template on sapphire. Initial nucleation and buffer growth are outside this selected final-layer example.':'Species arriving at the wafer participate in film-forming surface chemistry. The highlighted patches represent incorporation into the selected solid film.',claims:mo?'gan-substrate chem-tmga-MOCVD':('environment-surface '+ev.chemistry),observe:'Follow the transient markers at the wafer and the highlighted film patches. The separate atom-balance view tracks atoms through the idealised net equation.',scope:s.precursor==='wf6'?'A prepared nucleation surface is assumed for bulk W growth. Initial substrate-reduction products are not represented.':'Patch size, coverage, atomic positions and dwell times are illustrative. The net equation does not identify every intermediate or elementary event.'};
+        const exhaust=s.precursor==='wf6'?{title:'A product linked to measurement',text:'Gougousi et al. measured HF formation and depletion of H₂ and WF₆ during tungsten deposition. Their integrated HF signal was related to deposited W.',claims:'environment-w-exhaust',observe:'Follow the HF product glyphs leaving the local surface region alongside the residual gas stream.',scope:'This is a qualitative illustration of measured species, not a synthetic mass spectrum or a reproduction of the paper’s sensor response.'}:{title:'Volatile products leave the surface',text:'Gas products and unused feed leave through the exhaust. '+(s.spec.qualitative?'For TEOS PECVD, the C/H/O-containing exhaust is represented as a variable mixture.':'The selected net equation represents products as '+s.byproducts+'.'),claims:'exhaust '+ev.chemistry,observe:'Watch product markers move away from the wafer and turn toward the outlet. Delivery and removal happen continuously in this view.',scope:'Product labels follow the idealised net chemistry. They do not assert a complete measured exhaust composition, selectivity or transient reaction sequence.'};
+        return {delivery,activation,transport:{title:'Supply competes with consumption',text:'Precursor transport to the surface and surface consumption act as two resistances. Use the rate-ratio control below to explore how the balance changes.',claims:'environment-transport',observe:'Select Transport to see the calculated normalised concentration at different heights. The bulk boundary is C/Cᵦ = 1; the surface value responds to Dₐ.',scope:'The 1D, steady, first-order model follows SFU’s coupled-flux relation. Its rate ratio is an exploratory input, independent of the selected source conditions.'},surface,exhaust}[ui.stage];
+      }
+      function inspector(){
+        const order=['delivery','activation','transport','surface','exhaust'],c=selectedContext();
+        q('#cv-env-step').textContent=String(order.indexOf(ui.stage)+1).padStart(2,'0')+' / 05 · '+ui.stage;
+        q('#cv-env-focus-title').textContent=c.title;q('#cv-env-explanation').textContent=c.text;cite(q('#cv-env-explanation'),c.claims);
+        q('#cv-env-observe').textContent=c.observe;q('#cv-env-evidence').textContent=c.scope;cite(q('#cv-env-evidence'),c.claims);
+        root.querySelectorAll('[data-env-stage]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.envStage===ui.stage)));
+      }
+      function conditions(){
+        const s=snapshot,ev=s.evidence;
+        q('#cv-env-subtitle').textContent=s.precursorName+' · '+s.process+' · '+s.film;
+        q('#cv-env-temp').textContent=s.temperature+' °C';
+        // Provenance follows model state even before the old DOM field is refreshed.
+        cite(q('#cv-env-temp'),s.temperatureClaims||ev.conditions);
+        q('#cv-env-pressure').textContent=s.pressure;cite(q('#cv-env-pressure'),ev.conditions);
+        q('#cv-env-feed').textContent=s.feed;cite(q('#cv-env-feed'),ev.conditions);
+        q('#cv-env-activation').textContent=s.process==='PECVD'?(s.rfOn?'RF · '+s.rfReference:'RF off'):'Thermal';cite(q('#cv-env-activation'),s.process==='PECVD'?ev.conditions+' environment-plasma':s.process==='MOCVD'?'mocvd-definition':'thermal-activation');
+        const key=[s.precursor,s.process,s.stage,s.temperature,s.rfOn].join('|');
+        if(key!==lastKey){lastKey=key;inspector();legend();}
+      }
+      function legend(){
+        const s=snapshot,items=[[s.formula,'#e6ae82'],[s.spec.inputs[1]?sub(s.spec.inputs[1].formula):'Residual feed','#80b9e4'],[s.process==='PECVD'?'R* · reactive species':'Surface encounters','#c49af6'],['Gas products','#64d9c6']];
+        const el=q('#cv-env-legend');el.replaceChildren();for(const [label,color] of items){const span=document.createElement('span'),dot=document.createElement('i');dot.style.setProperty('--swatch',color);span.append(dot,document.createTextNode(label));el.appendChild(span);}
+      }
+      function stateText(){
+        const s=snapshot;
+        q('#cv-env-status').textContent=s.stage!=='deposit'?'Paused · '+s.stage:s.process==='PECVD'&&!s.rfOn?'RF off · animation paused':s.running?'● Environment playing':'Paused · inspect any region';
+        q('#cv-env-loop').checked=s.loop;q('#cv-env-speed').value=String(s.speed);q('#cv-env-play').textContent=s.running?'Pause environment':!s.loop&&s.growth>=1?'Replay environment':'Play environment';
+      }
+      function clock(now){return snapshot.elapsed+(snapshot.running?Math.min(.3,Math.max(0,(now-received)/1000))*snapshot.speed:0);}
+      function render(now=performance.now()){
+        const rect=viewport.getBoundingClientRect(),w=Math.max(260,rect.width||800),h=rect.height||465,dpr=Math.min(2,window.devicePixelRatio||1);
+        if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
+        ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+        const s=snapshot,t=clock(now),small=w<500,scale=Math.min(w/8.8,h/6.9)*ui.zoom,cy=h*.63;
+        const cyaw=Math.cos(ui.yaw),syaw=Math.sin(ui.yaw),sp=Math.sin(ui.pitch),cp=Math.cos(ui.pitch);
+        function project(p){const x=p[0]*cyaw+p[2]*syaw,z=-p[0]*syaw+p[2]*cyaw;return {x:w/2+x*scale,y:cy+z*sp*scale-p[1]*cp*scale,depth:z*cp+p[1]*sp};}
+        function poly(points,fill,stroke,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>{const a=project(p);i?ctx.lineTo(a.x,a.y):ctx.moveTo(a.x,a.y);});ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}ctx.globalAlpha=1;}
+        function path(points,color,width=1,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>{const a=project(p);i?ctx.lineTo(a.x,a.y):ctx.moveTo(a.x,a.y);});ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();ctx.globalAlpha=1;}
+        function dot(p,r,color,alpha=1){const a=project(p);ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.beginPath();ctx.arc(a.x,a.y,r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
+        function label(text,p,color='#afc8e2',align='center',size=10){const a=project(p);ctx.font=size+'px system-ui,sans-serif';ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillStyle=color;ctx.globalAlpha=1;ctx.fillText(text,a.x,a.y);}
+        function ring(y,r,color,width=1,alpha=1){path(Array.from({length:65},(_,i)=>{const a=i*2*Math.PI/64;return [r*Math.cos(a),y,r*Math.sin(a)];}),color,width,alpha);}
+        const bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#10263d');bg.addColorStop(.6,'#09182b');bg.addColorStop(1,'#0c1c30');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+        const glow=ctx.createRadialGradient(w*.5,h*.65,0,w*.5,h*.65,w*.48);glow.addColorStop(0,'rgba(42,116,137,.16)');glow.addColorStop(1,'rgba(9,24,43,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
+        for(let i=-5;i<=5;i++){path([[i,-.48,-4],[i,-.48,4]],'#365368',.6,.18);path([[-5,-.48,i],[5,-.48,i]],'#365368',.6,.18);}
+        ring(-.4,3.45,'#4d7d94',1,.25);
+        const face=Array.from({length:72},(_,i)=>{const a=i*2*Math.PI/72;return [3*Math.cos(a),0,3*Math.sin(a)];});
+        const bottom=face.map(p=>[p[0],-.28,p[2]]),loaded=s.stage!=='unload';
+        if(loaded){
+          poly([...face.slice(0,37),...bottom.slice(0,37).reverse()],'#243c53','#436780');poly(face,'#18344a','#7192aa');
+          const radial=ctx.createRadialGradient(w*.5,cy,8,w*.5,cy,scale*3);radial.addColorStop(0,'rgba(82,170,184,.18)');radial.addColorStop(1,'rgba(35,76,102,.05)');poly(face,radial);
+          for(const r of [1,2,2.86])ring(.01,r,'#6692aa',.6,.17);
+          const film=filmColours[s.material]||'#7dcfc6',rotation=s.process==='MOCVD'?t*.22:0;
+          for(let i=0;i<14;i++){const a=i*2.399+rotation,rad=.4+2.05*Math.sqrt(seed(i+4)),x=Math.cos(a)*rad,z=Math.sin(a)*rad,size=.13+.14*seed(i+91),pulse=.4+.35*Math.sin(t*1.5+i);poly([[x-size,.025,z-size],[x+size,.025,z-size],[x+size,.025,z+size],[x-size,.025,z+size]],film,film,.16+.18*s.growth+(ui.stage==='surface'?pulse*.25:0));}
+          if(s.process==='MOCVD')for(let i=0;i<6;i++){const a=i*Math.PI/3+rotation;path([[2.72*Math.cos(a),-.06,2.72*Math.sin(a)],[2.95*Math.cos(a),-.06,2.95*Math.sin(a)]],'#77ddd3',2,.8);}
+        }
+        const batch=s.chamber==='batch',pe=s.process==='PECVD',rf=pe&&s.rfOn&&s.stage==='deposit';
+        if(!batch){
+          const plate=[[-2.75,3.5,-1.5],[2.75,3.5,-1.5],[2.75,3.5,1.5],[-2.75,3.5,1.5]];
+          poly(plate,'#294357','#5b829b',.7);poly(plate.map(p=>[p[0],p[1]-.14,p[2]]),'#1a3348','#486b83',.6);
+          for(let i=0;i<20;i++){const x=-2.45+(i%5)*1.22,z=-1.13+Math.floor(i/5)*.75;dot([x,3.33,z],2,i%2&&s.process==='MOCVD'?'#8cc8ea':'#d4a67b',.9);if(ui.stage==='delivery')path([[x,3.3,z],[x,2.95,z]],i%2?'#76bce1':'#d9aa80',1,.4);}
+        }else{
+          for(const x of [-3.9,3.9])path([[x,.3,-1.5],[x,3,-1.5]],'#de9870',5,.3);
+          for(let i=0;i<5;i++)path([[-4,2.3,-1.3+i*.6],[-3.1,2.3,-1.3+i*.6]],'#e6b78a',1.3,.5);
+        }
+        if(ui.lens==='energy'&&loaded){
+          const heat=ctx.createRadialGradient(w/2,cy,scale*.3,w/2,cy,scale*3.6);heat.addColorStop(0,'rgba(244,156,87,.28)');heat.addColorStop(.65,'rgba(222,118,83,.07)');heat.addColorStop(1,'rgba(244,156,87,0)');ctx.fillStyle=heat;ctx.fillRect(0,0,w,h);
+          for(let i=0;i<4;i++){const y=.12+i*.19;ring(y,2.9-i*.2,'#f2b279',1,.18-i*.03);}
+        }
+        if(rf){
+          const pg=ctx.createRadialGradient(w/2,h*.43,scale*.2,w/2,h*.43,scale*2.8);pg.addColorStop(0,'rgba(168,113,233,.19)');pg.addColorStop(.65,'rgba(122,86,205,.06)');pg.addColorStop(1,'rgba(122,86,205,0)');ctx.fillStyle=pg;ctx.fillRect(0,0,w,h);
+          for(let i=0;i<10;i++){const x=Math.sin(t*2.6+i*1.9)*2.3,y=1.1+seed(i+51)*1.8+.14*Math.sin(t*4+i),z=Math.cos(t*2+i*1.7)*1.4;dot([x,y,z],1.5,'#e6d9ff',.7);if(i===1&&ui.lens==='energy')label('e⁻',[x,y+.13,z],'#d9c0ff','center',10);}
+        }
+        if(ui.lens==='transport'||ui.stage==='transport'){
+          const m=solveTransport(ui.da),x=-2.9,z=1.9;
+          for(let i=0;i<12;i++){const y=i/12*.92,concentration=m.cs+(1-m.cs)*i/12;poly([[-2.9,y,-2.1],[2.9,y,-2.1],[2.9,y,2.1],[-2.9,y,2.1]],'#68d0d4',null,.012+concentration*.018);}
+          path([[x,0,z],[x,.95,z]],'#87d7df',1,.75);
+          for(let i=0;i<=4;i++){const y=i/4*.95;path([[x-.08,y,z],[x+.08,y,z]],'#91cbd9',1,.6);}
+          if(!small){label('Cᵦ / Cᵦ = 1',[3.55,1.18,.9],'#a2dce4','left',10);label('Cₛ / Cᵦ = '+m.cs.toFixed(2),[3.55,-.13,.9],'#9ce4dd','left',10);}
+          // Colours visualise the analytic profile; these are not CFD cells.
+          for(let i=0;i<18;i++){const y=i/17*.92,c=m.cs+(1-m.cs)*i/17;dot([3.37,y,.9],2.2,'#82e5df',.08+.85*c);}
+        }
+        function moleculeGlyph(formula,p,colour,magnify=1){
+          let model;try{model=structure(formula);}catch{dot(p,3.3,colour);return;}
+          const factor=.075*magnify,points=model.atoms.map(a=>{const v=a.p;return project([p[0]+v[0]*factor,p[1]+v[1]*factor,p[2]+v[2]*factor]);});
+          ctx.globalAlpha=.75;ctx.strokeStyle=colour;ctx.lineWidth=.8;
+          for(const b of model.bonds){ctx.beginPath();ctx.moveTo(points[b.a].x,points[b.a].y);ctx.lineTo(points[b.b].x,points[b.b].y);ctx.stroke();}
+          const ordered=model.atoms.map((a,i)=>({...points[i],symbol:a.symbol})).sort((a,b)=>a.depth-b.depth);
+          for(const a of ordered){ctx.fillStyle=atomColours[a.symbol]||colour;ctx.beginPath();ctx.arc(a.x,a.y,a.symbol==='H'?1.05*magnify:1.9*magnify,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
+        }
+        const traces=[];
+        if(s.stage==='deposit'){
+          const count=small?24:42;
+          for(let i=0;i<count;i++){
+            const phase=fract(i/count+t*(.065+.018*seed(i+4))),a=i*2.399,rad=.25+2.5*Math.sqrt(seed(i+8)),target=[Math.cos(a)*rad,.06,Math.sin(a)*rad],group=i%2;
+            let p,kind;
+            if(phase<.44){const u=phase/.44;p=batch?[lerp(-4,target[0],u),lerp(2.4,.28,u)+.12*Math.sin(u*9+i),lerp(seed(i+7)*3-1.5,target[2],u)]:[lerp((group?1:-1)*(1+seed(i)*1.4),target[0],u)+.10*Math.sin(u*8+i),lerp(3.22,.25,u),lerp(seed(i+7)*2.4-1.2,target[2],u)];kind=rf&&p[1]<2.45?'reactive':'feed';}
+            else if(phase<.67){const u=(phase-.44)/.23;p=[target[0]+.12*Math.sin(u*5+i),.08+.06*Math.sin(u*Math.PI),target[2]+.12*Math.cos(u*5+i)];kind='surface';}
+            else{const u=(phase-.67)/.33;p=[lerp(target[0],4.2,u),.13+1.1*Math.sin(u*Math.PI*.6),lerp(target[2],.5,u)];kind='product';}
+            traces.push({p,kind,group,i,phase,depth:project(p).depth});
+          }
+          traces.sort((a,b)=>a.depth-b.depth);
+          for(const tr of traces){const {p,kind,group,i}=tr;
+            const focus=(ui.stage==='surface'&&kind==='surface')||(ui.stage==='exhaust'&&kind==='product')||(ui.stage==='activation'&&kind==='reactive')||(ui.stage==='delivery'&&kind==='feed');
+            const colour=kind==='product'?'#73e1cd':kind==='reactive'?'#caadff':group?'#8dc4f2':'#efb78c';
+            if(kind==='surface'){dot(p,focus?4:2.6,'#d8b6ff',.7);if(focus){const a=project(p);ctx.strokeStyle='#c7a5ff';ctx.lineWidth=.8;ctx.globalAlpha=.4;ctx.beginPath();ctx.arc(a.x,a.y,9+3*Math.sin(t*3+i),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}}
+            else if(kind==='reactive'){dot(p,focus?3.7:2.8,colour,.9);if(i%9===0)label('R*',[p[0]+.13,p[1]+.13,p[2]],'#d9c4ff','left',10);}
+            else{
+              const terms=kind==='product'?s.spec.outputs:s.spec.inputs,term=terms.length?terms[(kind==='product'?i:group)%terms.length]:null;
+              if(ui.lens==='species'&&term)moleculeGlyph(term.formula,p,colour,focus?1.35:1);
+              else dot(p,kind==='product'?2.7:3.1,colour,.85);
+              if(i%11===0)label(term?sub(term.formula):(kind==='product'?'C/H/O':'feed'),[p[0],p[1]+.22,p[2]],colour,'center',small?9:10);
+            }
+            if(focus){const a=project(p);ctx.strokeStyle=colour;ctx.globalAlpha=.2;ctx.lineWidth=1;ctx.beginPath();ctx.arc(a.x,a.y,9,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;}
+          }
+        }
+        const source=s.process==='MOCVD'?'Separated TMGa / NH₃ feeds':batch?'Lateral feed · local wafer coordinates':'Reactant distribution plate';
+        label(source,[0,3.98,0],'#a4bfd7','center',small?9:11);
+        const surfaceLabel=s.stage==='unload'?'Wafer removed':s.process==='MOCVD'?'GaN template on sapphire':s.precursor==='wf6'?'Prepared nucleation surface':s.precursor==='sicl4'?'Crystalline silicon surface':'Wafer surface';
+        ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=(small?9:10)+'px system-ui,sans-serif';ctx.fillStyle='#b3cbdc';ctx.fillText(surfaceLabel+' · '+s.film,w/2,h-32);
+        ctx.fillStyle=ui.lens==='energy'?'#efba8e':'#76cfc9';ctx.fillText(!loaded?'No wafer in the displayed stage':ui.lens==='energy'?s.temperature+' °C wafer · qualitative thermal zones':'Local incorporation view · event paths and times scaled',w/2,h-16);
+        if(!small){label('OUTLET',[4.25,1.1,.6],'#68c7c2','center',9);path([[3.65,1.12,.6],[4.5,1.12,.6]],'#6cbbbd',1,.5);}
+        q('#cv-env-view-label').textContent=ui.lens==='energy'?'Qualitative activation zones':ui.lens==='transport'?'1D normalised concentration field':'Molecular feed · reactive tracers · products';
+        canvas.setAttribute('aria-label',`${s.process} local growth environment for ${s.feed}, ${s.temperature} degrees Celsius and ${s.pressure}. ${s.stage==='deposit'?'Continuous delivery, activation, surface encounters and exhaust are illustrated.':'Playback paused at '+s.stage+'.'} ${ui.lens==='transport'?'The selected 1D model gives surface concentration '+solveTransport(ui.da).cs.toFixed(4)+' of bulk.':'Spatial paths and event times are illustrative.'}`);
+      }
+      function schedule(){if(!frame&&!lab.hidden&&snapshot.running&&!document.hidden)frame=requestAnimationFrame(animate);}
+      function animate(now){frame=0;if(!lab.hidden&&!document.hidden){render(now);schedule();}}
+      function onState(event){snapshot=event.detail;received=performance.now();stateText();const key=[snapshot.precursor,snapshot.process,snapshot.stage,snapshot.temperature,snapshot.rfOn].join('|');if(key!==lastKey)conditions();if(!snapshot.running||!frame)render();if(!snapshot.running&&frame){cancelAnimationFrame(frame);frame=0;}schedule();}
+      root.addEventListener('cvd:state',onState);
+      root.querySelectorAll('[data-lab-view]').forEach(button=>button.addEventListener('click',()=>{
+        ui.view=button.dataset.labView;lab.hidden=ui.view!=='environment';q('#cv-hardware-view').hidden=ui.view!=='hardware';
+        root.querySelectorAll('[data-lab-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+        if(lab.hidden){cancelAnimationFrame(frame);frame=0;bridge.redraw();}else{render();schedule();}
+      }));
+      root.querySelectorAll('[data-env-stage]').forEach(button=>button.addEventListener('click',()=>{ui.stage=button.dataset.envStage;if(ui.stage==='transport')setLens('transport');inspector();render();}));
+      function setLens(lens){ui.lens=lens;root.querySelectorAll('[data-env-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.envLens===lens)));render();}
+      root.querySelectorAll('[data-env-lens]').forEach(button=>button.addEventListener('click',()=>setLens(button.dataset.envLens)));
+      function setDa(da){ui.da=da;q('#cv-env-da').value=Math.log10(da);modelText();render();}
+      root.querySelectorAll('[data-env-da]').forEach(b=>b.addEventListener('click',()=>{setDa(+b.dataset.envDa);setLens('transport');}));
+      q('#cv-env-da').addEventListener('input',event=>setDa(10**Number(event.target.value)));
+      q('#cv-env-play').addEventListener('click',()=>q('#cv-play').click());
+      q('#cv-env-speed').addEventListener('change',event=>bridge.setPlaybackOptions({speed:Number(event.target.value)}));
+      q('#cv-env-loop').addEventListener('change',event=>bridge.setPlaybackOptions({loop:event.target.checked}));
+      q('#cv-env-reset').addEventListener('click',()=>{ui.yaw=.3;ui.pitch=.56;ui.zoom=1;render();});
+      canvas.addEventListener('pointerdown',event=>{drag={x:event.clientX,y:event.clientY,yaw:ui.yaw,pitch:ui.pitch};canvas.setPointerCapture(event.pointerId);});
+      canvas.addEventListener('pointermove',event=>{if(drag){ui.yaw=drag.yaw+(event.clientX-drag.x)*.008;ui.pitch=clamp(drag.pitch+(event.clientY-drag.y)*.006,.15,1.1);render();}});
+      canvas.addEventListener('pointerup',()=>{drag=null;});canvas.addEventListener('pointercancel',()=>{drag=null;});
+      canvas.addEventListener('wheel',event=>{event.preventDefault();ui.zoom=clamp(ui.zoom*Math.exp(-event.deltaY*.001),.65,1.65);render();},{passive:false});
+      canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-'].includes(event.key))return;event.preventDefault();if(event.key==='ArrowLeft')ui.yaw-=.1;if(event.key==='ArrowRight')ui.yaw+=.1;if(event.key==='ArrowUp')ui.pitch=clamp(ui.pitch+.06,.15,1.1);if(event.key==='ArrowDown')ui.pitch=clamp(ui.pitch-.06,.15,1.1);if(event.key==='+'||event.key==='=')ui.zoom=clamp(ui.zoom*1.1,.65,1.65);if(event.key==='-')ui.zoom=clamp(ui.zoom/1.1,.65,1.65);render();});
+      document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else{render();schedule();}});
+      new ResizeObserver(()=>{if(!lab.hidden)render();}).observe(viewport);
+      window.CVDEnvironment=Object.freeze({solveTransport,snapshot:()=>({stage:ui.stage,lens:ui.lens,da:ui.da,view:ui.view,camera:{yaw:ui.yaw,pitch:ui.pitch,zoom:ui.zoom}})});
+      conditions();stateText();modelText();render();schedule();
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!snapshot.running)q('#cv-play').click();
+    })();
+  </script>
+
   <script>
     (() => {
       const steps=[...document.querySelectorAll('.cv-fab-node[data-fab-summary]')];
