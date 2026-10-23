@@ -2,6 +2,11 @@
 
 **By S L RICHRIS** · Interactive chemical vapour deposition simulator.
 
+**Course faculty:** [Dr. Anjana J. G.](https://www.amrita.edu/faculty/anjana-j-g/)
+
+Assistant Professor, Department of Electronics and Communication Engineering,
+School of Engineering, Amritapuri.
+
 This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
