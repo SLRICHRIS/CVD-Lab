@@ -46,7 +46,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `exhaust` | Exhaust removes unused feed and volatile products; shown loading and finishing stages are illustrative. | [9](#ref-9): Operation paragraph; [15](#ref-15): PECVD technology, final paragraph | Exact purge, cool and vent procedures are tool-specific and are not supplied here. |
 | `wafer` | Silicon is a substrate material used in the silicon-based examples in this lab. | [16](#ref-16): §3.1, opening paragraph: crystalline silicon as the basic chip material | The selection of substrate materials is a model choice. The separate GaN/sapphire claim identifies the MOCVD stack. |
 | `precursor` | A precursor supplies film-forming atoms; co-reactants participate in its conversion. | [9](#ref-9): Example reactions 1–5 |  |
-| `carrier` | Ar and He serve as carrier/diluent gases in the stated TiN and TEOS examples. | [7](#ref-7): Preferred primary-reaction conditions: Ar flow — supports: Ar in the stated primary TiN feed.; [8](#ref-8): Description, helium-flow discussion — supports: He in the stated TEOS PECVD feed. |  |
+| `carrier` | Ar and He serve as carrier/diluent gases in the stated TiN and TEOS examples. | [7](#ref-7): Preferred primary-reaction conditions: Ar flow; supports: Ar in the stated primary TiN feed.; [8](#ref-8): Description, helium-flow discussion; supports: He in the stated TEOS PECVD feed. |  |
 | `plasma` | A partially ionised gas contains free electrons, ions and neutral species. | [14](#ref-14): What is Plasma? |  |
 | `rf-power` | RF means radio frequency; the generator supplies energy for the discharge. | [25](#ref-25): Title and RF power discussion; [15](#ref-15): PECVD technology |  |
 | `poly-structure` | Polycrystalline silicon has differently oriented grains separated by grain boundaries. | [16](#ref-16): §3.1.1, polycrystalline-material definition |  |
@@ -59,14 +59,14 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `type-lp` | Thermal LPCVD operates below atmospheric pressure and often provides uniform films at higher wafer temperatures. | [3](#ref-3): PDF pp. 3–4, 7, 9 |  |
 | `type-pe` | The selected PECVD processes use reduced pressure and RF; plasma damage and film properties depend on conditions. | [1](#ref-1): PECVD oxide recipe table; [8](#ref-8): 300 mm wafer process conditions; [3](#ref-3): PDF p. 3, PECVD disadvantages; [13](#ref-13): PECVD feature list |  |
 | `recipe-definition` | A recipe combines chemicals, pressure, temperature and activation; a precursor may give different films. | [1](#ref-1): PECVD recipe table; [2](#ref-2): Equipment Details, service items; [9](#ref-9): Example reactions |  |
-| `chem-silane-PECVD` | SiH4 + 2N2O -> SiO2 + 2N2 + 2H2 | [9](#ref-9): Example reactions, silicon dioxide, second equation — supports: Net equation.; [11](#ref-11): Opening CCP precursor description — supports: Silane/N₂O oxide feed pairing only; Stanford uses He dilution, not the Toronto N₂ recipe. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
+| `chem-silane-PECVD` | SiH4 + 2N2O -> SiO2 + 2N2 + 2H2 | [9](#ref-9): Example reactions, silicon dioxide, second equation; supports: Net equation.; [11](#ref-11): Opening CCP precursor description; supports: Silane/N₂O oxide feed pairing only; Stanford uses He dilution, not the Toronto N₂ recipe. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
 | `chem-silane-LPCVD` | SiH4 -> Si + 2H2 | [9](#ref-9): Example reactions, polysilicon | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
-| `chem-silane-APCVD` | SiH4 + O2 -> SiO2 + 2H2 | [9](#ref-9): Example reactions, silicon dioxide, first equation — supports: Net equation.; [4](#ref-4): A200V gas feed — supports: Atmospheric SiH₄/O₂ oxide process pairing, not equation stoichiometry. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
-| `chem-dcs-LPCVD` | 3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2 | [21](#ref-21): p. 276, Eq. (1) — supports: Balanced net equation (1).; [12](#ref-12): Overview and Gases — supports: LPCVD nitride and DCS/NH₃ feed pairing only. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
+| `chem-silane-APCVD` | SiH4 + O2 -> SiO2 + 2H2 | [9](#ref-9): Example reactions, silicon dioxide, first equation; supports: Net equation.; [4](#ref-4): A200V gas feed; supports: Atmospheric SiH₄/O₂ oxide process pairing, not equation stoichiometry. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
+| `chem-dcs-LPCVD` | 3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2 | [21](#ref-21): p. 276, Eq. (1); supports: Balanced net equation (1).; [12](#ref-12): Overview and Gases; supports: LPCVD nitride and DCS/NH₃ feed pairing only. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
 | `chem-teos-LPCVD` | Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O | [10](#ref-10): PDF p. 13, slide 26, thermal TEOS equation | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
-| `chem-teos-PECVD` | TEOS and oxygen plasma form SiO2; the exhaust mixture is not specified stoichiometrically. | [8](#ref-8): Detailed Description, TEOS/O₂/He process and silicon-oxide applications; 300 mm process-conditions paragraph — supports: TEOS/O₂/He PECVD silicon oxide; no balanced exhaust equation is supplied. | Qualitative species map; no gas ratio or balanced plasma equation is claimed. |
-| `chem-sicl4-APCVD` | SiCl4 + 2H2 -> Si + 4HCl | [9](#ref-9): Example reactions, silicon, first equation — supports: Net reduction equation.; [5](#ref-5): Description, PDF pp. 2–3, background Tables I–II, SiCl₄/H₂ epitaxy rows — supports: Conventional atmospheric epitaxy and SiCl₄/H₂ pairing. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
-| `chem-wf6-LPCVD` | WF6 + 3H2 -> W + 6HF | [9](#ref-9): Example reactions, tungsten, H2 reduction — supports: Net reduction equation.; [6](#ref-6): Abstract, HF product and nucleation discussion — supports: Experimental W deposition from H₂/WF₆ with observed HF; not a full elementary mechanism. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
+| `chem-teos-PECVD` | TEOS and oxygen plasma form SiO2; the exhaust mixture is not specified stoichiometrically. | [8](#ref-8): Detailed Description, TEOS/O₂/He process and silicon-oxide applications; 300 mm process-conditions paragraph; supports: TEOS/O₂/He PECVD silicon oxide; no balanced exhaust equation is supplied. | Qualitative species map; no gas ratio or balanced plasma equation is claimed. |
+| `chem-sicl4-APCVD` | SiCl4 + 2H2 -> Si + 4HCl | [9](#ref-9): Example reactions, silicon, first equation; supports: Net reduction equation.; [5](#ref-5): Description, PDF pp. 2–3, background Tables I–II, SiCl₄/H₂ epitaxy rows; supports: Conventional atmospheric epitaxy and SiCl₄/H₂ pairing. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
+| `chem-wf6-LPCVD` | WF6 + 3H2 -> W + 6HF | [9](#ref-9): Example reactions, tungsten, H2 reduction; supports: Net reduction equation.; [6](#ref-6): Abstract, HF product and nucleation discussion; supports: Experimental W deposition from H₂/WF₆ with observed HF; not a full elementary mechanism. | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
 | `chem-ticl4-LPCVD` | 6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl | [7](#ref-7): Description, Background of the Invention, overall reaction | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
 | `conditions-silane-PECVD` | 300 °C; 1.0 Torr; 5% SiH4 in N2 + N2O; 30 W. | [1](#ref-1): PECVD oxide table, second SiO2 row | Source-specific conditions; no transferable or validated simulator recipe is implied. |
 | `conditions-silane-LPCVD` | NYCU nominal poly-Si example: 620 °C, 300 mTorr, SiH4. | [2](#ref-2): Service item (2), poly-Si entry | Source-specific conditions; no transferable or validated simulator recipe is implied. |
@@ -87,7 +87,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `role-tungsten` | Tungsten contact/via fill provides an electrical connection to wiring. | [18](#ref-18): Fig. 9.3(d); [22](#ref-22): Opening contact-metal description |  |
 | `role-tin` | TiN is used as a contact liner/diffusion barrier. | [18](#ref-18): Opening barrier/adhesion description; [22](#ref-22): Opening TiN liner-barrier discussion |  |
 | `part-reactor` | The schematic uses an enclosure, heated wafer support, gas feed and exhaust. | [9](#ref-9): Chamber description and Operation; [10](#ref-10): PDF p. 13, slide 25 |  |
-| `part-flow` | A gas mass flow controller measures and controls gas feed. | [23](#ref-23): Overview — supports: Gas metering and control; vapour generation is a separate function. |  |
+| `part-flow` | A gas mass flow controller measures and controls gas feed. | [23](#ref-23): Overview; supports: Gas metering and control; vapour generation is a separate function. |  |
 | `part-vapour` | A source vessel and heated line can supply TEOS vapour. | [26](#ref-26): 1150C datasheet, PDF pp. 2–3, source materials and System Integration: heated source and delivery lines |  |
 | `part-pressure` | A gauge senses pressure and a throttle valve varies conductance to the vacuum pump. | [24](#ref-24): PDF p. 1, pressure-control sequence |  |
 | `part-rf` | Generator and matching network deliver RF energy to a plasma. | [25](#ref-25): RF power and matching-network paragraphs |  |
@@ -102,8 +102,8 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `fab-doping` | Doping/implantation introduces impurities to alter semiconductor electrical properties. | [27](#ref-27): §1.2.5 |  |
 | `fab-metal` | Patterned metal contacts and interconnects connect devices. | [27](#ref-27): §1.2, device example; [18](#ref-18): Fig. 9.3, interconnect sequence |  |
 | `fab-repeat` | Deposition, lithography and etching repeat across device and interconnect layers. | [18](#ref-18): Fig. 9.3 and subsequent metal-level processing; [27](#ref-27): §1.2, Fig. 1.7 | The seven displayed nodes are an illustrative overview, not a universal chronological fabrication sequence. |
-| `mocvd-definition` | MOCVD uses metal-organic precursors for semiconductor epitaxy; the thermal GaN example uses TMGa and ammonia. MOVPE is an alternative name in epitaxial growth. | [28](#ref-28): MOCVD technology overview, opening explanation — supports: Thermal GaN growth and TMGa/NH₃ precursors.; [29](#ref-29): §§3.1.1–3.1.2, pp. 45–46 — supports: MOVPE terminology and GaN net-chemistry context. | This preset is thermal; MOCVD does not itself specify pressure or plasma activation. |
-| `mocvd-classification` | AP/LP describe pressure, PE describes plasma assistance and MO describes precursor chemistry. The selected MOCVD example is also a reduced-pressure thermal process. | [3](#ref-3): CVD methods comparison, pp. 2–3 — supports: Pressure and activation labels in the CVD comparison.; [28](#ref-28): MOCVD technology overview, thermal decomposition explanation — supports: Metal-organic precursor chemistry and thermal activation.; [30](#ref-30): §2 and Table 1, T2 pressure 200 Torr — supports: Reduced pressure (200 Torr) for this specific example. | Classification is a teaching synthesis; the four selector labels are not mutually exclusive physical categories. |
+| `mocvd-definition` | MOCVD uses metal-organic precursors for semiconductor epitaxy; the thermal GaN example uses TMGa and ammonia. MOVPE is an alternative name in epitaxial growth. | [28](#ref-28): MOCVD technology overview, opening explanation; supports: Thermal GaN growth and TMGa/NH₃ precursors.; [29](#ref-29): §§3.1.1–3.1.2, pp. 45–46; supports: MOVPE terminology and GaN net-chemistry context. | This preset is thermal; MOCVD does not itself specify pressure or plasma activation. |
+| `mocvd-classification` | AP/LP describe pressure, PE describes plasma assistance and MO describes precursor chemistry. The selected MOCVD example is also a reduced-pressure thermal process. | [3](#ref-3): CVD methods comparison, pp. 2–3; supports: Pressure and activation labels in the CVD comparison.; [28](#ref-28): MOCVD technology overview, thermal decomposition explanation; supports: Metal-organic precursor chemistry and thermal activation.; [30](#ref-30): §2 and Table 1, T2 pressure 200 Torr; supports: Reduced pressure (200 Torr) for this specific example. | Classification is a teaching synthesis; the four selector labels are not mutually exclusive physical categories. |
 | `chem-tmga-MOCVD` | Idealised GaN net growth: Ga(CH3)3 + NH3 → GaN + 3CH4; TMGa supplies Ga and ammonia supplies N. | [29](#ref-29): §3.1.2, p. 46, Eq. (3.1) and surrounding discussion | Atom-balanced summary only. Molecular geometry, bond paths and exhaustive methane selectivity are not established by this equation. |
 | `conditions-tmga-MOCVD` | Liang et al. sample T2 uses TMGa/NH3 at 1050 °C and 200 Torr for the final GaN layer. | [30](#ref-30): p. 2, §2, TMGa/NH₃ sources; p. 3, Table 1, row T2 | Fixed reported example. No continuous operating window, carrier selection or gas-flow ratio is inferred. |
 | `role-gan` | GaN is a compound semiconductor used in LED heterostructures. | [28](#ref-28): MOCVD technology overview, GaN and GaN/InGaN LED multilayer example | The illustrated GaN layer is not a complete LED or a prediction of light output. |
@@ -280,7 +280,7 @@ Verification (2026-10-23): [Patent text](https://patents.google.com/patent/US792
 <a id="ref-9"></a>
 ### [9] NPTEL, Introduction to Microelectronic Fabrication Processes
 
-[Module 3, Lecture 11: Chemical Vapor Deposition — continued](https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html) (n.d.). **University lecture.** Accessed 2026-10-23.
+[Module 3, Lecture 11: Chemical Vapor Deposition (continued)](https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html) (n.d.). **University lecture.** Accessed 2026-10-23.
 
 Locator: Operation paragraph; example reactions for silicon, silicon dioxide and tungsten.
 
@@ -481,7 +481,7 @@ Verification (2026-10-23): [Manufacturer product page](https://www.mks.com/p/117
 <a id="ref-24"></a>
 ### [24] MKS Instruments
 
-[Downstream Pressure Controllers and Valves — Product Selection Guide](https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf) (n.d.). **Manufacturer technical guide.** Accessed 2026-10-23.
+[Downstream Pressure Controllers and Valves: Product Selection Guide](https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf) (n.d.). **Manufacturer technical guide.** Accessed 2026-10-23.
 
 Locator: PDF p. 1, pressure-control explanation.
 
@@ -520,7 +520,7 @@ Verification (2026-10-23): [Manufacturer datasheet](https://api.p1.mks.com/mam/c
 <a id="ref-27"></a>
 ### [27] Vito Šimonka, TU Wien Institute for Microelectronics
 
-[Thermal Oxidation and Dopant Activation of Silicon Carbide — Device Fabrication](https://www.iue.tuwien.ac.at/phd/simonka/Device-Fabrication.html) (2018). **University dissertation.** Accessed 2026-10-23.
+[Thermal Oxidation and Dopant Activation of Silicon Carbide: Device Fabrication](https://www.iue.tuwien.ac.at/phd/simonka/Device-Fabrication.html) (2018). **University dissertation.** Accessed 2026-10-23.
 
 Locator: §1.2, Fig. 1.7 and §§1.2.1–1.2.5.
 
@@ -589,7 +589,7 @@ Verification (2026-10-23): [Manufacturer technology page](https://www.aixtron.co
 <a id="ref-32"></a>
 ### [32] Southern Methodist University, Department of Chemistry
 
-[General Chemistry, Chapter 24: Organic Chemistry — chemical bonding review](https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
+[General Chemistry, Chapter 24: Organic Chemistry: chemical bonding review](https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
 
 Locator: PDF p. 11, GCh24-11: Lewis structures of nitrous oxide (N₂O); PDF p. 9, resonance definition.
 
@@ -602,7 +602,7 @@ Verification (2026-10-23): [University-hosted teaching PDF and visual inspection
 <a id="ref-33"></a>
 ### [33] Simon Fraser University, School of Engineering Science
 
-[Chemical Vapour Deposition: CVD — ENSC 495 lecture notes](https://www.sfu.ca/~gchapman/e495/e495l10m.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
+[Chemical Vapour Deposition: CVD (ENSC 495 lecture notes)](https://www.sfu.ca/~gchapman/e495/e495l10m.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
 
 Locator: PDF pp. 5–10: process steps, boundary-layer transport and coupled surface-reaction flux.
 
@@ -761,7 +761,7 @@ Verification (2026-10-23): [Publisher-indexed abstract/experimental excerpts and
 <a id="ref-44"></a>
 ### [44] Paul Flowers, Klaus Theopold, Richard Langley and William R. Robinson
 
-[Chemistry 2e — Molecular Structure and Polarity; Hybrid Atomic Orbitals](https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity) (2019). **Authored university textbook / teaching reference.** Accessed 2026-10-23.
+[Chemistry 2e: Molecular Structure and Polarity; Hybrid Atomic Orbitals](https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity) (2019). **Authored university textbook / teaching reference.** Accessed 2026-10-23.
 
 Locator: §7.6, Figs. 7.16–7.19 (ideal shapes, methane and pyramidal NH₃); §8.2, opening water example and Figs. 8.10–8.17 (sp²/sp³, ethene and ethane).
 

@@ -89,7 +89,7 @@ def markdown(data: dict) -> str:
     escape = lambda text: str(text).replace("|", "\\|").replace("\n", " ")
     for key, claim in data["claims"].items():
         evidence = "; ".join(
-            f"[{item['source']}](#ref-{item['source']}): {item['locator']}" + (f" — supports: {item['supports']}" if item.get('supports') else "")
+            f"[{item['source']}](#ref-{item['source']}): {item['locator']}" + (f"; supports: {item['supports']}" if item.get('supports') else "")
             for item in claim["evidence"]
         )
         lines.append(f"| `{key}` | {escape(claim['statement'])} | {escape(evidence)} | {escape(claim.get('note', ''))} |")

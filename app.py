@@ -10,7 +10,7 @@ SITE = Path(__file__).resolve().parent / "site"
 
 def main() -> None:
     st.set_page_config(
-        page_title="CVD Lab — S L RICHRIS",
+        page_title="CVD Lab: S L RICHRIS",
         page_icon=SITE / "favicon.svg",
         layout="wide",
         initial_sidebar_state="collapsed",

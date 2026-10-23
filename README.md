@@ -2,6 +2,8 @@
 
 **By S L RICHRIS** · Interactive chemical vapour deposition simulator.
 
+Developed as part of **23ECE338: VLSI Fabrication Technology**.
+
 **Course faculty:** [Dr. Anjana J. G.](https://www.amrita.edu/faculty/anjana-j-g/)
 
 Assistant Professor, Department of Electronics and Communication Engineering,
