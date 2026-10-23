@@ -19,7 +19,7 @@ const {chromium}=require('playwright');
     await page.goto(pathToFileURL(path.resolve(__dirname,'../site/index.html')).href);
     await page.waitForFunction(()=>window.CVDLab&&window.CVDEvidence);
     const links=page.locator('.cv-contents a');
-    assert.equal(await links.count(),8);
+    assert.equal(await links.count(),9);
     await page.selectOption('#cv-precursor','tmga');
     for(let i=0;i<await links.count();i++) {
       const link=links.nth(i),hash=await link.getAttribute('href');
@@ -35,6 +35,45 @@ const {chromium}=require('playwright');
         assert.equal('#'+id,hash);
       }
     }
+    // Scope comes from the supplied Unit III excerpt, including topics this CVD
+    // lab does not teach. Those topics must remain required separate study.
+    const coverage=await page.locator('[data-syllabus-topic]').evaluateAll(rows=>Object.fromEntries(rows.map(row=>[row.dataset.syllabusTopic,row.dataset.coverage])));
+    assert.deepEqual(coverage,{
+      requirements:'context',pvd:'elsewhere','interconnect-failures':'elsewhere',multilevel:'elsewhere',
+      cvd:'core',polysilicon:'core',oxide:'core',nitride:'core',metal:'core',epitaxy:'core',pecvd:'core',
+      'wet-etch':'elsewhere','plasma-rie':'elsewhere',cmp:'elsewhere',integration:'context',characterization:'context'
+    });
+    assert.match(await page.locator('#cv-exam-priority-note').textContent(),/not a guarantee.*excluded from an exam/);
+    assert.match(await page.locator('.cv-study-required').textContent(),/Do not leave out required syllabus topics/);
+    assert.equal(await page.locator('[data-syllabus-source="user-provided-unit-iii-excerpt"]').count(),1);
+    const sourceText=await page.locator('.cv-syllabus-excerpt').textContent();
+    for(const topic of ['Evaporation and sputtering','Failure mechanisms in metal interconnect','multilevel metallization','polysilicon','silicon dioxide','silicon nitride','metal films','Epitaxial growth of silicon','PECVD','wet chemical etching','Plasma etching and RIE','Chemical Mechanical Polishing','Process integration and characterization'])assert.ok(sourceText.includes(topic),topic+' omitted from transcription');
+    await page.locator('.cv-contents a[href="#cv-syllabus-guide"]').click();
+    await page.emulateMedia({reducedMotion:'no-preference'});
+    await page.selectOption('#cv-precursor','silane');await page.locator('[data-process="PECVD"]').click();
+    await page.uncheck('#cv-rf-on');await page.selectOption('#cv-stage','unload');
+    for(const [id,precursor,process,view] of [
+      ['poly','silane','LPCVD','hardware'],['oxide','silane','PECVD','environment'],
+      ['nitride','dcs','LPCVD','hardware'],['metal','wf6','LPCVD','hardware'],
+      ['epi','sicl4','APCVD','hardware'],['pecvd','silane','PECVD','hardware']
+    ]) {
+      await page.locator(`#cv-study-${id} button`).click();
+      const state=await page.evaluate(()=>window.CVDLab.snapshot());
+      assert.equal(state.precursor,precursor);assert.equal(state.process,process);
+      assert.equal(state.stage,'deposit');assert.equal(state.running,false);assert.equal(state.rfOn,process==='PECVD');
+      assert.equal(await page.locator('[data-lab-view][aria-pressed="true"]').getAttribute('data-lab-view'),view);
+      assert.equal(await page.evaluate(()=>document.activeElement.id),view==='hardware'?'cv-hardware-view':'cv-environment');
+      assert.ok(await page.locator(`#cv-study-${id} [data-cite]>.cv-citations a`).count(),id+' is not cited');
+      await page.locator('.cv-contents a[href="#cv-syllabus-guide"]').click();
+    }
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await page.locator('.cv-study-link[href="#cv-syllabus-source"]').first().click();
+    assert.equal(await page.locator('#cv-syllabus-source').evaluate(el=>el.open),true);
+    await page.locator('.cv-study-link[href="#cv-epitaxial-definition"]').click();
+    assert.equal(await page.locator('#cv-cvd-guide').evaluate(el=>el.open),true);
+    assert.equal(await page.evaluate(()=>document.activeElement.id),'cv-epitaxial-definition');
+    assert.equal(await page.locator('#cv-feedback a[href="mailto:am.en.u4ece23142@am.students.amrita.edu"]').count(),1);
+    assert.equal(await page.locator('#cv-feedback a[href="https://github.com/SLRICHRIS/CVD-Lab/issues"]').count(),1);
     // A transport jump opens its disclosure and its containing environment view.
     await page.locator('.cv-contents a[href="#cv-transport-guide"]').click();
     assert.equal(await page.locator('#cv-transport-guide').evaluate(el=>el.open),true);
@@ -65,7 +104,7 @@ const {chromium}=require('playwright');
         return [
           ['#cv-env-explanation',18],['#cv-env-observe',18],['.cv-about-definition',18],
           ['.cv-learning-path p',17],['.cv-example-limit',18],['.cv-env-bounds',16],
-          ['.cv-detail-line',16],['.cv-ref-use',18],['.cv-part-description',18]
+          ['.cv-detail-line',16],['.cv-ref-use',18],['.cv-part-description',18],['.cv-study-intro',18]
         ].map(([selector,minSize])=>{
           const el=document.querySelector(selector),style=getComputedStyle(el);
           let bg=el;
@@ -96,6 +135,12 @@ const {chromium}=require('playwright');
       await page.locator('.cv-back-top').click();
       await page.evaluate(()=>window.scrollTo(0,0));
       await page.screenshot({path:path.join(output,`reading-${width}-${colorScheme}.png`)});
+      await page.locator('.cv-contents a[href="#cv-syllabus-guide"]').click();
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,width+' px expanded syllabus overflow');
+      for(const section of ['.cv-study-priorities','#cv-unit-topic-map','#cv-exam-extras']) {
+        await page.locator(section).screenshot({path:path.join(output,`syllabus-${section.replace(/[.#]/g,'')}-${width}-${colorScheme}.png`)});
+      }
+      await page.locator('#cv-syllabus-guide>summary').click();
     }
 
     if(process.argv.includes('--streamlit')) {
@@ -135,12 +180,24 @@ const {chromium}=require('playwright');
       const padding=await page.locator('[data-testid="stMainBlockContainer"]').evaluate(el=>getComputedStyle(el).paddingBottom);
       assert.ok(parseFloat(padding)<=24,'Host footer padding is excessive');
       // srcdoc may forbid history writes; every contents route must still work.
-      for(const hash of ['#cv-hardware-view','#cv-defects','#cv-transport-guide','#cv-net-example','#cv-learn','#cv-references','#cv-studio','#cv-environment']) {
+      for(const hash of ['#cv-syllabus-guide','#cv-hardware-view','#cv-defects','#cv-transport-guide','#cv-net-example','#cv-learn','#cv-references','#cv-studio','#cv-environment']) {
         await frame.locator(`.cv-contents a[href="${hash}"]`).click();await fitted('contents '+hash);
         assert.equal(await frame.locator(hash).isVisible(),true,hash+' is hidden in Streamlit');
         const box=await frame.locator(hash).boundingBox();
         assert.ok(box.y>=0&&box.y<1000,hash+' is outside the host viewport');
       }
+      await page.emulateMedia({reducedMotion:'no-preference'});
+      await frame.locator('#cv-study-nitride button').click();await fitted('syllabus recipe');
+      assert.equal(await frame.locator('#cv-precursor').inputValue(),'dcs');
+      assert.equal(await frame.locator('[data-lab-view="hardware"]').getAttribute('aria-pressed'),'true');
+      assert.equal(await frame.locator('#cvd-recipe-accuracy').evaluate(()=>window.CVDLab.snapshot().running),false);
+      await page.emulateMedia({reducedMotion:'reduce'});
+      await frame.locator('.cv-contents a[href="#cv-syllabus-guide"]').click();
+      const syllabusExpanded=await fitted('syllabus expanded');
+      await frame.locator('#cv-syllabus-guide>summary').click();
+      const syllabusCollapsed=await fitted('syllabus collapsed');
+      assert.ok(syllabusExpanded-syllabusCollapsed>2000,'Syllabus disclosure did not release its height');
+      await frame.locator('.cv-contents a[href="#cv-environment"]').click();
       await frame.locator('#cv-references').evaluate(el=>el.open=false);await fitted('close references');
       await frame.locator('[data-env-stage="transport"]').click();
       await frame.locator('#cv-env-explanation .cv-citations a[data-reference="33"]').click();await fitted('citation');
@@ -168,7 +225,7 @@ const {chromium}=require('playwright');
       console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop resizing, compact host padding and no unused footer tail.');
     }
     assert.deepEqual(errors,[],'Browser JavaScript errors');
-    console.log('Reading-flow checks passed: eight keyboard-accessible contents routes, hidden-view reveal, preserved recipe, history navigation, seven cited film roles, light/dark prose contrast and 320/390/768/1440 px layouts.');
+    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast and 320/390/768/1440 px layouts.');
   } finally {
     await browser.close();
     if(server)server.kill('SIGTERM');
