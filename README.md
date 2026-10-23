@@ -6,7 +6,7 @@ This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
 Scientific citation audit, reaction environment and defect atlas, 23 October 2026:
-90 claim records map to 43 sources,
+92 claim records map to 45 sources,
 with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations, fabrication descriptions and twelve
 scoped defect examples covering all ten presets.
@@ -94,7 +94,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 - Seven process groups in an illustrative VLSI fabrication overview, with
   cited hover, tap and keyboard-focus explanations.
 - CVD teaching guide, ten-recipe comparison, plasma / PECVD, MOCVD and silicon
-  definitions, and 43 numbered references with source types and exact locators.
+  definitions, and 45 numbered references with source types and exact locators.
 - Navy, cobalt, teal, and violet design accents, responsive layouts,
   keyboard controls, and S L RICHRIS copyright.
 
@@ -108,6 +108,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 | `site/index.html` | Complete HTML, CSS, and JavaScript simulator |
 | `site/favicon.svg` | Browser icon |
 | `docs/CLAIMS.md` | Generated claim-to-source register, qualifications and bibliography |
+| `docs/SCIENTIFIC_REVIEW.md` | Scientific proofreading findings, condition/equation checks and evidence limits |
 | `scripts/check_evidence.py` | Dependency-free evidence integrity check and register generator |
 | `tests/evidence-dom.cjs` | DOM checks for recipe switching, cited fields and reference navigation |
 | `tests/citations.cjs` | Browser regression checks across recipes and citation navigation |
@@ -142,19 +143,25 @@ link, page/table/section and the limits of its use. The evidence registry is
 embedded in `site/index.html`; citations work in the standalone file without
 fetching a separate JSON file. External source documents require internet access.
 
-The complete mapping is in [docs/CLAIMS.md](docs/CLAIMS.md). Research articles,
+The [full scientific review](docs/SCIENTIFIC_REVIEW.md) records the corrections,
+checked conditions/equations and remaining evidence gaps. The complete claim
+mapping is in [docs/CLAIMS.md](docs/CLAIMS.md). Research articles,
 facility recipes, university teaching material, manufacturer documentation and
 patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
-All 43 references were checked against their linked assertions. The register
+All 45 references were checked against their linked assertions. The register
 records the checked copy and verification method. Mixed citations identify the
 specific source's role: a facility gas list supports a feed pairing, while a
 separate equation source establishes net stoichiometry. The obsolete vapour
 delivery link was replaced with the official 1150C datasheet; bibliography dates
-and silicon/SiC, cleaning and TEOS citation scopes were corrected. This source
-review is separate from the automated citation-integrity checks.
+and silicon/SiC, cleaning and TEOS citation scopes were corrected. Reference 35
+now attributes the polysilicon study to N. C. C. Lu et al.,
+using publisher-deposited DOI metadata rather than an institution’s partial
+contributor list. The downstream-pressure-control PDF link was replaced with
+the checked official MKS copy. This source review is separate from the
+automated citation-integrity checks.
 
 The process labels describe different attributes: AP/LP concern pressure, PE
 concerns plasma activation, and MO concerns precursor chemistry. They can overlap.
@@ -180,6 +187,15 @@ growth. Vapour generation and gas-flow metering are described as separate functi
 The N₂O drawing now uses the cited N≡N⁺–O⁻ resonance contributor with formal
 charge labels; lone pairs are omitted. This representation does not assert
 measured atomic charges or a plasma reaction pathway.
+
+Molecular shapes now have their own citations and scope notes. Saturated carbon
+centres use ideal tetrahedral geometry; ethene is planar with ideal trigonal
+angles. Water and ammonia follow the specified teaching figures. The TMGa
+monomer uses an ideal planar C₃Ga skeleton with tetrahedral methyl groups; it
+is not an electron-diffraction reconstruction. Bond lengths, TEOS Si–O–C angles
+and ethoxy torsions remain drawing choices. Environment glyphs preserve
+multiple bonds and formal-charge signs. RF status follows the displayed
+process stage, and added film patches are absent at zero growth.
 
 The default **Reaction environment** view shows simultaneous delivery,
 activation, surface encounters and exhaust. **Reactor & atom balance** opens the
@@ -241,7 +257,11 @@ The evidence graph and generated register pass the dependency-free integrity
 check. DOM checks pass for all ten presets, 107 component states, stage/RF/
 temperature changes, nine rendered balanced equations, the formula-unit
 proportions of the film backdrops and animated films, citation targets,
-reference focus/return and seven fabrication explanations. Canvas is stubbed
+reference focus/return and seven fabrication explanations. Independent
+coordinate checks also cover all 17 molecular models, bond-order valences,
+formal-charge sums, tetrahedral/planar/pyramidal/bent/linear/octahedral angles
+and ethene coplanarity. Renderer observations check multiple bonds and the
+absence of added film at zero growth. Canvas is stubbed
 in the DOM checks, so those results do not establish visual correctness.
 
 The separate browser regression test also passes in headless Chromium, with
@@ -254,7 +274,8 @@ Environment checks cover all ten recipe contexts and fifty cited region
 explanations. The model is checked against Fick's law, the surface sink and
 constant flux through the profile over seven rate ratios. Browser checks also
 cover region/overlay controls, camera motion, source navigation, concentration
-controls, continuous playback past eight seconds, pause/resume, speed changes,
+controls, both PECVD recipes through all five RF stages and RF-off accessible
+descriptions, continuous playback past eight seconds, pause/resume, speed changes,
 single-pass completion, reduced motion and desktop/mobile light/dark rendering.
 
 Defect checks cover all ten shared recipe routes and twelve precisely cited

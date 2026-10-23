@@ -685,7 +685,7 @@
     </div>
     <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
   </section>
-  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; H₂ and N₂ leave through the exhaust.</p></div>
+  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; the idealised net equation assigns H₂ and N₂ as gas products.</p></div>
   <div class="cv-lab-views" role="group" aria-label="Laboratory scale">
     <button type="button" data-lab-view="environment" aria-pressed="true" aria-controls="cv-environment">Reaction environment</button>
     <button type="button" data-lab-view="hardware" aria-pressed="false" aria-controls="cv-hardware-view">Reactor &amp; atom balance</button>
@@ -702,10 +702,10 @@
         <div class="cv-env-legend" id="cv-env-legend" aria-label="Environment colour key"></div>
         <div class="cv-env-tools"><button id="cv-env-play" type="button">Play environment</button><label>Playback speed<select id="cv-env-speed" aria-label="Environment playback speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label><input id="cv-env-loop" type="checkbox" checked>Continuous environment</label><button id="cv-env-reset" type="button">Reset camera</button></div>
       </div>
-      <aside class="cv-env-inspector" aria-labelledby="cv-env-focus-title"><p class="cv-env-step" id="cv-env-step">01 / 05 · Delivery</p><h3 id="cv-env-focus-title">From source to chamber</h3><p id="cv-env-explanation"></p><div class="cv-env-observation"><span>Follow in the animation</span><p id="cv-env-observe"></p></div><div class="cv-env-evidence"><span>Evidence &amp; scope</span><p id="cv-env-evidence"></p></div><p class="cv-env-bounds">Species paths and dwell times are enlarged illustrations. The cited conditions are source values; this view does not solve reactor CFD or an elementary reaction network.</p></aside>
+      <aside class="cv-env-inspector" aria-labelledby="cv-env-focus-title"><p class="cv-env-step" id="cv-env-step">01 / 05 · Delivery</p><h3 id="cv-env-focus-title">From source to chamber</h3><p id="cv-env-explanation"></p><div class="cv-env-observation"><span>Follow in the animation</span><p id="cv-env-observe"></p></div><div class="cv-env-evidence"><span>Evidence &amp; scope</span><p id="cv-env-evidence"></p></div><p class="cv-env-bounds">Species paths and dwell times are enlarged illustrations. Glyph counts do not show feed or product ratios; carrier/diluent molecules are omitted. The cited conditions are source values; this view does not solve reactor CFD or an elementary reaction network.</p></aside>
     </div>
     <div class="cv-env-stages" role="group" aria-label="Inspect an environment process"><button type="button" data-env-stage="delivery" aria-pressed="true"><span>01</span>Delivery</button><button type="button" data-env-stage="activation" aria-pressed="false"><span>02</span>Activation</button><button type="button" data-env-stage="transport" aria-pressed="false"><span>03</span>Transport</button><button type="button" data-env-stage="surface" aria-pressed="false"><span>04</span>Surface</button><button type="button" data-env-stage="exhaust" aria-pressed="false"><span>05</span>Exhaust</button></div>
-    <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. D is diffusivity, δ is layer thickness, and kₛ and kₘ have units of velocity.</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
+    <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. The coordinate z points away from the wafer; J is a positive flux magnitude toward it (the signed z-flux is −D dC/dz). D has units length²/time, δ length, kₛ and kₘ length/time, C amount/volume and J amount/(area time).</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
   </section>
   <section id="cv-defects" class="cv-defect-lab" aria-labelledby="cv-defects-title" hidden>
     <header class="cv-defect-heading"><div><p class="cv-overline">Film quality · evidence atlas</p><h2 id="cv-defects-title">Different chemistry. Different defects.</h2><p class="cv-secondary">Inspect where a documented problem appears, how it was detected and how closely the study matches this recipe.</p></div><span class="cv-defect-count">10 recipes · 12 curated examples</span></header>
@@ -738,6 +738,7 @@
       <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Idealised net-reaction illustration">Schematic atom redistribution from reactants into an idealised film composition and gas products; atomic positions do not depict a crystal structure.</canvas></div>
       <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
       <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
+      <p id="cv-structure-note" data-cite="structure-molecules" class="cv-chemistry-note">Molecular shapes are idealised; bond lengths and conformations are drawing choices.</p>
       <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" data-cite="role-oxide" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" data-cite="role-oxide" class="cv-role-use">Provides electrical insulation between metal wiring layers.</span></div>
       <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
       <div class="cv-seek"><label for="cv-reaction-progress">Inspect the illustration</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Net-reaction animation position"></div>
@@ -841,14 +842,14 @@
       "url": "https://www.m-watanabe.co.jp/en/product/apcvd/",
       "locator": "A200V → BASIC INFORMATION; AMAX system descriptions",
       "scope": "A200V SiH₄/O₂ feed and 350–450 °C range; atmospheric single-wafer and conveyor reactor examples.",
-      "limits": "400 °C is a teaching selection within the A200V range. The drawing is not an A200V engineering model.",
+      "limits": "400 °C is a teaching selection within the A200V range. The A200V source describes a face-down wafer with delivery from below; the lab’s face-up local view is generic and does not reconstruct that tool. The separate conveyor cutaway is representative.",
       "alternate": "",
       "accessed": "2026-10-23",
       "verification": {
         "date": "2026-10-23",
         "method": "Manufacturer page",
         "url": "https://www.m-watanabe.co.jp/en/product/apcvd/",
-        "note": "A200V gas/temperature fields and the separate AMAX conveyor description checked. Geometry remains representative."
+        "note": "A200V gas/temperature fields, face-down configuration and the separate AMAX conveyor description checked. Geometry remains representative."
       }
     },
     {
@@ -900,14 +901,14 @@
       "url": "https://patents.google.com/patent/US5348587A/en",
       "locator": "Description → Background equation; preferred primary-reaction conditions; preferred embodiment",
       "scope": "TiN net equation; about 150 mTorr, TiCl₄/NH₃/Ar, wafer 450–650 °C, preferred wafer temperature about 650 °C.",
-      "limits": "The patent also heats downstream walls with a secondary plasma. That hardware is omitted from this thermal-growth schematic; this is not a complete reproduction.",
+      "limits": "The patent describes a face-down, lamp-heated wafer and a secondary wall-heating plasma. The lab’s generic face-up wafer and heated holder do not reconstruct that geometry; the secondary plasma is omitted. Only the primary thermal-growth example is illustrated.",
       "alternate": "",
       "accessed": "2026-10-23",
       "verification": {
         "date": "2026-10-23",
         "method": "Patent text",
         "url": "https://patents.google.com/patent/US5348587A/en",
-        "note": "Background net equation, preferred primary conditions and the separately heated liner checked."
+        "note": "Background net equation, preferred primary conditions, face-down/lamp-heated wafer and separately plasma-heated liner checked."
       }
     },
     {
@@ -938,7 +939,7 @@
       "url": "https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html",
       "locator": "Operation paragraph; example reactions for silicon, silicon dioxide and tungsten",
       "scope": "SiH₄ decomposition; SiH₄/O₂ and SiH₄/N₂O oxide net equations; SiCl₄/H₂ silicon; WF₆/H₂ tungsten; reactor functions.",
-      "limits": "Do not use the malformed nitride equation on this page. These selected overall equations do not predict all actual exhaust species.",
+      "limits": "Only the selected balanced net equations and broad reactor functions are used. Malformed nitride and Si-reduced tungsten equations are excluded. Cold-wall heating is not inferred from low pressure. Overall equations do not predict all actual exhaust species.",
       "alternate": "",
       "accessed": "2026-10-23",
       "verification": {
@@ -1223,7 +1224,7 @@
       "title": "Downstream Pressure Controllers and Valves — Product Selection Guide",
       "year": "n.d.",
       "kind": "Manufacturer technical guide",
-      "url": "https://www.mksinst.com/docs/UR/dwnstrem.pdf",
+      "url": "https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf",
       "locator": "PDF p. 1, pressure-control explanation",
       "scope": "Pressure measurement, controller feedback and exhaust-throttle conductance to the vacuum pump.",
       "limits": "The gauge, valve and pump functions are explained; no closed-loop pressure solver is implemented.",
@@ -1232,8 +1233,8 @@
       "verification": {
         "date": "2026-10-23",
         "method": "Manufacturer technical PDF",
-        "url": "https://www.mksinst.com/docs/UR/dwnstrem.pdf",
-        "note": "PDF p. 1 explicitly describes gauge, feedback controller, throttle conductance and vacuum pump."
+        "url": "https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf#page=1",
+        "note": "The old mksinst.com/docs/UR link returned 404. The official mks.com copy was checked: PDF p. 1 describes gauge, feedback controller, throttle conductance and vacuum pump."
       }
     },
     {
@@ -1426,20 +1427,20 @@
     },
     {
       "id": 35,
-      "author": "T. T. Sheng, C. C. Shih and C. S. Wang",
-      "title": "The Effect of film thickness on the electrical properties of LPCVD polysilicon films",
+      "author": "N. C. C. Lu et al.",
+      "title": "The effect of film thickness on the electrical properties of LPCVD polysilicon films",
       "year": "1984",
       "kind": "Peer-reviewed experimental research article",
       "url": "https://doi.org/10.1149/1.2115724",
-      "locator": "Journal of The Electrochemical Society: IBM Research author-hosted abstract, paragraphs 1–2",
+      "locator": "Journal of The Electrochemical Society 131, first page 897 (1984); IBM Research article abstract, paragraphs 1–2; DOI 10.1149/1.2115724",
       "scope": "Carrier trapping associated with grain-size variation explains thickness-dependent resistivity in boron-doped LPCVD polysilicon.",
       "limits": "Abstract-level verification. Boron-doped films differ from the lab’s undoped schematic; the checked abstract does not establish the precursor or exact growth recipe.",
       "accessed": "2026-10-23",
       "verification": {
         "date": "2026-10-23",
-        "method": "Author institution abstract and DOI link",
+        "method": "Author-institution abstract and publisher-deposited DOI metadata",
         "url": "https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films",
-        "note": "Film type, doping, trapping interpretation and electrical measurements checked; no full-text figure attribution."
+        "note": "The IBM page lists its affiliated contributors, not the complete author list. Publisher-deposited DOI metadata identifies lead author N. C. C. Lu; attribution corrected to Lu et al. Film type, doping, trapping interpretation and electrical measurements checked at abstract level; no full-text figure attribution."
       },
       "alternate": "https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films",
       "alternate_label": "IBM Research article abstract"
@@ -1599,6 +1600,44 @@
       },
       "alternate": "https://labs.materials.ucsb.edu/speck/james/publications/1540",
       "alternate_label": "UCSB author-group article record"
+    },
+    {
+      "id": 44,
+      "author": "Paul Flowers, Klaus Theopold, Richard Langley and William R. Robinson",
+      "title": "Chemistry 2e — Molecular Structure and Polarity; Hybrid Atomic Orbitals",
+      "year": "2019",
+      "kind": "Authored university textbook / teaching reference",
+      "url": "https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity",
+      "locator": "§7.6, Figs. 7.16–7.19 (ideal shapes, methane and pyramidal NH₃); §8.2, opening water example and Figs. 8.10–8.17 (sp²/sp³, ethene and ethane)",
+      "scope": "Ideal tetrahedral, trigonal planar, linear and octahedral shapes; bent water (104.5°) and pyramidal ammonia (106.8° in Fig. 7.18); planar ethene and tetrahedral saturated carbon.",
+      "limits": "Teaching geometry only. Applying ideal tetrahedral carbon to ethoxy and methyl groups does not identify a measured TEOS conformer or TMGa bond angles. Bond lengths, TEOS Si–O–C angle, torsions and the drawing projection are implementation choices; no artwork is reused.",
+      "accessed": "2026-10-23",
+      "alternate": "https://openstax.org/books/chemistry-2e/pages/8-2-hybrid-atomic-orbitals",
+      "alternate_label": "§8.2 Hybrid Atomic Orbitals",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Authored textbook sections and labelled figures",
+        "url": "https://openstax.org/books/chemistry-2e/pages/8-2-hybrid-atomic-orbitals",
+        "note": "§7.6 ideal-shape figures and NH₃ figure label, §8.2 water angle and sp²/sp³ examples checked. Authorship and 2019 publication date checked in the OpenStax preface. Only general geometric constraints inform the original code drawings."
+      }
+    },
+    {
+      "id": 45,
+      "author": "B. Beagley and D. G. Schmidling",
+      "title": "An electron-diffraction study of the molecular structure of trimethylgallium",
+      "year": "1974",
+      "kind": "Peer-reviewed molecular-structure research article",
+      "url": "https://doi.org/10.1016/0022-2860(74)80093-1",
+      "locator": "Journal of Molecular Structure 21, 437–444: publisher-indexed abstract and introductory extract (vapour electron diffraction)",
+      "scope": "Vapour-phase TMGa molecular structure, near-planar C₃Ga skeleton, methyl geometry and internal rotation.",
+      "limits": "Publisher-indexed abstract/extract and DOI metadata were available; the full article was not retrieved. The lab uses an ideal planar monomer and tetrahedral methyl groups, not the fitted experimental coordinates, bond lengths or methyl torsions. No TMGa/NH₃ adduct or reaction intermediate is inferred.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher-indexed abstract/extract and publisher-deposited DOI metadata",
+        "url": "https://www.sciencedirect.com/science/article/pii/0022286074800931",
+        "note": "Publisher abstract reports electron-diffraction bond geometry and methyl rotation; indexed introductory text identifies consistency with a planar skeleton. Authors, title, year, volume, pages and DOI checked against DOI metadata. Ideal drawing coordinates are not asserted to reproduce those measurements."
+      }
     }
   ],
   "claims": {
@@ -2033,7 +2072,7 @@
           "locator": "A200V BASIC INFORMATION"
         }
       ],
-      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+      "note": "400 °C is a source-range teaching selection. The A200V has a face-down wafer and feed from below; the generic face-up drawing is not that tool."
     },
     "conditions-dcs-LPCVD": {
       "statement": "NYCU nitride example: 800 °C, 120 mTorr, SiH2Cl2 and NH3.",
@@ -2493,7 +2532,7 @@
           "locator": "PDF p. 8, diffusive flux; p. 9, final coupled flux equation; p. 10, limiting cases"
         }
       ],
-      "note": "The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe."
+      "note": "The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe. The coordinate z points away from the wafer; J is a positive flux magnitude toward the wafer. D has units length²/time, delta length, ks and km length/time, C amount/volume and J amount/(area time)."
     },
     "environment-surface": {
       "statement": "CVD involves delivery to the surface, film formation and desorption/transport of gaseous products.",
@@ -2557,7 +2596,7 @@
           "locator": "IBM Research article abstract, paragraphs 1–2"
         }
       ],
-      "note": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern."
+      "note": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. Boundary-state markers illustrate the trapping model; the electrical measurements do not locate individual atomic traps."
     },
     "defect-thermal-particles": {
       "statement": "Gas-borne particles were measured during thermal SiH₄/O₂ deposition at low pressure.",
@@ -2648,13 +2687,33 @@
         }
       ],
       "note": "No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population."
+    },
+    "structure-molecules": {
+      "statement": "Ideal molecular geometries distinguish tetrahedral saturated carbon from trigonal planar ethene, and pyramidal ammonia from bent water.",
+      "evidence": [
+        {
+          "source": 44,
+          "locator": "§7.6, Figs. 7.16–7.19; §8.2, water example and Figs. 8.10–8.17"
+        }
+      ],
+      "note": "Original teaching drawings use these geometric constraints. Bond lengths have arbitrary drawing units. TEOS Si–O–C angles and ethoxy torsions are chosen for readability; no unique measured conformer is asserted. Lone pairs are omitted."
+    },
+    "structure-tmga": {
+      "statement": "Vapour electron diffraction supports a near-planar C₃Ga skeleton for molecular trimethylgallium.",
+      "evidence": [
+        {
+          "source": 45,
+          "locator": "Publisher-indexed abstract and introductory extract; Journal of Molecular Structure 21, 437–444"
+        }
+      ],
+      "note": "The lab draws an ideal planar monomer with tetrahedral methyl groups. Exact experimental bond angles, lengths, conformations, vapour aggregation and ammonia adduct chemistry are not reconstructed."
     }
   },
   "model_choices": [
-    "Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.",
+    "Camera geometry, colours, atom sizes, bond lengths and trajectories are schematic. Molecular connectivity and ideal local bond angles are constrained teaching geometries with citations; TEOS Si–O–C angles and torsions are drawing choices. Film atoms do not depict a crystal structure or bonding network.",
     "In the atom-balance view, film formulae and atom counts represent idealised compositions; impurities, defects and deviations from stoichiometry are omitted. The film backdrop repeats complete formula units to preserve the displayed elemental proportions. The separate defect atlas illustrates selected literature examples.",
     "Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.",
-    "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.",
+    "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients. The remaining C/H/O atom pool is bookkeeping only, not identified atomic exhaust species.",
     "Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.",
     "Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.",
     "Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.",
@@ -2755,7 +2814,7 @@
         "studied": "Boron-doped LPCVD films; the checked abstract does not specify the precursor.",
         "driver": "Film thickness and doping were varied. The reported transport model links grain-size variation to trapping.",
         "diagnostic": "Electrical resistivity characterisation and trapping-model comparison.",
-        "scope": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern.",
+        "scope": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. Boundary-state markers illustrate the trapping model; the electrical measurements do not locate individual atomic traps.",
         "claim": "defect-poly-traps"
       },
       {
@@ -3024,7 +3083,7 @@
           APCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂',chamber:'single',effect:'Silane reacts with oxygen to form an insulating SiO₂ film on the heated wafer.',equation:'SiH4 + O2 -> SiO2 + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
         }},
         dcs:{name:'Dichlorosilane',formula:'SiH₂Cl₂',phase:'gas',presets:{
-          LPCVD:{film:'Si₃N₄',material:'nitride',property:'Insulator / barrier',byproducts:'HCl + H₂',chamber:'batch',effect:'The stoichiometric net reaction forms silicon nitride, HCl and H₂.',equation:'3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2',source:'https://doi.org/10.1016/0040-6090(90)90456-N'}
+          LPCVD:{film:'Si₃N₄',material:'nitride',property:'Insulator / barrier',byproducts:'HCl + H₂',chamber:'batch',effect:'The idealised net equation assigns silicon nitride to the solid and HCl and H₂ to the gas products.',equation:'3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2',source:'https://doi.org/10.1016/0040-6090(90)90456-N'}
         }},
         teos:{name:'TEOS',formula:'Si(OC₂H₅)₄',phase:'liquid',presets:{
           LPCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'C₂H₄ + H₂O (idealised)',chamber:'batch',effect:'Liquid TEOS is vaporised before delivery. Thermal decomposition forms SiO₂ and organic gaseous by-products.',equation:'Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O',source:'https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf'},
@@ -3049,7 +3108,7 @@
         silane:{
           PECVD:{temp:300,tempRange:[300,300],pressure:'1.0 Torr (1000 mTorr)',feed:'5% SiH₄ in N₂ + N₂O',rfReference:'30 W',setupName:'University of Toronto · SiO₂ PECVD example',setupSource:'https://www.ece.utoronto.ca/equipmentcapabilities/',deliveryNote:'Nitrogen diluent is omitted from the net reaction.'},
           LPCVD:{temp:620,tempRange:[575,650],pressure:'0.300 Torr (300 mTorr)',feed:'SiH₄',setupName:'NYCU · polysilicon LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'620 °C is the NYCU example. The wider lecture range is for teaching, not a qualified NYCU operating window.'},
-          APCVD:{temp:400,tempRange:[350,450],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiH₄ + O₂',chamber:'single',effect:'Silane reacts with oxygen to deposit an insulating SiO₂ film on the heated wafer.',setupName:'M. Watanabe · SiH₄/O₂ APCVD operating window',setupSource:'https://www.m-watanabe.co.jp/en/product/apcvd/',deliveryNote:'400 °C is a teaching selection within the A200V manufacturer range; chamber geometry is illustrative.'}
+          APCVD:{temp:400,tempRange:[350,450],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiH₄ + O₂',chamber:'single',effect:'Silane reacts with oxygen to deposit an insulating SiO₂ film on the heated wafer.',setupName:'M. Watanabe · SiH₄/O₂ APCVD operating window',setupSource:'https://www.m-watanabe.co.jp/en/product/apcvd/',deliveryNote:'400 °C is selected within the A200V range. Its face-down wafer and feed from below are not reconstructed by the generic face-up drawing.'}
         },
         dcs:{LPCVD:{temp:800,tempRange:[700,800],pressure:'0.120 Torr (120 mTorr)',feed:'SiH₂Cl₂ + NH₃',setupName:'NYCU · silicon nitride LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'800 °C is the NYCU example; the independent lecture range is not a qualified operating window for that tool.'}},
         teos:{
@@ -3058,7 +3117,7 @@
         },
         sicl4:{APCVD:{temp:1200,tempRange:[1150,1250],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiCl₄ vapour in H₂',setupName:'EP0114876B1 · background Tables I–II, SiCl₄/H₂',setupSource:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf',deliveryNote:'1200 °C is the conventional SiCl₄/H₂ example in background Table II; the slider uses the Table I range. These are not results of the patent’s bromosilane invention.'}},
         wf6:{LPCVD:{temp:400,tempRange:[400,500],pressure:'0.500 Torr (500 mTorr)',feed:'WF₆ + H₂',setupName:'NIST · low-pressure W CVD study',setupSource:'https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor',deliveryNote:'400 °C selects the low endpoint of the study’s 400–500 °C range. The drawing illustrates bulk growth, not initial nucleation.'}},
-        ticl4:{LPCVD:{temp:650,tempRange:[450,650],pressure:'0.150 Torr (150 mTorr)',feed:'TiCl₄ vapour + NH₃ + Ar',setupName:'US5348587A · thermal TiN growth example',setupSource:'https://patents.google.com/patent/US5348587A/en',deliveryNote:'650 °C is the preferred wafer example. The patent’s secondary wall-heating plasma is omitted; the primary growth reaction is illustrated thermally.'}},
+        ticl4:{LPCVD:{temp:650,tempRange:[450,650],pressure:'0.150 Torr (150 mTorr)',feed:'TiCl₄ vapour + NH₃ + Ar',setupName:'US5348587A · thermal TiN growth example',setupSource:'https://patents.google.com/patent/US5348587A/en',deliveryNote:'650 °C is the preferred wafer example. The patent’s face-down, lamp-heated wafer and secondary wall plasma are not reconstructed; the drawing illustrates primary thermal growth with a generic heated holder.'}},
         tmga:{MOCVD:{temp:1050,tempRange:[1050,1050],pressure:'200 Torr (reduced pressure)',feed:'TMGa vapour + NH₃',setupName:'Liang et al. (2018) · sample T2, Table 1',setupSource:'https://doi.org/10.3390/nano8090744',deliveryNote:'Final GaN layer on a prepared buffer/template on sapphire. One published setpoint is shown; no operating window or gas-flow ratio is inferred. The separate showerhead drawing is representative, not a reconstruction of the study’s reactor.'}}
       };
       // Source provenance is separate for nominal conditions, broader lecture
@@ -3123,6 +3182,13 @@
         const link=(a,b,order=1)=>bonds.push({a,b,order});
         const norm=p=>{const length=Math.hypot(...p);return p.map(v=>v/length);};
         const scale=(p,s)=>p.map(v=>v*s),plus=(a,b)=>a.map((v,i)=>v+b[i]);
+        const dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+        // Three ideal tetrahedral neighbours opposite an existing bond.
+        // Distances, torsions and the TEOS Si–O–C angle are drawing choices.
+        function tetraAway(back,preferredSide,torsion=0){
+          const axis=scale(norm(back),-1),u=norm(plus(preferredSide,scale(axis,-dot(preferredSide,axis)))),v=cross(axis,u);
+          return [0,1,2].map(j=>{const angle=torsion+j*2*Math.PI/3;return plus(scale(axis,1/3),scale(plus(scale(u,Math.cos(angle)),scale(v,Math.sin(angle))),Math.sqrt(8/9)));});
+        }
         const tetra=[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]].map(norm);
         if(['SiH4','SiH2Cl2','SiCl4','TiCl4','CH4'].includes(formula)){
           const core=formula==='CH4'?'C':formula.startsWith('Ti')?'Ti':'Si',ligands=['SiH4','CH4'].includes(formula)?['H','H','H','H']:formula==='SiH2Cl2'?['H','H','Cl','Cl']:['Cl','Cl','Cl','Cl'];
@@ -3133,29 +3199,32 @@
           for(let i=0;i<3;i++){
             const angle=i*2*Math.PI/3-Math.PI/2,direction=[Math.cos(angle),Math.sin(angle),0],side=[-direction[1],direction[0],0],cp=scale(direction,1.45),carbon=add('C',cp);
             link(0,carbon);
-            for(let j=0;j<3;j++){const a=j*2*Math.PI/3;link(carbon,add('H',plus(cp,plus(scale(direction,.45),plus(scale(side,.65*Math.cos(a)),[0,0,.65*Math.sin(a)])))));}
+            tetraAway(scale(direction,-1),side).forEach(p=>link(carbon,add('H',plus(cp,scale(p,.8)))));
           }
         }else if(formula==='WF6'){
           add('W',[0,0,0]);[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].forEach(p=>link(0,add('F',scale(p,1.3))));
         }else if(formula==='Si(OC2H5)4'){
           add('Si',[0,0,0]);
-          tetra.forEach((direction,i)=>{
-            const side=norm([-direction[1],direction[0],.12]),normal=norm([direction[1]*side[2]-direction[2]*side[1],direction[2]*side[0]-direction[0]*side[2],direction[0]*side[1]-direction[1]*side[0]]);
-            const oxygen=add('O',scale(direction,1.1)),c1p=plus(scale(direction,2.0),scale(side,.26)),c2p=plus(scale(direction,2.85),scale(side,.72));
+          tetra.forEach(direction=>{
+            const side=norm([-direction[1],direction[0],0]),normal=cross(direction,side),op=scale(direction,1.1);
+            const oc=plus(scale(direction,Math.cos(50*Math.PI/180)),scale(side,Math.sin(50*Math.PI/180))),c1p=plus(op,oc);
+            const neighbours=tetraAway(scale(oc,-1),direction),c2p=plus(c1p,scale(neighbours[0],1.1));
+            const oxygen=add('O',op);
             const c1=add('C',c1p),c2=add('C',c2p);link(0,oxygen);link(oxygen,c1);link(c1,c2);
-            for(const sign of [-1,1])link(c1,add('H',plus(c1p,plus(scale(normal,sign*.55),scale(side,-.35)))));
-            [plus(scale(direction,.5),scale(side,.35)),plus(scale(normal,.52),scale(side,-.38)),plus(scale(normal,-.52),scale(side,-.38))].forEach(p=>link(c2,add('H',plus(c2p,p))));
+            neighbours.slice(1).forEach(p=>link(c1,add('H',plus(c1p,scale(p,.72)))));
+            tetraAway(scale(neighbours[0],-1),normal,Math.PI/3).forEach(p=>link(c2,add('H',plus(c2p,scale(p,.72)))));
           });
         }else if(formula==='NH3'){
-          add('N',[0,-.25,0]);[[1,.18,.57],[-1,.18,.57],[0,.18,-1.15]].forEach(p=>link(0,add('H',p)));
+          const h=Math.sqrt((Math.cos(106.8*Math.PI/180)+.5)/1.5),r=Math.sqrt(1-h*h);
+          add('N',[0,0,0]);for(let i=0;i<3;i++){const angle=i*2*Math.PI/3;link(0,add('H',scale([r*Math.cos(angle),h,r*Math.sin(angle)],1.1)));}
         }else if(formula==='N2O'){
           // One Lewis resonance contributor, N≡N⁺–O⁻ (source [32]).
           add('N',[-1.15,0,0]);add('N',[0,0,0]);add('O',[1.15,0,0]);atoms[1].formalCharge=1;atoms[2].formalCharge=-1;link(0,1,3);link(1,2);
         }else if(formula==='H2O'){
-          add('O',[0,.15,0]);add('H',[-.8,.73,0]);add('H',[.8,.73,0]);link(0,1);link(0,2);
+          const half=104.5*Math.PI/360;add('O',[0,0,0]);for(const sign of [-1,1])link(0,add('H',[sign*Math.sin(half),Math.cos(half),0]));
         }else if(formula==='C2H4'){
           add('C',[-.58,0,0]);add('C',[.58,0,0]);link(0,1,2);
-          for(const [core,x] of [[0,-1.17],[1,1.17]])for(const y of [-.7,.7])link(core,add('H',[x,y,0]));
+          for(const [core,sign] of [[0,-1],[1,1]])for(const y of [-1,1])link(core,add('H',plus(atoms[core].p,[sign*.5,y*Math.sqrt(3)/2,0])));
         }else if(['H2','N2','O2','HCl','HF'].includes(formula)){
           const elements=formulaAtoms(formula);add(elements[0],[-.58,0,0]);add(elements[1],[.58,0,0]);link(0,1,formula==='N2'?3:formula==='O2'?2:1);
         }else throw new Error('No molecular structure for '+formula);
@@ -3210,10 +3279,10 @@
         const remaining=Object.values(pool).flat();
         if(spec.qualitative){
           // The plasma exhaust is a mixture. Keep all C/H/O atoms in a labelled
-          // unbonded fragment pool instead of inventing exact product molecules.
+          // unassigned atom inventory instead of inventing product species.
           const columns=Math.min(8,Math.ceil(Math.sqrt(remaining.length*1.8))),spacing=Math.min(27,(w-38)/columns),rows=Math.ceil(remaining.length/columns);
           remaining.forEach((id,i)=>{atoms[id].target={symbol:atoms[id].symbol,x:w/2+((i%columns)-(columns-1)/2)*spacing,y:64+Math.floor(i/columns)*32,z:0,r:atoms[id].symbol==='H'?4.2:8,solid:false};});
-          output.labels=[{text:'Illustrative C / H / O fragments',x:w/2,y:31}];
+          output.labels=[{text:'Unassigned C / H / O atom inventory',x:w/2,y:31}];
         }else if(remaining.length)throw new Error('Unassigned atoms in '+recipe().equation);
         reactionScene={spec,atoms,inputBonds:input.bonds,productBonds,inputLabels:input.labels,productLabels:output.labels,solidIds,w,h};
         return reactionScene;
@@ -3242,6 +3311,7 @@
         }
         const structureNote=state.precursor==='silane'&&state.process==='PECVD'?' N₂O is drawn as one resonance contributor, N≡N⁺–O⁻ (formal charges shown; lone pairs omitted).':'';
         root.querySelector('#cv-chemistry-note').textContent=(spec.qualitative?'Qualitative species map: molecule counts are illustrative, not gas ratios or a balanced equation.':'Idealised net stoichiometry, not an elementary pathway or a complete exhaust analysis.')+structureNote;
+        root.querySelector('#cv-structure-note').textContent=(state.precursor==='tmga'?'TMGa: idealised planar C₃Ga monomer and tetrahedral methyl groups; the vapour electron-diffraction study supports the molecular-shape comparison, not these exact coordinates. ':state.precursor==='teos'?'TEOS: idealised tetrahedral SiO₄ and carbon centres; Si–O–C angles and ethoxy torsions are drawing choices, not a measured conformer. ':'Idealised molecular shapes: tetrahedral, planar, pyramidal, bent or octahedral as appropriate. ')+'Bond lengths use arbitrary drawing units; lone pairs are omitted. No collision geometry or transition state is inferred.';
         const legend=root.querySelector('#cv-atoms');legend.replaceChildren();
         const elements=[...new Set(spec.inputs.flatMap(species=>formulaAtoms(species.formula)))];
         for(const element of elements){const span=document.createElement('span'),dot=document.createElement('i');dot.style.setProperty('--atom-color','var(--cv-atom-'+element+')');dot.setAttribute('aria-hidden','true');span.appendChild(dot);const label=document.createElement('span');label.textContent=element+' '+atomNames[element];span.appendChild(label);legend.appendChild(span);}
@@ -3286,10 +3356,10 @@
         const inputOpacity=1-smooth((g-.27)/.21),productOpacity=smooth((g-.56)/.19);
         c.globalAlpha=inputOpacity;scene.inputLabels.forEach(label=>c.fillText(label.text,label.x,label.y));
         c.globalAlpha=productOpacity;scene.productLabels.forEach(label=>c.fillText(label.text,label.x,label.y));c.globalAlpha=1;
-        c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'C/H/O fragments · mixture varies':'Gaseous by-products',8,13);
+        c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'Atom inventory · species unassigned':'Net gas products',8,13);
         c.textAlign='center';c.fillText(recipe().film+' · composition schematic',w/2,h-5);
         const phase=reactionPhase(),phaseElement=root.querySelector('#cv-reaction-phase');if(phaseElement.textContent!==phase)phaseElement.textContent=phase;
-        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'Qualitative TEOS PECVD species map. Displayed molecule counts and C, H and O fragments are illustrative, not reaction coefficients or measured exhaust species.':recipe().equation+'. Within this idealised atom-balance illustration, every displayed reactant atom is assigned to the film or gas products.')+(state.precursor==='silane'&&state.process==='PECVD'?' N2O is drawn as a resonance contributor with a positive formal charge on the central N and a negative formal charge on O; these labels fade with the input structure.':'')+' Film atoms show idealised composition, not a crystal structure.');
+        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'Qualitative TEOS PECVD species map. Displayed molecule counts are illustrative. Unassigned C, H and O atoms are bookkeeping, not identified exhaust species or reaction coefficients.':recipe().equation+'. Within this idealised atom-balance illustration, every displayed reactant atom is assigned to the film or gas products.')+(state.precursor==='silane'&&state.process==='PECVD'?' N2O is drawn as a resonance contributor with a positive formal charge on the central N and a negative formal charge on O; these labels fade with the input structure.':'')+' Film atoms show idealised composition, not a crystal structure.');
       }
       function drawChamberMolecules(project){
         if(state.stage!=='deposit')return;
@@ -3302,7 +3372,7 @@
         const atomScale=state.precursor==='teos'?.085:state.precursor==='tmga'?.1:.14;
         const points=model.atoms.map(atom=>{const p=project([center[0]+atom.q[0]*atomScale,center[1]-atom.q[1]*atomScale,center[2]+atom.q[2]*atomScale]);return {...p,symbol:atom.symbol,r:atom.symbol==='H'?2:3.6};});
         const opacity=1-smooth((state.growth-.24)/.34);
-        for(const bond of model.bonds)molecularBond(ctx,points[bond.a],points[bond.b],1,opacity*.75);
+        for(const bond of model.bonds)molecularBond(ctx,points[bond.a],points[bond.b],bond.order,opacity*.75);
         points.forEach(atom=>ball(ctx,atom,opacity,false));
         const surface=project(parts().find(part=>part.id==='film')?.p||[0,2.25,0]);
         ctx.strokeStyle=rgb('gas');ctx.lineWidth=1;ctx.globalAlpha=.55;ctx.beginPath();ctx.arc(surface.x,surface.y,7,0,Math.PI*2);ctx.moveTo(surface.x,surface.y+7);ctx.lineTo(width/2,height-31);ctx.lineTo(width/2,height-22);ctx.stroke();ctx.globalAlpha=1;
@@ -3549,6 +3619,7 @@
           ['#cv-rf-reference',ev.conditions],['#cv-reference-note',ev.conditions+' '+ev.window],
           ['#cv-effect',ev.chemistry+' '+ev.role+(p==='MOCVD'?' gan-substrate':'')],['#cv-equation',ev.chemistry],
           ['#cv-chemistry-note',ev.chemistry+(state.precursor==='silane'&&p==='PECVD'?' structure-n2o':'')],['#cv-role-label',ev.role],['#cv-role-use',ev.role],
+          ['#cv-structure-note','structure-molecules'+(state.precursor==='tmga'?' structure-tmga':'')],
           ['#cv-stage-detail',ev.chemistry+' exhaust'],
           ['#cv-machine',p==='MOCVD'?'part-mocvd':r.chamber==='batch'?'part-furnace':r.chamber==='conveyor'?'part-conveyor':p==='PECVD'?'part-showerhead':'part-reactor']
         ])cite(root.querySelector(selector),claims);
@@ -3574,7 +3645,7 @@
       root.querySelector('#cv-temperature').addEventListener('input',event=>{state.temperature=clamp(Number(event.target.value),...recipe().tempRange);event.target.value=state.temperature;text();draw();});
       root.querySelector('#cv-rf-on').addEventListener('change',event=>{if(state.process!=='PECVD')return;state.rfOn=event.target.checked;if(!state.rfOn)stop();update();if(state.rfOn&&state.growth<1&&state.stage==='deposit')start(false);});
       window.CVDLab={
-        snapshot:()=>{const r=recipe();return {process:state.process,precursor:state.precursor,precursorName:precursors[state.precursor].name,formula:precursors[state.precursor].formula,stage:state.stage,temperature:state.temperature,temperatureClaims:state.temperature===r.temp?r.evidence.conditions:r.evidence.window,rfOn:state.rfOn,running:state.running,elapsed:state.elapsed,speed:state.speed,loop:state.loop,growth:state.growth,film:r.film,material:r.material,feed:r.feed,pressure:r.pressure,rfReference:r.rfReference||'',byproducts:r.byproducts,chamber:r.chamber,evidence:r.evidence,spec:reactionSpec()};},
+        snapshot:()=>{const r=recipe();return {process:state.process,precursor:state.precursor,precursorName:precursors[state.precursor].name,formula:precursors[state.precursor].formula,stage:state.stage,temperature:state.temperature,temperatureClaims:state.temperature===r.temp?r.evidence.conditions:r.evidence.window,rfOn:state.rfOn,running:state.running,elapsed:state.elapsed,speed:state.speed,loop:state.loop,growth:state.growth,film:r.film,material:r.material,feed:r.feed,pressure:r.pressure,rfReference:r.rfReference||'',deliveryNote:r.deliveryNote,byproducts:r.byproducts,chamber:r.chamber,evidence:r.evidence,spec:reactionSpec()};},
         molecularStructure:formula=>molecule(formula),
         redraw:()=>draw(),
         setPlaybackOptions:options=>{if([.25,.5,1,2].includes(options.speed))state.speed=options.speed;if(typeof options.loop==='boolean')state.loop=options.loop;growthText();}
@@ -3616,12 +3687,12 @@
         root.querySelectorAll('[data-env-da]').forEach(b=>b.setAttribute('aria-pressed',String(Math.abs(Math.log10(+b.dataset.envDa)-Math.log10(ui.da))<.001)));
       }
       function selectedContext(){
-        const s=snapshot,pe=s.process==='PECVD',mo=s.process==='MOCVD',ev=s.evidence;
+        const s=snapshot,pe=s.process==='PECVD',mo=s.process==='MOCVD',ev=s.evidence,plasmaActive=pe&&s.rfOn&&s.stage==='deposit';
         const delivery=mo?{
           title:'Separated feeds, shared growth zone',text:'Carrier gas transports TMGa vapour from a temperature-controlled bubbler. Ammonia is delivered separately; the showerhead keeps the streams apart until injection.',claims:'part-mo-delivery part-mocvd',
           observe:'Follow the amber TMGa stream and blue NH₃ stream through separate inlet openings.',scope:'Delivery follows Zhu’s bubbler description; the separated, cooled showerhead follows AIXTRON. The local drawing does not reconstruct Liang et al.’s reactor.'
-        }:{title:'From source to chamber',text:s.feed+'. '+(['teos','sicl4','ticl4'].includes(s.precursor)?'The precursor enters as vapour; gas-flow metering is distinct from vapour generation.':'Flow controllers meter the gas feed before it reaches the deposition region.'),claims:ev.conditions+' part-flow'+(s.precursor==='teos'?' delivery':''),observe:s.chamber==='batch'?'Follow the lateral feed across the local wafer surface. Use the hardware view to inspect the full furnace and wafer boat.':'Follow the molecular feed from the distribution plate toward the heated wafer.',scope:'Feed composition and nominal conditions come from the selected recipe source. Molecular counts in this view do not specify a feed ratio.'};
-        const activation=pe?{title:s.rfOn?'RF creates reactive species':'RF off in this demonstration',text:s.rfOn?'Collisions in the RF discharge create reactive and energetic species. These interact with the heated substrate to form the film.':'The plasma overlay is off and playback is paused. Residual thermal chemistry is outside this demonstration.',claims:'environment-plasma',observe:'Violet R* markers represent a generic reactive population; small bright e⁻ markers identify the electron illustration.',scope:'CORIAL describes RF activation, collision-created species and surface interactions. Radical identities, electron energies and plasma densities are not calculated.'}:{title:mo?'Heat drives GaN growth':'Thermal activation at the wafer',text:mo?'TMGa and ammonia supply Ga and N for thermal growth on the prepared GaN template. The substrate sits on a heated, rotating susceptor.':'The selected wafer temperature provides thermal activation for the cited chemistry. Temperature is a wafer setpoint, not a calculated temperature of every gas molecule.',claims:mo?'mocvd-definition part-mocvd':('thermal-activation '+ev.conditions),observe:mo?'Watch the susceptor’s orientation marks rotate below the local growth zone. Its angular speed is time-scaled.':'Switch to Energy to distinguish the heated surface from the surrounding gas region.',scope:mo?'AIXTRON supports the heated rotating susceptor; the GaN reference setpoint is cited above. Rotation speed and spatial temperature fields are illustrative.':s.precursor==='ticl4'?'This view illustrates the primary thermal TiN reaction. The cited patent also uses a secondary wall-heating plasma, which is omitted here.':'The recipe source supports the wafer condition. Warm colour indicates a qualitative thermal zone; no temperature-field solver is implied.'};
+        }:{title:'From source to chamber',text:s.feed+'. '+(['teos','sicl4','ticl4'].includes(s.precursor)?'The precursor enters as vapour; gas-flow metering is distinct from vapour generation.':'Flow controllers meter the gas feed before it reaches the deposition region.'),claims:ev.conditions+' part-flow'+(s.precursor==='teos'?' delivery':''),observe:s.chamber==='batch'?'Follow the lateral feed across the local wafer surface. Use the hardware view to inspect the full furnace and wafer boat.':'Follow the molecular feed from the distribution plate toward the heated wafer.',scope:'Feed composition and nominal conditions come from the selected recipe source. '+s.deliveryNote+' Molecular counts do not specify a feed ratio.'};
+        const activation=pe?{title:plasmaActive?'RF creates reactive species':'RF off in this demonstration',text:plasmaActive?'Collisions in the RF discharge create reactive and energetic species. These interact with the heated substrate to form the film.':'RF is shown only during deposition when enabled. The current stage is '+s.stage+'; the plasma overlay is off. Residual thermal chemistry is outside this demonstration.',claims:'environment-plasma',observe:'Violet R* markers represent a generic reactive population; small bright e⁻ markers identify the electron illustration.',scope:'CORIAL describes RF activation, collision-created species and surface interactions. Radical identities, electron energies and plasma densities are not calculated. The RF stage sequence is a teaching control, not a sourced operating procedure.'}:{title:mo?'Heat drives GaN growth':'Thermal activation at the wafer',text:mo?'TMGa and ammonia supply Ga and N for thermal growth on the prepared GaN template. The substrate sits on a heated, rotating susceptor.':'The selected wafer temperature provides thermal activation for the cited chemistry. Temperature is a wafer setpoint, not a calculated temperature of every gas molecule.',claims:mo?'mocvd-definition part-mocvd':('thermal-activation '+ev.conditions),observe:mo?'Watch the susceptor’s orientation marks rotate below the local growth zone. Its angular speed is time-scaled.':'Switch to Energy to distinguish the heated surface from the surrounding gas region.',scope:mo?'AIXTRON supports the heated rotating susceptor; the GaN reference setpoint is cited above. Rotation speed and spatial temperature fields are illustrative.':s.precursor==='ticl4'?'This view illustrates the primary thermal TiN reaction. The cited patent also uses a secondary wall-heating plasma, which is omitted here.':'The recipe source supports the wafer condition. Warm colour indicates a qualitative thermal zone; no temperature-field solver is implied.'};
         const surface={title:mo?'Incorporation on a prepared template':'Surface encounter → solid film',text:mo?'The final GaN layer grows over an existing buffer/template on sapphire. Initial nucleation and buffer growth are outside this selected final-layer example.':'Species arriving at the wafer participate in film-forming surface chemistry. The highlighted patches represent incorporation into the selected solid film.',claims:mo?'gan-substrate chem-tmga-MOCVD':('environment-surface '+ev.chemistry),observe:'Follow the transient markers at the wafer and the highlighted film patches. The separate atom-balance view tracks atoms through the idealised net equation.',scope:s.precursor==='wf6'?'A prepared nucleation surface is assumed for bulk W growth. Initial substrate-reduction products are not represented.':'Patch size, coverage, atomic positions and dwell times are illustrative. The net equation does not identify every intermediate or elementary event.'};
         const exhaust=s.precursor==='wf6'?{title:'A product linked to measurement',text:'Gougousi et al. measured HF formation and depletion of H₂ and WF₆ during tungsten deposition. Their integrated HF signal was related to deposited W.',claims:'environment-w-exhaust',observe:'Follow the HF product glyphs leaving the local surface region alongside the residual gas stream.',scope:'This is a qualitative illustration of measured species, not a synthetic mass spectrum or a reproduction of the paper’s sensor response.'}:{title:'Volatile products leave the surface',text:'Gas products and unused feed leave through the exhaust. '+(s.spec.qualitative?'For TEOS PECVD, the C/H/O-containing exhaust is represented as a variable mixture.':'The selected net equation represents products as '+s.byproducts+'.'),claims:'exhaust '+ev.chemistry,observe:'Watch product markers move away from the wafer and turn toward the outlet. Delivery and removal happen continuously in this view.',scope:'Product labels follow the idealised net chemistry. They do not assert a complete measured exhaust composition, selectivity or transient reaction sequence.'};
         return {delivery,activation,transport:{title:'Supply competes with consumption',text:'Precursor transport to the surface and surface consumption act as two resistances. Use the rate-ratio control below to explore how the balance changes.',claims:'environment-transport',observe:'Select Transport to see the calculated normalised concentration at different heights. The bulk boundary is C/Cᵦ = 1; the surface value responds to Dₐ.',scope:'The 1D, steady, first-order model follows SFU’s coupled-flux relation. Its rate ratio is an exploratory input, independent of the selected source conditions.'},surface,exhaust}[ui.stage];
@@ -3641,7 +3712,7 @@
         cite(q('#cv-env-temp'),s.temperatureClaims||ev.conditions);
         q('#cv-env-pressure').textContent=s.pressure;cite(q('#cv-env-pressure'),ev.conditions);
         q('#cv-env-feed').textContent=s.feed;cite(q('#cv-env-feed'),ev.conditions);
-        q('#cv-env-activation').textContent=s.process==='PECVD'?(s.rfOn?'RF · '+s.rfReference:'RF off'):'Thermal';cite(q('#cv-env-activation'),s.process==='PECVD'?ev.conditions+' environment-plasma':s.process==='MOCVD'?'mocvd-definition':'thermal-activation');
+        q('#cv-env-activation').textContent=s.process==='PECVD'?(s.rfOn&&s.stage==='deposit'?'RF · '+s.rfReference:'RF off · '+s.stage):'Thermal';cite(q('#cv-env-activation'),s.process==='PECVD'?ev.conditions+' environment-plasma':s.process==='MOCVD'?'mocvd-definition':'thermal-activation');
         const key=[s.precursor,s.process,s.stage,s.temperature,s.rfOn].join('|');
         if(key!==lastKey){lastKey=key;inspector();legend();}
       }
@@ -3678,7 +3749,7 @@
           const radial=ctx.createRadialGradient(w*.5,cy,8,w*.5,cy,scale*3);radial.addColorStop(0,'rgba(82,170,184,.18)');radial.addColorStop(1,'rgba(35,76,102,.05)');poly(face,radial);
           for(const r of [1,2,2.86])ring(.01,r,'#6692aa',.6,.17);
           const film=filmColours[s.material]||'#7dcfc6',rotation=s.process==='MOCVD'?t*.22:0;
-          for(let i=0;i<14;i++){const a=i*2.399+rotation,rad=.4+2.05*Math.sqrt(seed(i+4)),x=Math.cos(a)*rad,z=Math.sin(a)*rad,size=.13+.14*seed(i+91),pulse=.4+.35*Math.sin(t*1.5+i);poly([[x-size,.025,z-size],[x+size,.025,z-size],[x+size,.025,z+size],[x-size,.025,z+size]],film,film,.16+.18*s.growth+(ui.stage==='surface'?pulse*.25:0));}
+          for(let i=0;s.growth>0&&i<14;i++){const a=i*2.399+rotation,rad=.4+2.05*Math.sqrt(seed(i+4)),x=Math.cos(a)*rad,z=Math.sin(a)*rad,size=.13+.14*seed(i+91),pulse=.4+.35*Math.sin(t*1.5+i);poly([[x-size,.025,z-size],[x+size,.025,z-size],[x+size,.025,z+size],[x-size,.025,z+size]],film,film,s.growth*(.34+(ui.stage==='surface'?pulse*.25:0)));}
           if(s.process==='MOCVD')for(let i=0;i<6;i++){const a=i*Math.PI/3+rotation;path([[2.72*Math.cos(a),-.06,2.72*Math.sin(a)],[2.95*Math.cos(a),-.06,2.95*Math.sin(a)]],'#77ddd3',2,.8);}
         }
         const batch=s.chamber==='batch',pe=s.process==='PECVD',rf=pe&&s.rfOn&&s.stage==='deposit';
@@ -3700,20 +3771,20 @@
         }
         if(ui.lens==='transport'||ui.stage==='transport'){
           const m=solveTransport(ui.da),x=-2.9,z=1.9;
-          for(let i=0;i<12;i++){const y=i/12*.92,concentration=m.cs+(1-m.cs)*i/12;poly([[-2.9,y,-2.1],[2.9,y,-2.1],[2.9,y,2.1],[-2.9,y,2.1]],'#68d0d4',null,.012+concentration*.018);}
+          for(let i=0;i<12;i++){const y=i/12*.95,concentration=m.cs+(1-m.cs)*i/12;poly([[-2.9,y,-2.1],[2.9,y,-2.1],[2.9,y,2.1],[-2.9,y,2.1]],'#68d0d4',null,.012+concentration*.018);}
           path([[x,0,z],[x,.95,z]],'#87d7df',1,.75);
           for(let i=0;i<=4;i++){const y=i/4*.95;path([[x-.08,y,z],[x+.08,y,z]],'#91cbd9',1,.6);}
-          if(!small){label('Cᵦ / Cᵦ = 1',[3.55,1.18,.9],'#a2dce4','left',10);label('Cₛ / Cᵦ = '+m.cs.toFixed(2),[3.55,-.13,.9],'#9ce4dd','left',10);}
+          if(!small){label('Cᵦ / Cᵦ = 1',[3.55,.95,.9],'#a2dce4','left',10);label('Cₛ / Cᵦ = '+m.cs.toFixed(2),[3.55,-.13,.9],'#9ce4dd','left',10);}
           // Colours visualise the analytic profile; these are not CFD cells.
-          for(let i=0;i<18;i++){const y=i/17*.92,c=m.cs+(1-m.cs)*i/17;dot([3.37,y,.9],2.2,'#82e5df',.08+.85*c);}
+          for(let i=0;i<18;i++){const y=i/17*.95,c=m.cs+(1-m.cs)*i/17;dot([3.37,y,.9],2.2,'#82e5df',.08+.85*c);}
         }
         function moleculeGlyph(formula,p,colour,magnify=1){
           let model;try{model=structure(formula);}catch{dot(p,3.3,colour);return;}
           const factor=.075*magnify,points=model.atoms.map(a=>{const v=a.p;return project([p[0]+v[0]*factor,p[1]+v[1]*factor,p[2]+v[2]*factor]);});
           ctx.globalAlpha=.75;ctx.strokeStyle=colour;ctx.lineWidth=.8;
-          for(const b of model.bonds){ctx.beginPath();ctx.moveTo(points[b.a].x,points[b.a].y);ctx.lineTo(points[b.b].x,points[b.b].y);ctx.stroke();}
-          const ordered=model.atoms.map((a,i)=>({...points[i],symbol:a.symbol})).sort((a,b)=>a.depth-b.depth);
-          for(const a of ordered){ctx.fillStyle=atomColours[a.symbol]||colour;ctx.beginPath();ctx.arc(a.x,a.y,a.symbol==='H'?1.05*magnify:1.9*magnify,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
+          for(const b of model.bonds){const a=points[b.a],end=points[b.b],length=Math.hypot(end.x-a.x,end.y-a.y)||1,nx=-(end.y-a.y)/length,ny=(end.x-a.x)/length;for(let line=0;line<b.order;line++){const offset=(line-(b.order-1)/2)*1.5*magnify;ctx.beginPath();ctx.moveTo(a.x+nx*offset,a.y+ny*offset);ctx.lineTo(end.x+nx*offset,end.y+ny*offset);ctx.stroke();}}
+          const ordered=model.atoms.map((a,i)=>({...points[i],symbol:a.symbol,formalCharge:a.formalCharge||0})).sort((a,b)=>a.depth-b.depth);
+          for(const a of ordered){ctx.fillStyle=atomColours[a.symbol]||colour;ctx.beginPath();ctx.arc(a.x,a.y,a.symbol==='H'?1.05*magnify:1.9*magnify,0,Math.PI*2);ctx.fill();if(a.formalCharge){ctx.font=(6*magnify)+'px system-ui,sans-serif';ctx.textAlign='center';ctx.fillStyle='#e7f1ff';ctx.fillText(a.formalCharge>0?'+':'−',a.x+3*magnify,a.y-3*magnify);}}ctx.globalAlpha=1;
         }
         const traces=[];
         if(s.stage==='deposit'){
@@ -3748,7 +3819,7 @@
         ctx.fillStyle=ui.lens==='energy'?'#efba8e':'#76cfc9';ctx.fillText(!loaded?'No wafer in the displayed stage':ui.lens==='energy'?s.temperature+' °C wafer · qualitative thermal zones':'Local incorporation view · event paths and times scaled',w/2,h-16);
         if(!small){label('OUTLET',[4.25,1.1,.6],'#68c7c2','center',9);path([[3.65,1.12,.6],[4.5,1.12,.6]],'#6cbbbd',1,.5);}
         q('#cv-env-view-label').textContent=ui.lens==='energy'?'Qualitative activation zones':ui.lens==='transport'?'1D normalised concentration field':'Molecular feed · reactive tracers · products';
-        canvas.setAttribute('aria-label',`${s.process} local growth environment for ${s.feed}, ${s.temperature} degrees Celsius and ${s.pressure}. ${s.stage==='deposit'?'Continuous delivery, activation, surface encounters and exhaust are illustrated.':'Playback paused at '+s.stage+'.'} ${ui.lens==='transport'?'The selected 1D model gives surface concentration '+solveTransport(ui.da).cs.toFixed(4)+' of bulk.':'Spatial paths and event times are illustrative.'}`);
+        canvas.setAttribute('aria-label',`${s.process} local growth environment for ${s.feed}, ${s.temperature} degrees Celsius and ${s.pressure}. ${s.stage!=='deposit'?'Playback paused at '+s.stage+'.':pe&&!s.rfOn?'RF is off; playback is paused. Residual thermal chemistry is not modelled.':'Continuous delivery, activation, surface encounters and exhaust are illustrated.'} ${ui.lens==='transport'?'The selected 1D model gives surface concentration '+solveTransport(ui.da).cs.toFixed(4)+' of bulk.':'Spatial paths and event times are illustrative.'}`);
       }
       function schedule(){if(!frame&&!lab.hidden&&snapshot.running&&!document.hidden)frame=requestAnimationFrame(animate);}
       function animate(now){frame=0;if(!lab.hidden&&!document.hidden){render(now);schedule();}}

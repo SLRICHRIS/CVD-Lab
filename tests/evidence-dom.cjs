@@ -16,10 +16,17 @@ const html = fs.readFileSync(path.resolve(__dirname, '../site/index.html'), 'utf
 const drawHook = 'function drawReaction(){';
 const atomHook = 'function ball(context,atom,opacity=1,labels=true){';
 const bondHook = 'function molecularBond(context,a,b,order=1,opacity=1){';
-for (const hook of [drawHook, atomHook, bondHook]) assert.equal(html.split(hook).length, 2, `Missing or ambiguous renderer observation point: ${hook}`);
+const glyphHook = 'function moleculeGlyph(formula,p,colour,magnify=1){';
+const glyphEnd = '        }\n        const traces=[];';
+const envHook = 'function render(now=performance.now()){';
+for (const hook of [drawHook, atomHook, bondHook, glyphHook, glyphEnd, envHook]) assert.equal(html.split(hook).length, 2, `Missing or ambiguous renderer observation point: ${hook}`);
 const observedHtml = html.replace(drawHook, drawHook + 'window.__reactionAtoms=[];window.__reactionBonds=[];')
   .replace(atomHook, atomHook + 'if(context===reactionCtx)window.__reactionAtoms.push({symbol:atom.symbol,solid:Boolean(atom.target?.solid),opacity,formalCharge:atom.formalCharge||0});')
-  .replace(bondHook, bondHook + 'if(context===reactionCtx&&opacity>0)window.__reactionBonds.push({a:a.symbol,b:b.symbol,order});');
+  .replace(bondHook, bondHook + 'if(context===reactionCtx&&opacity>0)window.__reactionBonds.push({a:a.symbol,b:b.symbol,order});')
+  .replace(envHook, envHook + 'window.__environmentGlyphs=[];window.__filmPatches=[];')
+  .replace(glyphHook, glyphHook + 'const savedStroke=ctx.stroke;let strokes=0;ctx.stroke=()=>{strokes++;savedStroke.call(ctx);};')
+  .replace(glyphEnd, '          ctx.stroke=savedStroke;window.__environmentGlyphs.push({formula,strokes});\n' + glyphEnd)
+  .replace("if(fill){ctx.fillStyle=fill;ctx.fill();}", "if(fill){if(fill===filmColours[s.material])window.__filmPatches.push(alpha);ctx.fillStyle=fill;ctx.fill();}");
 const dom = new JSDOM(observedHtml, {
   url: 'https://cvd-lab.test/', runScripts: 'dangerously', virtualConsole,
   beforeParse(window) {
@@ -81,6 +88,47 @@ function renderedCounts(atoms) {
   for (const atom of atoms) result[atom.symbol] = (result[atom.symbol] || 0) + 1;
   return result;
 }
+// Inspect the production 3D coordinates independently of its construction
+// helper. Correct counts alone cannot detect flattened or distorted centres.
+const subtract=(a,b)=>a.map((v,i)=>v-b[i]);
+function angle(a,centre,b){
+  const u=subtract(a,centre),v=subtract(b,centre);
+  return Math.acos(Math.max(-1,Math.min(1,u.reduce((s,x,i)=>s+x*v[i],0)/Math.hypot(...u)/Math.hypot(...v))))*180/Math.PI;
+}
+function close(actual,expected,label){assert.ok(Math.abs(actual-expected)<1e-7,`${label}: ${actual} versus ${expected}`);}
+const formulas=['SiH4','SiH2Cl2','SiCl4','TiCl4','CH4','Ga(CH3)3','WF6','Si(OC2H5)4','NH3','N2O','H2O','C2H4','H2','N2','O2','HCl','HF'];
+for(const formula of formulas){
+  const model=dom.window.CVDLab.molecularStructure(formula);
+  assert.deepEqual(renderedCounts(model.atoms),atoms(formula),`${formula}: formula inventory`);
+  assert.equal(model.atoms.reduce((sum,a)=>sum+(a.formalCharge||0),0),0,`${formula}: net formal charge`);
+  const adjacent=model.atoms.map(()=>[]),valence=model.atoms.map(()=>0);
+  for(const bond of model.bonds){
+    assert.ok(Number.isInteger(bond.order)&&bond.order>=1&&bond.order<=3);
+    adjacent[bond.a].push(bond.b);adjacent[bond.b].push(bond.a);valence[bond.a]+=bond.order;valence[bond.b]+=bond.order;
+    close(Math.hypot(...subtract(model.atoms[bond.a].p,model.atoms[bond.b].p)),Math.hypot(...subtract(model.atoms[bond.a].q,model.atoms[bond.b].q)),`${formula}: rotation preserves bond length`);
+  }
+  model.atoms.forEach((a,i)=>{
+    const target={H:1,C:4,Si:4,Ti:4,Ga:3,W:6,F:1,Cl:1,N:a.formalCharge===1?4:3,O:a.formalCharge===-1?1:2}[a.symbol];
+    assert.equal(valence[i],target,`${formula}: ${a.symbol} bond-order sum`);
+    const n=adjacent[i];let ideal;
+    if(n.length===4&&['Si','Ti','C'].includes(a.symbol))ideal=Math.acos(-1/3)*180/Math.PI;
+    if(formula==='C2H4'&&a.symbol==='C'||formula==='Ga(CH3)3'&&a.symbol==='Ga')ideal=120;
+    if(formula==='NH3'&&a.symbol==='N')ideal=106.8;
+    if(formula==='H2O'&&a.symbol==='O')ideal=104.5;
+    if(formula==='N2O'&&n.length===2)ideal=180;
+    for(let j=0;j<n.length;j++)for(let k=j+1;k<n.length;k++){
+      const value=angle(model.atoms[n[j]].p,a.p,model.atoms[n[k]].p);
+      if(ideal!==undefined)close(value,ideal,`${formula}: angle at ${a.symbol}`);
+      if(a.symbol==='W')assert.ok(Math.abs(value-90)<1e-7||Math.abs(value-180)<1e-7,`${formula}: octahedral angle`);
+    }
+  });
+  if(formula==='C2H4'){
+    assert.equal(model.bonds.filter(b=>b.order===2).length,1);
+    // All six atoms lie in one plane, not merely each carbon's neighbours.
+    const [a,b,c]=model.atoms,u=subtract(b.p,a.p),v=subtract(c.p,a.p),normal=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+    for(const atom of model.atoms)close(subtract(atom.p,a.p).reduce((sum,x,i)=>sum+x*normal[i],0),0,'Ethene coplanarity');
+  }
+}
 function expectFilmComposition(formula, coefficient, label) {
   const unit = atoms(formula), rendered = dom.window.__reactionAtoms;
   const background = renderedCounts(rendered.filter(atom => atom.opacity === .32));
@@ -113,6 +161,9 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   expectRefs('#cv-temp-window', range);
   expectRefs('#cv-equation', chemistry);
   expectRefs('#cv-chemistry-note', precursor === 'silane' && mode === 'PECVD' ? [...chemistry, 32] : chemistry);
+  expectRefs('#cv-structure-note', precursor === 'tmga' ? [44,45] : [44]);
+  assert.match(query('#cv-structure-note').textContent,/arbitrary drawing units/);
+  if(precursor==='teos')assert.match(query('#cv-structure-note').textContent,/not a measured conformer/);
   expectRefs('#cv-role-use', role);
   const renderedEquation = withoutCitations(query('#cv-equation')).replace(/[₀-₉]/g, digit => String('₀₁₂₃₄₅₆₇₈₉'.indexOf(digit))).replace(/\((?:gas|solid)\)/g, '').replace('→', '->');
   if (precursor === 'teos' && mode === 'PECVD') {
@@ -134,8 +185,15 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
     assert.deepEqual(Array.from(bonds.filter(bond => bond.a === 'N' && bond.b === 'N'), bond => bond.order), [3, 3]);
     assert.deepEqual(Array.from(bonds.filter(bond => bond.a === 'N' && bond.b === 'O'), bond => bond.order), [1, 1]);
     for (const sign of ['+', '−']) assert.equal(dom.window.__reactionTexts.filter(text => text === sign).length, 2);
+    const n2o=dom.window.__environmentGlyphs.filter(g=>g.formula==='N2O');
+    assert.ok(n2o.length>0,'N₂O feed glyphs were not rendered');
+    assert.ok(n2o.every(g=>g.strokes===4),'N₂O glyph must draw three N–N lines and one N–O line');
     seek.value = 1000; seek.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
     for (const sign of ['+', '−']) assert.equal(dom.window.__reactionTexts.filter(text => text === sign).length, 0, 'Input formal charges must fade before neutral products');
+  }
+  if(precursor==='teos'&&mode==='LPCVD'){
+    const ethene=dom.window.__environmentGlyphs.filter(g=>g.formula==='C2H4');
+    assert.ok(ethene.length>0&&ethene.every(g=>g.strokes===6),'Ethene glyph must retain its double bond');
   }
   const options = [...query('#cv-component').options].map(option => option.value);
   if (mode === 'MOCVD') {
@@ -159,7 +217,10 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
     expectRefs('#cv-machine', [31]); expectRefs('#cv-activation-state', [28, 29]);
   } else assert.equal(query('[data-process="MOCVD"]').disabled, true);
   for (const component of options) { change('#cv-component', component); assert.ok(refs('#cv-inspector').length, component); parts++; }
-  for (const stage of ['load', 'condition', 'deposit', 'purge', 'unload', 'deposit']) { change('#cv-stage', stage); expectRefs('#cv-equation', chemistry); }
+  for (const stage of ['load', 'condition', 'deposit', 'purge', 'unload', 'deposit']) {
+    change('#cv-stage', stage); expectRefs('#cv-equation', chemistry);
+    if(stage==='load'||stage==='condition')assert.equal(dom.window.__filmPatches.length,0,'No added film patches at zero growth');
+  }
   const temperature = query('#cv-temperature');
   if (!temperature.disabled) { temperature.value = Number(temperature.value) === Number(temperature.max) ? temperature.min : temperature.max; temperature.dispatchEvent(new dom.window.Event('input', { bubbles: true })); expectRefs('#cv-temp', range); expectRefs('#cv-temp-window', range); expectRefs('#cv-env-temp', range); }
   if (mode === 'PECVD') {
@@ -170,7 +231,7 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   }
 }
 assert.equal(equations, 9);
-assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 43);
+assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 45);
 assert.equal(query('#cv-precursor').options.length, 7);
 assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
 assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);
@@ -184,6 +245,8 @@ assert.match(query('#cv-ref-27').textContent, /2018/);
 assert.match(query('#cv-ref-17').textContent, /2023/);
 assert.match(query('#cv-ref-10').textContent, /Shiang-Cheng Lu/);
 assert.match(query('#cv-ref-30').textContent, /Checked source copy/);
+assert.match(query('#cv-ref-35').textContent,/N\. C\. C\. Lu et al\./);
+assert.match(query('#cv-ref-24 > a').href,/mks\.com\/mam\/celum\/celum_assets\/resources\/dwnstrem\.pdf/);
 assert.match(query('#cv-ref-26 > a').href, /1150C-MFC-DS\.pdf/);
 expectRefs('[data-cite="wafer"]', [16]);
 for (const source of dom.window.CVDEvidence.sources.values()) {
@@ -214,4 +277,4 @@ for (const step of document.querySelectorAll('[data-fab-cite]')) {
 }
 assert.deepEqual(errors, [], 'JavaScript execution errors');
 dom.window.close();
-console.log(`DOM evidence checks passed: ${cases.length} presets, formula-unit proportions in all rendered film backdrops and animated films, ${parts} component states, stage/RF/temperature changes, nine rendered balanced equations, MOCVD delivery/substrate/activation, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);
+console.log(`DOM evidence checks passed: 17 molecular inventories, valences and formal-charge sums; tetrahedral/planar/pyramidal/bent/linear/octahedral angles; glyph bond multiplicity; no added film at zero growth; ${cases.length} presets, all film compositions, ${parts} component states, nine balanced equations, stages, RF and temperature, geometry provenance, citation navigation and fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);

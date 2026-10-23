@@ -43,6 +43,7 @@ const { chromium } = require('playwright');
     await expectReferences('#cv-temp-window', recipe.window);
     await expectReferences('#cv-equation', recipe.chemistry);
     await expectReferences('#cv-chemistry-note', recipe.p === 'silane' && recipe.mode === 'PECVD' ? [...recipe.chemistry, 32] : recipe.chemistry);
+    await expectReferences('#cv-structure-note',recipe.p==='tmga'?[44,45]:[44]);
     await expectReferences('#cv-role-use', recipe.role);
     for (const stage of ['load', 'condition', 'deposit', 'purge', 'unload', 'deposit']) {
       await page.selectOption('#cv-stage', stage);
@@ -107,7 +108,7 @@ const { chromium } = require('playwright');
   assert.deepEqual(integrity.duplicateIds, []);
   assert.deepEqual(integrity.missing, []);
   assert.deepEqual(integrity.bareClaims, []);
-  assert.equal(integrity.sources, 43);
+  assert.equal(integrity.sources, 45);
   // Hidden reference details must open when a claim is selected, with focus and return.
   await page.locator('#cv-pressure > .cv-citations a').click();
   assert.equal(await page.locator('#cv-references').evaluate(element => element.open), true);

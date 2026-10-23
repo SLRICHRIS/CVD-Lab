@@ -53,8 +53,23 @@ const {chromium}=require('playwright');
         if(process==='MOCVD'&&stage==='delivery')assert.deepEqual(await refs('#cv-env-explanation'),[29,31]);
       }
       if(process==='PECVD'){
+        await page.locator('[data-env-stage="activation"]').click();
+        for(const stage of ['load','condition','deposit','purge','unload']){
+          await page.selectOption('#cv-stage',stage);
+          const chip=await page.locator('#cv-env-activation').textContent();
+          const title=await page.locator('#cv-env-focus-title').textContent();
+          if(stage==='deposit'){
+            assert.match(chip,/RF ·/);assert.match(title,/RF creates/);
+          }else{
+            assert.match(chip,new RegExp('RF off · '+stage));assert.match(title,/RF off/);
+            assert.match(await page.locator('#cv-env-explanation').textContent(),new RegExp('current stage is '+stage));
+          }
+        }
+        await page.selectOption('#cv-stage','deposit');
         await page.uncheck('#cv-rf-on');assert.match(await page.locator('#cv-env-status').textContent(),/RF off/);
-        await page.locator('[data-env-stage="activation"]').click();assert.match(await page.locator('#cv-env-focus-title').textContent(),/RF off/);
+        assert.match(await page.locator('#cv-env-focus-title').textContent(),/RF off/);
+        assert.match(await page.locator('#cv-env-activation').textContent(),/RF off/);
+        assert.match(await page.locator('#cv-env-canvas').getAttribute('aria-label'),/RF is off; playback is paused/);
         await page.check('#cv-rf-on');
       }
     }
@@ -109,6 +124,6 @@ const {chromium}=require('playwright');
     await page.locator('#cv-env-play').click();
     assert.equal(await page.evaluate(()=>window.CVDLab.snapshot().running),false);
     assert.deepEqual(errors,[],'Browser JavaScript errors');
-    console.log('Environment checks passed: ten recipe contexts, fifty cited process explanations, conserved 1D flux and boundary conditions, invalid-input handling, concentration controls, camera, reference return, continuous and single-pass playback, speed/pause/reduced-motion controls and desktop/mobile light/dark rendering.');
+    console.log('Environment checks passed: ten recipe contexts, fifty cited process explanations, both PECVD recipes across five RF stages and RF-off accessibility, conserved 1D flux and boundary conditions, invalid-input handling, concentration controls, camera, reference return, continuous and single-pass playback, speed/pause/reduced-motion controls and desktop/mobile light/dark rendering.');
   }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

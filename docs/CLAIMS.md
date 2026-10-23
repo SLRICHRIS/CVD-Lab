@@ -29,6 +29,9 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.
 - Added a continuous local growth environment with fifty recipe/region explanations, three overlays and shared recipe provenance. The 1D transport explorer derives normalised concentration and flux from the cited SFU coupled-resistance equation; its input ratio and tracer paths are explicitly exploratory.
 - Added twelve defect examples covering all ten presets. Source-fit labels and condition differences are visible beside each drawing; material-only and low-pressure evidence are not presented as direct verification of SiCl4 or atmospheric-pressure defect behaviour. Full-text and abstract-level verification are distinguished.
+- Full scientific proofreading corrected local molecular bond angles and preserved multiple bonds/formal charges in environment glyphs; added general-geometry and TMGa electron-diffraction references with explicit representation limits.
+- Corrected reference 35 to lead author N. C. C. Lu et al. using DOI metadata; replaced the dead downstream-pressure-control link with the checked official MKS copy. Made RF status stage-consistent, removed added-film patches at zero growth, labelled the TEOS atom inventory as bookkeeping and stated transport flux direction/units.
+- Disclosed face-down/lamp-heating differences between the cited source tools and generic face-up drawings. Clarified that grain-boundary trap markers illustrate an electrical model rather than site-resolved imaging. See SCIENTIFIC_REVIEW.md for the complete proofreading scope and remaining limits.
 
 ## Claim register
 
@@ -67,7 +70,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `chem-ticl4-LPCVD` | 6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl | [7](#ref-7): Description, Background of the Invention, overall reaction | Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition. |
 | `conditions-silane-PECVD` | 300 °C; 1.0 Torr; 5% SiH4 in N2 + N2O; 30 W. | [1](#ref-1): PECVD oxide table, second SiO2 row | Source-specific conditions; no transferable or validated simulator recipe is implied. |
 | `conditions-silane-LPCVD` | NYCU nominal poly-Si example: 620 °C, 300 mTorr, SiH4. | [2](#ref-2): Service item (2), poly-Si entry | Source-specific conditions; no transferable or validated simulator recipe is implied. |
-| `conditions-silane-APCVD` | A200V atmospheric SiH4/O2 example: 350–450 °C; 400 °C is the lab selection. | [4](#ref-4): A200V BASIC INFORMATION | Source-specific conditions; no transferable or validated simulator recipe is implied. |
+| `conditions-silane-APCVD` | A200V atmospheric SiH4/O2 example: 350–450 °C; 400 °C is the lab selection. | [4](#ref-4): A200V BASIC INFORMATION | 400 °C is a source-range teaching selection. The A200V has a face-down wafer and feed from below; the generic face-up drawing is not that tool. |
 | `conditions-dcs-LPCVD` | NYCU nitride example: 800 °C, 120 mTorr, SiH2Cl2 and NH3. | [2](#ref-2): Service item (3), nitride entry | Source-specific conditions; no transferable or validated simulator recipe is implied. |
 | `conditions-teos-LPCVD` | NYCU thermal TEOS example: 700 °C, 120 mTorr, TEOS vapour. | [2](#ref-2): Service item (4), TEOS entry | Source-specific conditions; no transferable or validated simulator recipe is implied. |
 | `conditions-teos-PECVD` | Patent example for 300 mm equipment: TEOS/O2/He, 350–400 °C, 2–4 Torr, 2–3 kW. | [8](#ref-8): Description, 300 mm wafer conditions after helium-flow discussion | Source-specific conditions; no transferable or validated simulator recipe is implied. |
@@ -108,13 +111,13 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `part-mo-delivery` | Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control. | [29](#ref-29): §§3.1.3–3.1.4, printed pp. 50–54, Figs. 3.5–3.6: MFCs, carrier gas, bubbler and bath | No bubbler temperature, delivery flow or source-consumption calculation is modelled. |
 | `structure-n2o` | N≡N⁺–O⁻ is one Lewis resonance contributor for nitrous oxide; the signs are formal charges. | [32](#ref-32): PDF p. 11, GCh24-11, second Lewis structure; PDF p. 9, resonance definition | The molecular drawing shows this contributor with formal charges and omits lone pairs. It does not assert measured atomic charges or a plasma reaction mechanism. Charge labels fade with the illustrated input bonds. |
 | `gan-substrate` | The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire. | [30](#ref-30): p. 2, §2 and Fig. 1, sapphire/buffer/template/final-layer stack | Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic. |
-| `environment-transport` | Under a steady boundary-layer model with first-order surface consumption, J = D Cb ks / (D + delta ks). | [33](#ref-33): PDF p. 8, diffusive flux; p. 9, final coupled flux equation; p. 10, limiting cases | The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe. |
+| `environment-transport` | Under a steady boundary-layer model with first-order surface consumption, J = D Cb ks / (D + delta ks). | [33](#ref-33): PDF p. 8, diffusive flux; p. 9, final coupled flux equation; p. 10, limiting cases | The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe. The coordinate z points away from the wafer; J is a positive flux magnitude toward the wafer. D has units length²/time, delta length, ks and km length/time, C amount/volume and J amount/(area time). |
 | `environment-surface` | CVD involves delivery to the surface, film formation and desorption/transport of gaseous products. | [33](#ref-33): PDF p. 5, Major CVD Processes; [10](#ref-10): PDF p. 9, slide 18: transport, surface reaction and product removal | The continuously animated tracer encounters teach these process categories, not an elementary atomistic pathway or measured dwell time. |
 | `environment-plasma` | In the depicted PECVD architecture, RF sustains a discharge that creates reactive species by collisions; surface interactions form a film and the exhaust removes products. | [15](#ref-15): PECVD technology paragraphs: RF discharge, collision-created reactive species, surface interaction and pumping | Generic R* markers indicate a reactive-species population. Their identities, abundances, electron energies and trajectories are not calculated. |
 | `environment-w-exhaust` | The cited H2/WF6 study measured HF formation and depletion of the reactants during W deposition. | [6](#ref-6): Abstract: quadrupole mass spectrometry, HF signal and reactant depletion | The animation illustrates bulk deposition on a prepared surface. It does not reproduce the measured mass spectrum or transient nucleation chemistry. |
 | `defect-oxide-charge` | C–V hysteresis in SiH₄/N₂O PECVD oxide was interpreted as evidence of border traps near the Si interface. | [34](#ref-34): pp. 90–91 Experimental; pp. 95–96, Fig. 7 and Table 1 | Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures. |
 | `defect-plasma-powder` | A SiH₄/N₂O PECVD study reported white oxide powder on chamber walls and in the pumping line at higher silane flow. | [34](#ref-34): p. 93, deposition-rate discussion immediately before FTIR analysis | A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative. |
-| `defect-poly-traps` | In boron-doped LPCVD polysilicon, carrier trapping associated with grain-size variation explained thickness-dependent resistivity. | [35](#ref-35): IBM Research article abstract, paragraphs 1–2 | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. |
+| `defect-poly-traps` | In boron-doped LPCVD polysilicon, carrier trapping associated with grain-size variation explained thickness-dependent resistivity. | [35](#ref-35): IBM Research article abstract, paragraphs 1–2 | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. Boundary-state markers illustrate the trapping model; the electrical measurements do not locate individual atomic traps. |
 | `defect-thermal-particles` | Gas-borne particles were measured during thermal SiH₄/O₂ deposition at low pressure. | [36](#ref-36): p. 413 abstract; §II Experimental setup; §III particle measurements | Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here. |
 | `defect-nitride-cracks` | Thick DCS/NH₃/N₂ LPCVD nitride films showed tensile stress and cracks; deep barriers arrested cracks in the study. | [37](#ref-37): §2.1 p. 16726; §3 pp. 16727–16728; Figs. 2/4 and Table 1 | The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it. |
 | `defect-teos-trench` | Cross-sectional SEM showed seams and voids in LPCVD TEOS oxide inside shallow trenches. | [38](#ref-38): §II–III; Figs. 2–3 and Fig. 6 (author PDF pp. 1–4) | The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction. |
@@ -124,6 +127,8 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `defect-tin-chlorine` | RBS measurements found residual chlorine in TiCl₄/NH₃ LPCVD TiN; chlorine content decreased as deposition temperature increased in that study. | [42](#ref-42): NJIT-hosted abstract, paragraphs 2–3 | The selected patent recipe is different. Cl markers have no assigned lattice site or concentration, and chlorine is not treated as the sole cause of resistivity. |
 | `defect-gan-carbon` | In the GaN sample series that includes T2, higher SIMS carbon concentration correlated with stronger yellow photoluminescence. | [30](#ref-30): §2 and Table 1; §3, Figs. 3–6 (SIMS/PL correlations) | The trend is study-specific, not a universal defect law. SIMS plus PL does not uniquely locate C atoms or prove one microscopic complex; the diagram assigns no atomic site. |
 | `defect-gan-dislocations` | TEM/AFM studies of two-step TMGa/NH₃ MOCVD GaN on sapphire documented threading-dislocation generation during growth. | [43](#ref-43): Publisher-indexed abstract and Experimental excerpt; UCSB author record for bibliographic details | No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population. |
+| `structure-molecules` | Ideal molecular geometries distinguish tetrahedral saturated carbon from trigonal planar ethene, and pyramidal ammonia from bent water. | [44](#ref-44): §7.6, Figs. 7.16–7.19; §8.2, water example and Figs. 8.10–8.17 | Original teaching drawings use these geometric constraints. Bond lengths have arbitrary drawing units. TEOS Si–O–C angles and ethoxy torsions are chosen for readability; no unique measured conformer is asserted. Lone pairs are omitted. |
+| `structure-tmga` | Vapour electron diffraction supports a near-planar C₃Ga skeleton for molecular trimethylgallium. | [45](#ref-45): Publisher-indexed abstract and introductory extract; Journal of Molecular Structure 21, 437–444 | The lab draws an ideal planar monomer with tetrahedral methyl groups. Exact experimental bond angles, lengths, conformations, vapour aggregation and ammonia adduct chemistry are not reconstructed. |
 
 ## Defect coverage and evidence transfer
 
@@ -133,7 +138,7 @@ These are curated published examples, not a complete catalogue or an incidence m
 | --- | --- | --- | --- | --- |
 | `silane-PECVD` | Charge-trapping centres / `traps` | Same chemistry · different conditions | He-diluted silane/N₂O; reported substrate 260 °C; annealed and unannealed MIS structures. Capacitance–voltage (C–V) hysteresis and estimated trap populations. See claim `defect-oxide-charge` above. | Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures. |
 | `silane-PECVD` | Powder formation / `particles` | Same chemistry · different conditions | He-diluted SiH₄/N₂O in a different PECVD reactor. Reported visual observation of powder in the chamber and pumping line. See claim `defect-plasma-powder` above. | A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative. |
-| `silane-LPCVD` | Trapping at grain boundaries / `grains` | Related film · doped study | Boron-doped LPCVD films; the checked abstract does not specify the precursor. Electrical resistivity characterisation and trapping-model comparison. See claim `defect-poly-traps` above. | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. |
+| `silane-LPCVD` | Trapping at grain boundaries / `grains` | Related film · doped study | Boron-doped LPCVD films; the checked abstract does not specify the precursor. Electrical resistivity characterisation and trapping-model comparison. See claim `defect-poly-traps` above. | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. Boundary-state markers illustrate the trapping model; the electrical measurements do not locate individual atomic traps. |
 | `silane-APCVD` | Gas-phase particle formation / `particles` | Related chemistry · LPCVD evidence | LPCVD, 0.5–2 Torr and 200–800 °C; O₂/SiH₄ = 20. Particle-beam mass spectrometry and transmission electron microscopy (TEM). See claim `defect-thermal-particles` above. | Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here. |
 | `dcs-LPCVD` | Tensile-stress cracking / `crack` | Same chemistry · different stack | 750 °C, 150 mTorr; thermally cycled thick films on oxide/Si. Wafer-bow stress measurements and published crack images. See claim `defect-nitride-cracks` above. | The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it. |
 | `teos-LPCVD` | Trench seams & voids / `void` | Same chemistry · patterned substrate | 0.5 Torr; patterned oxide/nitride-lined trenches; comparisons at 650–725 °C. Cross-sectional scanning electron microscopy (SEM). See claim `defect-teos-trench` above. | The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction. |
@@ -146,10 +151,10 @@ These are curated published examples, not a complete catalogue or an incidence m
 
 ## Model choices
 
-- Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.
+- Camera geometry, colours, atom sizes, bond lengths and trajectories are schematic. Molecular connectivity and ideal local bond angles are constrained teaching geometries with citations; TEOS Si–O–C angles and torsions are drawing choices. Film atoms do not depict a crystal structure or bonding network.
 - In the atom-balance view, film formulae and atom counts represent idealised compositions; impurities, defects and deviations from stoichiometry are omitted. The film backdrop repeats complete formula units to preserve the displayed elemental proportions. The separate defect atlas illustrates selected literature examples.
 - Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
-- TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.
+- TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients. The remaining C/H/O atom pool is bookkeeping only, not identified atomic exhaust species.
 - Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.
 - Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.
 - Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.
@@ -212,9 +217,9 @@ Locator: A200V → BASIC INFORMATION; AMAX system descriptions.
 
 Supports: A200V SiH₄/O₂ feed and 350–450 °C range; atmospheric single-wafer and conveyor reactor examples.
 
-Scope: 400 °C is a teaching selection within the A200V range. The drawing is not an A200V engineering model.
+Scope: 400 °C is a teaching selection within the A200V range. The A200V source describes a face-down wafer with delivery from below; the lab’s face-up local view is generic and does not reconstruct that tool. The separate conveyor cutaway is representative.
 
-Verification (2026-10-23): [Manufacturer page](https://www.m-watanabe.co.jp/en/product/apcvd/). A200V gas/temperature fields and the separate AMAX conveyor description checked. Geometry remains representative.
+Verification (2026-10-23): [Manufacturer page](https://www.m-watanabe.co.jp/en/product/apcvd/). A200V gas/temperature fields, face-down configuration and the separate AMAX conveyor description checked. Geometry remains representative.
 
 <a id="ref-5"></a>
 ### [5] J. C. Schumacher
@@ -255,9 +260,9 @@ Locator: Description → Background equation; preferred primary-reaction conditi
 
 Supports: TiN net equation; about 150 mTorr, TiCl₄/NH₃/Ar, wafer 450–650 °C, preferred wafer temperature about 650 °C.
 
-Scope: The patent also heats downstream walls with a secondary plasma. That hardware is omitted from this thermal-growth schematic; this is not a complete reproduction.
+Scope: The patent describes a face-down, lamp-heated wafer and a secondary wall-heating plasma. The lab’s generic face-up wafer and heated holder do not reconstruct that geometry; the secondary plasma is omitted. Only the primary thermal-growth example is illustrated.
 
-Verification (2026-10-23): [Patent text](https://patents.google.com/patent/US5348587A/en). Background net equation, preferred primary conditions and the separately heated liner checked.
+Verification (2026-10-23): [Patent text](https://patents.google.com/patent/US5348587A/en). Background net equation, preferred primary conditions, face-down/lamp-heated wafer and separately plasma-heated liner checked.
 
 <a id="ref-8"></a>
 ### [8] N. Arul Dhas and J. Henri
@@ -281,7 +286,7 @@ Locator: Operation paragraph; example reactions for silicon, silicon dioxide and
 
 Supports: SiH₄ decomposition; SiH₄/O₂ and SiH₄/N₂O oxide net equations; SiCl₄/H₂ silicon; WF₆/H₂ tungsten; reactor functions.
 
-Scope: Do not use the malformed nitride equation on this page. These selected overall equations do not predict all actual exhaust species.
+Scope: Only the selected balanced net equations and broad reactor functions are used. Malformed nitride and Si-reduced tungsten equations are excluded. Cold-wall heating is not inferred from low pressure. Overall equations do not predict all actual exhaust species.
 
 Verification (2026-10-23): [University course text](https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html). Only the stated silicon, oxide and H₂-reduced tungsten equations are used; malformed nitride and Si-reduced tungsten equations are excluded.
 
@@ -476,7 +481,7 @@ Verification (2026-10-23): [Manufacturer product page](https://www.mks.com/p/117
 <a id="ref-24"></a>
 ### [24] MKS Instruments
 
-[Downstream Pressure Controllers and Valves — Product Selection Guide](https://www.mksinst.com/docs/UR/dwnstrem.pdf) (n.d.). **Manufacturer technical guide.** Accessed 2026-10-23.
+[Downstream Pressure Controllers and Valves — Product Selection Guide](https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf) (n.d.). **Manufacturer technical guide.** Accessed 2026-10-23.
 
 Locator: PDF p. 1, pressure-control explanation.
 
@@ -484,7 +489,7 @@ Supports: Pressure measurement, controller feedback and exhaust-throttle conduct
 
 Scope: The gauge, valve and pump functions are explained; no closed-loop pressure solver is implemented.
 
-Verification (2026-10-23): [Manufacturer technical PDF](https://www.mksinst.com/docs/UR/dwnstrem.pdf). PDF p. 1 explicitly describes gauge, feedback controller, throttle conductance and vacuum pump.
+Verification (2026-10-23): [Manufacturer technical PDF](https://www.mks.com/mam/celum/celum_assets/resources/dwnstrem.pdf#page=1). The old mksinst.com/docs/UR link returned 404. The official mks.com copy was checked: PDF p. 1 describes gauge, feedback controller, throttle conductance and vacuum pump.
 
 <a id="ref-25"></a>
 ### [25] MKS Instruments
@@ -623,11 +628,11 @@ Scope: Different dilution, pressure and thermal history from the preset. C–V i
 Verification (2026-10-23): [Publisher PDF, full text](https://metall-mater-eng.com/index.php/home/article/download/159/145). Experimental conditions, powder paragraph, Fig. 7 and Table 1 read; net-equation and ambiguous FTIR passages excluded.
 
 <a id="ref-35"></a>
-### [35] T. T. Sheng, C. C. Shih and C. S. Wang
+### [35] N. C. C. Lu et al.
 
-[The Effect of film thickness on the electrical properties of LPCVD polysilicon films](https://doi.org/10.1149/1.2115724) (1984). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+[The effect of film thickness on the electrical properties of LPCVD polysilicon films](https://doi.org/10.1149/1.2115724) (1984). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
 
-Locator: Journal of The Electrochemical Society: IBM Research author-hosted abstract, paragraphs 1–2.
+Locator: Journal of The Electrochemical Society 131, first page 897 (1984); IBM Research article abstract, paragraphs 1–2; DOI 10.1149/1.2115724.
 
 Supports: Carrier trapping associated with grain-size variation explains thickness-dependent resistivity in boron-doped LPCVD polysilicon.
 
@@ -635,7 +640,7 @@ Scope: Abstract-level verification. Boron-doped films differ from the lab’s un
 
 [IBM Research article abstract](https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films).
 
-Verification (2026-10-23): [Author institution abstract and DOI link](https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films). Film type, doping, trapping interpretation and electrical measurements checked; no full-text figure attribution.
+Verification (2026-10-23): [Author-institution abstract and publisher-deposited DOI metadata](https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films). The IBM page lists its affiliated contributors, not the complete author list. Publisher-deposited DOI metadata identifies lead author N. C. C. Lu; attribution corrected to Lu et al. Film type, doping, trapping interpretation and electrical measurements checked at abstract level; no full-text figure attribution.
 
 <a id="ref-36"></a>
 ### [36] T. Kim, S.-M. Suh, S. L. Girshick, M. R. Zachariah, P. H. McMurry, R. M. Rassel, Z. Shen and S. A. Campbell
@@ -752,3 +757,31 @@ Scope: Publisher-indexed abstract/experimental excerpts checked, not the full te
 [UCSB author-group article record](https://labs.materials.ucsb.edu/speck/james/publications/1540).
 
 Verification (2026-10-23): [Publisher-indexed abstract/experimental excerpts and author-group metadata](https://www.sciencedirect.com/science/article/abs/pii/S0022024898002401). TMGa/NH3, sapphire, two-step growth, TEM/AFM and coalescence checked in publisher excerpts; author group confirms authors, year and pages.
+
+<a id="ref-44"></a>
+### [44] Paul Flowers, Klaus Theopold, Richard Langley and William R. Robinson
+
+[Chemistry 2e — Molecular Structure and Polarity; Hybrid Atomic Orbitals](https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity) (2019). **Authored university textbook / teaching reference.** Accessed 2026-10-23.
+
+Locator: §7.6, Figs. 7.16–7.19 (ideal shapes, methane and pyramidal NH₃); §8.2, opening water example and Figs. 8.10–8.17 (sp²/sp³, ethene and ethane).
+
+Supports: Ideal tetrahedral, trigonal planar, linear and octahedral shapes; bent water (104.5°) and pyramidal ammonia (106.8° in Fig. 7.18); planar ethene and tetrahedral saturated carbon.
+
+Scope: Teaching geometry only. Applying ideal tetrahedral carbon to ethoxy and methyl groups does not identify a measured TEOS conformer or TMGa bond angles. Bond lengths, TEOS Si–O–C angle, torsions and the drawing projection are implementation choices; no artwork is reused.
+
+[§8.2 Hybrid Atomic Orbitals](https://openstax.org/books/chemistry-2e/pages/8-2-hybrid-atomic-orbitals).
+
+Verification (2026-10-23): [Authored textbook sections and labelled figures](https://openstax.org/books/chemistry-2e/pages/8-2-hybrid-atomic-orbitals). §7.6 ideal-shape figures and NH₃ figure label, §8.2 water angle and sp²/sp³ examples checked. Authorship and 2019 publication date checked in the OpenStax preface. Only general geometric constraints inform the original code drawings.
+
+<a id="ref-45"></a>
+### [45] B. Beagley and D. G. Schmidling
+
+[An electron-diffraction study of the molecular structure of trimethylgallium](https://doi.org/10.1016/0022-2860(74)80093-1) (1974). **Peer-reviewed molecular-structure research article.** Accessed 2026-10-23.
+
+Locator: Journal of Molecular Structure 21, 437–444: publisher-indexed abstract and introductory extract (vapour electron diffraction).
+
+Supports: Vapour-phase TMGa molecular structure, near-planar C₃Ga skeleton, methyl geometry and internal rotation.
+
+Scope: Publisher-indexed abstract/extract and DOI metadata were available; the full article was not retrieved. The lab uses an ideal planar monomer and tetrahedral methyl groups, not the fitted experimental coordinates, bond lengths or methyl torsions. No TMGa/NH₃ adduct or reaction intermediate is inferred.
+
+Verification (2026-10-23): [Publisher-indexed abstract/extract and publisher-deposited DOI metadata](https://www.sciencedirect.com/science/article/pii/0022286074800931). Publisher abstract reports electron-diffraction bond geometry and methyl rotation; indexed introductory text identifies consistency with a planar skeleton. Authors, title, year, volume, pages and DOI checked against DOI metadata. Ideal drawing coordinates are not asserted to reproduce those measurements.
