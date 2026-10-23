@@ -18,12 +18,30 @@ with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations, fabrication descriptions and twelve
 scoped defect examples covering all ten presets.
 
-The reading flow starts with a compact definition, an eight-link contents list
+The reading flow starts with a compact definition, a nine-link contents list
 and a four-step learning path. Choose a recipe before opening the longer
 background guide. A worked silane/LPCVD atom balance and a cited seven-film
 application table connect the animation to the chemistry and device purpose.
 Contents links reveal the requested view or disclosure and move keyboard focus
 to it without changing the selected recipe.
+
+The **Unit III study guide** maps the syllabus excerpt supplied for this course
+to sixteen topics: seven with direct CVD teaching routes, three with supporting
+context or selected examples, and six requiring separate course study. Six
+buttons open cited film/PECVD examples with the relevant preset selected,
+deposition restored and playback paused. The complete supplied excerpt is
+transcribed inside the guide; it is the source for curriculum scope, not an
+independently verified official exam notice.
+
+GaN/MOCVD, detailed transport calculations, individual paper histories and
+animation implementation are marked as material that can follow a first
+revision unless assigned. This is study-priority guidance only. The excerpt
+does not give marks, question patterns or exam exclusions. PVD, interconnect
+failures, multilevel metallization, wet/plasma/RIE etching and CMP remain
+syllabus topics even though the lab does not teach them as complete lessons;
+integration and characterization also require course notes. The footer's
+**About this lab, AI assistance and feedback** section includes the author's
+AI disclosure, email and public GitHub contribution links.
 
 ## Upload to GitHub
 
@@ -300,7 +318,7 @@ teaching-reveal playback and desktop/mobile light/dark layouts. Defect diagrams
 and the full atlas were visually reviewed. These checks verify implementation
 and citation integrity; they do not establish experimental defect validation.
 
-Reading-flow checks cover all eight contents routes with keyboard activation,
+Reading-flow checks cover all nine contents routes with keyboard activation,
 view/disclosure reveal, preserved recipe selection, browser-history navigation,
 seven cited film roles, light/dark prose contrast and layouts at 320, 390, 768
 and 1440 px. Main reading text now uses 18 px type and near-black text in light
