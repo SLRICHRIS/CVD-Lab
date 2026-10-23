@@ -107,7 +107,7 @@ const { chromium } = require('playwright');
   assert.deepEqual(integrity.duplicateIds, []);
   assert.deepEqual(integrity.missing, []);
   assert.deepEqual(integrity.bareClaims, []);
-  assert.equal(integrity.sources, 33);
+  assert.equal(integrity.sources, 43);
   // Hidden reference details must open when a claim is selected, with focus and return.
   await page.locator('#cv-pressure > .cv-citations a').click();
   assert.equal(await page.locator('#cv-references').evaluate(element => element.open), true);
