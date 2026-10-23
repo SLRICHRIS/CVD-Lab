@@ -5,7 +5,8 @@
 This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
-Scientific citation audit and proofreading, 23 October 2026: 74 claim records map to 32 sources,
+Scientific citation audit and environment upgrade, 23 October 2026:
+78 claim records map to 33 sources,
 with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations and fabrication descriptions.
 
@@ -73,6 +74,13 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 
 ## What is included
 
+- A continuous, rotatable 3D local growth environment with molecular feed,
+  plasma/thermal activation, surface encounters, gas products and timed MOCVD
+  susceptor rotation. Five inspectable regions have recipe-specific citations.
+- Species, energy and transport overlays; local play/pause, playback speed,
+  continuous/single-pass modes and reduced-motion support.
+- An analytic 1D diffusion/surface-reaction explorer with a concentration
+  profile and normalised flux; source equations and assumptions are visible.
 - Rotatable chamber cutaways with machine part labels and inspection.
 - Seven precursor choices, ten supported reference recipes, and APCVD,
   LPCVD, PECVD and MOCVD views where appropriate to the selected chemistry.
@@ -82,7 +90,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 - Seven process groups in an illustrative VLSI fabrication overview, with
   cited hover, tap and keyboard-focus explanations.
 - CVD teaching guide, ten-recipe comparison, plasma / PECVD, MOCVD and silicon
-  definitions, and 32 numbered references with source types and exact locators.
+  definitions, and 33 numbered references with source types and exact locators.
 - Navy, cobalt, teal, and violet design accents, responsive layouts,
   keyboard controls, and S L RICHRIS copyright.
 
@@ -99,6 +107,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 | `scripts/check_evidence.py` | Dependency-free evidence integrity check and register generator |
 | `tests/evidence-dom.cjs` | DOM checks for recipe switching, cited fields and reference navigation |
 | `tests/citations.cjs` | Browser regression checks across recipes and citation navigation |
+| `tests/environment.cjs` | Conservation, boundary conditions, environment citations, playback and rendering |
 | `package.json` | Optional development dependencies; no frontend build is required |
 | `.gitignore` | Keeps local environments and secrets out of Git |
 | `LICENSE.txt` | Copyright notice |
@@ -134,7 +143,7 @@ patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
-All 32 references were checked against their linked assertions. The register
+All 33 references were checked against their linked assertions. The register
 records the checked copy and verification method. Mixed citations identify the
 specific source's role: a facility gas list supports a feed pairing, while a
 separate equation source establishes net stoichiometry. The obsolete vapour
@@ -165,6 +174,22 @@ growth. Vapour generation and gas-flow metering are described as separate functi
 The N₂O drawing now uses the cited N≡N⁺–O⁻ resonance contributor with formal
 charge labels; lone pairs are omitted. This representation does not assert
 measured atomic charges or a plasma reaction pathway.
+
+The default **Reaction environment** view shows simultaneous delivery,
+activation, surface encounters and exhaust. **Reactor & atom balance** opens the
+hardware cutaway and conserved-atom illustration for the same selected recipe.
+The environmental tracers teach process categories; their trajectories,
+population counts, surface dwell times and film patches are illustrative.
+
+The transport explorer implements SFU's coupled diffusion/first-order surface
+reaction model. With mass-transfer coefficient `km = D/delta` and rate ratio
+`Da = ks/km`, it solves `Cs/Cb = 1/(1+Da)` and
+`J/(km*Cb) = Da/(1+Da)`. A linear concentration profile follows from constant
+diffusivity and no gas-phase reaction. The ratio is an independent exploratory
+input; it is not estimated from the recipe's temperature or pressure. Results
+are normalised concentrations and flux, not measured precursor utilisation or
+film-growth rates. The Energy overlay shows qualitative zones, not a solved
+temperature or plasma-potential field.
 
 After changing scientific content or reference metadata, update the relevant
 claim in `cv-evidence-data`, bind the displayed claim using `data-cite` or its
@@ -206,6 +231,13 @@ real canvas rendering and desktop (1440 px) plus mobile (390 px) light/dark
 layout checks. Focused screenshots of the workspace, metrics and a reference
 entry, plus the MOCVD workspace, were visually reviewed. Test screenshots are written to `test-results/`
 and are not committed.
+
+Environment checks cover all ten recipe contexts and fifty cited region
+explanations. The model is checked against Fick's law, the surface sink and
+constant flux through the profile over seven rate ratios. Browser checks also
+cover region/overlay controls, camera motion, source navigation, concentration
+controls, continuous playback past eight seconds, pause/resume, speed changes,
+single-pass completion, reduced motion and desktop/mobile light/dark rendering.
 
 The Streamlit launcher is unchanged by this audit. It uses the documented
 [`st.iframe` API](https://docs.streamlit.io/develop/api-reference/text/st.iframe)

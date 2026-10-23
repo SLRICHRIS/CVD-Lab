@@ -27,6 +27,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Checked all 31 references against their linked assertions. Replaced the broken vapour-delivery URL with the official 1150C datasheet, corrected bibliography dates, rebound wafer cleaning and silicon-substrate claims, and removed the TEOS-specific attribution to an Oxford page that does not establish that feed pairing.
 - Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.
 - Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.
+- Added a continuous local growth environment with fifty recipe/region explanations, three overlays and shared recipe provenance. The 1D transport explorer derives normalised concentration and flux from the cited SFU coupled-resistance equation; its input ratio and tracer paths are explicitly exploratory.
 
 ## Claim register
 
@@ -102,10 +103,14 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `chem-tmga-MOCVD` | Idealised GaN net growth: Ga(CH3)3 + NH3 → GaN + 3CH4; TMGa supplies Ga and ammonia supplies N. | [29](#ref-29): §3.1.2, p. 46, Eq. (3.1) and surrounding discussion | Atom-balanced summary only. Molecular geometry, bond paths and exhaustive methane selectivity are not established by this equation. |
 | `conditions-tmga-MOCVD` | Liang et al. sample T2 uses TMGa/NH3 at 1050 °C and 200 Torr for the final GaN layer. | [30](#ref-30): p. 2, §2, TMGa/NH₃ sources; p. 3, Table 1, row T2 | Fixed reported example. No continuous operating window, carrier selection or gas-flow ratio is inferred. |
 | `role-gan` | GaN is a compound semiconductor used in LED heterostructures. | [28](#ref-28): MOCVD technology overview, GaN and GaN/InGaN LED multilayer example | The illustrated GaN layer is not a complete LED or a prediction of light output. |
-| `part-mocvd` | A close-coupled MOCVD architecture separates precursor streams, cools the showerhead and heats a rotating susceptor. | [31](#ref-31): Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs | Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. Rotation is described, not mechanically simulated. |
+| `part-mocvd` | A close-coupled MOCVD architecture separates precursor streams, cools the showerhead and heats a rotating susceptor. | [31](#ref-31): Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs | Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. The local environment illustrates time-scaled rotation; the hardware cutaway does not simulate the drive mechanics. |
 | `part-mo-delivery` | Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control. | [29](#ref-29): §§3.1.3–3.1.4, printed pp. 50–54, Figs. 3.5–3.6: MFCs, carrier gas, bubbler and bath | No bubbler temperature, delivery flow or source-consumption calculation is modelled. |
 | `structure-n2o` | N≡N⁺–O⁻ is one Lewis resonance contributor for nitrous oxide; the signs are formal charges. | [32](#ref-32): PDF p. 11, GCh24-11, second Lewis structure; PDF p. 9, resonance definition | The molecular drawing shows this contributor with formal charges and omits lone pairs. It does not assert measured atomic charges or a plasma reaction mechanism. Charge labels fade with the illustrated input bonds. |
 | `gan-substrate` | The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire. | [30](#ref-30): p. 2, §2 and Fig. 1, sapphire/buffer/template/final-layer stack | Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic. |
+| `environment-transport` | Under a steady boundary-layer model with first-order surface consumption, J = D Cb ks / (D + delta ks). | [33](#ref-33): PDF p. 8, diffusive flux; p. 9, final coupled flux equation; p. 10, limiting cases | The lab defines km = D/delta and Da = ks/km, then derives Cs/Cb = 1/(1+Da) and J/(km Cb) = Da/(1+Da). The linear profile assumes constant D and no gas-phase reaction. Da is an exploratory input, not inferred from a recipe. |
+| `environment-surface` | CVD involves delivery to the surface, film formation and desorption/transport of gaseous products. | [33](#ref-33): PDF p. 5, Major CVD Processes; [10](#ref-10): PDF p. 9, slide 18: transport, surface reaction and product removal | The continuously animated tracer encounters teach these process categories, not an elementary atomistic pathway or measured dwell time. |
+| `environment-plasma` | In the depicted PECVD architecture, RF sustains a discharge that creates reactive species by collisions; surface interactions form a film and the exhaust removes products. | [15](#ref-15): PECVD technology paragraphs: RF discharge, collision-created reactive species, surface interaction and pumping | Generic R* markers indicate a reactive-species population. Their identities, abundances, electron energies and trajectories are not calculated. |
+| `environment-w-exhaust` | The cited H2/WF6 study measured HF formation and depletion of the reactants during W deposition. | [6](#ref-6): Abstract: quadrupole mass spectrometry, HF signal and reactant depletion | The animation illustrates bulk deposition on a prepared surface. It does not reproduce the measured mass spectrum or transient nucleation chemistry. |
 
 ## Model choices
 
@@ -113,11 +118,15 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.
 - Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
 - TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.
-- Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.
+- Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.
 - Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.
 - Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.
 - Reactor drawings and load/purge/cool/vent stages do not reproduce a source tool or provide an operating procedure.
 - The MOCVD view combines one cited GaN final-layer setpoint with a separately sourced showerhead architecture. The prepared buffer/template is already present; delivery, crystal geometry and layer thickness are schematic.
+- The environment shows continuous local-surface process categories. Incoming molecular glyphs, generic reactive-species markers, surface patches and outgoing gas glyphs are explanatory tracers, not a simulated elementary chemical network.
+- The 1D transport explorer solves the stated diffusion/first-order-reaction model analytically. Its user-selected Damkohler ratio is independent of the documented recipe conditions; it does not fit kinetic constants or predict a physical film thickness.
+- Environment colour fields represent qualitative thermal/plasma zones or the explicitly normalised concentration solution. No gas temperature map, plasma potential, electron-energy distribution or full-reactor CFD solution is asserted.
+- Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment and hardware/atom-balance views share the same selected recipe.
 
 ## References
 
@@ -550,3 +559,16 @@ Supports: N₂O resonance contributors and formal charges, including N≡N⁺–
 Scope: Lewis representation only; integer bond orders and formal charges are not measurements of the actual charge distribution. Lone pairs are omitted from the animation. No plasma mechanism, recipe or kinetic claim is inferred.
 
 Verification (2026-10-23): [University-hosted teaching PDF and visual inspection](https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf#page=11). PDF p. 11 was read and visually checked: N≡N⁺–O⁻ has a positive formal charge on the central N and a negative formal charge on O. Only the stated bonding/resonance material is used.
+
+<a id="ref-33"></a>
+### [33] Simon Fraser University, School of Engineering Science
+
+[Chemical Vapour Deposition: CVD — ENSC 495 lecture notes](https://www.sfu.ca/~gchapman/e495/e495l10m.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
+
+Locator: PDF pp. 5–10: process steps, boundary-layer transport and coupled surface-reaction flux.
+
+Supports: Diffusive supply and first-order surface reaction treated as coupled resistances; limiting regimes. The lab derives its normalised outputs from the displayed flux relation.
+
+Scope: Reduced steady 1D model only. No reactor-specific constants, gas-phase chemistry, plasma sheath, adsorption coverage, CFD field or recipe-calibrated growth rate is established.
+
+Verification (2026-10-23): [University-hosted lecture PDF and equation inspection](https://www.sfu.ca/~gchapman/e495/e495l10m.pdf#page=9). Final coupled flux equation on PDF p. 9 and limiting cases on p. 10 checked, with diffusion relation on p. 8. The isolated surface-flux line is typographically inconsistent with its surface concentration; the lab uses the final coupled expression.
