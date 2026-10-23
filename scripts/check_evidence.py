@@ -76,6 +76,7 @@ def markdown(data: dict) -> str:
         "- Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.",
         "- Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.",
         "- Added a continuous local growth environment with fifty recipe/region explanations, three overlays and shared recipe provenance. The 1D transport explorer derives normalised concentration and flux from the cited SFU coupled-resistance equation; its input ratio and tracer paths are explicitly exploratory.",
+        "- Added twelve defect examples covering all ten presets. Source-fit labels and condition differences are visible beside each drawing; material-only and low-pressure evidence are not presented as direct verification of SiCl4 or atmospheric-pressure defect behaviour. Full-text and abstract-level verification are distinguished.",
         "",
         "## Claim register",
         "",
@@ -89,6 +90,14 @@ def markdown(data: dict) -> str:
             for item in claim["evidence"]
         )
         lines.append(f"| `{key}` | {escape(claim['statement'])} | {escape(evidence)} | {escape(claim.get('note', ''))} |")
+    lines += [
+        "", "## Defect coverage and evidence transfer", "",
+        "These are curated published examples, not a complete catalogue or an incidence model. The atlas uses qualitative drawings and an explanatory reveal, not defect kinetics. Current recipe controls do not recalculate defect density.",
+        "", "| Recipe | Example / visual | Evidence fit | Source conditions and measurement | Transfer limits |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for item in data["defects"]["cases"]:
+        lines.append(f"| `{item['recipe']}` | {escape(item['title'])} / `{item['visual']}` | {escape(item['fit_label'])} | {escape(item['studied'])} {escape(item['diagnostic'])} See claim `{item['claim']}` above. | {escape(item['scope'])} |")
     lines += ["", "## Model choices", ""]
     lines.extend(f"- {choice}" for choice in data["model_choices"])
     lines += ["", "## References", ""]
@@ -158,13 +167,38 @@ def main() -> None:
     for name, *keys in mappings:
         for key in keys:
             assert key in claims, f"{name}: unknown evidence key {key}"
+    atlas = data.get("defects", {})
+    defect_cases = {item["id"]: item for item in atlas.get("cases", [])}
+    assert len(defect_cases) == len(atlas.get("cases", [])) == 12, "Expected twelve unique defect examples"
+    assert set(atlas.get("recipes", {})) == {mapping[0] for mapping in mappings}, "Defect atlas must cover every recipe exactly"
+    allowed_visuals = {"traps", "particles", "grains", "crack", "void", "peel", "fault", "seam", "impurity", "carbon", "dislocation"}
+    allowed_fits = {"same-series", "same-chemistry", "related-material", "related-regime", "related-process"}
+    mapped = []
+    for recipe, ids in atlas["recipes"].items():
+        assert ids, f"No defect examples mapped to {recipe}"
+        for case_id in ids:
+            assert case_id in defect_cases, f"{recipe}: unknown defect {case_id}"
+            assert defect_cases[case_id]["recipe"] == recipe, f"{case_id}: recipe mismatch"
+            mapped.append(case_id)
+    assert sorted(mapped) == sorted(defect_cases), "Each defect case must map to exactly one recipe"
+    for item in defect_cases.values():
+        for field in ("title", "family", "region", "fit_label", "host", "mark", "observation", "studied", "driver", "diagnostic", "scope"):
+            assert item.get(field), f"{item['id']}: missing defect {field}"
+        assert item["claim"] in claims, f"{item['id']}: missing evidence claim"
+        assert claims[item["claim"]]["statement"] == item["observation"], f"{item['id']}: observation/claim drift"
+        assert claims[item["claim"]]["note"] == item["scope"], f"{item['id']}: scope/claim drift"
+        assert item["visual"] in allowed_visuals, f"{item['id']}: unrecognised diagram"
+        assert item["fit"] in allowed_fits, f"{item['id']}: unrecognised evidence-fit label"
+    assert defect_cases["thermal-particles"]["fit"] == "related-regime", "LPCVD evidence must not become APCVD validation"
+    assert defect_cases["epi-faults"]["fit"] == "related-material", "Unverified precursor must retain material-only scope"
+    assert defect_cases["gan-carbon"]["fit"] == "same-series", "GaN carbon series provenance changed"
     doc = ROOT / "docs/CLAIMS.md"
     generated = markdown(data)
     if args.write_doc:
         doc.parent.mkdir(exist_ok=True)
         doc.write_text(generated)
     assert doc.exists() and doc.read_text() == generated, "docs/CLAIMS.md is out of date; run with --write-doc"
-    print(f"Evidence integrity passed: {len(claims)} claims, {len(sources)} sources, {len(parsed.bindings)} static bindings, {len(mappings)} recipe mappings.")
+    print(f"Evidence integrity passed: {len(claims)} claims, {len(sources)} sources, {len(parsed.bindings)} static bindings, {len(mappings)} recipe mappings, {len(defect_cases)} scoped defect examples.")
 
 
 if __name__ == "__main__":

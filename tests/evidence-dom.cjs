@@ -170,7 +170,7 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   }
 }
 assert.equal(equations, 9);
-assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 33);
+assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 43);
 assert.equal(query('#cv-precursor').options.length, 7);
 assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
 assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);
@@ -183,7 +183,7 @@ assert.match(query('#cv-ref-26').textContent, /1150C/);
 assert.match(query('#cv-ref-27').textContent, /2018/);
 assert.match(query('#cv-ref-17').textContent, /2023/);
 assert.match(query('#cv-ref-10').textContent, /Shiang-Cheng Lu/);
-assert.match(query('#cv-ref-30').textContent, /Reviewed full text/);
+assert.match(query('#cv-ref-30').textContent, /Checked source copy/);
 assert.match(query('#cv-ref-26 > a').href, /1150C-MFC-DS\.pdf/);
 expectRefs('[data-cite="wafer"]', [16]);
 for (const source of dom.window.CVDEvidence.sources.values()) {

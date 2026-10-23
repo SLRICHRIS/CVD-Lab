@@ -5,10 +5,11 @@
 This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
-Scientific citation audit and environment upgrade, 23 October 2026:
-78 claim records map to 33 sources,
+Scientific citation audit, reaction environment and defect atlas, 23 October 2026:
+90 claim records map to 43 sources,
 with numbered citations beside definitions, recipe values, net equations,
-material roles, component explanations and fabrication descriptions.
+material roles, component explanations, fabrication descriptions and twelve
+scoped defect examples covering all ten presets.
 
 ## Upload to GitHub
 
@@ -81,6 +82,9 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
   continuous/single-pass modes and reduced-motion support.
 - An analytic 1D diffusion/surface-reaction explorer with a concentration
   profile and normalised flux; source equations and assumptions are visible.
+- A recipe-linked **Defect atlas** with twelve examples, distinct qualitative
+  diagrams, a three-step teaching reveal, diagnostic methods and source-fit
+  labels. The coverage table switches the shared recipe.
 - Rotatable chamber cutaways with machine part labels and inspection.
 - Seven precursor choices, ten supported reference recipes, and APCVD,
   LPCVD, PECVD and MOCVD views where appropriate to the selected chemistry.
@@ -90,7 +94,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 - Seven process groups in an illustrative VLSI fabrication overview, with
   cited hover, tap and keyboard-focus explanations.
 - CVD teaching guide, ten-recipe comparison, plasma / PECVD, MOCVD and silicon
-  definitions, and 33 numbered references with source types and exact locators.
+  definitions, and 43 numbered references with source types and exact locators.
 - Navy, cobalt, teal, and violet design accents, responsive layouts,
   keyboard controls, and S L RICHRIS copyright.
 
@@ -108,6 +112,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 | `tests/evidence-dom.cjs` | DOM checks for recipe switching, cited fields and reference navigation |
 | `tests/citations.cjs` | Browser regression checks across recipes and citation navigation |
 | `tests/environment.cjs` | Conservation, boundary conditions, environment citations, playback and rendering |
+| `tests/defects.cjs` | All defect mappings, diagram selection, evidence limits, citations and accessible playback |
 | `package.json` | Optional development dependencies; no frontend build is required |
 | `.gitignore` | Keeps local environments and secrets out of Git |
 | `LICENSE.txt` | Copyright notice |
@@ -143,7 +148,7 @@ patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
-All 33 references were checked against their linked assertions. The register
+All 43 references were checked against their linked assertions. The register
 records the checked copy and verification method. Mixed citations identify the
 specific source's role: a facility gas list supports a feed pairing, while a
 separate equation source establishes net stoichiometry. The obsolete vapour
@@ -167,7 +172,8 @@ scope for each reaction.
 Scientific proofreading also corrected the film backdrop to preserve complete
 formula-unit proportions, including Si:O = 1:2 and Si:N = 3:4. Film spheres
 represent idealised composition; their positions do not depict crystal structure
-or a bonding network. Impurities, defects and nonstoichiometry are omitted.
+or a bonding network. The atom-balance view omits impurities, defects and
+nonstoichiometry; the separate defect atlas illustrates selected published concerns.
 Reaction phases illustrate net atom redistribution rather than an elementary
 mechanism. RF-off pauses the demonstration and does not predict residual thermal
 growth. Vapour generation and gas-flow metering are described as separate functions.
@@ -178,6 +184,7 @@ measured atomic charges or a plasma reaction pathway.
 The default **Reaction environment** view shows simultaneous delivery,
 activation, surface encounters and exhaust. **Reactor & atom balance** opens the
 hardware cutaway and conserved-atom illustration for the same selected recipe.
+**Defect atlas** opens the evidence-mapped film-quality view for that recipe.
 The environmental tracers teach process categories; their trajectories,
 population counts, surface dwell times and film patches are illustrative.
 
@@ -190,6 +197,17 @@ input; it is not estimated from the recipe's temperature or pressure. Results
 are normalised concentrations and flux, not measured precursor utilisation or
 film-growth rates. The Energy overlay shows qualitative zones, not a solved
 temperature or plasma-potential field.
+
+The defect atlas distinguishes observations from suggested causes and identifies
+how each study differs from the preset. The GaN carbon entry uses the same
+published sample series as T2. Other studies use different conditions or stacks.
+The APCVD particle comparison explicitly retains an evidence gap because its
+checked experiment is LPCVD; the epitaxial-Si stacking-fault abstract does not
+establish SiCl₄ chemistry. Neither is presented as direct preset validation.
+Abstract-only sources are labelled in the reference verification records, and
+no unreviewed figure number is supplied for them. The diagrams and teaching
+reveal have no calibrated scale, population, atomic-site assignment or kinetics.
+Temperature and transport controls do not recalculate defect incidence.
 
 After changing scientific content or reference metadata, update the relevant
 claim in `cv-evidence-data`, bind the displayed claim using `data-cite` or its
@@ -238,6 +256,13 @@ constant flux through the profile over seven rate ratios. Browser checks also
 cover region/overlay controls, camera motion, source navigation, concentration
 controls, continuous playback past eight seconds, pause/resume, speed changes,
 single-pass completion, reduced motion and desktop/mobile light/dark rendering.
+
+Defect checks cover all ten shared recipe routes and twelve precisely cited
+examples, diagram/step selection, source-fit labels and evidence gaps, unchanged
+defect results after setpoint changes, citation focus/return across views,
+teaching-reveal playback and desktop/mobile light/dark layouts. Defect diagrams
+and the full atlas were visually reviewed. These checks verify implementation
+and citation integrity; they do not establish experimental defect validation.
 
 The Streamlit launcher is unchanged by this audit. It uses the documented
 [`st.iframe` API](https://docs.streamlit.io/develop/api-reference/text/st.iframe)

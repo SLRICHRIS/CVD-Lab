@@ -20,6 +20,76 @@
     @media(max-width:1000px) { body { padding:24px; } }
     @media(max-width:700px) { body { padding:22px 16px 30px; } }
     @media(max-width:400px) { body { padding:20px 12px 28px; } }
+    #cvd-recipe-accuracy .cv-defect-lab { margin:0 0 24px; padding:24px; border:1px solid var(--cv-line); border-radius:18px; background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-defect-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+    #cvd-recipe-accuracy .cv-defect-heading h2 { font-size:26px; margin:5px 0 9px; letter-spacing:-.6px; }
+    #cvd-recipe-accuracy .cv-defect-heading p { max-width:730px; }
+    #cvd-recipe-accuracy .cv-defect-count { flex:0 0 auto; padding:8px 12px; border-radius:20px; background:light-dark(#e9f3f4,#183e45); color:light-dark(#18656b,#9de0df); font-size:12px; }
+    #cvd-recipe-accuracy .cv-defect-current { margin:14px 0 18px; padding:12px 15px; border:1px solid var(--cv-line); border-radius:9px; font-size:13px; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-defect-current strong { color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-defect-options { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+    #cvd-recipe-accuracy .cv-defect-options button { padding:10px 15px; border:1px solid var(--cv-line); border-radius:9px; background:var(--cv-panel); color:var(--cv-muted); text-align:left; }
+    #cvd-recipe-accuracy .cv-defect-options button[aria-pressed=true] { background:light-dark(#e7f3f3,#183e45); border-color:light-dark(#2c8189,#77c8ce); color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-defect-options small { display:block; margin-top:3px; font-size:11px; }
+    #cvd-recipe-accuracy .cv-defect-grid { display:grid; grid-template-columns:minmax(0,1.18fr) minmax(0,1fr); gap:24px; align-items:start; }
+    #cvd-recipe-accuracy .cv-defect-visual { min-width:0; border:1px solid #29425a; border-radius:14px; overflow:hidden; color:#eaf4ff; background:#0e2135; }
+    #cvd-recipe-accuracy .cv-defect-scene-top { padding:15px 18px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:7px; font-size:11px; letter-spacing:.6px; color:#bdd1e5; border-bottom:1px solid #29425a; }
+    #cvd-recipe-accuracy #cv-defect-svg { display:block; width:100%; height:auto; aspect-ratio:660/360; background:radial-gradient(ellipse at 45% 42%,#18394d,#0d1e32 80%); }
+    #cvd-recipe-accuracy .cv-defect-visual .cv-defect-overlay { transition:opacity .3s; }
+    #cvd-recipe-accuracy .cv-defect-visual a.cv-cite-link { color:#9eeae2; }
+    #cvd-recipe-accuracy .cv-defect-key { display:flex; flex-wrap:wrap; gap:15px; padding:4px 18px 13px; font-size:12px; color:#d3e1ed; }
+    #cvd-recipe-accuracy .cv-defect-key span::before { content:''; display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:6px; background:#5598a7; }
+    #cvd-recipe-accuracy .cv-defect-key span:last-child::before { background:#ffb875; }
+    #cvd-recipe-accuracy .cv-defect-sequence { padding:15px 18px; border-top:1px solid #29425a; }
+    #cvd-recipe-accuracy .cv-defect-steps { display:flex; gap:7px; }
+    #cvd-recipe-accuracy .cv-defect-steps button { flex:1; min-width:0; padding:8px 6px; border:1px solid #405b72; border-radius:7px; background:#172f45; color:#c9dceb; font-size:12px; }
+    #cvd-recipe-accuracy .cv-defect-steps button[aria-pressed=true] { border-color:#9bdddb; color:#b5efea; background:#20454e; }
+    #cvd-recipe-accuracy #cv-defect-play { padding:8px 12px; margin-top:11px; border:1px solid #8fd6d1; border-radius:7px; background:#9fe2dc; color:#102d39; font-size:12px; }
+    #cvd-recipe-accuracy #cv-defect-caption { min-height:48px; margin:12px 0 0; font-size:13px; line-height:1.6; color:#d4e2ed; }
+    #cvd-recipe-accuracy .cv-defect-timing { margin:9px 0 0; color:#a9bfce; font-size:11px; }
+    #cvd-recipe-accuracy .cv-defect-fit { display:inline-block; max-width:100%; border:1px solid light-dark(#ccad78,#8b734e); background:light-dark(#fff6e6,#3b3427); color:light-dark(#795218,#f2d39b); border-radius:7px; padding:6px 9px; font-size:11px; }
+    #cvd-recipe-accuracy .cv-defect-fit[data-fit=same-series] { border-color:light-dark(#7cac9f,#4f9c8b); background:light-dark(#e9f5ef,#193e35); color:light-dark(#286751,#98d7bf); }
+    #cvd-recipe-accuracy #cv-defect-title { margin:12px 0 6px; font-size:23px; line-height:1.25; }
+    #cvd-recipe-accuracy #cv-defect-meta { margin:0 0 18px; color:var(--cv-muted); font-size:12px; }
+    #cvd-recipe-accuracy .cv-defect-evidence { margin:0; }
+    #cvd-recipe-accuracy .cv-defect-evidence>div { margin:0 0 14px; }
+    #cvd-recipe-accuracy .cv-defect-evidence dt { font-size:10px; color:var(--cv-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
+    #cvd-recipe-accuracy .cv-defect-evidence dd { margin:0; line-height:1.65; font-size:13px; }
+    #cvd-recipe-accuracy .cv-defect-scope { border-top:1px solid var(--cv-line); padding-top:13px; }
+    #cvd-recipe-accuracy .cv-defect-bounds { border-left:3px solid light-dark(#a1b5c5,#607e96); padding-left:13px; color:var(--cv-muted); font-size:12px; line-height:1.65; margin:20px 0; }
+    #cvd-recipe-accuracy .cv-defect-lab details { margin-bottom:0; border-radius:10px; }
+    #cvd-recipe-accuracy .cv-defect-table-wrap { overflow-x:auto; }
+    #cvd-recipe-accuracy .cv-defect-table { width:100%; border-collapse:collapse; font-size:12px; }
+    #cvd-recipe-accuracy .cv-defect-table th { text-align:left; padding:10px; color:var(--cv-muted); font-weight:500; }
+    #cvd-recipe-accuracy .cv-defect-table td { padding:10px; border-top:1px solid var(--cv-line); line-height:1.6; vertical-align:top; }
+    #cvd-recipe-accuracy .cv-defect-table button { border:0; padding:0; background:transparent; color:var(--cv-active); text-align:left; text-decoration:underline; text-underline-offset:3px; }
+    #cvd-recipe-accuracy .cv-defect-table tr[aria-current=true] { background:light-dark(#eff6f8,#172e43); }
+    #cvd-recipe-accuracy .cv-defect-table td:first-child { min-width:140px; }
+    #cvd-recipe-accuracy .cv-defect-table td:last-child { min-width:160px; }
+    @media(max-width:900px) {
+      #cvd-recipe-accuracy .cv-defect-grid { grid-template-columns:minmax(0,1fr); }
+      #cvd-recipe-accuracy .cv-defect-evidence { display:grid; grid-template-columns:1fr 1fr; gap:0 22px; }
+      #cvd-recipe-accuracy .cv-defect-scope { grid-column:1/-1; }
+    }
+    @media(max-width:540px) {
+      #cvd-recipe-accuracy .cv-defect-lab { padding:15px; }
+      #cvd-recipe-accuracy .cv-defect-heading { display:block; }
+      #cvd-recipe-accuracy .cv-defect-heading h2 { font-size:23px; }
+      #cvd-recipe-accuracy .cv-defect-count { display:inline-block; margin-top:9px; }
+      #cvd-recipe-accuracy .cv-defect-options button { flex:1 1 135px; }
+      #cvd-recipe-accuracy .cv-defect-evidence { display:block; }
+      #cvd-recipe-accuracy .cv-defect-steps { gap:4px; }
+      #cvd-recipe-accuracy .cv-defect-steps button { font-size:11px; }
+      #cvd-recipe-accuracy .cv-defect-scene-top { padding:12px; font-size:10px; }
+      #cvd-recipe-accuracy #cv-defect-svg text { font-size:24px; }
+      #cvd-recipe-accuracy #cv-defect-svg .cv-defect-svg-heading { font-size:26px; }
+      #cvd-recipe-accuracy #cv-defect-svg .cv-defect-svg-symbol { font-size:18px; }
+      #cvd-recipe-accuracy #cv-defect-svg .cv-defect-svg-note { display:none; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      #cvd-recipe-accuracy .cv-defect-visual .cv-defect-overlay { transition:none; }
+    }
+
   </style>
   <style>
     #cvd-recipe-accuracy {
@@ -619,7 +689,8 @@
   <div class="cv-lab-views" role="group" aria-label="Laboratory scale">
     <button type="button" data-lab-view="environment" aria-pressed="true" aria-controls="cv-environment">Reaction environment</button>
     <button type="button" data-lab-view="hardware" aria-pressed="false" aria-controls="cv-hardware-view">Reactor &amp; atom balance</button>
-    <span>One recipe. Two connected scales.</span>
+    <button type="button" data-lab-view="defects" aria-pressed="false" aria-controls="cv-defects">Defect atlas</button>
+    <span>One recipe. Three connected views.</span>
   </div>
   <section id="cv-environment" class="cv-env-lab" aria-labelledby="cv-env-title">
     <header class="cv-env-heading"><div><p class="cv-overline">Inside the growth zone</p><h2 id="cv-env-title">Follow the species. Understand the film.</h2><p id="cv-env-subtitle" class="cv-secondary"></p></div><span class="cv-env-label">Interactive 3D environment</span></header>
@@ -636,6 +707,23 @@
     <div class="cv-env-stages" role="group" aria-label="Inspect an environment process"><button type="button" data-env-stage="delivery" aria-pressed="true"><span>01</span>Delivery</button><button type="button" data-env-stage="activation" aria-pressed="false"><span>02</span>Activation</button><button type="button" data-env-stage="transport" aria-pressed="false"><span>03</span>Transport</button><button type="button" data-env-stage="surface" aria-pressed="false"><span>04</span>Surface</button><button type="button" data-env-stage="exhaust" aria-pressed="false"><span>05</span>Exhaust</button></div>
     <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. D is diffusivity, δ is layer thickness, and kₛ and kₘ have units of velocity.</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
   </section>
+  <section id="cv-defects" class="cv-defect-lab" aria-labelledby="cv-defects-title" hidden>
+    <header class="cv-defect-heading"><div><p class="cv-overline">Film quality · evidence atlas</p><h2 id="cv-defects-title">Different chemistry. Different defects.</h2><p class="cv-secondary">Inspect where a documented problem appears, how it was detected and how closely the study matches this recipe.</p></div><span class="cv-defect-count">10 recipes · 12 curated examples</span></header>
+    <div class="cv-defect-current"><strong>Current preset</strong><p id="cv-defect-current"></p></div>
+    <div id="cv-defect-options" class="cv-defect-options" role="group" aria-label="Defects mapped to the selected recipe"></div>
+    <div class="cv-defect-grid">
+      <div class="cv-defect-visual">
+        <div class="cv-defect-scene-top"><span id="cv-defect-scene-kind">QUALITATIVE CROSS-SECTION</span><span>Enlarged · no physical scale</span></div>
+        <svg id="cv-defect-svg" viewBox="0 0 660 360" role="img" aria-labelledby="cv-defect-svg-title cv-defect-svg-desc"></svg>
+        <div class="cv-defect-key"><span>Host / process region</span><span>Mapped concern</span></div>
+        <div class="cv-defect-sequence"><div class="cv-defect-steps" role="group" aria-label="Explain the defect diagram"><button type="button" data-defect-step="0" aria-pressed="false">1 · Host</button><button type="button" data-defect-step="1" aria-pressed="true">2 · Location</button><button type="button" data-defect-step="2" aria-pressed="false">3 · Detection</button></div><p id="cv-defect-caption" aria-live="polite"></p><button type="button" id="cv-defect-play">Play explanation</button><p class="cv-defect-timing">Three-step teaching reveal · timing does not represent formation kinetics</p></div>
+      </div>
+      <article id="cv-defect-detail" aria-labelledby="cv-defect-title"><span id="cv-defect-fit" class="cv-defect-fit"></span><h3 id="cv-defect-title" tabindex="-1" aria-live="polite"></h3><p id="cv-defect-meta"></p><dl class="cv-defect-evidence"><div><dt>Documented observation</dt><dd id="cv-defect-observation"></dd></div><div><dt>Studied conditions</dt><dd id="cv-defect-studied"></dd></div><div><dt>Variables investigated</dt><dd id="cv-defect-driver"></dd></div><div><dt>How it was detected</dt><dd id="cv-defect-diagnostic"></dd></div><div class="cv-defect-scope"><dt>Evidence fit &amp; limits</dt><dd id="cv-defect-scope"></dd></div></dl></article>
+    </div>
+    <p class="cv-defect-bounds">This is a curated map of published examples, not an exhaustive defect catalogue or a prediction that the selected recipe will fail. Marker counts, sizes and atomic sites are illustrative. Changing temperature or the transport ratio does not calculate defect density.</p>
+    <details id="cv-defect-coverage"><summary>Compare defect mappings across all 10 recipes</summary><div class="cv-defect-table-wrap"><table class="cv-defect-table"><thead><tr><th scope="col">Recipe</th><th scope="col">Mapped examples</th><th scope="col">Evidence fit &amp; sources</th></tr></thead><tbody id="cv-defect-coverage-body"></tbody></table></div></details>
+  </section>
+
   <div id="cv-hardware-view" class="cv-workspace" hidden>
     <section class="cv-chamber" aria-labelledby="cv-machine">
       <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" data-cite="part-showerhead" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
@@ -684,7 +772,7 @@
   <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p></footer>
   <script id="cv-evidence-data" type="application/json">
 {
-  "version": 3,
+  "version": 4,
   "reviewed": "2026-10-23",
   "sources": [
     {
@@ -1250,15 +1338,15 @@
       "kind": "Peer-reviewed experimental research article",
       "url": "https://doi.org/10.3390/nano8090744",
       "alternate": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6163992/",
-      "locator": "Nanomaterials 8(9), 744 (2018): p. 2, §2 and Fig. 1; p. 3, Table 1, row T2; DOI 10.3390/nano8090744",
-      "scope": "TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire.",
-      "limits": "One reported final-layer setpoint, not a general MOCVD operating window. The schematic does not reconstruct the study’s reactor, nucleation sequence, impurity concentrations or luminescence.",
+      "locator": "Nanomaterials 8(9), 744 (2018): p. 2, §2 and Fig. 1; p. 3, Table 1, row T2; DOI 10.3390/nano8090744; §3, Figs. 3–6 (SIMS and photoluminescence)",
+      "scope": "TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire. Carbon/SIMS and yellow-luminescence correlations in the three growth series.",
+      "limits": "One reported final-layer setpoint, not a general operating window. The carbon atlas uses measured trends, not a calibrated concentration/PL prediction. SIMS and PL do not uniquely identify the microscopic carbon configuration.",
       "accessed": "2026-10-23",
       "verification": {
         "date": "2026-10-23",
         "method": "Primary article full text and DOI record",
         "url": "https://pdfs.semanticscholar.org/fd19/d460aa3cd602369575494bf06d5b452a0266.pdf",
-        "note": "§2, Fig. 1 and Table 1 row T2 checked; a readable copy of the published article was used when the DOI fetch was blocked."
+        "note": "§2, Fig. 1 and Table 1 row T2 checked; a readable copy of the published article was used when the DOI fetch was blocked. §3 and Figs. 3–6 also checked for the defect atlas; proposed atomic-site models are distinguished from measured impurity/PL correlations."
       },
       "alternate_label": "PubMed Central full text"
     },
@@ -1315,6 +1403,202 @@
         "url": "https://www.sfu.ca/~gchapman/e495/e495l10m.pdf#page=9",
         "note": "Final coupled flux equation on PDF p. 9 and limiting cases on p. 10 checked, with diffusion relation on p. 8. The isolated surface-flux line is typographically inconsistent with its surface concentration; the lab uses the final coupled expression."
       }
+    },
+    {
+      "id": 34,
+      "author": "M. Zarchi, S. Ahangarani and M. Zare Sanjari",
+      "title": "Properties of Silicon Dioxide Film Deposited By PECVD at Low Temperature/Pressure",
+      "year": "2014",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.5937/metmateng1402089M",
+      "locator": "Metallurgical and Materials Engineering 20(2), 89–96: pp. 90–91 Experimental; p. 93 powder observation; pp. 95–96 Fig. 7 and Table 1",
+      "scope": "SiH4/N2O PECVD: reported chamber/exhaust powder and C–V hysteresis interpreted as border traps.",
+      "limits": "Different dilution, pressure and thermal history from the preset. C–V identifies electrical behaviour, not an atomic defect structure. The paper’s unbalanced Eq. (1) is not used.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher PDF, full text",
+        "url": "https://metall-mater-eng.com/index.php/home/article/download/159/145",
+        "note": "Experimental conditions, powder paragraph, Fig. 7 and Table 1 read; net-equation and ambiguous FTIR passages excluded."
+      },
+      "alternate": "https://metall-mater-eng.com/index.php/home/article/view/159",
+      "alternate_label": "Publisher article record"
+    },
+    {
+      "id": 35,
+      "author": "T. T. Sheng, C. C. Shih and C. S. Wang",
+      "title": "The Effect of film thickness on the electrical properties of LPCVD polysilicon films",
+      "year": "1984",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1149/1.2115724",
+      "locator": "Journal of The Electrochemical Society: IBM Research author-hosted abstract, paragraphs 1–2",
+      "scope": "Carrier trapping associated with grain-size variation explains thickness-dependent resistivity in boron-doped LPCVD polysilicon.",
+      "limits": "Abstract-level verification. Boron-doped films differ from the lab’s undoped schematic; the checked abstract does not establish the precursor or exact growth recipe.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Author institution abstract and DOI link",
+        "url": "https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films",
+        "note": "Film type, doping, trapping interpretation and electrical measurements checked; no full-text figure attribution."
+      },
+      "alternate": "https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films",
+      "alternate_label": "IBM Research article abstract"
+    },
+    {
+      "id": 36,
+      "author": "T. Kim, S.-M. Suh, S. L. Girshick, M. R. Zachariah, P. H. McMurry, R. M. Rassel, Z. Shen and S. A. Campbell",
+      "title": "Particle formation during low-pressure chemical vapor deposition from silane and oxygen: Measurement, modeling, and film properties",
+      "year": "2002",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1116/1.1448506",
+      "locator": "JVST A 20(2), 413–423: p. 413 abstract; §II; §III.A–B; Figs. 6–11",
+      "scope": "Gas-borne particles in thermal SiH4/O2 deposition measured by particle-beam mass spectrometry and TEM at low pressure.",
+      "limits": "The experiment is LPCVD (0.5–2 Torr, 200–800 °C), not APCVD. Its particle domains and sizes are not transferred to the atmospheric preset. Airborne particles alone do not establish pinholes in that preset.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Author research-group PDF, full text",
+        "url": "https://mrzgroup.ucr.edu/sites/default/files/2019-02/2002_JVST_taesung.pdf",
+        "note": "Abstract, experimental conditions, particle measurements and the introduction’s caution about APCVD pinhole correlation read."
+      },
+      "alternate": "https://mrzgroup.ucr.edu/sites/default/files/2019-02/2002_JVST_taesung.pdf",
+      "alternate_label": "Author-group full text"
+    },
+    {
+      "id": 37,
+      "author": "R. M. Grootes, M. Dijkstra, Y. Klaver, D. Marpaung and H. L. Offerhaus",
+      "title": "Crack barriers for thick SiN using dicing",
+      "year": "2022",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1364/OE.456834",
+      "locator": "Optics Express 30(10), 16725–16733: §2.1 p. 16726; §3 pp. 16727–16728; Figs. 2 and 4; Table 1",
+      "scope": "DCS/NH3/N2 LPCVD nitride: tensile stress measured by wafer bow, cracking and crack arrest in thick films.",
+      "limits": "750 °C and 150 mTorr, thermal cycling and patterned crack barriers differ from the preset. Thickness, substrate and stress matter; no universal critical thickness is assigned.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher-provided full text and author institution record",
+        "url": "https://www.researchgate.net/publication/359950973_Crack_barriers_for_thick_SiN_using_dicing",
+        "note": "Publisher full text on ResearchGate read: §2.1 stress, §3 recipe, Figs. 2/4 and Table 1; DOI and authors checked at Twente."
+      },
+      "alternate": "https://research.utwente.nl/en/publications/crack-barriers-for-thick-sin-using-dicing/",
+      "alternate_label": "University of Twente article record"
+    },
+    {
+      "id": 38,
+      "author": "John L. Sudijono, Vladislav Y. Vassiliev and Jia-Zhen Zheng",
+      "title": "A Comparative Study of TEOS-based Chemical Vapor Deposition Techniques for Shallow Trench Isolation Technology",
+      "year": "1997",
+      "kind": "Experimental conference paper (author manuscript)",
+      "url": "https://www.researchgate.net/publication/273635032_A_Comparative_Study_of_TEOS-based_Chemical_Vapor_Deposition_Techniques_for_Shallow_Trench_Isolation_Technology",
+      "locator": "ISIC-97 proceedings, pp. 597–600: §II–III; Figs. 2, 3 and 6 (author manuscript PDF pp. 1–4)",
+      "scope": "Thermal LPCVD TEOS oxide: cross-sectional SEM of trench seams and voids; temperature/pressure/geometry discussion.",
+      "limits": "The study used 0.5 Torr and patterned shallow trenches, including oxide/nitride surfaces. SEM preparation enlarges some voids. Not a measurement of the lab’s flat 0.12 Torr wafer.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Author-uploaded manuscript, full text and figure inspection",
+        "url": "https://www.researchgate.net/profile/Vladislav-Vasilyev-5/publication/273635032_A_Comparative_Study_of_TEOS-based_Chemical_Vapor_Deposition_Techniques_for_Shallow_Trench_Isolation_Technology/links/5507936b0cf2d7a28125c8a8/A-Comparative-Study-of-TEOS-based-Chemical-Vapor-Deposition-Techniques-for-Shallow-Trench-Isolation-Technology.pdf",
+        "note": "Downloaded readable author PDF; §II–III, SEM Fig. 2 and schematic Fig. 3 inspected. Conference details checked against the author record."
+      }
+    },
+    {
+      "id": 39,
+      "author": "Ciprian Iliescu",
+      "title": "Characterization of TEOS Thin Film Depositions on PECVD Reactors",
+      "year": "2019",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://www.aos.ro/wp-content/anale/IFVol12Nr1Art.2.pdf",
+      "locator": "Annals of the Academy of Romanian Scientists, Series on Science and Technology of Information 12(1), 17–30: p. 18 Fig. 1; p. 19 §2; p. 20 §3.1",
+      "scope": "TEOS/O2 PECVD film exfoliation associated with adhesion and residual stress; pressure, temperature and feed-ratio effects.",
+      "limits": "STS system, 200–350 °C and sub-Torr pressures differ from the 300 mm patent preset. The reported pressure threshold is equipment-specific and is not applied to the preset.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Academy journal PDF, full text",
+        "url": "https://www.aos.ro/wp-content/anale/IFVol12Nr1Art.2.pdf",
+        "note": "Fig. 1, materials/methods and §3.1 exfoliation discussion read. No quantitative threshold transfer."
+      }
+    },
+    {
+      "id": 40,
+      "author": "R. H. Finch, H. J. Queisser, G. Thomas and J. Washburn",
+      "title": "Structure and Origin of Stacking Faults in Epitaxial Silicon",
+      "year": "1963",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1063/1.1702622",
+      "locator": "Journal of Applied Physics 34, 406–415: publisher abstract (microscopy, tetrahedral fault bundles, suggested oxygen origin)",
+      "scope": "Microscopy documents stacking-fault bundles with apices at the substrate/film interface; oxygen contamination is a suggested origin.",
+      "limits": "Publisher abstract only; precursor and growth conditions are not established by that abstract. This is epitaxial-silicon evidence, not a verified SiCl4-specific defect rate or mechanism.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher abstract",
+        "url": "https://pubs.aip.org/aip/jap/article/34/2/406/163769/Structure-and-Origin-of-Stacking-Faults-in",
+        "note": "Microscopy and fault morphology checked in publisher abstract; oxygen cause retained as a suggestion, not proof of unique causality."
+      },
+      "alternate": "https://pubs.aip.org/aip/jap/article/34/2/406/163769/Structure-and-Origin-of-Stacking-Faults-in",
+      "alternate_label": "Publisher abstract"
+    },
+    {
+      "id": 41,
+      "author": "Shaohui Xu, Pan Yao, Jiandong Zhang and Renrui Huang",
+      "title": "The filling seams improvement and properties analyses of tungsten films",
+      "year": "2020",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1016/j.mee.2020.111285",
+      "locator": "Microelectronic Engineering 226, 111285: abstract (H2 flow, nucleation time, filling and CT contact resistance)",
+      "scope": "CVD tungsten seam/filling comparison: H2 flow and nucleation-time changes accompanied improved filling and contact resistance.",
+      "limits": "Abstract-level verification. The full nucleation stack, geometry and imaging method are not established by the checked abstract; the flat-wafer preset does not predict a seam.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher-indexed abstract and article abstract copy",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167931720300733",
+        "note": "Indexed publisher abstract and ResearchGate article abstract checked; no unverified figure or SEM-method attribution."
+      },
+      "alternate": "https://www.researchgate.net/publication/340164411_The_filling_seams_improvement_and_properties_analyses_of_tungsten_films",
+      "alternate_label": "Article abstract copy"
+    },
+    {
+      "id": 42,
+      "author": "N. Ramanuja, R. A. Levy, S. N. Dharmadhikari, E. Ramos, C. W. Pearce, S. C. Menasian, P. C. Schamberger and C. C. Collins",
+      "title": "Synthesis and characterization of low pressure chemically vapor deposited titanium nitride films using TiCl4 and NH3",
+      "year": "2002",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1016/S0167-577X(02)00776-0",
+      "locator": "Materials Letters 57(2), 261–269: NJIT-hosted abstract, paragraphs 2–3 (RBS, chlorine and resistivity)",
+      "scope": "RBS-measured chlorine retention in TiCl4/NH3 LPCVD TiN and its temperature dependence; resistivity depends on temperature and feed ratio.",
+      "limits": "Institution-hosted abstract only. Process conditions differ from the selected patent example; measured composition does not identify a unique atomic Cl site or predict its concentration at 650 °C.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Author institution abstract",
+        "url": "https://digitalcommons.njit.edu/fac_pubs/14554/",
+        "note": "Reactants, RBS measurement, chlorine-temperature trend and electrical-property statement checked; no full-text figure attribution."
+      },
+      "alternate": "https://digitalcommons.njit.edu/fac_pubs/14554/",
+      "alternate_label": "NJIT article abstract"
+    },
+    {
+      "id": 43,
+      "author": "X. H. Wu, P. Fini, E. J. Tarsa, B. Heying, S. Keller, U. K. Mishra, S. P. DenBaars and J. S. Speck",
+      "title": "Dislocation generation in GaN heteroepitaxy",
+      "year": "1998",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.1016/S0022-0248(98)00240-1",
+      "locator": "Journal of Crystal Growth 189–190, 231–243: abstract and indexed Experimental section (two-step MOCVD, TMGa/NH3, TEM/AFM)",
+      "scope": "Threading-dislocation generation during two-step MOCVD GaN growth on sapphire, studied by TEM and AFM; island coalescence is implicated.",
+      "limits": "Publisher-indexed abstract/experimental excerpts checked, not the full text. This is a different growth sequence from Liang sample T2; no T2 dislocation density or Burgers vector is inferred.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Publisher-indexed abstract/experimental excerpts and author-group metadata",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0022024898002401",
+        "note": "TMGa/NH3, sapphire, two-step growth, TEM/AFM and coalescence checked in publisher excerpts; author group confirms authors, year and pages."
+      },
+      "alternate": "https://labs.materials.ucsb.edu/speck/james/publications/1540",
+      "alternate_label": "UCSB author-group article record"
     }
   ],
   "claims": {
@@ -2244,11 +2528,131 @@
         }
       ],
       "note": "The animation illustrates bulk deposition on a prepared surface. It does not reproduce the measured mass spectrum or transient nucleation chemistry."
+    },
+    "defect-oxide-charge": {
+      "statement": "C–V hysteresis in SiH₄/N₂O PECVD oxide was interpreted as evidence of border traps near the Si interface.",
+      "evidence": [
+        {
+          "source": 34,
+          "locator": "pp. 90–91 Experimental; pp. 95–96, Fig. 7 and Table 1"
+        }
+      ],
+      "note": "Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures."
+    },
+    "defect-plasma-powder": {
+      "statement": "A SiH₄/N₂O PECVD study reported white oxide powder on chamber walls and in the pumping line at higher silane flow.",
+      "evidence": [
+        {
+          "source": 34,
+          "locator": "p. 93, deposition-rate discussion immediately before FTIR analysis"
+        }
+      ],
+      "note": "A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative."
+    },
+    "defect-poly-traps": {
+      "statement": "In boron-doped LPCVD polysilicon, carrier trapping associated with grain-size variation explained thickness-dependent resistivity.",
+      "evidence": [
+        {
+          "source": 35,
+          "locator": "IBM Research article abstract, paragraphs 1–2"
+        }
+      ],
+      "note": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern."
+    },
+    "defect-thermal-particles": {
+      "statement": "Gas-borne particles were measured during thermal SiH₄/O₂ deposition at low pressure.",
+      "evidence": [
+        {
+          "source": 36,
+          "locator": "p. 413 abstract; §II Experimental setup; §III particle measurements"
+        }
+      ],
+      "note": "Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here."
+    },
+    "defect-nitride-cracks": {
+      "statement": "Thick DCS/NH₃/N₂ LPCVD nitride films showed tensile stress and cracks; deep barriers arrested cracks in the study.",
+      "evidence": [
+        {
+          "source": 37,
+          "locator": "§2.1 p. 16726; §3 pp. 16727–16728; Figs. 2/4 and Table 1"
+        }
+      ],
+      "note": "The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it."
+    },
+    "defect-teos-trench": {
+      "statement": "Cross-sectional SEM showed seams and voids in LPCVD TEOS oxide inside shallow trenches.",
+      "evidence": [
+        {
+          "source": 38,
+          "locator": "§II–III; Figs. 2–3 and Fig. 6 (author PDF pp. 1–4)"
+        }
+      ],
+      "note": "The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction."
+    },
+    "defect-teos-peeling": {
+      "statement": "A TEOS/O₂ PECVD study showed film exfoliation and associated it with poor adhesion and residual stress.",
+      "evidence": [
+        {
+          "source": 39,
+          "locator": "p. 18 Fig. 1 and discussion; p. 19 §2; p. 20 §3.1"
+        }
+      ],
+      "note": "Different equipment and pressure from the selected 300 mm patent recipe. The study’s failure threshold cannot be applied to the lab’s 2–4 Torr window."
+    },
+    "defect-epi-faults": {
+      "statement": "Microscopy of epitaxial silicon showed stacking-fault bundles with apices at the substrate–film interface; oxygen contamination was suggested as a nucleation cause.",
+      "evidence": [
+        {
+          "source": 40,
+          "locator": "Publisher abstract, microscopy and fault-origin sentences"
+        }
+      ],
+      "note": "Material-level evidence only: the abstract does not establish SiCl₄/H₂. Fault-plane angles are schematic; this does not identify a defect rate for the atmospheric preset."
+    },
+    "defect-w-seam": {
+      "statement": "A CVD tungsten study reported improved seam filling when H₂ flow and nucleation time were adjusted, alongside lower contact resistance.",
+      "evidence": [
+        {
+          "source": 41,
+          "locator": "Abstract, filling comparison and CT contact-resistance results"
+        }
+      ],
+      "note": "Abstract-level evidence. Full stack and imaging method are not established here. A contact geometry is added for explanation; the flat-wafer preset does not predict seams."
+    },
+    "defect-tin-chlorine": {
+      "statement": "RBS measurements found residual chlorine in TiCl₄/NH₃ LPCVD TiN; chlorine content decreased as deposition temperature increased in that study.",
+      "evidence": [
+        {
+          "source": 42,
+          "locator": "NJIT-hosted abstract, paragraphs 2–3"
+        }
+      ],
+      "note": "The selected patent recipe is different. Cl markers have no assigned lattice site or concentration, and chlorine is not treated as the sole cause of resistivity."
+    },
+    "defect-gan-carbon": {
+      "statement": "In the GaN sample series that includes T2, higher SIMS carbon concentration correlated with stronger yellow photoluminescence.",
+      "evidence": [
+        {
+          "source": 30,
+          "locator": "§2 and Table 1; §3, Figs. 3–6 (SIMS/PL correlations)"
+        }
+      ],
+      "note": "The trend is study-specific, not a universal defect law. SIMS plus PL does not uniquely locate C atoms or prove one microscopic complex; the diagram assigns no atomic site."
+    },
+    "defect-gan-dislocations": {
+      "statement": "TEM/AFM studies of two-step TMGa/NH₃ MOCVD GaN on sapphire documented threading-dislocation generation during growth.",
+      "evidence": [
+        {
+          "source": 43,
+          "locator": "Publisher-indexed abstract and Experimental excerpt; UCSB author record for bibliographic details"
+        }
+      ],
+      "note": "No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population."
     }
   },
   "model_choices": [
     "Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.",
-    "Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.",
+    "In the atom-balance view, film formulae and atom counts represent idealised compositions; impurities, defects and deviations from stoichiometry are omitted. The film backdrop repeats complete formula units to preserve the displayed elemental proportions. The separate defect atlas illustrates selected literature examples.",
     "Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.",
     "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.",
     "Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.",
@@ -2259,8 +2663,265 @@
     "The environment shows continuous local-surface process categories. Incoming molecular glyphs, generic reactive-species markers, surface patches and outgoing gas glyphs are explanatory tracers, not a simulated elementary chemical network.",
     "The 1D transport explorer solves the stated diffusion/first-order-reaction model analytically. Its user-selected Damkohler ratio is independent of the documented recipe conditions; it does not fit kinetic constants or predict a physical film thickness.",
     "Environment colour fields represent qualitative thermal/plasma zones or the explicitly normalised concentration solution. No gas temperature map, plasma potential, electron-energy distribution or full-reactor CFD solution is asserted.",
-    "Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment and hardware/atom-balance views share the same selected recipe."
-  ]
+    "Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment, hardware/atom-balance and defect-atlas views share the same selected recipe.",
+    "The defect atlas maps twelve curated literature examples to all ten included presets. Evidence-fit labels distinguish same chemistry, related material/pressure/stack and the same GaN sample series. This is not an exhaustive catalogue of possible defects.",
+    "Defect drawings, marker counts, sizes, paths and three-step reveals are original qualitative teaching choices. They do not predict defect incidence, density, atomic sites or kinetics, and do not change with the transport-model rate ratio or recipe setpoint."
+  ],
+  "defects": {
+    "version": 1,
+    "recipes": {
+      "silane-PECVD": [
+        "oxide-charge",
+        "plasma-powder"
+      ],
+      "silane-LPCVD": [
+        "poly-traps"
+      ],
+      "silane-APCVD": [
+        "thermal-particles"
+      ],
+      "dcs-LPCVD": [
+        "nitride-cracks"
+      ],
+      "teos-LPCVD": [
+        "teos-trench"
+      ],
+      "teos-PECVD": [
+        "teos-peeling"
+      ],
+      "sicl4-APCVD": [
+        "epi-faults"
+      ],
+      "wf6-LPCVD": [
+        "w-seam"
+      ],
+      "ticl4-LPCVD": [
+        "tin-chlorine"
+      ],
+      "tmga-MOCVD": [
+        "gan-carbon",
+        "gan-dislocations"
+      ]
+    },
+    "cases": [
+      {
+        "id": "oxide-charge",
+        "recipe": "silane-PECVD",
+        "title": "Charge-trapping centres",
+        "family": "Electrical",
+        "region": "Film / interface",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different conditions",
+        "visual": "traps",
+        "host": "SiO₂ on Si",
+        "mark": "Charge-trapping region",
+        "observation": "C–V hysteresis in SiH₄/N₂O PECVD oxide was interpreted as evidence of border traps near the Si interface.",
+        "studied": "He-diluted silane/N₂O; reported substrate 260 °C; annealed and unannealed MIS structures.",
+        "driver": "Annealing and film/interface preparation were compared; no monotonic defect law is inferred.",
+        "diagnostic": "Capacitance–voltage (C–V) hysteresis and estimated trap populations.",
+        "scope": "Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures.",
+        "claim": "defect-oxide-charge"
+      },
+      {
+        "id": "plasma-powder",
+        "recipe": "silane-PECVD",
+        "title": "Powder formation",
+        "family": "Particles",
+        "region": "Gas / chamber wall",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different conditions",
+        "visual": "particles",
+        "host": "SiO₂ process · gas space",
+        "mark": "Particle clusters",
+        "observation": "A SiH₄/N₂O PECVD study reported white oxide powder on chamber walls and in the pumping line at higher silane flow.",
+        "studied": "He-diluted SiH₄/N₂O in a different PECVD reactor.",
+        "driver": "Silane flow was varied while the oxidant supply was held fixed.",
+        "diagnostic": "Reported visual observation of powder in the chamber and pumping line.",
+        "scope": "A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative.",
+        "claim": "defect-plasma-powder"
+      },
+      {
+        "id": "poly-traps",
+        "recipe": "silane-LPCVD",
+        "title": "Trapping at grain boundaries",
+        "family": "Microstructure / electrical",
+        "region": "Grain boundaries",
+        "fit": "related-material",
+        "fit_label": "Related film · doped study",
+        "visual": "grains",
+        "host": "Polycrystalline Si",
+        "mark": "Boundary trap markers",
+        "observation": "In boron-doped LPCVD polysilicon, carrier trapping associated with grain-size variation explained thickness-dependent resistivity.",
+        "studied": "Boron-doped LPCVD films; the checked abstract does not specify the precursor.",
+        "driver": "Film thickness and doping were varied. The reported transport model links grain-size variation to trapping.",
+        "diagnostic": "Electrical resistivity characterisation and trapping-model comparison.",
+        "scope": "The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern.",
+        "claim": "defect-poly-traps"
+      },
+      {
+        "id": "thermal-particles",
+        "recipe": "silane-APCVD",
+        "title": "Gas-phase particle formation",
+        "family": "Particles",
+        "region": "Gas phase",
+        "fit": "related-regime",
+        "fit_label": "Related chemistry · LPCVD evidence",
+        "visual": "particles",
+        "host": "SiH₄/O₂ gas space",
+        "mark": "Gas-borne particle clusters",
+        "observation": "Gas-borne particles were measured during thermal SiH₄/O₂ deposition at low pressure.",
+        "studied": "LPCVD, 0.5–2 Torr and 200–800 °C; O₂/SiH₄ = 20.",
+        "driver": "Pressure and temperature were scanned to identify particle-forming domains in that reactor.",
+        "diagnostic": "Particle-beam mass spectrometry and transmission electron microscopy (TEM).",
+        "scope": "Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here.",
+        "claim": "defect-thermal-particles"
+      },
+      {
+        "id": "nitride-cracks",
+        "recipe": "dcs-LPCVD",
+        "title": "Tensile-stress cracking",
+        "family": "Mechanical",
+        "region": "Through the film",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different stack",
+        "visual": "crack",
+        "host": "Si₃N₄ on an oxide/Si stack",
+        "mark": "Crack through nitride",
+        "observation": "Thick DCS/NH₃/N₂ LPCVD nitride films showed tensile stress and cracks; deep barriers arrested cracks in the study.",
+        "studied": "750 °C, 150 mTorr; thermally cycled thick films on oxide/Si.",
+        "driver": "Film thickness, thermal cycling and barrier geometry were studied.",
+        "diagnostic": "Wafer-bow stress measurements and published crack images.",
+        "scope": "The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it.",
+        "claim": "defect-nitride-cracks"
+      },
+      {
+        "id": "teos-trench",
+        "recipe": "teos-LPCVD",
+        "title": "Trench seams & voids",
+        "family": "Geometric",
+        "region": "Patterned feature",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · patterned substrate",
+        "visual": "void",
+        "host": "TEOS oxide in a trench",
+        "mark": "Seams and enclosed void",
+        "observation": "Cross-sectional SEM showed seams and voids in LPCVD TEOS oxide inside shallow trenches.",
+        "studied": "0.5 Torr; patterned oxide/nitride-lined trenches; comparisons at 650–725 °C.",
+        "driver": "Deposition temperature and trench profile affected filling; transport and reaction were discussed together.",
+        "diagnostic": "Cross-sectional scanning electron microscopy (SEM).",
+        "scope": "The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction.",
+        "claim": "defect-teos-trench"
+      },
+      {
+        "id": "teos-peeling",
+        "recipe": "teos-PECVD",
+        "title": "Interfacial peeling",
+        "family": "Mechanical / adhesion",
+        "region": "Film–substrate interface",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different reactor",
+        "visual": "peel",
+        "host": "TEOS-derived SiO₂ on Si",
+        "mark": "Detached film segment",
+        "observation": "A TEOS/O₂ PECVD study showed film exfoliation and associated it with poor adhesion and residual stress.",
+        "studied": "STS PECVD equipment, 200–350 °C and sub-Torr pressure studies.",
+        "driver": "Pressure, temperature and TEOS/O₂ ratio were investigated.",
+        "diagnostic": "Published peeled-film image and wafer-stress measurement.",
+        "scope": "Different equipment and pressure from the selected 300 mm patent recipe. The study’s failure threshold cannot be applied to the lab’s 2–4 Torr window.",
+        "claim": "defect-teos-peeling"
+      },
+      {
+        "id": "epi-faults",
+        "recipe": "sicl4-APCVD",
+        "title": "Stacking-fault bundles",
+        "family": "Planar crystal defect",
+        "region": "Interface → epitaxial film",
+        "fit": "related-material",
+        "fit_label": "Related material · chemistry unverified",
+        "visual": "fault",
+        "host": "Epitaxial Si on Si",
+        "mark": "Fault planes",
+        "observation": "Microscopy of epitaxial silicon showed stacking-fault bundles with apices at the substrate–film interface; oxygen contamination was suggested as a nucleation cause.",
+        "studied": "Epitaxial Si in several crystal orientations; recipe details are absent from the checked abstract.",
+        "driver": "Substrate orientation was examined; the proposed oxygen origin was an interpretation.",
+        "diagnostic": "Light optical microscopy and TEM.",
+        "scope": "Material-level evidence only: the abstract does not establish SiCl₄/H₂. Fault-plane angles are schematic; this does not identify a defect rate for the atmospheric preset.",
+        "claim": "defect-epi-faults"
+      },
+      {
+        "id": "w-seam",
+        "recipe": "wf6-LPCVD",
+        "title": "Contact-fill seams",
+        "family": "Geometric",
+        "region": "Patterned contact",
+        "fit": "related-process",
+        "fit_label": "Related CVD fill · stack differs",
+        "visual": "seam",
+        "host": "W in a lined contact",
+        "mark": "Central seam",
+        "observation": "A CVD tungsten study reported improved seam filling when H₂ flow and nucleation time were adjusted, alongside lower contact resistance.",
+        "studied": "CVD W contact filling; abstract compares H₂ flow and nucleation-time conditions.",
+        "driver": "Hydrogen supply and the preceding nucleation step were varied together.",
+        "diagnostic": "Reported filling comparison and CT-hole contact-resistance measurements.",
+        "scope": "Abstract-level evidence. Full stack and imaging method are not established here. A contact geometry is added for explanation; the flat-wafer preset does not predict seams.",
+        "claim": "defect-w-seam"
+      },
+      {
+        "id": "tin-chlorine",
+        "recipe": "ticl4-LPCVD",
+        "title": "Retained chlorine",
+        "family": "Chemical impurity",
+        "region": "Inside the TiN film",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different study",
+        "visual": "impurity",
+        "host": "TiN film",
+        "mark": "Cl impurity markers",
+        "observation": "RBS measurements found residual chlorine in TiCl₄/NH₃ LPCVD TiN; chlorine content decreased as deposition temperature increased in that study.",
+        "studied": "LPCVD TiCl₄/NH₃ study across multiple temperatures and feed ratios.",
+        "driver": "Temperature affected chlorine retention; resistivity also depended on temperature and feed ratio.",
+        "diagnostic": "Rutherford backscattering spectrometry (RBS) and electrical resistivity.",
+        "scope": "The selected patent recipe is different. Cl markers have no assigned lattice site or concentration, and chlorine is not treated as the sole cause of resistivity.",
+        "claim": "defect-tin-chlorine"
+      },
+      {
+        "id": "gan-carbon",
+        "recipe": "tmga-MOCVD",
+        "title": "Carbon-related optical defects",
+        "family": "Chemical / optical",
+        "region": "Inside the GaN film",
+        "fit": "same-series",
+        "fit_label": "Same published sample series",
+        "visual": "carbon",
+        "host": "GaN final layer on a template",
+        "mark": "C impurity markers",
+        "observation": "In the GaN sample series that includes T2, higher SIMS carbon concentration correlated with stronger yellow photoluminescence.",
+        "studied": "TMGa/NH₃ on sapphire/buffer/template; pressure, temperature and NH₃-flow series include the selected T2 sample.",
+        "driver": "Lower pressure, temperature or NH₃ flow accompanied more carbon and stronger yellow emission within those series.",
+        "diagnostic": "SIMS carbon depth profiles and room-temperature photoluminescence (PL).",
+        "scope": "The trend is study-specific, not a universal defect law. SIMS plus PL does not uniquely locate C atoms or prove one microscopic complex; the diagram assigns no atomic site.",
+        "claim": "defect-gan-carbon"
+      },
+      {
+        "id": "gan-dislocations",
+        "recipe": "tmga-MOCVD",
+        "title": "Threading dislocations",
+        "family": "Line crystal defect",
+        "region": "Template → film surface",
+        "fit": "same-chemistry",
+        "fit_label": "Same chemistry · different growth sequence",
+        "visual": "dislocation",
+        "host": "GaN on a prepared GaN template",
+        "mark": "Threading line defects",
+        "observation": "TEM/AFM studies of two-step TMGa/NH₃ MOCVD GaN on sapphire documented threading-dislocation generation during growth.",
+        "studied": "A separate two-step GaN-on-sapphire study, not Liang sample T2.",
+        "driver": "Microstructure was followed through growth; high-temperature island coalescence was implicated in generating many threading dislocations.",
+        "diagnostic": "Transmission electron microscopy (TEM) and atomic force microscopy (AFM).",
+        "scope": "No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population.",
+        "claim": "defect-gan-dislocations"
+      }
+    ]
+  }
 }
   </script>
   <script>
@@ -2314,7 +2975,7 @@
           const alternate=document.createElement('a');alternate.href=source.alternate;alternate.target='_blank';alternate.rel='noopener noreferrer';alternate.textContent=source.alternate_label;alternate.className='cv-reference-back';item.append(alternate,document.createTextNode(' · '));
         }
         if(source.verification.url!==source.url&&source.verification.url!==source.alternate) {
-          const checked=document.createElement('a');checked.href=source.verification.url;checked.target='_blank';checked.rel='noopener noreferrer';checked.textContent='Reviewed full text';checked.className='cv-reference-back';item.append(checked,document.createTextNode(' · '));
+          const checked=document.createElement('a');checked.href=source.verification.url;checked.target='_blank';checked.rel='noopener noreferrer';checked.textContent='Checked source copy';checked.className='cv-reference-back';item.append(checked,document.createTextNode(' · '));
         }
         const back=document.createElement('a');back.href='#cv-studio';back.className='cv-reference-back';back.dataset.evidenceBack='true';back.textContent='Return to claim';item.append(back);
         list.append(item);
@@ -2324,6 +2985,8 @@
       for(const text of data.model_choices){const item=document.createElement('li');item.textContent=text;choices.append(item);}
       root.querySelectorAll('[data-cite]').forEach(element=>cite(element,element.dataset.cite));
       function reveal(target) {
+        const panel=target.closest('#cv-defects, #cv-environment, #cv-hardware-view');
+        if(panel?.hidden){const view={'cv-defects':'defects','cv-environment':'environment','cv-hardware-view':'hardware'}[panel.id];root.querySelector('[data-lab-view="'+view+'"]').click();}
         let node=target;
         while(node&&node!==root){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}
         target.scrollIntoView({block:'start',behavior:'instant'});
@@ -3092,7 +3755,7 @@
       function onState(event){snapshot=event.detail;received=performance.now();stateText();const key=[snapshot.precursor,snapshot.process,snapshot.stage,snapshot.temperature,snapshot.rfOn].join('|');if(key!==lastKey)conditions();if(!snapshot.running||!frame)render();if(!snapshot.running&&frame){cancelAnimationFrame(frame);frame=0;}schedule();}
       root.addEventListener('cvd:state',onState);
       root.querySelectorAll('[data-lab-view]').forEach(button=>button.addEventListener('click',()=>{
-        ui.view=button.dataset.labView;lab.hidden=ui.view!=='environment';q('#cv-hardware-view').hidden=ui.view!=='hardware';
+        ui.view=button.dataset.labView;lab.hidden=ui.view!=='environment';q('#cv-hardware-view').hidden=ui.view!=='hardware';q('#cv-defects').hidden=ui.view!=='defects';
         root.querySelectorAll('[data-lab-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
         if(lab.hidden){cancelAnimationFrame(frame);frame=0;bridge.redraw();}else{render();schedule();}
       }));
@@ -3116,6 +3779,138 @@
       window.CVDEnvironment=Object.freeze({solveTransport,snapshot:()=>({stage:ui.stage,lens:ui.lens,da:ui.da,view:ui.view,camera:{yaw:ui.yaw,pitch:ui.pitch,zoom:ui.zoom}})});
       conditions();stateText();modelText();render();schedule();
       if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!snapshot.running)q('#cv-play').click();
+    })();
+  </script>
+
+  <script>
+    (()=>{
+      const root=document.getElementById('cvd-recipe-accuracy'),bridge=window.CVDLab;
+      const atlas=JSON.parse(document.getElementById('cv-evidence-data').textContent).defects;
+      const q=s=>root.querySelector(s),cite=window.CVDEvidence.cite,cases=new Map(atlas.cases.map(d=>[d.id,d]));
+      const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+      const recipeNames={'silane-PECVD':'SiH₄ · PECVD · SiO₂','silane-LPCVD':'SiH₄ · LPCVD · poly-Si','silane-APCVD':'SiH₄ · APCVD · SiO₂','dcs-LPCVD':'DCS · LPCVD · Si₃N₄','teos-LPCVD':'TEOS · LPCVD · SiO₂','teos-PECVD':'TEOS · PECVD · SiO₂','sicl4-APCVD':'SiCl₄ · APCVD · epitaxial Si','wf6-LPCVD':'WF₆ · LPCVD · W','ticl4-LPCVD':'TiCl₄ · LPCVD · TiN','tmga-MOCVD':'TMGa · MOCVD · GaN'};
+      let state=bridge.snapshot(),recipe='',selected='',step=1,timer=0,playing=false,lastCondition='';
+      const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+      const text=(x,y,t,fill='#d6e6f1',size=16)=>`<text x="${x}" y="${y}" class="${y>=330?'cv-defect-svg-note':y===40?'cv-defect-svg-heading':size<=13?'cv-defect-svg-symbol':'cv-defect-svg-label'}" fill="${fill}" font-size="${size}" font-family="system-ui,sans-serif">${esc(t)}</text>`;
+      const path=(d,stroke='#ffc082',width=3,fill='none',extra='')=>`<path d="${d}" fill="${fill}" stroke="${stroke}" stroke-width="${width}" stroke-linejoin="round" stroke-linecap="round" ${extra}/>`;
+      const rect=(x,y,w,h,fill,stroke='#689ba9')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="${stroke}"/>`;
+      const circle=(x,y,r,fill='#ffbc7c')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`;
+      function diagram(){
+        const d=cases.get(selected),film='#326e7b',substrate='#263b52',orange='#ffbc7c';
+        let host='',defect='',labels='',mode='QUALITATIVE CROSS-SECTION';
+        const flat=()=>rect(54,151,552,104,film)+rect(54,256,552,55,substrate,'#5b748f')+text(72,289,'Substrate / prepared underlayer','#b1c6dc',15);
+        if(d.visual==='particles'){
+          host=rect(54,256,552,55,substrate,'#5b748f')+text(73,289,'Chamber boundary / surface region','#b1c6dc',15);
+          host+=path('M72 104H565M548 96L565 104L548 112','#6eacbc',2)+text(76,87,'Gas stream','#a1c7d4',15);
+          for(const [x,y] of [[170,143],[328,184],[470,139]])for(const [dx,dy,r] of [[0,0,9],[-11,2,6],[7,-9,7],[10,8,7],[-5,-10,5]])defect+=circle(x+dx,y+dy,r,orange);
+          labels=path('M365 192L410 221H561','#ffc082',1.5)+text(410,241,'Gas-borne clusters',orange,15);
+          mode='GAS-REGION ILLUSTRATION';
+        }else if(d.visual==='grains'){
+          host=flat();
+          for(const line of ['M180 151L205 205L190 255','M370 151L343 205L367 255','M54 207L205 205L343 205L606 212'])host+=path(line,'#93c9d1',2);
+          for(const [x,y,a] of [[110,174,-10],[255,174,15],[431,174,-8],[103,227,12],[252,228,-12],[450,230,16]])host+=`<g transform="rotate(${a} ${x} ${y})">`+path(`M${x} ${y}h32m-32 8h32`,'#73a5b2',1.2)+'</g>';
+          for(const [x,y] of [[190,174],[203,203],[196,237],[350,184],[349,224],[277,205],[471,209]])defect+=circle(x,y,5,orange);
+          labels=path('M350 177L398 116H550',orange,1.5)+text(398,103,'Boundary states',orange,15);
+        }else if(d.visual==='crack'){
+          host=flat();
+          defect=path('M327 151L312 173L331 197L314 222L323 255','#0d1e32',12)+path('M327 151L312 173L331 197L314 222L323 255',orange,2);
+          defect+=path('M241 202H169L183 194M169 202L183 210M401 202H473L459 194M473 202L459 210',orange,3);
+          labels=path('M330 168L385 108H549',orange,1.5)+text(390,96,'Film fracture',orange,15)+text(191,235,'Tensile stress',orange,13);
+        }else if(d.visual==='peel'){
+          host=rect(54,256,552,55,substrate,'#5b748f')+rect(54,187,552,68,film)+text(73,290,'Silicon substrate','#b1c6dc',15);
+          defect=path('M292 255L606 255L606 143C505 186 421 226 292 255Z','#0d1e32',1,'#0d1e32');
+          defect+=path('M292 245C424 218 490 162 606 124L606 153C490 191 424 242 292 255Z',orange,2,film);
+          labels=path('M478 214L477 107H576',orange,1.5)+text(375,91,'Lifting at interface',orange,15);
+        }else if(d.visual==='void'||d.visual==='seam'){
+          host=path('M54 148H235V300H425V148H606V315H54Z','#6891a1',1,substrate);
+          host+=path('M54 130H252V282H408V130H606V148H425V300H235V148H54Z','#81b7bf',1,film);
+          host+=rect(253,149,154,133,d.visual==='seam'?'#8a966d':film,'#83bbc3');
+          if(d.visual==='void'){
+            defect=`<ellipse cx="330" cy="224" rx="13" ry="35" fill="#0d1e32" stroke="${orange}" stroke-width="2"/>`;
+            defect+=path('M330 189V162L254 149M330 162L406 149M330 259V282',orange,2);
+            labels=path('M344 222L458 221',orange,1.5)+text(462,228,'Void',orange,15)+text(277,110,'Corner seams',orange,15);
+          }else{
+            defect=path('M330 151L325 174L333 194L326 220L332 243L329 276','#0d1e32',9)+path('M330 151L325 174L333 194L326 220L332 243L329 276',orange,2);
+            labels=path('M335 191L453 190',orange,1.5)+text(460,196,'Fill seam',orange,15);
+          }
+          labels+=text(73,338,'Patterned feature added for this explanation','#b1c6dc',14);
+        }else if(d.visual==='fault'){
+          host=flat();
+          for(let y=164;y<250;y+=17)host+=path(`M65 ${y}H594`,'#6fa2b0',1);
+          defect=path('M205 253L285 155L435 155Z',orange,2,'#ffbc7c22')+path('M205 253L359 155',orange,2);
+          labels=path('M360 169L428 111H554',orange,1.5)+text(425,97,'Fault planes',orange,15)+text(73,337,'Plane angles and crystal orientation are schematic','#b1c6dc',14);
+        }else if(d.visual==='dislocation'){
+          host=flat();
+          for(let y=164;y<251;y+=17)host+=path(`M65 ${y}H594`,'#6fa2b0',1);
+          for(const [x,shift] of [[184,17],[326,-12],[453,19]])defect+=path(`M${x} 255C${x+shift} 226 ${x-shift} 198 ${x+shift} 152`,orange,3);
+          labels=path('M346 170L401 110H548',orange,1.5)+text(400,97,'Line defects',orange,15)+text(73,337,'Lines are not open gaps; no Burgers vector is assigned','#b1c6dc',14);
+        }else{
+          host=flat();
+          if(d.visual==='traps'){
+            for(const [x,y] of [[143,238],[239,245],[338,230],[421,241],[526,232]])defect+=`<circle cx="${x}" cy="${y}" r="10" fill="#ffbc7c22" stroke="${orange}"/>`+text(x-7,y+4,'e⁻',orange,12);
+            labels=path('M340 220L390 109H548',orange,1.5)+text(387,96,'Trapping region',orange,15)+text(73,337,'Electrical markers; atomic configuration unassigned','#b1c6dc',14);
+          }else{
+            const symbol=d.visual==='carbon'?'C':'Cl';
+            for(const [x,y] of [[136,183],[226,221],[331,178],[430,222],[534,186]])defect+=circle(x,y,14,'#ffbc7c1c')+text(x-(symbol==='Cl'?8:5),y+5,symbol,orange,15);
+            labels=path('M344 174L398 109H548',orange,1.5)+text(392,96,'Retained impurity',orange,15)+text(73,337,'Impurity markers; no atomic site or density is assigned','#b1c6dc',14);
+          }
+        }
+        q('#cv-defect-scene-kind').textContent=mode;
+        const label=d.title+'. '+d.host+'. '+(step===0?'Host only.':d.mark+'. '+d.region+'.')+' Qualitative drawing; no defect density or physical scale.';
+        q('#cv-defect-svg').innerHTML=`<title id="cv-defect-svg-title">${esc(d.title)}</title><desc id="cv-defect-svg-desc">${esc(label)}</desc>`+text(36,40,d.host,'#d7e7f2',18)+host+`<g class="cv-defect-overlay" data-defect-visual="${d.visual}" opacity="${step===0?0:1}">${defect}${labels}</g>`;
+        q('#cv-defect-svg').dataset.visual=d.visual;
+        q('#cv-defect-svg').dataset.step=String(step);
+        q('#cv-defect-caption').textContent=step===0?'Host structure · '+d.host+'. Inspect Location to reveal the mapped concern.':step===1?'Mapped location · '+d.region+'. '+d.mark+'.':'Detection · '+d.diagnostic;
+        cite(q('#cv-defect-caption'),d.claim);
+        root.querySelectorAll('[data-defect-step]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.defectStep===step)));
+      }
+      function stop(){clearTimeout(timer);timer=0;playing=false;q('#cv-defect-play').textContent=motion.matches?'Show annotated view':'Play explanation';}
+      function showCase(id,reset=true){
+        if(reset){stop();step=1;}selected=id;
+        const d=cases.get(id);
+        q('#cv-defect-title').textContent=d.title;q('#cv-defect-meta').textContent=d.family+' · '+d.region;
+        q('#cv-defect-fit').textContent=d.fit_label;q('#cv-defect-fit').dataset.fit=d.fit;
+        for(const field of ['observation','studied','driver','diagnostic','scope']){q('#cv-defect-'+field).textContent=d[field];cite(q('#cv-defect-'+field),d.claim);}
+        q('#cv-defect-options').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.defect===id)));
+        diagram();
+      }
+      function sync(s){
+        state=s;
+        const key=s.precursor+'-'+s.process,condition=[key,s.temperature,s.temperatureClaims,s.pressure,s.feed].join('|');
+        if(condition!==lastCondition){lastCondition=condition;q('#cv-defect-current').textContent=recipeNames[key]+' · '+s.temperature+' °C · '+s.pressure+' · '+s.feed;cite(q('#cv-defect-current'),[s.evidence.conditions,s.temperatureClaims||s.evidence.conditions]);}
+        if(recipe===key)return;
+        recipe=key;const options=q('#cv-defect-options');options.replaceChildren();
+        for(const id of atlas.recipes[key]){
+          const d=cases.get(id),b=document.createElement('button'),small=document.createElement('small');b.type='button';b.dataset.defect=id;b.setAttribute('aria-controls','cv-defect-detail');b.append(document.createTextNode(d.title));small.textContent=d.family;b.append(small);b.addEventListener('click',()=>showCase(id));options.append(b);
+        }
+        q('#cv-defect-coverage-body').querySelectorAll('tr').forEach(row=>row.setAttribute('aria-current',String(row.dataset.recipe===key)));
+        showCase(atlas.recipes[key][0]);
+      }
+      for(const [key,ids] of Object.entries(atlas.recipes)){
+        const row=document.createElement('tr');row.dataset.recipe=key;
+        const name=document.createElement('td'),button=document.createElement('button');button.type='button';button.textContent=recipeNames[key];button.dataset.defectRecipe=key;
+        button.addEventListener('click',()=>{
+          const [precursor,process]=key.split('-'),select=q('#cv-precursor');
+          select.value=precursor;select.dispatchEvent(new Event('change',{bubbles:true}));
+          q('[data-process="'+process+'"]').click();
+          q('#cv-defect-title').focus();q('#cv-defects').scrollIntoView({block:'start',behavior:'instant'});
+        });
+        name.append(button);const examples=document.createElement('td'),fit=document.createElement('td');
+        examples.textContent=ids.map(id=>cases.get(id).title).join('; ');fit.textContent=[...new Set(ids.map(id=>cases.get(id).fit_label))].join('; ');cite(fit,ids.map(id=>cases.get(id).claim));row.append(name,examples,fit);q('#cv-defect-coverage-body').append(row);
+      }
+      root.addEventListener('cvd:state',event=>sync(event.detail));
+      root.querySelectorAll('[data-defect-step]').forEach(b=>b.addEventListener('click',()=>{stop();step=+b.dataset.defectStep;diagram();}));
+      q('#cv-defect-play').addEventListener('click',()=>{
+        if(playing){stop();return;}
+        if(motion.matches){step=2;diagram();return;}
+        playing=true;step=0;diagram();q('#cv-defect-play').textContent='Pause explanation';
+        const advance=()=>{if(!playing||q('#cv-defects').hidden||document.hidden){stop();return;}if(step>=2){stop();return;}step++;diagram();timer=setTimeout(advance,2200);};timer=setTimeout(advance,2200);
+      });
+      root.querySelectorAll('[data-lab-view]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.labView!=='defects')stop();}));
+      document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+      motion.addEventListener('change',()=>{stop();if(motion.matches){step=2;diagram();}});
+      window.CVDDefects=Object.freeze({snapshot:()=>({recipe,selected,step,playing,visual:cases.get(selected).visual,fit:cases.get(selected).fit})});
+      sync(state);stop();
     })();
   </script>
 

@@ -28,6 +28,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.
 - Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.
 - Added a continuous local growth environment with fifty recipe/region explanations, three overlays and shared recipe provenance. The 1D transport explorer derives normalised concentration and flux from the cited SFU coupled-resistance equation; its input ratio and tracer paths are explicitly exploratory.
+- Added twelve defect examples covering all ten presets. Source-fit labels and condition differences are visible beside each drawing; material-only and low-pressure evidence are not presented as direct verification of SiCl4 or atmospheric-pressure defect behaviour. Full-text and abstract-level verification are distinguished.
 
 ## Claim register
 
@@ -111,11 +112,42 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `environment-surface` | CVD involves delivery to the surface, film formation and desorption/transport of gaseous products. | [33](#ref-33): PDF p. 5, Major CVD Processes; [10](#ref-10): PDF p. 9, slide 18: transport, surface reaction and product removal | The continuously animated tracer encounters teach these process categories, not an elementary atomistic pathway or measured dwell time. |
 | `environment-plasma` | In the depicted PECVD architecture, RF sustains a discharge that creates reactive species by collisions; surface interactions form a film and the exhaust removes products. | [15](#ref-15): PECVD technology paragraphs: RF discharge, collision-created reactive species, surface interaction and pumping | Generic R* markers indicate a reactive-species population. Their identities, abundances, electron energies and trajectories are not calculated. |
 | `environment-w-exhaust` | The cited H2/WF6 study measured HF formation and depletion of the reactants during W deposition. | [6](#ref-6): Abstract: quadrupole mass spectrometry, HF signal and reactant depletion | The animation illustrates bulk deposition on a prepared surface. It does not reproduce the measured mass spectrum or transient nucleation chemistry. |
+| `defect-oxide-charge` | C–V hysteresis in SiH₄/N₂O PECVD oxide was interpreted as evidence of border traps near the Si interface. | [34](#ref-34): pp. 90–91 Experimental; pp. 95–96, Fig. 7 and Table 1 | Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures. |
+| `defect-plasma-powder` | A SiH₄/N₂O PECVD study reported white oxide powder on chamber walls and in the pumping line at higher silane flow. | [34](#ref-34): p. 93, deposition-rate discussion immediately before FTIR analysis | A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative. |
+| `defect-poly-traps` | In boron-doped LPCVD polysilicon, carrier trapping associated with grain-size variation explained thickness-dependent resistivity. | [35](#ref-35): IBM Research article abstract, paragraphs 1–2 | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. |
+| `defect-thermal-particles` | Gas-borne particles were measured during thermal SiH₄/O₂ deposition at low pressure. | [36](#ref-36): p. 413 abstract; §II Experimental setup; §III particle measurements | Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here. |
+| `defect-nitride-cracks` | Thick DCS/NH₃/N₂ LPCVD nitride films showed tensile stress and cracks; deep barriers arrested cracks in the study. | [37](#ref-37): §2.1 p. 16726; §3 pp. 16727–16728; Figs. 2/4 and Table 1 | The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it. |
+| `defect-teos-trench` | Cross-sectional SEM showed seams and voids in LPCVD TEOS oxide inside shallow trenches. | [38](#ref-38): §II–III; Figs. 2–3 and Fig. 6 (author PDF pp. 1–4) | The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction. |
+| `defect-teos-peeling` | A TEOS/O₂ PECVD study showed film exfoliation and associated it with poor adhesion and residual stress. | [39](#ref-39): p. 18 Fig. 1 and discussion; p. 19 §2; p. 20 §3.1 | Different equipment and pressure from the selected 300 mm patent recipe. The study’s failure threshold cannot be applied to the lab’s 2–4 Torr window. |
+| `defect-epi-faults` | Microscopy of epitaxial silicon showed stacking-fault bundles with apices at the substrate–film interface; oxygen contamination was suggested as a nucleation cause. | [40](#ref-40): Publisher abstract, microscopy and fault-origin sentences | Material-level evidence only: the abstract does not establish SiCl₄/H₂. Fault-plane angles are schematic; this does not identify a defect rate for the atmospheric preset. |
+| `defect-w-seam` | A CVD tungsten study reported improved seam filling when H₂ flow and nucleation time were adjusted, alongside lower contact resistance. | [41](#ref-41): Abstract, filling comparison and CT contact-resistance results | Abstract-level evidence. Full stack and imaging method are not established here. A contact geometry is added for explanation; the flat-wafer preset does not predict seams. |
+| `defect-tin-chlorine` | RBS measurements found residual chlorine in TiCl₄/NH₃ LPCVD TiN; chlorine content decreased as deposition temperature increased in that study. | [42](#ref-42): NJIT-hosted abstract, paragraphs 2–3 | The selected patent recipe is different. Cl markers have no assigned lattice site or concentration, and chlorine is not treated as the sole cause of resistivity. |
+| `defect-gan-carbon` | In the GaN sample series that includes T2, higher SIMS carbon concentration correlated with stronger yellow photoluminescence. | [30](#ref-30): §2 and Table 1; §3, Figs. 3–6 (SIMS/PL correlations) | The trend is study-specific, not a universal defect law. SIMS plus PL does not uniquely locate C atoms or prove one microscopic complex; the diagram assigns no atomic site. |
+| `defect-gan-dislocations` | TEM/AFM studies of two-step TMGa/NH₃ MOCVD GaN on sapphire documented threading-dislocation generation during growth. | [43](#ref-43): Publisher-indexed abstract and Experimental excerpt; UCSB author record for bibliographic details | No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population. |
+
+## Defect coverage and evidence transfer
+
+These are curated published examples, not a complete catalogue or an incidence model. The atlas uses qualitative drawings and an explanatory reveal, not defect kinetics. Current recipe controls do not recalculate defect density.
+
+| Recipe | Example / visual | Evidence fit | Source conditions and measurement | Transfer limits |
+| --- | --- | --- | --- | --- |
+| `silane-PECVD` | Charge-trapping centres / `traps` | Same chemistry · different conditions | He-diluted silane/N₂O; reported substrate 260 °C; annealed and unannealed MIS structures. Capacitance–voltage (C–V) hysteresis and estimated trap populations. See claim `defect-oxide-charge` above. | Different dilution and thermal history from the preset. Markers denote electrical trapping regions, not identified atomic structures. |
+| `silane-PECVD` | Powder formation / `particles` | Same chemistry · different conditions | He-diluted SiH₄/N₂O in a different PECVD reactor. Reported visual observation of powder in the chamber and pumping line. See claim `defect-plasma-powder` above. | A chamber-particle example, not proof of wafer contamination or pinholes in the selected facility recipe. Cluster number and size are illustrative. |
+| `silane-LPCVD` | Trapping at grain boundaries / `grains` | Related film · doped study | Boron-doped LPCVD films; the checked abstract does not specify the precursor. Electrical resistivity characterisation and trapping-model comparison. See claim `defect-poly-traps` above. | The preset is an undoped silane illustration. Grain boundaries are normal poly-Si microstructure; electrically active boundary states are the mapped concern. |
+| `silane-APCVD` | Gas-phase particle formation / `particles` | Related chemistry · LPCVD evidence | LPCVD, 0.5–2 Torr and 200–800 °C; O₂/SiH₄ = 20. Particle-beam mass spectrometry and transmission electron microscopy (TEM). See claim `defect-thermal-particles` above. | Evidence gap: this is not an APCVD measurement. Chemistry motivates the comparison, but atmospheric thresholds, particle sizes, wafer impact and pinholes are unvalidated here. |
+| `dcs-LPCVD` | Tensile-stress cracking / `crack` | Same chemistry · different stack | 750 °C, 150 mTorr; thermally cycled thick films on oxide/Si. Wafer-bow stress measurements and published crack images. See claim `defect-nitride-cracks` above. | The lab’s nominal 800 °C / 0.12 Torr recipe is different. No critical thickness or crack probability is assigned to it. |
+| `teos-LPCVD` | Trench seams & voids / `void` | Same chemistry · patterned substrate | 0.5 Torr; patterned oxide/nitride-lined trenches; comparisons at 650–725 °C. Cross-sectional scanning electron microscopy (SEM). See claim `defect-teos-trench` above. | The preset’s flat 0.12 Torr wafer has no simulated trench. Etching during SEM preparation enlarged some observed voids; the diagram is not a size reconstruction. |
+| `teos-PECVD` | Interfacial peeling / `peel` | Same chemistry · different reactor | STS PECVD equipment, 200–350 °C and sub-Torr pressure studies. Published peeled-film image and wafer-stress measurement. See claim `defect-teos-peeling` above. | Different equipment and pressure from the selected 300 mm patent recipe. The study’s failure threshold cannot be applied to the lab’s 2–4 Torr window. |
+| `sicl4-APCVD` | Stacking-fault bundles / `fault` | Related material · chemistry unverified | Epitaxial Si in several crystal orientations; recipe details are absent from the checked abstract. Light optical microscopy and TEM. See claim `defect-epi-faults` above. | Material-level evidence only: the abstract does not establish SiCl₄/H₂. Fault-plane angles are schematic; this does not identify a defect rate for the atmospheric preset. |
+| `wf6-LPCVD` | Contact-fill seams / `seam` | Related CVD fill · stack differs | CVD W contact filling; abstract compares H₂ flow and nucleation-time conditions. Reported filling comparison and CT-hole contact-resistance measurements. See claim `defect-w-seam` above. | Abstract-level evidence. Full stack and imaging method are not established here. A contact geometry is added for explanation; the flat-wafer preset does not predict seams. |
+| `ticl4-LPCVD` | Retained chlorine / `impurity` | Same chemistry · different study | LPCVD TiCl₄/NH₃ study across multiple temperatures and feed ratios. Rutherford backscattering spectrometry (RBS) and electrical resistivity. See claim `defect-tin-chlorine` above. | The selected patent recipe is different. Cl markers have no assigned lattice site or concentration, and chlorine is not treated as the sole cause of resistivity. |
+| `tmga-MOCVD` | Carbon-related optical defects / `carbon` | Same published sample series | TMGa/NH₃ on sapphire/buffer/template; pressure, temperature and NH₃-flow series include the selected T2 sample. SIMS carbon depth profiles and room-temperature photoluminescence (PL). See claim `defect-gan-carbon` above. | The trend is study-specific, not a universal defect law. SIMS plus PL does not uniquely locate C atoms or prove one microscopic complex; the diagram assigns no atomic site. |
+| `tmga-MOCVD` | Threading dislocations / `dislocation` | Same chemistry · different growth sequence | A separate two-step GaN-on-sapphire study, not Liang sample T2. Transmission electron microscopy (TEM) and atomic force microscopy (AFM). See claim `defect-gan-dislocations` above. | No T2 dislocation density, Burgers vector or exact line path is established. Lines illustrate extended crystal defects, not open cracks or a calibrated population. |
 
 ## Model choices
 
 - Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.
-- Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.
+- In the atom-balance view, film formulae and atom counts represent idealised compositions; impurities, defects and deviations from stoichiometry are omitted. The film backdrop repeats complete formula units to preserve the displayed elemental proportions. The separate defect atlas illustrates selected literature examples.
 - Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
 - TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.
 - Film thickness and the eight-second atom-balance sequence at 1× speed are normalised demonstration controls, not measured growth or kinetic predictions. Continuous environment playback does not measure residence time.
@@ -126,7 +158,9 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - The environment shows continuous local-surface process categories. Incoming molecular glyphs, generic reactive-species markers, surface patches and outgoing gas glyphs are explanatory tracers, not a simulated elementary chemical network.
 - The 1D transport explorer solves the stated diffusion/first-order-reaction model analytically. Its user-selected Damkohler ratio is independent of the documented recipe conditions; it does not fit kinetic constants or predict a physical film thickness.
 - Environment colour fields represent qualitative thermal/plasma zones or the explicitly normalised concentration solution. No gas temperature map, plasma potential, electron-energy distribution or full-reactor CFD solution is asserted.
-- Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment and hardware/atom-balance views share the same selected recipe.
+- Continuous playback, speed changes, camera scale and source-condition overlays are interface controls. The environment, hardware/atom-balance and defect-atlas views share the same selected recipe.
+- The defect atlas maps twelve curated literature examples to all ten included presets. Evidence-fit labels distinguish same chemistry, related material/pressure/stack and the same GaN sample series. This is not an exhaustive catalogue of possible defects.
+- Defect drawings, marker counts, sizes, paths and three-step reveals are original qualitative teaching choices. They do not predict defect incidence, density, atomic sites or kinetics, and do not change with the transport-model rate ratio or recipe setpoint.
 
 ## References
 
@@ -524,15 +558,15 @@ Verification (2026-10-23): [Institution-hosted doctoral thesis](https://etheses.
 
 [Carbon-Related Defects as a Source for the Enhancement of Yellow Luminescence of Unintentionally Doped GaN](https://doi.org/10.3390/nano8090744) (2018). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
 
-Locator: Nanomaterials 8(9), 744 (2018): p. 2, §2 and Fig. 1; p. 3, Table 1, row T2; DOI 10.3390/nano8090744.
+Locator: Nanomaterials 8(9), 744 (2018): p. 2, §2 and Fig. 1; p. 3, Table 1, row T2; DOI 10.3390/nano8090744; §3, Figs. 3–6 (SIMS and photoluminescence).
 
-Supports: TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire.
+Supports: TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire. Carbon/SIMS and yellow-luminescence correlations in the three growth series.
 
-Scope: One reported final-layer setpoint, not a general MOCVD operating window. The schematic does not reconstruct the study’s reactor, nucleation sequence, impurity concentrations or luminescence.
+Scope: One reported final-layer setpoint, not a general operating window. The carbon atlas uses measured trends, not a calibrated concentration/PL prediction. SIMS and PL do not uniquely identify the microscopic carbon configuration.
 
 [PubMed Central full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC6163992/).
 
-Verification (2026-10-23): [Primary article full text and DOI record](https://pdfs.semanticscholar.org/fd19/d460aa3cd602369575494bf06d5b452a0266.pdf). §2, Fig. 1 and Table 1 row T2 checked; a readable copy of the published article was used when the DOI fetch was blocked.
+Verification (2026-10-23): [Primary article full text and DOI record](https://pdfs.semanticscholar.org/fd19/d460aa3cd602369575494bf06d5b452a0266.pdf). §2, Fig. 1 and Table 1 row T2 checked; a readable copy of the published article was used when the DOI fetch was blocked. §3 and Figs. 3–6 also checked for the defect atlas; proposed atomic-site models are distinguished from measured impurity/PL correlations.
 
 <a id="ref-31"></a>
 ### [31] AIXTRON
@@ -572,3 +606,149 @@ Supports: Diffusive supply and first-order surface reaction treated as coupled r
 Scope: Reduced steady 1D model only. No reactor-specific constants, gas-phase chemistry, plasma sheath, adsorption coverage, CFD field or recipe-calibrated growth rate is established.
 
 Verification (2026-10-23): [University-hosted lecture PDF and equation inspection](https://www.sfu.ca/~gchapman/e495/e495l10m.pdf#page=9). Final coupled flux equation on PDF p. 9 and limiting cases on p. 10 checked, with diffusion relation on p. 8. The isolated surface-flux line is typographically inconsistent with its surface concentration; the lab uses the final coupled expression.
+
+<a id="ref-34"></a>
+### [34] M. Zarchi, S. Ahangarani and M. Zare Sanjari
+
+[Properties of Silicon Dioxide Film Deposited By PECVD at Low Temperature/Pressure](https://doi.org/10.5937/metmateng1402089M) (2014). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Metallurgical and Materials Engineering 20(2), 89–96: pp. 90–91 Experimental; p. 93 powder observation; pp. 95–96 Fig. 7 and Table 1.
+
+Supports: SiH4/N2O PECVD: reported chamber/exhaust powder and C–V hysteresis interpreted as border traps.
+
+Scope: Different dilution, pressure and thermal history from the preset. C–V identifies electrical behaviour, not an atomic defect structure. The paper’s unbalanced Eq. (1) is not used.
+
+[Publisher article record](https://metall-mater-eng.com/index.php/home/article/view/159).
+
+Verification (2026-10-23): [Publisher PDF, full text](https://metall-mater-eng.com/index.php/home/article/download/159/145). Experimental conditions, powder paragraph, Fig. 7 and Table 1 read; net-equation and ambiguous FTIR passages excluded.
+
+<a id="ref-35"></a>
+### [35] T. T. Sheng, C. C. Shih and C. S. Wang
+
+[The Effect of film thickness on the electrical properties of LPCVD polysilicon films](https://doi.org/10.1149/1.2115724) (1984). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Journal of The Electrochemical Society: IBM Research author-hosted abstract, paragraphs 1–2.
+
+Supports: Carrier trapping associated with grain-size variation explains thickness-dependent resistivity in boron-doped LPCVD polysilicon.
+
+Scope: Abstract-level verification. Boron-doped films differ from the lab’s undoped schematic; the checked abstract does not establish the precursor or exact growth recipe.
+
+[IBM Research article abstract](https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films).
+
+Verification (2026-10-23): [Author institution abstract and DOI link](https://research.ibm.com/publications/the-effect-of-film-thickness-on-the-electrical-properties-of-lpcvd-polysilicon-films). Film type, doping, trapping interpretation and electrical measurements checked; no full-text figure attribution.
+
+<a id="ref-36"></a>
+### [36] T. Kim, S.-M. Suh, S. L. Girshick, M. R. Zachariah, P. H. McMurry, R. M. Rassel, Z. Shen and S. A. Campbell
+
+[Particle formation during low-pressure chemical vapor deposition from silane and oxygen: Measurement, modeling, and film properties](https://doi.org/10.1116/1.1448506) (2002). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: JVST A 20(2), 413–423: p. 413 abstract; §II; §III.A–B; Figs. 6–11.
+
+Supports: Gas-borne particles in thermal SiH4/O2 deposition measured by particle-beam mass spectrometry and TEM at low pressure.
+
+Scope: The experiment is LPCVD (0.5–2 Torr, 200–800 °C), not APCVD. Its particle domains and sizes are not transferred to the atmospheric preset. Airborne particles alone do not establish pinholes in that preset.
+
+[Author-group full text](https://mrzgroup.ucr.edu/sites/default/files/2019-02/2002_JVST_taesung.pdf).
+
+Verification (2026-10-23): [Author research-group PDF, full text](https://mrzgroup.ucr.edu/sites/default/files/2019-02/2002_JVST_taesung.pdf). Abstract, experimental conditions, particle measurements and the introduction’s caution about APCVD pinhole correlation read.
+
+<a id="ref-37"></a>
+### [37] R. M. Grootes, M. Dijkstra, Y. Klaver, D. Marpaung and H. L. Offerhaus
+
+[Crack barriers for thick SiN using dicing](https://doi.org/10.1364/OE.456834) (2022). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Optics Express 30(10), 16725–16733: §2.1 p. 16726; §3 pp. 16727–16728; Figs. 2 and 4; Table 1.
+
+Supports: DCS/NH3/N2 LPCVD nitride: tensile stress measured by wafer bow, cracking and crack arrest in thick films.
+
+Scope: 750 °C and 150 mTorr, thermal cycling and patterned crack barriers differ from the preset. Thickness, substrate and stress matter; no universal critical thickness is assigned.
+
+[University of Twente article record](https://research.utwente.nl/en/publications/crack-barriers-for-thick-sin-using-dicing/).
+
+Verification (2026-10-23): [Publisher-provided full text and author institution record](https://www.researchgate.net/publication/359950973_Crack_barriers_for_thick_SiN_using_dicing). Publisher full text on ResearchGate read: §2.1 stress, §3 recipe, Figs. 2/4 and Table 1; DOI and authors checked at Twente.
+
+<a id="ref-38"></a>
+### [38] John L. Sudijono, Vladislav Y. Vassiliev and Jia-Zhen Zheng
+
+[A Comparative Study of TEOS-based Chemical Vapor Deposition Techniques for Shallow Trench Isolation Technology](https://www.researchgate.net/publication/273635032_A_Comparative_Study_of_TEOS-based_Chemical_Vapor_Deposition_Techniques_for_Shallow_Trench_Isolation_Technology) (1997). **Experimental conference paper (author manuscript).** Accessed 2026-10-23.
+
+Locator: ISIC-97 proceedings, pp. 597–600: §II–III; Figs. 2, 3 and 6 (author manuscript PDF pp. 1–4).
+
+Supports: Thermal LPCVD TEOS oxide: cross-sectional SEM of trench seams and voids; temperature/pressure/geometry discussion.
+
+Scope: The study used 0.5 Torr and patterned shallow trenches, including oxide/nitride surfaces. SEM preparation enlarges some voids. Not a measurement of the lab’s flat 0.12 Torr wafer.
+
+Verification (2026-10-23): [Author-uploaded manuscript, full text and figure inspection](https://www.researchgate.net/profile/Vladislav-Vasilyev-5/publication/273635032_A_Comparative_Study_of_TEOS-based_Chemical_Vapor_Deposition_Techniques_for_Shallow_Trench_Isolation_Technology/links/5507936b0cf2d7a28125c8a8/A-Comparative-Study-of-TEOS-based-Chemical-Vapor-Deposition-Techniques-for-Shallow-Trench-Isolation-Technology.pdf). Downloaded readable author PDF; §II–III, SEM Fig. 2 and schematic Fig. 3 inspected. Conference details checked against the author record.
+
+<a id="ref-39"></a>
+### [39] Ciprian Iliescu
+
+[Characterization of TEOS Thin Film Depositions on PECVD Reactors](https://www.aos.ro/wp-content/anale/IFVol12Nr1Art.2.pdf) (2019). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Annals of the Academy of Romanian Scientists, Series on Science and Technology of Information 12(1), 17–30: p. 18 Fig. 1; p. 19 §2; p. 20 §3.1.
+
+Supports: TEOS/O2 PECVD film exfoliation associated with adhesion and residual stress; pressure, temperature and feed-ratio effects.
+
+Scope: STS system, 200–350 °C and sub-Torr pressures differ from the 300 mm patent preset. The reported pressure threshold is equipment-specific and is not applied to the preset.
+
+Verification (2026-10-23): [Academy journal PDF, full text](https://www.aos.ro/wp-content/anale/IFVol12Nr1Art.2.pdf). Fig. 1, materials/methods and §3.1 exfoliation discussion read. No quantitative threshold transfer.
+
+<a id="ref-40"></a>
+### [40] R. H. Finch, H. J. Queisser, G. Thomas and J. Washburn
+
+[Structure and Origin of Stacking Faults in Epitaxial Silicon](https://doi.org/10.1063/1.1702622) (1963). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Journal of Applied Physics 34, 406–415: publisher abstract (microscopy, tetrahedral fault bundles, suggested oxygen origin).
+
+Supports: Microscopy documents stacking-fault bundles with apices at the substrate/film interface; oxygen contamination is a suggested origin.
+
+Scope: Publisher abstract only; precursor and growth conditions are not established by that abstract. This is epitaxial-silicon evidence, not a verified SiCl4-specific defect rate or mechanism.
+
+[Publisher abstract](https://pubs.aip.org/aip/jap/article/34/2/406/163769/Structure-and-Origin-of-Stacking-Faults-in).
+
+Verification (2026-10-23): [Publisher abstract](https://pubs.aip.org/aip/jap/article/34/2/406/163769/Structure-and-Origin-of-Stacking-Faults-in). Microscopy and fault morphology checked in publisher abstract; oxygen cause retained as a suggestion, not proof of unique causality.
+
+<a id="ref-41"></a>
+### [41] Shaohui Xu, Pan Yao, Jiandong Zhang and Renrui Huang
+
+[The filling seams improvement and properties analyses of tungsten films](https://doi.org/10.1016/j.mee.2020.111285) (2020). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Microelectronic Engineering 226, 111285: abstract (H2 flow, nucleation time, filling and CT contact resistance).
+
+Supports: CVD tungsten seam/filling comparison: H2 flow and nucleation-time changes accompanied improved filling and contact resistance.
+
+Scope: Abstract-level verification. The full nucleation stack, geometry and imaging method are not established by the checked abstract; the flat-wafer preset does not predict a seam.
+
+[Article abstract copy](https://www.researchgate.net/publication/340164411_The_filling_seams_improvement_and_properties_analyses_of_tungsten_films).
+
+Verification (2026-10-23): [Publisher-indexed abstract and article abstract copy](https://www.sciencedirect.com/science/article/abs/pii/S0167931720300733). Indexed publisher abstract and ResearchGate article abstract checked; no unverified figure or SEM-method attribution.
+
+<a id="ref-42"></a>
+### [42] N. Ramanuja, R. A. Levy, S. N. Dharmadhikari, E. Ramos, C. W. Pearce, S. C. Menasian, P. C. Schamberger and C. C. Collins
+
+[Synthesis and characterization of low pressure chemically vapor deposited titanium nitride films using TiCl4 and NH3](https://doi.org/10.1016/S0167-577X(02)00776-0) (2002). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Materials Letters 57(2), 261–269: NJIT-hosted abstract, paragraphs 2–3 (RBS, chlorine and resistivity).
+
+Supports: RBS-measured chlorine retention in TiCl4/NH3 LPCVD TiN and its temperature dependence; resistivity depends on temperature and feed ratio.
+
+Scope: Institution-hosted abstract only. Process conditions differ from the selected patent example; measured composition does not identify a unique atomic Cl site or predict its concentration at 650 °C.
+
+[NJIT article abstract](https://digitalcommons.njit.edu/fac_pubs/14554/).
+
+Verification (2026-10-23): [Author institution abstract](https://digitalcommons.njit.edu/fac_pubs/14554/). Reactants, RBS measurement, chlorine-temperature trend and electrical-property statement checked; no full-text figure attribution.
+
+<a id="ref-43"></a>
+### [43] X. H. Wu, P. Fini, E. J. Tarsa, B. Heying, S. Keller, U. K. Mishra, S. P. DenBaars and J. S. Speck
+
+[Dislocation generation in GaN heteroepitaxy](https://doi.org/10.1016/S0022-0248(98)00240-1) (1998). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Journal of Crystal Growth 189–190, 231–243: abstract and indexed Experimental section (two-step MOCVD, TMGa/NH3, TEM/AFM).
+
+Supports: Threading-dislocation generation during two-step MOCVD GaN growth on sapphire, studied by TEM and AFM; island coalescence is implicated.
+
+Scope: Publisher-indexed abstract/experimental excerpts checked, not the full text. This is a different growth sequence from Liang sample T2; no T2 dislocation density or Burgers vector is inferred.
+
+[UCSB author-group article record](https://labs.materials.ucsb.edu/speck/james/publications/1540).
+
+Verification (2026-10-23): [Publisher-indexed abstract/experimental excerpts and author-group metadata](https://www.sciencedirect.com/science/article/abs/pii/S0022024898002401). TMGa/NH3, sapphire, two-step growth, TEM/AFM and coalescence checked in publisher excerpts; author group confirms authors, year and pages.
