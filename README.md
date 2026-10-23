@@ -320,8 +320,11 @@ and citation integrity; they do not establish experimental defect validation.
 
 Reading-flow checks cover all nine contents routes with keyboard activation,
 view/disclosure reveal, preserved recipe selection, browser-history navigation,
-seven cited film roles, light/dark prose contrast and layouts at 320, 390, 768
-and 1440 px. Main reading text now uses 18 px type and near-black text in light
+seven cited film roles, light/dark prose contrast and layouts at 320, 390, 768,
+1440, 1906 and 2560 px. The workspace grows to 1680 px on desktop screens,
+with a taller growth-environment canvas on wide displays. Long study-guide,
+reference and feedback paragraphs have a bounded reading width. Main reading
+text uses 18 px type and near-black text in light
 mode; supporting copy uses 16 or 17 px. Selected prose is checked for at least
 7:1 contrast in light and dark modes. Primary controls use at least 16 px text
 and 44 px target heights, with the process choices arranged in two columns on
@@ -329,6 +332,18 @@ narrow phones. The three lab views have descriptive selection cards, and the
 reactor/atom-balance panels share the available width more evenly. Figure keys
 and citation numbers use 14 px type. The larger reference material follows the
 lab, with the transport model and background topics available as disclosures.
+All three Canvas 2D renderers rebuild their drawing buffers when display pixel
+density changes, including while playback is paused and the CSS dimensions stay
+fixed. Resolution, resize and page-restore events trigger repainting. A visible-page
+check also detects density changes without browser events and repaints only when
+the density changes. Buffers use
+at least one pixel per CSS pixel and up to three for higher-density displays.
+The browser check changes pixel density from one-third through 1, 1.25, 2 and 3
+and back to 1, verifies the buffers and unchanged simulation state, and repeats
+the checks inside the Streamlit iframe.
+If the entire app appears as a tiny central column, reset browser zoom to
+100% with Ctrl+0 (Windows/Linux) or Command+0 (macOS). Browser zoom scales both
+the Streamlit toolbar and the embedded lab; the app does not override it.
 
 The Streamlit launcher uses the documented
 [`st.iframe` API](https://docs.streamlit.io/1.65.0/develop/api-reference/text/st.iframe)
@@ -341,7 +356,8 @@ for standalone pages and cross-origin frames; its host detection and padding
 selectors should be rechecked when changing the Streamlit version.
 
 The local Streamlit 1.65.0 browser check verifies guide/reference expansion and
-collapse, all three view heights, mobile/desktop resizing and a compact footer:
+collapse, all three view heights, mobile/desktop/wide-screen resizing, the
+centered workspace width in its actual host and a compact footer:
 
 ```bash
 npm run test:streamlit
