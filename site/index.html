@@ -561,21 +561,344 @@
     @media(max-width:1000px) { #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr) 280px; } #cvd-recipe-accuracy .cv-env-conditions>div { padding:12px 16px; } #cvd-recipe-accuracy .cv-env-model { gap:20px 30px; } }
     @media(max-width:760px) { #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr); } #cvd-recipe-accuracy .cv-env-inspector { border-left:0; border-top:1px solid var(--cv-line); display:block; padding:22px; } #cvd-recipe-accuracy .cv-env-inspector h3 { margin-top:7px; } #cvd-recipe-accuracy .cv-env-bounds { padding-top:16px; } #cvd-recipe-accuracy .cv-env-viewport { height:400px; } #cvd-recipe-accuracy .cv-env-heading { padding:20px; } #cvd-recipe-accuracy .cv-env-heading h2 { font-size:20px; } #cvd-recipe-accuracy .cv-env-label { display:none; } #cvd-recipe-accuracy .cv-env-conditions { grid-template-columns:1fr 1fr; } #cvd-recipe-accuracy .cv-env-conditions>div:nth-child(3) { border-left:0; } #cvd-recipe-accuracy .cv-env-conditions>div:nth-child(n+3) { border-top:1px solid var(--cv-line); } #cvd-recipe-accuracy .cv-env-model { grid-template-columns:minmax(0,1fr); padding:22px; } #cvd-recipe-accuracy .cv-env-stages button { font-size:10px; padding:12px 2px; } #cvd-recipe-accuracy .cv-env-stages button>span { display:block; margin:0 0 3px; } #cvd-recipe-accuracy .cv-lab-views>span { display:none; } #cvd-recipe-accuracy .cv-lab-views button { padding:9px 12px; font-size:12px; } #cvd-recipe-accuracy .cv-env-scene-bar { padding:10px 12px; } #cvd-recipe-accuracy #cv-env-status { font-size:10px; } }
   </style>
+  <style id="cv-reading-styles">
+    html { background-color:light-dark(#f5f7fa,#0b1322); scroll-padding-top:16px; }
+    body { padding:16px 20px 18px; }
+    main { max-width:1320px; }
+    #cvd-recipe-accuracy { --cv-text:light-dark(#1d2939,#f1f5fb); --cv-muted:light-dark(#465468,#bdc9d9); font-size:15px; line-height:1.65; }
+    #cvd-recipe-accuracy :is(h2,h3) { text-wrap:balance; }
+    #cvd-recipe-accuracy :is(a,button,input,select,summary):focus-visible { outline:3px solid var(--cv-accent); outline-offset:4px; }
+    #cvd-recipe-accuracy :is(section,nav,details,div[id]) { scroll-margin-top:16px; }
+    #cvd-recipe-accuracy :is(section,nav,div)[tabindex="-1"]:focus-visible { outline:3px solid var(--cv-accent); outline-offset:4px; }
+    #cvd-recipe-accuracy .cv-head { padding:16px 22px 18px; margin-bottom:16px; border-radius:14px; }
+    #cvd-recipe-accuracy .cv-topbar { padding-bottom:10px; margin-bottom:14px; gap:8px 20px; }
+    #cvd-recipe-accuracy .cv-nav { gap:18px; }
+    #cvd-recipe-accuracy :is(.cv-nav a,.cv-wordmark,.cv-byline) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-name { font-size:40px; letter-spacing:-1.4px; white-space:nowrap; }
+    #cvd-recipe-accuracy .cv-head-note p:first-child { font-size:18px; line-height:1.4; }
+    #cvd-recipe-accuracy .cv-head-facts { gap:22px; margin-top:10px; }
+    #cvd-recipe-accuracy .cv-head-facts :is(span,.cv-recipe-link) { font-size:12px; }
+    #cvd-recipe-accuracy .cv-head-facts b { font-size:18px; }
+    #cvd-recipe-accuracy .cv-head .cv-overline { font-size:11px; }
+    #cvd-recipe-accuracy .cv-brand .cv-overline { margin-bottom:4px; }
+    #cvd-recipe-accuracy .cv-faculty-credit { grid-template-columns:minmax(240px,.9fr) minmax(200px,.65fr) minmax(0,1.4fr); gap:8px 18px; margin-top:14px; padding-top:12px; align-items:start; }
+    #cvd-recipe-accuracy .cv-course-context { grid-column:auto; font-size:13px; line-height:1.6; }
+    #cvd-recipe-accuracy .cv-faculty-name span { font-size:11px; margin-bottom:2px; }
+    #cvd-recipe-accuracy .cv-faculty-affiliation { font-size:13px; line-height:1.6; }
+    #cvd-recipe-accuracy .cv-orientation { display:grid; grid-template-columns:minmax(0,1fr) minmax(390px,1fr); gap:16px; margin-bottom:16px; }
+    #cvd-recipe-accuracy .cv-about { display:block; margin:0; padding:16px 18px; }
+    #cvd-recipe-accuracy .cv-about-title { font-size:20px; margin-bottom:6px; }
+    #cvd-recipe-accuracy .cv-about-definition { font-size:15px; line-height:1.7; color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-contents { min-width:0; padding:16px 18px; border:1px solid var(--cv-line); border-radius:14px; background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-contents h2 { font-size:17px; margin-bottom:7px; }
+    #cvd-recipe-accuracy .cv-contents ol { display:grid; grid-template-columns:1fr 1fr; gap:3px 24px; margin:0; padding-left:22px; font-size:13px; }
+    #cvd-recipe-accuracy .cv-contents li::marker { color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-contents a { display:inline-block; padding:3px 0; color:var(--cv-blue); text-underline-offset:3px; }
+    #cvd-recipe-accuracy .cv-start { padding:0 2px; margin-bottom:16px; }
+    #cvd-recipe-accuracy .cv-start h2 { font-size:17px; margin-bottom:7px; }
+    #cvd-recipe-accuracy .cv-learning-path { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px 22px; padding-left:22px; margin:0; }
+    #cvd-recipe-accuracy .cv-learning-path li { padding-left:2px; }
+    #cvd-recipe-accuracy .cv-learning-path li::marker { color:var(--cv-accent); font-weight:650; }
+    #cvd-recipe-accuracy .cv-learning-path a { color:var(--cv-text); font-weight:650; text-underline-offset:3px; }
+    #cvd-recipe-accuracy .cv-learning-path p { margin-top:2px; font-size:13px; line-height:1.55; color:var(--cv-muted); }
+    #cvd-recipe-accuracy .cv-section-intro { margin-bottom:12px; }
+    #cvd-recipe-accuracy .cv-section-intro h2 { font-size:21px; line-height:1.4; }
+    #cvd-recipe-accuracy .cv-section-intro p { margin-top:4px; color:var(--cv-muted); font-size:14px; }
+    #cvd-recipe-accuracy .cv-setup { padding:16px 20px; margin-bottom:12px; box-shadow:none; }
+    #cvd-recipe-accuracy :is(.cv-chem-controls>label,.cv-control-label) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-modes button { font-size:13px; min-height:40px; }
+    #cvd-recipe-accuracy :is(select,button) { font-size:14px; }
+    #cvd-recipe-accuracy :is(.cv-preset-note,.cv-preset-info>.cv-recipe-link) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-preset-info { margin-top:8px; }
+    #cvd-recipe-accuracy .cv-effect { padding:10px 16px; margin-bottom:14px; }
+    #cvd-recipe-accuracy .cv-effect .cv-overline { font-size:11px; }
+    #cvd-recipe-accuracy #cv-effect { font-size:14px; }
+    #cvd-recipe-accuracy .cv-view-intro { font-size:17px; font-weight:650; margin-bottom:8px; }
+    #cvd-recipe-accuracy .cv-lab-views { gap:8px; margin-bottom:12px; }
+    #cvd-recipe-accuracy .cv-lab-views button { min-height:42px; padding:8px 14px; }
+    #cvd-recipe-accuracy .cv-lab-views>span { font-size:13px; }
+    #cvd-recipe-accuracy .cv-env-heading { padding:16px 20px; }
+    #cvd-recipe-accuracy .cv-env-heading h2 { font-size:23px; }
+    #cvd-recipe-accuracy :is(.cv-secondary,#cv-env-subtitle,.cv-env-label) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-env-conditions>div { padding:11px 18px; }
+    #cvd-recipe-accuracy .cv-env-conditions span { font-size:12px; }
+    #cvd-recipe-accuracy .cv-env-conditions strong { font-size:14px; }
+    #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr) 350px; }
+    #cvd-recipe-accuracy .cv-env-inspector { padding:18px 20px; }
+    #cvd-recipe-accuracy .cv-env-step { font-size:12px; letter-spacing:.35px; }
+    #cvd-recipe-accuracy .cv-env-inspector h3 { margin:7px 0 10px; font-size:21px; }
+    #cvd-recipe-accuracy #cv-env-explanation { font-size:15px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-env-observation { margin-top:16px; padding-top:12px; }
+    #cvd-recipe-accuracy .cv-env-observation>span { font-size:11px; letter-spacing:.5px; }
+    #cvd-recipe-accuracy :is(.cv-env-observation,.cv-env-evidence)>p { font-size:14px; line-height:1.65; color:var(--cv-text); }
+    #cvd-recipe-accuracy details.cv-env-evidence { margin-top:14px; padding:0; border:0; border-top:1px solid var(--cv-line); border-radius:0; }
+    #cvd-recipe-accuracy .cv-env-evidence>summary { padding:10px 0 4px; font-size:13px; color:var(--cv-blue); }
+    #cvd-recipe-accuracy .cv-env-bounds { padding-top:14px; margin-top:auto; font-size:13px; line-height:1.6; }
+    #cvd-recipe-accuracy .cv-env-stages button { padding:12px 8px; min-height:46px; font-size:13px; }
+    #cvd-recipe-accuracy .cv-env-stages button>span { font-size:12px; margin-right:5px; }
+    #cvd-recipe-accuracy .cv-env-scene-bar { flex-wrap:wrap; font-size:12px; padding:10px 14px; }
+    #cvd-recipe-accuracy .cv-env-lenses button { font-size:12px; min-height:34px; }
+    #cvd-recipe-accuracy .cv-env-hud { font-size:11px; color:#abc4dd; }
+    #cvd-recipe-accuracy .cv-env-hud span+span { font-size:11px; }
+    #cvd-recipe-accuracy .cv-env-camera-hint { font-size:11px; color:#b0c5da; top:42px; }
+    #cvd-recipe-accuracy .cv-env-legend { font-size:12px; color:#c6d5e6; }
+    #cvd-recipe-accuracy .cv-env-tools { padding:10px 14px; gap:8px 14px; }
+    #cvd-recipe-accuracy .cv-env-tools :is(label,button,select) { font-size:12px; }
+    #cvd-recipe-accuracy .cv-env-tools :is(button,select) { min-height:36px; }
+    #cvd-recipe-accuracy details.cv-transport-guide { margin:0; padding:0; border:0; border-radius:0; }
+    #cvd-recipe-accuracy .cv-transport-guide>summary { padding:14px 20px; font-size:14px; color:var(--cv-blue); }
+    #cvd-recipe-accuracy .cv-env-model { gap:18px 28px; padding:4px 20px 18px; }
+    #cvd-recipe-accuracy :is(#cv-env-model-intro,#cv-env-regime-text,.cv-env-equations p,#cv-env-model-scope) { font-size:14px; line-height:1.7; }
+    #cvd-recipe-accuracy :is(.cv-env-regimes button,.cv-env-model-control>label,.cv-env-model-metrics span,.cv-env-range-labels,.cv-env-equations summary) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-env-regimes { margin:12px 0; }
+    #cvd-recipe-accuracy .cv-env-regimes button { min-height:40px; }
+    #cvd-recipe-accuracy #cv-env-profile text { font-size:10px; }
+    #cvd-recipe-accuracy details { margin-top:16px; padding:0 20px; }
+    #cvd-recipe-accuracy details>summary { font-size:15px; padding:14px 0; line-height:1.5; }
+    #cvd-recipe-accuracy :is(.cv-detail-controls select,.cv-detail-line,.cv-setting-note,.cv-rf,.cv-flow-control .cv-secondary) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-recipe :is(dt,dt label) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-guide-example { margin:16px 0; padding:18px 20px; }
+    #cvd-recipe-accuracy .cv-guide-example h2 { font-size:22px; line-height:1.4; margin-top:4px; }
+    #cvd-recipe-accuracy .cv-guide-example p { font-size:14px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-example-context { margin-top:6px; }
+    #cvd-recipe-accuracy .cv-guide-equation { margin:12px 0; font-size:20px; gap:6px 12px; }
+    #cvd-recipe-accuracy .cv-equation-reading { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 24px; margin:0 0 12px; }
+    #cvd-recipe-accuracy .cv-equation-reading dt { font-size:14px; font-weight:650; }
+    #cvd-recipe-accuracy .cv-equation-reading dd { margin:3px 0 0; font-size:14px; line-height:1.65; }
+    #cvd-recipe-accuracy .cv-equation-reading>.cv-citations { grid-column:1/-1; }
+    #cvd-recipe-accuracy .cv-example-limit { border-top:1px solid var(--cv-teal-line); padding-top:10px; margin-bottom:8px; }
+    #cvd-recipe-accuracy .cv-learn { padding:18px 20px; border:1px solid var(--cv-line); border-radius:14px; background:var(--cv-panel); }
+    #cvd-recipe-accuracy .cv-learn>.cv-section-intro { margin-bottom:0; }
+    #cvd-recipe-accuracy .cv-learn>details { margin:0; padding:0; border:0; border-top:1px solid var(--cv-line); border-radius:0; }
+    #cvd-recipe-accuracy .cv-learn>details:first-of-type { margin-top:12px; }
+    #cvd-recipe-accuracy .cv-learn>details>summary { font-size:15px; color:var(--cv-blue); padding:13px 0; }
+    #cvd-recipe-accuracy :is(.cv-guide-steps,.cv-guide-terms,.cv-silicon-terms,.cv-guide-takeaway,.cv-guide-footer,.cv-recipes-definition,.cv-recipes-note) { font-size:14px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-guide-heading { font-size:17px; }
+    #cvd-recipe-accuracy :is(.cv-guide-table,.cv-recipes-table,.cv-defect-table) { font-size:14px; line-height:1.65; }
+    #cvd-recipe-accuracy .cv-guide-table caption { padding:12px 14px; text-align:left; color:var(--cv-muted); font-size:13px; }
+    #cvd-recipe-accuracy .cv-film-table { min-width:480px; }
+    #cvd-recipe-accuracy .cv-film-table th { width:32%; }
+    #cvd-recipe-accuracy .cv-fabrication { margin:0 0 14px; padding:14px; box-shadow:none; }
+    #cvd-recipe-accuracy .cv-fab-description { min-height:0; padding-bottom:8px; font-size:14px; }
+    #cvd-recipe-accuracy :is(.cv-fab-note,.cv-fab-hint,.cv-fab-swipe) { font-size:13px; }
+    #cvd-recipe-accuracy .cv-defect-heading h2 { font-size:24px; }
+    #cvd-recipe-accuracy :is(.cv-defect-evidence dd,#cv-defect-caption,.cv-defect-current,.cv-defect-bounds) { font-size:15px; line-height:1.7; }
+    #cvd-recipe-accuracy :is(.cv-defect-evidence dt,.cv-defect-fit,#cv-defect-meta,.cv-defect-timing,.cv-defect-options small) { font-size:13px; }
+    #cvd-recipe-accuracy :is(.cv-chemistry-note,.cv-drawing-note,.cv-role-use,.cv-inspector,.cv-model-note) { font-size:13px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-citations { font-size:12px; }
+    #cvd-recipe-accuracy .cv-citations a { padding:4px 3px; }
+    #cvd-recipe-accuracy :is(.cv-ref-list a,.cv-refs-intro,.cv-ref-use,.cv-evidence-list .cv-ref-use) { font-size:14px; line-height:1.7; }
+    #cvd-recipe-accuracy :is(.cv-ref-note,.cv-ref-meta,.cv-reference-back) { font-size:13px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-footer { padding-top:14px; margin-top:16px; gap:8px 18px; font-size:13px; }
+    #cvd-recipe-accuracy .cv-footer-brand span { font-size:12px; }
+    #cvd-recipe-accuracy .cv-back-top { font-size:13px; }
+    @media(max-width:1000px) {
+      #cvd-recipe-accuracy .cv-faculty-credit { grid-template-columns:minmax(0,1fr) minmax(0,1.4fr); }
+      #cvd-recipe-accuracy .cv-course-context { grid-column:1/-1; }
+      #cvd-recipe-accuracy .cv-orientation { grid-template-columns:1fr; }
+      #cvd-recipe-accuracy .cv-env-grid { grid-template-columns:minmax(0,1fr); }
+      #cvd-recipe-accuracy .cv-env-inspector { border-left:0; border-top:1px solid var(--cv-line); display:block; }
+      #cvd-recipe-accuracy .cv-env-bounds { padding-top:12px; }
+    }
+    @media(max-width:700px) {
+      body { padding:12px 12px 16px; }
+      #cvd-recipe-accuracy .cv-head { padding:14px 16px; }
+      #cvd-recipe-accuracy .cv-topbar { margin-bottom:12px; gap:8px; }
+      #cvd-recipe-accuracy .cv-hero { display:flex; align-items:flex-start; gap:14px; }
+      #cvd-recipe-accuracy .cv-name { font-size:34px; }
+      #cvd-recipe-accuracy .cv-head-note { margin:0; max-width:165px; }
+      #cvd-recipe-accuracy .cv-head-note p:first-child { font-size:15px; }
+      #cvd-recipe-accuracy .cv-head-facts { gap:4px; grid-template-columns:1fr; }
+      #cvd-recipe-accuracy .cv-head-facts>span, #cvd-recipe-accuracy .cv-head-facts>.cv-recipe-link { flex-direction:row; align-items:baseline; gap:6px; min-height:0; }
+      #cvd-recipe-accuracy .cv-head-facts :is(span,.cv-recipe-link) { font-size:11px; white-space:normal; }
+      #cvd-recipe-accuracy .cv-head-facts b { font-size:16px; }
+      #cvd-recipe-accuracy .cv-faculty-credit { grid-template-columns:1fr; gap:8px; margin-top:12px; padding-top:12px; }
+      #cvd-recipe-accuracy .cv-course-context { grid-column:auto; }
+      #cvd-recipe-accuracy .cv-contents ol { gap:4px 18px; }
+      #cvd-recipe-accuracy .cv-learning-path { grid-template-columns:1fr 1fr; gap:12px 20px; }
+      #cvd-recipe-accuracy .cv-learning-path p { font-size:14px; }
+      #cvd-recipe-accuracy :is(.cv-about,.cv-contents,.cv-setup,.cv-learn,.cv-guide-example) { padding:14px 16px; }
+      #cvd-recipe-accuracy .cv-equation-reading { grid-template-columns:1fr; gap:10px; }
+      #cvd-recipe-accuracy .cv-equation-reading dd { margin-top:0; }
+      #cvd-recipe-accuracy .cv-env-heading { padding:16px; }
+      #cvd-recipe-accuracy .cv-env-heading h2 { font-size:21px; }
+      #cvd-recipe-accuracy .cv-env-viewport { height:350px; }
+      #cvd-recipe-accuracy .cv-env-inspector { padding:16px; }
+      #cvd-recipe-accuracy .cv-env-model { padding:0 16px 16px; grid-template-columns:1fr; }
+      #cvd-recipe-accuracy .cv-env-stages button { font-size:12px; padding:10px 2px; }
+      #cvd-recipe-accuracy .cv-env-stages button>span { display:block; margin:0 0 2px; }
+      #cvd-recipe-accuracy .cv-env-conditions>div { padding:10px 12px; }
+      #cvd-recipe-accuracy .cv-env-tools { justify-content:flex-start; }
+      #cvd-recipe-accuracy details { padding:0 16px; }
+      #cvd-recipe-accuracy .cv-footer { align-items:flex-start; flex-direction:column; }
+    }
+    @media(max-width:380px) {
+      #cvd-recipe-accuracy .cv-hero { display:block; }
+      #cvd-recipe-accuracy .cv-head-note { max-width:none; margin-top:12px; }
+      #cvd-recipe-accuracy .cv-head-facts { max-width:280px; }
+      #cvd-recipe-accuracy .cv-head-facts { grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+      #cvd-recipe-accuracy .cv-head-facts>span, #cvd-recipe-accuracy .cv-head-facts>.cv-recipe-link { flex-direction:column; gap:2px; }
+      #cvd-recipe-accuracy .cv-contents ol { grid-template-columns:1fr; }
+    }
+  </style>
 </head>
 <body>
 <main aria-label="CVD learning simulator">
 <div id="cvd-recipe-accuracy">
   <header class="cv-head">
-    <div class="cv-topbar"><span class="cv-wordmark">CVD Lab<span>Process studio</span></span><nav class="cv-nav" aria-label="Site sections"><a href="#cv-studio">Simulator</a><a href="#cv-cvd-guide">CVD explained</a><a href="#cv-references">References</a></nav></div>
+    <div class="cv-topbar"><span class="cv-wordmark">CVD Lab<span>Process studio</span></span><nav class="cv-nav" aria-label="Site sections"><a href="#cv-contents">Contents</a><a href="#cv-studio">Simulator</a><a href="#cv-references">References</a></nav></div>
     <div class="cv-hero">
       <div class="cv-brand"><p class="cv-overline">Semiconductor process lab</p><h1 class="cv-name">CVD Lab<span class="cv-title-point">.</span></h1><p class="cv-byline">By S L RICHRIS</p></div>
       <div class="cv-head-note"><p>Chemical vapour deposition,<br> made visible.</p><div class="cv-head-facts" aria-label="Seven precursors, ten reference recipes, four CVD process views"><span><b>07</b>Precursors</span><a href="#cv-recipes-guide" class="cv-recipe-link" aria-label="Why 10 reference recipes? View the recipe matrix"><b>10</b><span>Reference recipes</span></a><span><b>04</b>Process views</span></div></div>
     </div>
     <div class="cv-faculty-credit"><p class="cv-course-context">Developed as part of <strong>23ECE338: VLSI Fabrication Technology</strong>.</p><p class="cv-faculty-name"><span>Course faculty</span><a href="https://www.amrita.edu/faculty/anjana-j-g/" target="_blank" rel="noopener noreferrer">Dr. Anjana J. G.</a></p><p class="cv-faculty-affiliation">Assistant Professor, Department of Electronics and Communication Engineering<br>School of Engineering, Amritapuri</p></div>
   </header>
+  <div class="cv-orientation">
   <section class="cv-about" aria-labelledby="cv-about-title">
     <h2 id="cv-about-title" class="cv-about-title">What is CVD?</h2>
     <p class="cv-about-definition"><span data-cite="cvd-definition"><strong>CVD means Chemical Vapour Deposition.</strong> Gas or vapour reactions form a solid film on a substrate; volatile products and unused feed leave through the exhaust.</span> <span data-cite="film-functions">These films can insulate, connect or protect chip features, or form semiconductor layers.</span></p>
+
+  </section>
+  <nav id="cv-contents" class="cv-contents" aria-labelledby="cv-contents-title">
+    <h2 id="cv-contents-title">Contents</h2>
+    <ol>
+      <li><a href="#cv-studio">Choose a recipe</a></li>
+      <li><a href="#cv-environment">Reaction environment</a></li>
+      <li><a href="#cv-hardware-view">Reactor &amp; atom balance</a></li>
+      <li><a href="#cv-defects">Defect evidence</a></li>
+      <li><a href="#cv-transport-guide">Transport model</a></li>
+      <li><a href="#cv-net-example">Read a net equation</a></li>
+      <li><a href="#cv-learn">CVD, MOCVD &amp; film uses</a></li>
+      <li><a href="#cv-references">References &amp; evidence</a></li>
+    </ol>
+  </nav>
+  </div>
+  <section class="cv-start" aria-labelledby="cv-start-title">
+    <h2 id="cv-start-title">Start here</h2>
+    <ol class="cv-learning-path">
+      <li><a href="#cv-studio">Choose</a><p>Select a precursor and an available process. Read the selected feed and film.</p></li>
+      <li><a href="#cv-environment">Follow</a><p>Inspect delivery, activation, transport, surface and exhaust in order.</p></li>
+      <li><a href="#cv-hardware-view">Count</a><p>Compare the feed, solid film and gas products in the atom-balance view.</p></li>
+      <li><a href="#cv-defects">Evaluate</a><p>Check each defect’s observation, source match and evidence limits.</p></li>
+    </ol>
+  </section>
+  <section id="cv-studio" class="cv-setup" aria-labelledby="cv-studio-title">
+    <div class="cv-section-intro"><h2 id="cv-studio-title">1. Choose a recipe</h2><p>Begin with the selected example, or change the precursor to explore another film.</p></div>
+    <div class="cv-setup-row">
+      <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option><option value="tmga">Trimethylgallium (TMGa) · Ga(CH₃)₃</option></select></label></div>
+      <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD process view</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button><button type="button" data-process="MOCVD" aria-pressed="false" title="Metal-organic CVD · select TMGa for the GaN preset">MOCVD</button></div></div>
+      <div class="cv-run"><button type="button" id="cv-play">Play animation</button></div>
+    </div>
+    <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
+  </section>
+  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; the idealised net equation assigns H₂ and N₂ as gas products.</p></div>
+  <p class="cv-view-intro">2. Explore the same recipe at three levels</p>
+  <div id="cv-views" class="cv-lab-views" role="group" aria-label="Laboratory scale">
+    <button type="button" data-lab-view="environment" aria-pressed="true" aria-controls="cv-environment">Reaction environment</button>
+    <button type="button" data-lab-view="hardware" aria-pressed="false" aria-controls="cv-hardware-view">Reactor &amp; atom balance</button>
+    <button type="button" data-lab-view="defects" aria-pressed="false" aria-controls="cv-defects">Defect atlas</button>
+    <span>One recipe. Three connected views.</span>
+  </div>
+  <section id="cv-environment" class="cv-env-lab" aria-labelledby="cv-env-title">
+    <header class="cv-env-heading"><div><p class="cv-overline">Inside the growth zone</p><h2 id="cv-env-title">Follow the reaction environment</h2><p id="cv-env-subtitle" class="cv-secondary"></p></div><span class="cv-env-label">Interactive 3D environment</span></header>
+    <div class="cv-env-conditions" aria-label="Selected source conditions"><div><span>Wafer setpoint</span><strong id="cv-env-temp"></strong></div><div><span>Chamber pressure</span><strong id="cv-env-pressure"></strong></div><div><span>Feed chemistry</span><strong id="cv-env-feed"></strong></div><div><span>Activation</span><strong id="cv-env-activation"></strong></div></div>
+    <div class="cv-env-grid">
+      <div class="cv-env-scene">
+        <div class="cv-env-scene-bar"><span id="cv-env-status">Paused · inspect any region</span><div class="cv-env-lenses" role="group" aria-label="Environment overlay"><button type="button" data-env-lens="species" aria-pressed="true">Species</button><button type="button" data-env-lens="energy" aria-pressed="false">Energy</button><button type="button" data-env-lens="transport" aria-pressed="false">Transport</button></div></div>
+        <div class="cv-env-viewport"><canvas id="cv-env-canvas" tabindex="0" role="img" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" aria-label="Interactive local CVD growth environment">Local growth-zone illustration showing incoming feed, activation, surface encounters and outgoing products.</canvas><div class="cv-env-hud"><span>LOCAL SURFACE VIEW</span><span id="cv-env-view-label">Species trajectories</span></div><div class="cv-env-camera-hint">Drag to orbit · scroll to zoom</div></div>
+        <div class="cv-env-legend" id="cv-env-legend" aria-label="Environment colour key"></div>
+        <div class="cv-env-tools"><button id="cv-env-play" type="button">Play environment</button><label>Playback speed<select id="cv-env-speed" aria-label="Environment playback speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label><input id="cv-env-loop" type="checkbox" checked>Continuous environment</label><button id="cv-env-reset" type="button">Reset camera</button></div>
+      </div>
+      <aside class="cv-env-inspector" aria-labelledby="cv-env-focus-title"><p class="cv-env-step" id="cv-env-step">01 / 05 · Delivery</p><h3 id="cv-env-focus-title">From source to chamber</h3><p id="cv-env-explanation"></p><div class="cv-env-observation"><span>Follow in the animation</span><p id="cv-env-observe"></p></div><details class="cv-env-evidence"><summary>Evidence &amp; scope</summary><p id="cv-env-evidence"></p></details><p class="cv-env-bounds">Species paths and dwell times are enlarged illustrations. Glyph counts do not show feed or product ratios; carrier/diluent molecules are omitted. The cited conditions are source values; this view does not solve reactor CFD or an elementary reaction network.</p></aside>
+    </div>
+    <div class="cv-env-stages" role="group" aria-label="Inspect an environment process"><button type="button" data-env-stage="delivery" aria-pressed="true"><span>01</span>Delivery</button><button type="button" data-env-stage="activation" aria-pressed="false"><span>02</span>Activation</button><button type="button" data-env-stage="transport" aria-pressed="false"><span>03</span>Transport</button><button type="button" data-env-stage="surface" aria-pressed="false"><span>04</span>Surface</button><button type="button" data-env-stage="exhaust" aria-pressed="false"><span>05</span>Exhaust</button></div>
+    <details id="cv-transport-guide" class="cv-transport-guide"><summary>Explore transport: what limits supply to the surface?</summary>
+    <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. The coordinate z points away from the wafer; J is a positive flux magnitude toward it (the signed z-flux is −D dC/dz). D has units length²/time, δ length, kₛ and kₘ length/time, C amount/volume and J amount/(area time).</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
+    </details>
+  </section>
+  <section id="cv-defects" class="cv-defect-lab" aria-labelledby="cv-defects-title" hidden>
+    <header class="cv-defect-heading"><div><p class="cv-overline">Film quality · evidence atlas</p><h2 id="cv-defects-title">Examine the defect evidence</h2><p class="cv-secondary">Inspect where a documented problem appears, how it was detected and how closely the study matches this recipe.</p></div><span class="cv-defect-count">10 recipes · 12 curated examples</span></header>
+    <div class="cv-defect-current"><strong>Current preset</strong><p id="cv-defect-current"></p></div>
+    <div id="cv-defect-options" class="cv-defect-options" role="group" aria-label="Defects mapped to the selected recipe"></div>
+    <div class="cv-defect-grid">
+      <div class="cv-defect-visual">
+        <div class="cv-defect-scene-top"><span id="cv-defect-scene-kind">QUALITATIVE CROSS-SECTION</span><span>Enlarged · no physical scale</span></div>
+        <svg id="cv-defect-svg" viewBox="0 0 660 360" role="img" aria-labelledby="cv-defect-svg-title cv-defect-svg-desc"></svg>
+        <div class="cv-defect-key"><span>Host / process region</span><span>Mapped concern</span></div>
+        <div class="cv-defect-sequence"><div class="cv-defect-steps" role="group" aria-label="Explain the defect diagram"><button type="button" data-defect-step="0" aria-pressed="false">1 · Host</button><button type="button" data-defect-step="1" aria-pressed="true">2 · Location</button><button type="button" data-defect-step="2" aria-pressed="false">3 · Detection</button></div><p id="cv-defect-caption" aria-live="polite"></p><button type="button" id="cv-defect-play">Play explanation</button><p class="cv-defect-timing">Three-step teaching reveal · timing does not represent formation kinetics</p></div>
+      </div>
+      <article id="cv-defect-detail" aria-labelledby="cv-defect-title"><span id="cv-defect-fit" class="cv-defect-fit"></span><h3 id="cv-defect-title" tabindex="-1" aria-live="polite"></h3><p id="cv-defect-meta"></p><dl class="cv-defect-evidence"><div><dt>Documented observation</dt><dd id="cv-defect-observation"></dd></div><div><dt>Studied conditions</dt><dd id="cv-defect-studied"></dd></div><div><dt>Variables investigated</dt><dd id="cv-defect-driver"></dd></div><div><dt>How it was detected</dt><dd id="cv-defect-diagnostic"></dd></div><div class="cv-defect-scope"><dt>Evidence fit &amp; limits</dt><dd id="cv-defect-scope"></dd></div></dl></article>
+    </div>
+    <p class="cv-defect-bounds">This is a curated map of published examples, not an exhaustive defect catalogue or a prediction that the selected recipe will fail. Marker counts, sizes and atomic sites are illustrative. Changing temperature or the transport ratio does not calculate defect density.</p>
+    <details id="cv-defect-coverage"><summary>Compare defect mappings across all 10 recipes</summary><div class="cv-defect-table-wrap"><table class="cv-defect-table"><thead><tr><th scope="col">Recipe</th><th scope="col">Mapped examples</th><th scope="col">Evidence fit &amp; sources</th></tr></thead><tbody id="cv-defect-coverage-body"></tbody></table></div></details>
+  </section>
+
+  <div id="cv-hardware-view" class="cv-workspace" hidden>
+    <section class="cv-chamber" aria-labelledby="cv-machine">
+      <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" data-cite="part-showerhead" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
+      <div class="cv-viewport"><canvas id="cv-canvas" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" role="img" aria-label="Rotatable 3D PECVD reactor design">3D CVD reactor with gas delivery and exhaust equipment.</canvas><svg id="cv-callouts" class="cv-callouts" role="img" aria-label="Machine part names"></svg></div>
+      <p id="cv-hint" class="cv-camera-hint">Drag to rotate · scroll to zoom</p>
+      <div class="cv-caption"><label for="cv-component">Inspect a machine part<select id="cv-component"></select></label><div id="cv-inspector" data-cite="part-reactor" class="cv-part-description" aria-live="polite">Silicon wafer · surface on which the film forms.</div></div>
+      <p class="cv-drawing-note">Illustrative architecture, not a drawing of the cited equipment. Part citations explain component functions.</p>
+      <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
+    </section>
+    <section class="cv-reaction" aria-labelledby="cv-reaction-title">
+      <div class="cv-reaction-head"><p class="cv-overline">Atom balance</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Net-reaction illustration · reactants</span></div>
+      <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Idealised net-reaction illustration">Schematic atom redistribution from reactants into an idealised film composition and gas products; atomic positions do not depict a crystal structure.</canvas></div>
+      <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
+      <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
+      <p id="cv-structure-note" data-cite="structure-molecules" class="cv-chemistry-note">Molecular shapes are idealised; bond lengths and conformations are drawing choices.</p>
+      <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" data-cite="role-oxide" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" data-cite="role-oxide" class="cv-role-use">Provides electrical insulation between metal wiring layers.</span></div>
+      <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
+      <div class="cv-seek"><label for="cv-reaction-progress">Inspect the illustration</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Net-reaction animation position"></div>
+    </section>
+  </div>
+  <details id="cv-process-details" open>
+    <summary id="cv-details-summary">Process details · Silane / PECVD</summary>
+    <div class="cv-detail-controls"><label for="cv-stage">Process stage<select id="cv-stage"><option value="load">Load</option><option value="condition">Condition</option><option value="deposit" selected>Deposit</option><option value="purge">Purge and cool</option><option value="unload">Unload</option></select></label><div class="cv-flow-control"><label><input id="cv-flow" class="cv-check" type="checkbox">Gas path overlay</label><span class="cv-secondary">Schematic inlet-to-exhaust guide</span></div></div>
+    <dl class="cv-recipe">
+      <div><dt><label for="cv-temperature">Illustrative wafer setpoint</label></dt><dd><output id="cv-temp" data-cite="conditions-silane-PECVD" for="cv-temperature">300 °C</output><span id="cv-temp-window" data-cite="conditions-silane-PECVD" class="cv-setting-note">Documented example</span><input id="cv-temperature" type="range" min="300" max="300" step="5" value="300" hidden disabled></dd></div>
+      <div><dt>Nominal example pressure</dt><dd id="cv-pressure" data-cite="conditions-silane-PECVD">1.0 Torr</dd></div>
+      <div><dt>Reactant delivery</dt><dd id="cv-feed" data-cite="conditions-silane-PECVD">5% SiH₄ in N₂ + N₂O</dd></div>
+      <div><dt>Activation</dt><dd><span id="cv-activation-state" data-cite="pecvd rf-power">RF plasma</span><label class="cv-rf"><input id="cv-rf-on" type="checkbox" checked>Enable RF during deposition</label><span id="cv-rf-reference" data-cite="conditions-silane-PECVD" class="cv-setting-note">RF example: 30 W</span></dd></div>
+    </dl>
+    <div id="cv-reference-note" data-cite="conditions-silane-PECVD" class="cv-detail-line">Reference conditions · University of Toronto oxide recipe</div>
+    <div id="cv-stage-detail" data-cite="chem-silane-PECVD exhaust" class="cv-detail-line" aria-live="polite">Idealised reaction by-products: H₂ + N₂.</div>
+    <div class="cv-detail-line cv-source-line"><a id="cv-setup-source" target="_blank" rel="noopener noreferrer">Conditions source</a> · <a id="cv-window-source" target="_blank" rel="noopener noreferrer" hidden>Independent temperature range</a><span id="cv-window-divider" hidden> · </span><a id="cv-chem-source" target="_blank" rel="noopener noreferrer">Net chemistry source</a> · <a id="cv-role-source" target="_blank" rel="noopener noreferrer">Film application source</a></div>
+  </details>
+  <section id="cv-net-example" class="cv-guide-example" aria-labelledby="cv-guide-example-title">
+    <p class="cv-overline">3. Read the chemistry</p>
+    <h2 id="cv-guide-example-title">Read a net equation, one atom at a time</h2>
+    <p class="cv-example-context">Worked example: silane / LPCVD. This example stays fixed while you explore other presets above.</p>
+    <div class="cv-guide-equation" data-cite="chem-silane-LPCVD" aria-label="Idealised net equation: silane gas forms solid silicon and hydrogen gas"><span>SiH<sub>4</sub> (gas)</span><span>→</span><span>Si (solid)</span><span>+</span><span>2H<sub>2</sub> (gas)</span></div>
+    <dl class="cv-equation-reading">
+      <div><dt>Feed enters</dt><dd>One SiH₄ molecule supplies one Si atom and four H atoms.</dd></div>
+      <div><dt>Film remains</dt><dd>The Si atom enters the idealised solid silicon film.</dd></div>
+      <div><dt>Gas leaves</dt><dd>Two H₂ molecules account for the same four H atoms.</dd></div>
+    </dl>
+    <p class="cv-example-limit">Count atoms on both sides to check conservation. A balanced net equation summarises chemistry; it does not identify every intermediate or the measured exhaust mixture.</p>
+    <p><span data-cite="recipe-definition">Changing co-reactants and conditions can change the film, even with the same precursor.</span> <a href="#cv-recipes-guide" class="cv-recipe-link">Compare the ten presets.</a></p>
+  </section>
+  <section id="cv-learn" class="cv-learn" aria-labelledby="cv-learn-title">
+    <div class="cv-section-intro"><h2 id="cv-learn-title">4. Connect the film to its purpose</h2><p>Open the topic you need. Each scientific statement links to its supporting source.</p></div>
+    <details id="cv-film-guide">
+      <summary>What is each deposited film used for?</summary>
+      <div class="cv-guide-table-wrap" tabindex="0" role="region" aria-labelledby="cv-film-caption">
+        <table class="cv-guide-table cv-film-table">
+          <caption id="cv-film-caption">Selected film roles in this lab. Applications are examples, not a complete list.</caption>
+          <thead><tr><th scope="col">Deposited film</th><th scope="col">Example role</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Silicon dioxide (SiO₂)</th><td data-cite="role-oxide">Electrical insulation between metal wiring layers.</td></tr>
+            <tr><th scope="row">Silicon nitride (Si₃N₄)</th><td data-cite="role-nitride">Passivation and moisture-barrier layers.</td></tr>
+            <tr><th scope="row">Polysilicon (poly-Si)</th><td data-cite="poly-role">Gate electrodes and resistors after suitable doping and patterning.</td></tr>
+            <tr><th scope="row">Epitaxial silicon (Si)</th><td data-cite="role-epi">A crystalline semiconductor layer for device fabrication.</td></tr>
+            <tr><th scope="row">Tungsten (W)</th><td data-cite="role-tungsten">Conductive filling of contacts and vias.</td></tr>
+            <tr><th scope="row">Titanium nitride (TiN)</th><td data-cite="role-tin">Contact liners and diffusion barriers.</td></tr>
+            <tr><th scope="row">Gallium nitride (GaN)</th><td data-cite="role-gan">A compound-semiconductor material in LED heterostructures.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
     <details id="cv-cvd-guide" class="cv-cvd-guide">
       <summary>How CVD works · gas roles · CVD types</summary>
       <div class="cv-guide-grid">
@@ -612,11 +935,7 @@
         <p class="cv-guide-takeaway" data-cite="bulk-purity"><strong>Structure and purity describe different properties.</strong> Polycrystalline refers to grain structure. Purification of metallurgical silicon can also produce high-purity bulk polysilicon for wafer manufacture.</p>
         <p class="cv-guide-footer">This lab illustrates a deposited thin poly-Si film; it does not model bulk feedstock purification.</p>
       </section>
-      <section class="cv-guide-example" aria-labelledby="cv-guide-example-title">
-        <h3 id="cv-guide-example-title" class="cv-guide-heading">One clear example · silane / LPCVD</h3>
-        <div class="cv-guide-equation" data-cite="chem-silane-LPCVD" aria-label="Idealised net equation: silane gas forms solid silicon and hydrogen gas"><span>SiH<sub>4</sub> (gas)</span><span>→</span><span>Si (solid)</span><span>+</span><span>2H<sub>2</sub> (gas)</span></div>
-        <p data-cite="chem-silane-LPCVD recipe-definition">The net equation puts silicon in the film and hydrogen in the gas phase. A different co-reactant can give a different film from the same precursor.</p>
-      </section>
+
       <section aria-labelledby="cv-guide-pecvd-title">
         <h3 id="cv-guide-pecvd-title" class="cv-guide-heading">What is PECVD?</h3>
         <p id="cv-pecvd-definition" class="cv-guide-takeaway" data-cite="pecvd"><strong>Plasma-enhanced chemical vapour deposition (PECVD)</strong> uses plasma-created reactive species to form a film at the substrate. Plasma activation often permits lower wafer temperatures than thermal CVD.</p>
@@ -643,7 +962,7 @@
         </table>
       </div>
       <p class="cv-guide-takeaway" data-cite="recipe-definition">Precursor, co-reactants, activation and process conditions work together to determine the film.</p>
-      <p class="cv-guide-footer">Select a precursor and an available technique, then play or inspect the reaction below. Numbered citations open the relevant reference.</p>
+      <p class="cv-guide-footer">Select a precursor and an available technique, then play or inspect the reaction in the simulator. Numbered citations open the relevant reference.</p>
     </details>
     <details id="cv-recipes-guide" class="cv-recipes-guide">
       <summary>Why 10 recipes?<span class="cv-recipes-summary-note">7 precursors, 10 process presets</span></summary>
@@ -667,7 +986,7 @@
       <p class="cv-recipes-total"><strong>3 + 1 + 2 + 1 + 1 + 1 + 1 = 10 recipes</strong><span>Each coloured cell is one included teaching preset.</span></p>
       <p class="cv-recipes-note"><span data-cite="chem-silane-LPCVD">Silane LPCVD forms polysilicon in the selected example.</span> <span data-cite="chem-silane-PECVD">With N₂O, the silane PECVD example forms SiO₂.</span> Empty cells mean no preset is included, not that the process is impossible.</p>
     </details>
-  </section>
+    <details id="cv-fabrication-guide"><summary>Where does CVD fit in VLSI fabrication?</summary>
   <section class="cv-fabrication" aria-labelledby="cv-fab-title" aria-describedby="cv-fab-note">
     <div class="cv-fab-heading"><h2 id="cv-fab-title" class="cv-fab-title">VLSI fabrication overview</h2><span class="cv-secondary">Illustrative process groups</span></div>
     <div class="cv-fab-track" tabindex="0" role="region" aria-label="Fabrication overview, scroll horizontally to see all seven process groups">
@@ -686,86 +1005,8 @@
     <p class="cv-fab-hint">Hover, focus or tap a process to see its explanation and citation.</p>
     <p id="cv-fab-note" class="cv-fab-note" data-cite="fab-repeat">Simplified overview, not a universal seven-step sequence. Deposition, lithography and etching repeat across layers; the order depends on the device process.</p>
   </section>
-  <section id="cv-studio" class="cv-setup" aria-label="Choose a deposition recipe">
-    <div class="cv-setup-row">
-      <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option><option value="tmga">Trimethylgallium (TMGa) · Ga(CH₃)₃</option></select></label></div>
-      <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD process view</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button><button type="button" data-process="MOCVD" aria-pressed="false" title="Metal-organic CVD · select TMGa for the GaN preset">MOCVD</button></div></div>
-      <div class="cv-run"><button type="button" id="cv-play">Play animation</button></div>
-    </div>
-    <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
+    </details>
   </section>
-  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; the idealised net equation assigns H₂ and N₂ as gas products.</p></div>
-  <div class="cv-lab-views" role="group" aria-label="Laboratory scale">
-    <button type="button" data-lab-view="environment" aria-pressed="true" aria-controls="cv-environment">Reaction environment</button>
-    <button type="button" data-lab-view="hardware" aria-pressed="false" aria-controls="cv-hardware-view">Reactor &amp; atom balance</button>
-    <button type="button" data-lab-view="defects" aria-pressed="false" aria-controls="cv-defects">Defect atlas</button>
-    <span>One recipe. Three connected views.</span>
-  </div>
-  <section id="cv-environment" class="cv-env-lab" aria-labelledby="cv-env-title">
-    <header class="cv-env-heading"><div><p class="cv-overline">Inside the growth zone</p><h2 id="cv-env-title">Follow the species. Understand the film.</h2><p id="cv-env-subtitle" class="cv-secondary"></p></div><span class="cv-env-label">Interactive 3D environment</span></header>
-    <div class="cv-env-conditions" aria-label="Selected source conditions"><div><span>Wafer setpoint</span><strong id="cv-env-temp"></strong></div><div><span>Chamber pressure</span><strong id="cv-env-pressure"></strong></div><div><span>Feed chemistry</span><strong id="cv-env-feed"></strong></div><div><span>Activation</span><strong id="cv-env-activation"></strong></div></div>
-    <div class="cv-env-grid">
-      <div class="cv-env-scene">
-        <div class="cv-env-scene-bar"><span id="cv-env-status">Paused · inspect any region</span><div class="cv-env-lenses" role="group" aria-label="Environment overlay"><button type="button" data-env-lens="species" aria-pressed="true">Species</button><button type="button" data-env-lens="energy" aria-pressed="false">Energy</button><button type="button" data-env-lens="transport" aria-pressed="false">Transport</button></div></div>
-        <div class="cv-env-viewport"><canvas id="cv-env-canvas" tabindex="0" role="img" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" aria-label="Interactive local CVD growth environment">Local growth-zone illustration showing incoming feed, activation, surface encounters and outgoing products.</canvas><div class="cv-env-hud"><span>LOCAL SURFACE VIEW</span><span id="cv-env-view-label">Species trajectories</span></div><div class="cv-env-camera-hint">Drag to orbit · scroll to zoom</div></div>
-        <div class="cv-env-legend" id="cv-env-legend" aria-label="Environment colour key"></div>
-        <div class="cv-env-tools"><button id="cv-env-play" type="button">Play environment</button><label>Playback speed<select id="cv-env-speed" aria-label="Environment playback speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label><input id="cv-env-loop" type="checkbox" checked>Continuous environment</label><button id="cv-env-reset" type="button">Reset camera</button></div>
-      </div>
-      <aside class="cv-env-inspector" aria-labelledby="cv-env-focus-title"><p class="cv-env-step" id="cv-env-step">01 / 05 · Delivery</p><h3 id="cv-env-focus-title">From source to chamber</h3><p id="cv-env-explanation"></p><div class="cv-env-observation"><span>Follow in the animation</span><p id="cv-env-observe"></p></div><div class="cv-env-evidence"><span>Evidence &amp; scope</span><p id="cv-env-evidence"></p></div><p class="cv-env-bounds">Species paths and dwell times are enlarged illustrations. Glyph counts do not show feed or product ratios; carrier/diluent molecules are omitted. The cited conditions are source values; this view does not solve reactor CFD or an elementary reaction network.</p></aside>
-    </div>
-    <div class="cv-env-stages" role="group" aria-label="Inspect an environment process"><button type="button" data-env-stage="delivery" aria-pressed="true"><span>01</span>Delivery</button><button type="button" data-env-stage="activation" aria-pressed="false"><span>02</span>Activation</button><button type="button" data-env-stage="transport" aria-pressed="false"><span>03</span>Transport</button><button type="button" data-env-stage="surface" aria-pressed="false"><span>04</span>Surface</button><button type="button" data-env-stage="exhaust" aria-pressed="false"><span>05</span>Exhaust</button></div>
-    <section class="cv-env-model" aria-labelledby="cv-env-model-title"><div class="cv-env-model-control"><p class="cv-overline">Explore a physical model</p><h3 id="cv-env-model-title">What limits the supply to the surface?</h3><p id="cv-env-model-intro" data-cite="environment-transport">A steady 1D model couples diffusion across a boundary layer with a first-order surface reaction.</p><div class="cv-env-regimes" role="group" aria-label="Choose a transport scenario"><button type="button" data-env-da="0.1" aria-pressed="false">Reaction limited</button><button type="button" data-env-da="1" aria-pressed="true">Coupled</button><button type="button" data-env-da="10" aria-pressed="false">Transport limited</button></div><label for="cv-env-da">Rate ratio Dₐ = kₛ / kₘ<output id="cv-env-da-value" for="cv-env-da">1.00</output></label><input id="cv-env-da" type="range" min="-2" max="2" step="0.02" value="0" aria-describedby="cv-env-model-scope"><div class="cv-env-range-labels"><span>Slower surface reaction</span><span>Slower mass transfer</span></div></div><div class="cv-env-model-result"><div class="cv-env-model-metrics"><div><span>Surface / bulk concentration</span><strong id="cv-env-cs">50.0%</strong></div><div><span>Flux / transport ceiling</span><strong id="cv-env-flux">50.0%</strong></div></div><svg id="cv-env-profile" viewBox="0 0 340 150" role="img" aria-label="Normalised precursor concentration profile"><path d="M45 15V113H320" fill="none" stroke="currentColor" opacity=".3"/><path id="cv-env-profile-area" d="" fill="#49bdbc" opacity=".12"/><path id="cv-env-profile-line" d="" fill="none" stroke="#168b93" stroke-width="3"/><text x="10" y="19">1</text><text x="10" y="116">0</text><text x="42" y="132">0</text><text x="312" y="132">1</text><text x="126" y="148">Concentration C / Cb</text><text x="66" y="26">Bulk gas · z / δ = 1</text><text x="66" y="108">Surface · z / δ = 0</text></svg><p id="cv-env-regime-text"></p></div><details class="cv-env-equations"><summary>Equations, assumptions &amp; source</summary><p data-cite="environment-transport">J = kₘ(Cᵦ − Cₛ) = kₛCₛ, with kₘ = D/δ. Therefore Cₛ/Cᵦ = 1/(1 + Dₐ), and J/(kₘCᵦ) = Dₐ/(1 + Dₐ).</p><p>With constant diffusivity and no gas-phase reaction, C(z)/Cᵦ = Cₛ/Cᵦ + (1 − Cₛ/Cᵦ)z/δ. The plotted profile is the closed-form solution to those stated assumptions. The coordinate z points away from the wafer; J is a positive flux magnitude toward it (the signed z-flux is −D dC/dz). D has units length²/time, δ length, kₛ and kₘ length/time, C amount/volume and J amount/(area time).</p></details><p id="cv-env-model-scope">Exploratory model · Dₐ is user-selected, not fitted to this recipe. The percentages are normalised model outputs, not precursor utilisation or measured film growth. The transport lens displays this profile; tracer paths remain illustrative.</p></section>
-  </section>
-  <section id="cv-defects" class="cv-defect-lab" aria-labelledby="cv-defects-title" hidden>
-    <header class="cv-defect-heading"><div><p class="cv-overline">Film quality · evidence atlas</p><h2 id="cv-defects-title">Different chemistry. Different defects.</h2><p class="cv-secondary">Inspect where a documented problem appears, how it was detected and how closely the study matches this recipe.</p></div><span class="cv-defect-count">10 recipes · 12 curated examples</span></header>
-    <div class="cv-defect-current"><strong>Current preset</strong><p id="cv-defect-current"></p></div>
-    <div id="cv-defect-options" class="cv-defect-options" role="group" aria-label="Defects mapped to the selected recipe"></div>
-    <div class="cv-defect-grid">
-      <div class="cv-defect-visual">
-        <div class="cv-defect-scene-top"><span id="cv-defect-scene-kind">QUALITATIVE CROSS-SECTION</span><span>Enlarged · no physical scale</span></div>
-        <svg id="cv-defect-svg" viewBox="0 0 660 360" role="img" aria-labelledby="cv-defect-svg-title cv-defect-svg-desc"></svg>
-        <div class="cv-defect-key"><span>Host / process region</span><span>Mapped concern</span></div>
-        <div class="cv-defect-sequence"><div class="cv-defect-steps" role="group" aria-label="Explain the defect diagram"><button type="button" data-defect-step="0" aria-pressed="false">1 · Host</button><button type="button" data-defect-step="1" aria-pressed="true">2 · Location</button><button type="button" data-defect-step="2" aria-pressed="false">3 · Detection</button></div><p id="cv-defect-caption" aria-live="polite"></p><button type="button" id="cv-defect-play">Play explanation</button><p class="cv-defect-timing">Three-step teaching reveal · timing does not represent formation kinetics</p></div>
-      </div>
-      <article id="cv-defect-detail" aria-labelledby="cv-defect-title"><span id="cv-defect-fit" class="cv-defect-fit"></span><h3 id="cv-defect-title" tabindex="-1" aria-live="polite"></h3><p id="cv-defect-meta"></p><dl class="cv-defect-evidence"><div><dt>Documented observation</dt><dd id="cv-defect-observation"></dd></div><div><dt>Studied conditions</dt><dd id="cv-defect-studied"></dd></div><div><dt>Variables investigated</dt><dd id="cv-defect-driver"></dd></div><div><dt>How it was detected</dt><dd id="cv-defect-diagnostic"></dd></div><div class="cv-defect-scope"><dt>Evidence fit &amp; limits</dt><dd id="cv-defect-scope"></dd></div></dl></article>
-    </div>
-    <p class="cv-defect-bounds">This is a curated map of published examples, not an exhaustive defect catalogue or a prediction that the selected recipe will fail. Marker counts, sizes and atomic sites are illustrative. Changing temperature or the transport ratio does not calculate defect density.</p>
-    <details id="cv-defect-coverage"><summary>Compare defect mappings across all 10 recipes</summary><div class="cv-defect-table-wrap"><table class="cv-defect-table"><thead><tr><th scope="col">Recipe</th><th scope="col">Mapped examples</th><th scope="col">Evidence fit &amp; sources</th></tr></thead><tbody id="cv-defect-coverage-body"></tbody></table></div></details>
-  </section>
-
-  <div id="cv-hardware-view" class="cv-workspace" hidden>
-    <section class="cv-chamber" aria-labelledby="cv-machine">
-      <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" data-cite="part-showerhead" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
-      <div class="cv-viewport"><canvas id="cv-canvas" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" role="img" aria-label="Rotatable 3D PECVD reactor design">3D CVD reactor with gas delivery and exhaust equipment.</canvas><svg id="cv-callouts" class="cv-callouts" role="img" aria-label="Machine part names"></svg></div>
-      <p id="cv-hint" class="cv-camera-hint">Drag to rotate · scroll to zoom</p>
-      <div class="cv-caption"><label for="cv-component">Inspect a machine part<select id="cv-component"></select></label><div id="cv-inspector" data-cite="part-reactor" class="cv-part-description" aria-live="polite">Silicon wafer · surface on which the film forms.</div></div>
-      <p class="cv-drawing-note">Illustrative architecture, not a drawing of the cited equipment. Part citations explain component functions.</p>
-      <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
-    </section>
-    <section class="cv-reaction" aria-labelledby="cv-reaction-title">
-      <div class="cv-reaction-head"><p class="cv-overline">Atom balance</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Net-reaction illustration · reactants</span></div>
-      <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Idealised net-reaction illustration">Schematic atom redistribution from reactants into an idealised film composition and gas products; atomic positions do not depict a crystal structure.</canvas></div>
-      <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
-      <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
-      <p id="cv-structure-note" data-cite="structure-molecules" class="cv-chemistry-note">Molecular shapes are idealised; bond lengths and conformations are drawing choices.</p>
-      <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" data-cite="role-oxide" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" data-cite="role-oxide" class="cv-role-use">Provides electrical insulation between metal wiring layers.</span></div>
-      <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
-      <div class="cv-seek"><label for="cv-reaction-progress">Inspect the illustration</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Net-reaction animation position"></div>
-    </section>
-  </div>
-  <details open>
-    <summary id="cv-details-summary">Process details · Silane / PECVD</summary>
-    <div class="cv-detail-controls"><label for="cv-stage">Process stage<select id="cv-stage"><option value="load">Load</option><option value="condition">Condition</option><option value="deposit" selected>Deposit</option><option value="purge">Purge and cool</option><option value="unload">Unload</option></select></label><div class="cv-flow-control"><label><input id="cv-flow" class="cv-check" type="checkbox">Gas path overlay</label><span class="cv-secondary">Schematic inlet-to-exhaust guide</span></div></div>
-    <dl class="cv-recipe">
-      <div><dt><label for="cv-temperature">Illustrative wafer setpoint</label></dt><dd><output id="cv-temp" data-cite="conditions-silane-PECVD" for="cv-temperature">300 °C</output><span id="cv-temp-window" data-cite="conditions-silane-PECVD" class="cv-setting-note">Documented example</span><input id="cv-temperature" type="range" min="300" max="300" step="5" value="300" hidden disabled></dd></div>
-      <div><dt>Nominal example pressure</dt><dd id="cv-pressure" data-cite="conditions-silane-PECVD">1.0 Torr</dd></div>
-      <div><dt>Reactant delivery</dt><dd id="cv-feed" data-cite="conditions-silane-PECVD">5% SiH₄ in N₂ + N₂O</dd></div>
-      <div><dt>Activation</dt><dd><span id="cv-activation-state" data-cite="pecvd rf-power">RF plasma</span><label class="cv-rf"><input id="cv-rf-on" type="checkbox" checked>Enable RF during deposition</label><span id="cv-rf-reference" data-cite="conditions-silane-PECVD" class="cv-setting-note">RF example: 30 W</span></dd></div>
-    </dl>
-    <div id="cv-reference-note" data-cite="conditions-silane-PECVD" class="cv-detail-line">Reference conditions · University of Toronto oxide recipe</div>
-    <div id="cv-stage-detail" data-cite="chem-silane-PECVD exhaust" class="cv-detail-line" aria-live="polite">Idealised reaction by-products: H₂ + N₂.</div>
-    <div class="cv-detail-line cv-source-line"><a id="cv-setup-source" target="_blank" rel="noopener noreferrer">Conditions source</a> · <a id="cv-window-source" target="_blank" rel="noopener noreferrer" hidden>Independent temperature range</a><span id="cv-window-divider" hidden> · </span><a id="cv-chem-source" target="_blank" rel="noopener noreferrer">Net chemistry source</a> · <a id="cv-role-source" target="_blank" rel="noopener noreferrer">Film application source</a></div>
-  </details>
   <details id="cv-references">
     <summary id="cv-references-summary">References and evidence</summary>
     <p class="cv-refs-intro">Numbered citations identify the source for the adjacent claim. Select a number to see the title, source type and exact table, page or section. Source conditions describe the cited equipment; they do not validate this animation.</p>
@@ -779,7 +1020,7 @@
     <p class="cv-ref-note">Citations support the stated concepts and source values. Geometry, playback and interaction rules are original teaching choices; they are not literature-validated process outputs.</p>
   </details>
   <p id="cv-model-note" class="cv-model-note">Net reaction schematic · enlarged atoms and film · playback speed is not a deposition rate</p>
-  <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p></footer>
+  <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p><a href="#cv-contents" class="cv-back-top">Back to contents ↑</a></footer>
   <script id="cv-evidence-data" type="application/json">
 {
   "version": 4,
@@ -3057,6 +3298,7 @@
         if(panel?.hidden){const view={'cv-defects':'defects','cv-environment':'environment','cv-hardware-view':'hardware'}[panel.id];root.querySelector('[data-lab-view="'+view+'"]').click();}
         let node=target;
         while(node&&node!==root){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}
+        window.dispatchEvent(new Event('cvd:layout'));
         target.scrollIntoView({block:'start',behavior:'instant'});
         if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');
         target.focus({preventScroll:true});
@@ -4010,15 +4252,66 @@
         step.addEventListener('focus',() => explain(step));
         step.addEventListener('click',() => explain(step));
       });
-      const revealSection=hash => {
+      const revealSection=(hash,focus=false) => {
+        if(!hash || hash==='#') return;
         const target=document.getElementById(hash.slice(1));
-        if(target?.tagName==='DETAILS') target.open=true;
+        if(!target) return;
+        const panel=target.closest('#cv-defects, #cv-environment, #cv-hardware-view');
+        if(panel?.hidden) {
+          const view={'cv-defects':'defects','cv-environment':'environment','cv-hardware-view':'hardware'}[panel.id];
+          document.querySelector('[data-lab-view="'+view+'"]').click();
+        }
+        for(let node=target;node;node=node.parentElement) if(node.tagName==='DETAILS') node.open=true;
+        window.dispatchEvent(new Event('cvd:layout'));
+        if(focus) {
+          const destination=target.tagName==='DETAILS'?target.querySelector('summary'):target;
+          if(!destination.hasAttribute('tabindex')) destination.tabIndex=-1;
+          requestAnimationFrame(()=>{destination.focus({preventScroll:true});target.scrollIntoView({block:'start'});});
+        }
       };
-      document.querySelectorAll('.cv-nav a, .cv-recipe-link').forEach(link => {
-        link.addEventListener('click', () => revealSection(link.hash));
+      document.querySelectorAll('.cv-nav a, .cv-recipe-link, .cv-contents a, .cv-learning-path a, .cv-back-top').forEach(link => {
+        link.addEventListener('click',event => {
+          if(event.button!==0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          // srcdoc frames can forbid history writes even with a hash-only URL.
+          try {
+            const url=new URL(window.location.href);url.hash=link.hash;
+            if(window.location.hash!==link.hash) history.pushState(null,'',url.href);
+          } catch { /* Revealing and focusing the content still works. */ }
+          revealSection(link.hash,true);
+        });
       });
-      revealSection(window.location.hash);
-      window.addEventListener('hashchange', () => revealSection(window.location.hash));
+      revealSection(window.location.hash,Boolean(window.location.hash));
+      window.addEventListener('hashchange',()=>revealSection(window.location.hash,true));
+      window.addEventListener('popstate',()=>revealSection(window.location.hash,true));
+
+      // Streamlit 1.65 measures documentElement.scrollHeight, which cannot shrink
+      // below the current iframe viewport. Measure the body instead so closing a
+      // disclosure or changing views removes the unused area below the footer.
+      // Local srcdoc is same-origin; standalone and other embeds are unaffected.
+      try {
+        const frame=window.frameElement;
+        if(frame?.classList.contains('stIFrame') && typeof ResizeObserver!=='undefined') {
+          let pending=false;
+          const applyFrameSize=()=>{
+            const height=Math.ceil(document.body.getBoundingClientRect().height);
+            if(height>0 && frame.style.height!==height+'px') frame.style.height=height+'px';
+          };
+          const fitFrame=()=>{
+            if(pending) return;
+            pending=true;
+            requestAnimationFrame(()=>{
+              pending=false;
+              applyFrameSize();
+            });
+          };
+          new ResizeObserver(fitFrame).observe(document.body);
+          window.addEventListener('load',fitFrame);
+          window.addEventListener('resize',fitFrame);
+          window.addEventListener('cvd:layout',applyFrameSize);
+          fitFrame();
+        }
+      } catch { /* Cross-origin hosts retain their own frame sizing. */ }
     })();
   </script>
 </div>

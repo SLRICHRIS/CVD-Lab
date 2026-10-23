@@ -4,7 +4,8 @@
   "description": "Optional verification tools; the simulator has no frontend build step.",
   "scripts": {
     "test": "python scripts/check_evidence.py && node tests/evidence-dom.cjs",
-    "test:browser": "node tests/citations.cjs && node tests/environment.cjs && node tests/defects.cjs"
+    "test:browser": "node tests/citations.cjs && node tests/environment.cjs && node tests/defects.cjs && node tests/reading-flow.cjs",
+    "test:streamlit": "node tests/reading-flow.cjs --streamlit"
   },
   "devDependencies": {
     "jsdom": "30.1.3",
