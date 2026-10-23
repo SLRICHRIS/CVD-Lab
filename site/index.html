@@ -564,7 +564,7 @@
   <style id="cv-reading-styles">
     html { background-color:light-dark(#f5f7fa,#0b1322); scroll-padding-top:16px; }
     body { padding:16px 20px 18px; }
-    main { max-width:1320px; }
+    main { max-width:1680px; }
     #cvd-recipe-accuracy { --cv-text:light-dark(#101828,#f8fafc); --cv-muted:light-dark(#24344a,#e0e9f5); --cv-line:light-dark(#cbd5e1,#40536a); --cv-blue:light-dark(#184a94,#b9d6ff); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; font-size:18px; line-height:1.65; }
     #cvd-recipe-accuracy :is(h2,h3) { text-wrap:balance; }
     #cvd-recipe-accuracy :is(a,button,input,select,summary):focus-visible { outline:3px solid var(--cv-accent); outline-offset:4px; }
@@ -905,10 +905,15 @@
     #cvd-recipe-accuracy .cv-syllabus-excerpt { margin:0 0 14px; padding:16px; border-left:3px solid var(--cv-accent); background:var(--cv-soft); }
     #cvd-recipe-accuracy .cv-syllabus-excerpt p+p { margin-top:12px; }
     #cvd-recipe-accuracy .cv-study-body .cv-study-source-note { font-size:16px; margin-bottom:16px; }
-    #cvd-recipe-accuracy .cv-feedback-body { padding-bottom:8px; max-width:1000px; }
+    #cvd-recipe-accuracy .cv-feedback-body { padding-bottom:8px; max-width:76ch; }
     #cvd-recipe-accuracy .cv-feedback-body p { font-size:18px; line-height:1.7; color:var(--cv-text); margin-bottom:14px; }
     #cvd-recipe-accuracy .cv-feedback-body a { overflow-wrap:anywhere; }
     #cvd-recipe-accuracy .cv-feedback-author { font-weight:650; }
+    /* Give the visual workspace more room without stretching long paragraphs. */
+    #cvd-recipe-accuracy :is(.cv-study-intro,.cv-study-steps li,.cv-study-launch-note,.cv-study-scope,.cv-study-extra-list li,.cv-study-required p,.cv-study-source-note,.cv-syllabus-excerpt p,.cv-example-limit,.cv-example-next,.cv-refs-intro,.cv-ref-use,.cv-ref-note,.cv-model-note) { max-width:76ch; }
+    @media(min-width:1600px) {
+      #cvd-recipe-accuracy .cv-env-viewport { height:clamp(465px,28vw,560px); }
+    }
     @media(max-width:1000px) {
       #cvd-recipe-accuracy .cv-study-examples { grid-template-columns:repeat(2,minmax(0,1fr)); }
       #cvd-recipe-accuracy .cv-study-priorities { grid-template-columns:1fr; }

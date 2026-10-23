@@ -118,11 +118,21 @@ const {chromium}=require('playwright');
         assert.ok(m.contrast>=7,`${colorScheme} ${m.selector}: ${m.contrast.toFixed(2)} contrast`);
       }
     }
-    for(const [width,colorScheme] of [[1440,'light'],[768,'light'],[390,'light'],[390,'dark'],[320,'light']]) {
+    for(const [width,colorScheme] of [[2560,'light'],[1906,'light'],[1906,'dark'],[1440,'light'],[768,'light'],[390,'light'],[390,'dark'],[320,'light']]) {
       await page.setViewportSize({width,height:1000});await page.emulateMedia({colorScheme});
       await page.evaluate(()=>document.querySelectorAll('details').forEach(el=>el.open=false));
       await page.locator('.cv-contents a[href="#cv-environment"]').click();
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,width+' px overflow');
+      if(width>=1906) {
+        const layout=await page.evaluate(()=>({
+          width:document.querySelector('main').getBoundingClientRect().width,
+          scene:document.querySelector('.cv-env-viewport').getBoundingClientRect().height,
+          font:parseFloat(getComputedStyle(document.querySelector('#cv-env-explanation')).fontSize)
+        }));
+        assert.ok(layout.width>=width*(width===1906?.85:.64),width+' px: excessive desktop side margins');
+        assert.ok(layout.scene>=500,width+' px: the growth environment did not grow with the workspace');
+        assert.ok(layout.font>=18,width+' px: main prose shrank on a wide screen');
+      }
       assert.equal(await page.locator('.cv-head-facts').evaluate(el=>[...el.children].every(cell=>{
         const box=cell.getBoundingClientRect();
         return [...cell.children].every(child=>{const r=child.getBoundingClientRect();return r.left>=box.left-1&&r.right<=box.right+1;});
@@ -137,6 +147,13 @@ const {chromium}=require('playwright');
       await page.screenshot({path:path.join(output,`reading-${width}-${colorScheme}.png`)});
       await page.locator('.cv-contents a[href="#cv-syllabus-guide"]').click();
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,width+' px expanded syllabus overflow');
+      if(width>=1906) {
+        assert.equal(await page.locator('.cv-study-intro').evaluate(el=>{
+          const probe=document.createElement('span');probe.textContent='0';probe.style.font=getComputedStyle(el).font;
+          el.append(probe);const ch=probe.getBoundingClientRect().width;probe.remove();
+          return el.getBoundingClientRect().width<=76*ch+1;
+        }),true,width+' px: the introduction has an excessive reading width');
+      }
       for(const section of ['.cv-study-priorities','#cv-unit-topic-map','#cv-exam-extras']) {
         await page.locator(section).screenshot({path:path.join(output,`syllabus-${section.replace(/[.#]/g,'')}-${width}-${colorScheme}.png`)});
       }
@@ -215,17 +232,27 @@ const {chromium}=require('playwright');
       for(const view of ['hardware','defects','environment']) {
         await frame.locator(`[data-lab-view="${view}"]`).click();await fitted(view);
       }
-      for(const width of [390,1440]) {
+      for(const width of [390,1440,1906,2560]) {
         await page.setViewportSize({width,height:1000});await fitted(width+' px');
+        if(width>=1906) {
+          const host=await page.locator('iframe.stIFrame').boundingBox();
+          const lab=await frame.locator('main').boundingBox();
+          assert.ok(lab.width>=width*(width===1906?.85:.64),width+' px: narrow lab inside Streamlit');
+          assert.ok(Math.abs(lab.x-(width-lab.width)/2)<=2,width+' px: the lab is not centered');
+          assert.ok(host.width>=lab.width,width+' px: host clips the wider lab');
+          assert.equal(await frame.locator('body').evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,width+' px: Streamlit frame overflows');
+          await frame.locator('.cv-contents a[href="#cv-environment"]').click();await fitted('wide environment');
+          await page.screenshot({path:path.join(output,`streamlit-environment-${width}.png`)});
+        }
         await frame.locator('#cv-references>summary').click();await fitted('references expanded');
         await frame.locator('#cv-references>summary').click();await fitted('references collapsed');
         await page.locator('[data-testid="stMain"]').evaluate(el=>el.scrollTop=el.scrollHeight);
         await page.screenshot({path:path.join(output,`streamlit-footer-${width}.png`)});
       }
-      console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop resizing, compact host padding and no unused footer tail.');
+      console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop/wide-screen resizing, centered usable workspace width, compact host padding and no unused footer tail.');
     }
     assert.deepEqual(errors,[],'Browser JavaScript errors');
-    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast and 320/390/768/1440 px layouts.');
+    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast, bounded reading widths and 320/390/768/1440/1906/2560 px layouts.');
   } finally {
     await browser.close();
     if(server)server.kill('SIGTERM');
