@@ -31,6 +31,7 @@ const { chromium } = require('playwright');
     { p: 'teos', mode: 'PECVD', conditions: [8], chemistry: [8, 13], role: [18], t: '350', window: [8] },
     { p: 'sicl4', mode: 'APCVD', conditions: [5], chemistry: [5, 9], role: [3], t: '1200', window: [5], eq: 'SiCl4 + 2H2 -> Si + 4HCl' },
     { p: 'wf6', mode: 'LPCVD', conditions: [6], chemistry: [6, 9], role: [18, 22], t: '400', window: [6], eq: 'WF6 + 3H2 -> W + 6HF' },
+    { p: 'tmga', mode: 'MOCVD', conditions: [30], chemistry: [29], role: [28], t: '1050', window: [30], eq: 'Ga(CH3)3 + NH3 -> GaN + 3CH4' },
     { p: 'ticl4', mode: 'LPCVD', conditions: [7], chemistry: [7], role: [18, 22], t: '650', window: [7], eq: '6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl' },
   ];
   for (const recipe of recipes) {
@@ -104,7 +105,7 @@ const { chromium } = require('playwright');
   assert.deepEqual(integrity.duplicateIds, []);
   assert.deepEqual(integrity.missing, []);
   assert.deepEqual(integrity.bareClaims, []);
-  assert.equal(integrity.sources, 27);
+  assert.equal(integrity.sources, 31);
   // Hidden reference details must open when a claim is selected, with focus and return.
   await page.locator('#cv-pressure > .cv-citations a').click();
   assert.equal(await page.locator('#cv-references').evaluate(element => element.open), true);
@@ -122,6 +123,26 @@ const { chromium } = require('playwright');
   assert.match(await page.locator('#cv-equation').textContent(), /variable C\/H\/O/);
   assert.match(await page.locator('#cv-chemistry-note').textContent(), /not gas ratios or a balanced equation/);
 
+  // TMGa selects the MOCVD preset, with thermal activation and the correct substrate.
+  await page.selectOption('#cv-precursor', 'tmga');
+  assert.equal(await page.locator('[data-process="MOCVD"]').getAttribute('aria-pressed'), 'true');
+  for (const mode of ['APCVD', 'LPCVD', 'PECVD']) assert.equal(await page.locator(`[data-process="${mode}"]`).isDisabled(), true);
+  assert.equal(await page.locator('.cv-rf').isVisible(), false);
+  assert.equal(await page.locator('#cv-temperature').isDisabled(), true);
+  await expectReferences('#cv-activation-state', [28, 29]);
+  await expectReferences('#cv-machine', [31]);
+  await page.selectOption('#cv-component', 'wafer');
+  assert.match(await page.locator('#cv-inspector').textContent(), /GaN template on sapphire/);
+  await expectReferences('#cv-inspector', [30]);
+  await page.selectOption('#cv-component', 'bubbler'); await expectReferences('#cv-inspector', [29]);
+  await page.selectOption('#cv-component', 'showerhead'); await expectReferences('#cv-inspector', [31]);
+  await page.check('#cv-flow');
+  for (const value of [0, 250, 500, 750, 1000]) {
+    await page.locator('#cv-reaction-progress').evaluate((element, progress) => { element.value = progress; element.dispatchEvent(new Event('input', { bubbles: true })); }, value);
+    assert.match(await page.locator('#cv-reaction-canvas').getAttribute('aria-label'), /Ga\(CH3\)3 \+ NH3 -> GaN \+ 3CH4/);
+  }
+  assert.equal(await page.locator('.cv-recipes-table [data-cvd-type]').count(), recipes.length);
+
   for (const [width, height, colorScheme] of [[1440, 1000, 'light'], [390, 844, 'light'], [390, 844, 'dark']]) {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ colorScheme });
@@ -129,8 +150,10 @@ const { chromium } = require('playwright');
     await page.locator('#cv-recipes-guide').evaluate(element => element.open = true);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), `${width}px: unexpected page overflow`);
     await page.screenshot({ path: path.join(outputDir, `cvd-qa-${width}-${colorScheme}.png`), fullPage: true });
+    await page.locator('.cv-workspace').screenshot({ path: path.join(outputDir, `mocvd-workspace-${width}-${colorScheme}.png`) });
+    await page.locator('#cv-studio').screenshot({ path: path.join(outputDir, `mocvd-controls-${width}-${colorScheme}.png`) });
   }
   assert.deepEqual(errors, [], 'Browser JavaScript errors');
   await browser.close();
-  console.log('Citation browser checks passed: nine recipes, all available parts and stages, temperature/RF controls, eight balanced net equations, reference navigation, light/dark mobile layouts.');
+  console.log('Citation browser checks passed: ten recipes, all available parts and stages, temperature/RF controls, nine balanced net equations, MOCVD chemistry/delivery/substrate, reference navigation, light/dark mobile layouts.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

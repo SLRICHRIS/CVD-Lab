@@ -23,6 +23,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Replaced the inaccessible OSHA bulk-silicon link with a readable manufacturer process report. Replaced the uninformative Applied Materials epitaxy landing page with the actual lecture sections on crystalline growth.
 - Limited the silicon-nitride role text to cited passivation/moisture-barrier applications; removed the oxidation-mask extension from a source that did not establish it.
 - Added sources for gas metering, vapour delivery, RF matching, pressure feedback and each fabrication explanation.
+- Added a GaN MOCVD preset with the TMGa/ammonia net equation, sample T2 conditions from Liang et al., a prepared sapphire/buffer/template stack and separately sourced showerhead architecture. Pressure, activation and precursor-chemistry labels are distinguished.
 
 ## Claim register
 
@@ -35,7 +36,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `thermal-activation` | Heat activates thermal CVD in these presets. | [3](#ref-3): PDF pp. 2–3 |  |
 | `surface-growth` | Transport, adsorption, surface reaction and desorption produce a deposited film. | [10](#ref-10): PDF p. 9, slide 18: CVD Principles |  |
 | `exhaust` | Exhaust removes unused feed and volatile products; shown loading and finishing stages are illustrative. | [9](#ref-9): Operation paragraph; [15](#ref-15): PECVD technology, final paragraph | Exact purge, cool and vent procedures are tool-specific and are not supplied here. |
-| `wafer` | The illustrated wafer is a silicon substrate used to build devices. | [27](#ref-27): §1.2, substrate and planar processing discussion | This is the substrate selected for this lab, not a definition excluding other wafer materials. |
+| `wafer` | Most examples illustrate a silicon substrate used to build devices; the GaN/sapphire stack is identified separately. | [27](#ref-27): §1.2, substrate and planar processing discussion | This is the substrate selected for this lab, not a definition excluding other wafer materials. |
 | `precursor` | A precursor supplies film-forming atoms; co-reactants participate in its conversion. | [9](#ref-9): Example reactions 1–5 |  |
 | `carrier` | Ar and He serve as carrier/diluent gases in the stated TiN and TEOS examples. | [7](#ref-7): Preferred primary-reaction conditions: Ar flow; [8](#ref-8): Description, helium-flow discussion |  |
 | `plasma` | A partially ionised gas contains free electrons, ions and neutral species. | [14](#ref-14): What is Plasma? |  |
@@ -93,16 +94,25 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `fab-doping` | Doping/implantation introduces impurities to alter semiconductor electrical properties. | [27](#ref-27): §1.2.5 |  |
 | `fab-metal` | Patterned metal contacts and interconnects connect devices. | [27](#ref-27): §1.2, device example; [18](#ref-18): Fig. 9.3, interconnect sequence |  |
 | `fab-repeat` | Deposition, lithography and etching repeat across device and interconnect layers. | [18](#ref-18): Fig. 9.3 and subsequent metal-level processing; [27](#ref-27): §1.2, Fig. 1.7 | The seven displayed nodes are an illustrative overview, not a universal chronological fabrication sequence. |
+| `mocvd-definition` | MOCVD uses metal-organic precursors for semiconductor epitaxy; the thermal GaN example uses TMGa and ammonia. MOVPE is an alternative name in epitaxial growth. | [28](#ref-28): MOCVD technology overview, opening explanation; [29](#ref-29): §§3.1.1–3.1.2, pp. 45–46 | This preset is thermal; MOCVD does not itself specify pressure or plasma activation. |
+| `mocvd-classification` | AP/LP describe pressure, PE describes plasma assistance and MO describes precursor chemistry. The selected MOCVD example is also a reduced-pressure thermal process. | [3](#ref-3): CVD methods comparison, pp. 2–3; [28](#ref-28): MOCVD technology overview, thermal decomposition explanation; [30](#ref-30): §2 and Table 1, T2 pressure 200 Torr | Classification is a teaching synthesis; the four selector labels are not mutually exclusive physical categories. |
+| `chem-tmga-MOCVD` | Idealised GaN net growth: Ga(CH3)3 + NH3 → GaN + 3CH4; TMGa supplies Ga and ammonia supplies N. | [29](#ref-29): §3.1.2, p. 46, Eq. (3.1) and surrounding discussion | Atom-balanced summary only. Molecular geometry, bond paths and exhaustive methane selectivity are not established by this equation. |
+| `conditions-tmga-MOCVD` | Liang et al. sample T2 uses TMGa/NH3 at 1050 °C and 200 Torr for the final GaN layer. | [30](#ref-30): §2, Table 1, row T2 | Fixed reported example. No continuous operating window, carrier selection or gas-flow ratio is inferred. |
+| `role-gan` | GaN is a compound semiconductor used in LED heterostructures. | [28](#ref-28): MOCVD technology overview, GaN and GaN/InGaN LED multilayer example | The illustrated GaN layer is not a complete LED or a prediction of light output. |
+| `part-mocvd` | A close-coupled MOCVD architecture separates precursor streams, cools the showerhead and heats a rotating susceptor. | [31](#ref-31): Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs | Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. Rotation is described, not mechanically simulated. |
+| `part-mo-delivery` | Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control. | [29](#ref-29): §3.1.4, pp. 51–54, metal-organic sources and bubbler delivery | No bubbler temperature, delivery flow or source-consumption calculation is modelled. |
+| `gan-substrate` | The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire. | [30](#ref-30): §2 and Fig. 1, substrate/buffer/template/final-layer stack | Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic. |
 
 ## Model choices
 
 - Camera geometry, colours, atom sizes, bonds, lattice positions and trajectories are schematic design choices.
-- Eight displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
+- Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
 - TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.
 - Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.
 - Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.
 - Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.
 - Reactor drawings and load/purge/cool/vent stages do not reproduce a source tool or provide an operating procedure.
+- The MOCVD view combines one cited GaN final-layer setpoint with a separately sourced showerhead architecture. The prepared buffer/template is already present; delivery, crystal geometry and layer thickness are schematic.
 
 ## References
 
@@ -406,3 +416,49 @@ Locator: §1.2, Fig. 1.7 and §§1.2.1–1.2.5.
 Supports: Wafer processing, photoresist exposure/development, etching, oxidation, implantation and patterned metal contacts.
 
 Scope: The illustrated device is a SiC MOSFET. Only general process definitions are used; its sequence is not a universal silicon process flow.
+
+<a id="ref-28"></a>
+### [28] AIXTRON
+
+[AIXTRON Technologies: MOCVD](https://www.aixtron.com/en/innovation/technologies/mocvd) (n.d.). **Manufacturer technology documentation.** Accessed 2026-10-23.
+
+Locator: MOCVD technology overview, opening explanation and LED multilayer example.
+
+Supports: Metal-organic precursors, thermal GaN growth from TMGa/NH3, semiconductor epitaxy and LED heterostructures.
+
+Scope: Conceptual overview; no recipe setpoints, measured film properties or animation validation.
+
+<a id="ref-29"></a>
+### [29] Chenqi Zhu, University of Sheffield
+
+[MOCVD Growth and characterisation of III-nitride semiconductor materials for monolithically integrated optoelectronics](https://etheses.whiterose.ac.uk/id/eprint/32396/1/MOCVD%20Growth%20and%20characterisation%20of%20III-nitride%20semiconductor%20materials%20for%20monolithically%20integrated%20optoelectronics.pdf) (2022). **Doctoral thesis.** Accessed 2026-10-23.
+
+Locator: §§3.1.1–3.1.2, printed pp. 45–46, Eq. (3.1); §3.1.4, pp. 51–54.
+
+Supports: MOVPE terminology; idealised TMGa/ammonia GaN equation; liquid-source bubbler, carrier-gas and flow-control concepts.
+
+Scope: Eq. (3.1) is a net summary, not an elementary mechanism or a complete exhaust analysis. No bubbler setpoint or delivery flow is inferred.
+
+<a id="ref-30"></a>
+### [30] Feng Liang et al.
+
+[Carbon-Related Defects as a Source for the Enhancement of Yellow Luminescence of Unintentionally Doped GaN](https://doi.org/10.3390/nano8090744) (2018). **Peer-reviewed experimental research article.** Accessed 2026-10-23.
+
+Locator: Nanomaterials 8(9), 744; §2, Fig. 1 and Table 1, sample T2.
+
+Supports: TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire.
+
+Scope: One reported final-layer setpoint, not a general MOCVD operating window. The schematic does not reconstruct the study’s reactor, nucleation sequence, impurity concentrations or luminescence.
+
+[Alternate / author full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC6163992/).
+
+<a id="ref-31"></a>
+### [31] AIXTRON
+
+[AIXTRON Technologies: Showerhead principle (MOCVD)](https://www.aixtron.com/en/innovation/technologies/showerhead-principle) (n.d.). **Manufacturer technology documentation.** Accessed 2026-10-23.
+
+Locator: Close Coupled Showerhead® explanation, gas separation, cooling and heated susceptor paragraphs.
+
+Supports: Separate precursor channels, water-cooled showerhead and heated rotating susceptor.
+
+Scope: Representative architecture only; dimensions and single-substrate simplification are teaching choices. Not evidence that Liang et al. used this specific showerhead.

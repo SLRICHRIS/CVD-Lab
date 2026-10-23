@@ -71,6 +71,7 @@ def markdown(data: dict) -> str:
         "- Replaced the inaccessible OSHA bulk-silicon link with a readable manufacturer process report. Replaced the uninformative Applied Materials epitaxy landing page with the actual lecture sections on crystalline growth.",
         "- Limited the silicon-nitride role text to cited passivation/moisture-barrier applications; removed the oxidation-mask extension from a source that did not establish it.",
         "- Added sources for gas metering, vapour delivery, RF matching, pressure feedback and each fabrication explanation.",
+        "- Added a GaN MOCVD preset with the TMGa/ammonia net equation, sample T2 conditions from Liang et al., a prepared sapphire/buffer/template stack and separately sourced showerhead architecture. Pressure, activation and precursor-chemistry labels are distinguished.",
         "",
         "## Claim register",
         "",
@@ -135,9 +136,9 @@ def main() -> None:
     assert referenced == sources.keys(), f"Unreferenced sources: {sources.keys() - referenced}"
     for key in parsed.bindings:
         assert key in claims, f"Unknown static citation binding: {key}"
-    mappings = re.findall(r"'([a-z0-9]+-(?:APCVD|LPCVD|PECVD))':\{conditions:'([^']+)',window:'([^']+)',chemistry:'([^']+)',role:'([^']+)'\}", html)
-    assert len(mappings) == 9, f"Expected nine distinct recipe evidence mappings, got {len(mappings)}"
-    assert len({mapping[0] for mapping in mappings}) == 9, "Duplicate recipe evidence mapping"
+    mappings = re.findall(r"'([a-z0-9]+-(?:APCVD|LPCVD|PECVD|MOCVD))':\{conditions:'([^']+)',window:'([^']+)',chemistry:'([^']+)',role:'([^']+)'\}", html)
+    assert len(mappings) == 10, f"Expected ten distinct recipe evidence mappings, got {len(mappings)}"
+    assert len({mapping[0] for mapping in mappings}) == len(mappings), "Duplicate recipe evidence mapping"
     for name, *keys in mappings:
         for key in keys:
             assert key in claims, f"{name}: unknown evidence key {key}"

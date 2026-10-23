@@ -71,6 +71,7 @@ const cases = [
   ['teos', 'PECVD', [8], [8], [8, 13], [18]],
   ['sicl4', 'APCVD', [5], [5], [5, 9], [3]],
   ['wf6', 'LPCVD', [6], [6], [6, 9], [18, 22]],
+  ['tmga', 'MOCVD', [30], [30], [29], [28]],
   ['ticl4', 'LPCVD', [7], [7], [7], [18, 22]],
 ];
 let equations = 0, parts = 0;
@@ -89,6 +90,26 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
     const [left, right] = renderedEquation.split('->'); assert.deepEqual(totals(left), totals(right), renderedEquation); equations++;
   }
   const options = [...query('#cv-component').options].map(option => option.value);
+  if (mode === 'MOCVD') {
+    assert.equal(query('[data-process="MOCVD"]').getAttribute('aria-pressed'), 'true');
+    for (const process of ['APCVD', 'LPCVD', 'PECVD']) assert.equal(query(`[data-process="${process}"]`).disabled, true);
+    assert.equal(query('.cv-rf').hidden, true);
+    assert.equal(query('#cv-rf-on').disabled, true);
+    assert.equal(query('#cv-temperature').disabled, true);
+    assert.equal(query('#cv-temperature').value, '1050');
+    assert.match(query('#cv-pressure').textContent, /200 Torr/);
+    assert.match(query('#cv-machine').textContent, /thermal showerhead reactor/);
+    assert.match(query('#cv-atoms').textContent, /Ga.*gallium/);
+    assert.ok(options.includes('bubbler'));
+    assert.ok(!options.includes('plasma') && !options.includes('rfGenerator'));
+    change('#cv-component', 'wafer'); expectRefs('#cv-inspector', [30]);
+    change('#cv-component', 'bubbler'); expectRefs('#cv-inspector', [29]);
+    change('#cv-component', 'showerhead'); expectRefs('#cv-inspector', [31]);
+    query('#cv-flow').checked = true; query('#cv-flow').dispatchEvent(new dom.window.Event('change', { bubbles: true }));
+    for (const progress of [0, 250, 500, 750, 1000]) { query('#cv-reaction-progress').value = progress; query('#cv-reaction-progress').dispatchEvent(new dom.window.Event('input', { bubbles: true })); }
+    assert.match(query('#cv-reaction-canvas').getAttribute('aria-label'), /Ga\(CH3\)3 \+ NH3 -> GaN \+ 3CH4/);
+    expectRefs('#cv-machine', [31]); expectRefs('#cv-activation-state', [28, 29]);
+  } else assert.equal(query('[data-process="MOCVD"]').disabled, true);
   for (const component of options) { change('#cv-component', component); assert.ok(refs('#cv-inspector').length, component); parts++; }
   for (const stage of ['load', 'condition', 'deposit', 'purge', 'unload', 'deposit']) { change('#cv-stage', stage); expectRefs('#cv-equation', chemistry); }
   const temperature = query('#cv-temperature');
@@ -98,8 +119,12 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
     assert.match(query('#cv-growth-status').textContent, /RF off/); expectRefs('#cv-equation', chemistry);
   }
 }
-assert.equal(equations, 8);
-assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 27);
+assert.equal(equations, 9);
+assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 31);
+assert.equal(query('#cv-precursor').options.length, 7);
+assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
+assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);
+assert.match(query('#cv-mocvd-definition').textContent, /MOVPE/);
 const allIds = [...document.querySelectorAll('[id]')].map(element => element.id);
 assert.equal(new Set(allIds).size, allIds.length, 'Duplicate element IDs');
 for (const claim of document.querySelectorAll('[data-cite]')) assert.ok(claim.querySelector(':scope > .cv-citations a'), `Uncited claim: ${claim.dataset.cite}`);
@@ -118,4 +143,4 @@ assert.equal(document.activeElement.id, 'cv-ref-7');
 for (const step of document.querySelectorAll('[data-fab-cite]')) { step.click(); assert.equal(query('#cv-fab-description').dataset.cite, step.dataset.fabCite); }
 assert.deepEqual(errors, [], 'JavaScript execution errors');
 dom.window.close();
-console.log(`DOM evidence checks passed: nine presets, ${parts} component states, stage/RF/temperature changes, eight rendered balanced equations, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);
+console.log(`DOM evidence checks passed: ${cases.length} presets, ${parts} component states, stage/RF/temperature changes, nine rendered balanced equations, MOCVD delivery/substrate/activation, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);

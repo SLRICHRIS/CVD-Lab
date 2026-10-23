@@ -5,7 +5,7 @@
 This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
-Scientific citation audit, 23 October 2026: 65 claim records map to 27 sources,
+Scientific citation audit, 23 October 2026: 73 claim records map to 31 sources,
 with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations and fabrication descriptions.
 
@@ -74,13 +74,15 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 ## What is included
 
 - Rotatable chamber cutaways with machine part labels and inspection.
-- Six precursor choices, nine supported reference recipes, and APCVD,
-  LPCVD, and PECVD where appropriate to the selected chemistry.
+- Seven precursor choices, ten supported reference recipes, and APCVD,
+  LPCVD, PECVD and MOCVD views where appropriate to the selected chemistry.
+- GaN MOCVD from TMGa/ammonia, with a bubbler, separate delivery lines,
+  cooled showerhead and heated susceptor cutaway.
 - Animated molecular reactions, deposited-film roles, and atom colour keys.
 - Seven process groups in an illustrative VLSI fabrication overview, with
   cited hover, tap and keyboard-focus explanations.
-- CVD teaching guide, nine-recipe comparison, plasma / PECVD and silicon
-  definitions, and 27 numbered references with source types and exact locators.
+- CVD teaching guide, ten-recipe comparison, plasma / PECVD, MOCVD and silicon
+  definitions, and 31 numbered references with source types and exact locators.
 - Navy, cobalt, teal, and violet design accents, responsive layouts,
   keyboard controls, and S L RICHRIS copyright.
 
@@ -132,7 +134,14 @@ patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
-Eight net equations are atom-balanced teaching summaries. The TEOS PECVD view
+The process labels describe different attributes: AP/LP concern pressure, PE
+concerns plasma activation, and MO concerns precursor chemistry. They can overlap.
+Select **Trimethylgallium (TMGa)** to open the thermal, reduced-pressure GaN MOCVD
+preset. Its fixed 1050 °C / 200 Torr example is Liang et al.'s sample T2; the
+prepared buffer/template on sapphire is already present. The showerhead
+architecture has a separate source and does not reproduce that experiment's tool.
+
+Nine net equations are atom-balanced teaching summaries. The TEOS PECVD view
 is a qualitative species map; displayed molecule counts are not reaction
 coefficients or gas-flow ratios. The source patent does not provide a complete
 plasma-exhaust mechanism. See the register for the corresponding source and
@@ -167,15 +176,15 @@ Set `CVD_CHROMIUM_EXECUTABLE` to use an existing compatible Chromium executable.
 ## Validation
 
 The evidence graph and generated register pass the dependency-free integrity
-check. DOM checks pass for all nine presets, 94 component states, stage/RF/
-temperature changes, eight rendered balanced equations, citation targets,
+check. DOM checks pass for all ten presets, 107 component states, stage/RF/
+temperature changes, nine rendered balanced equations, citation targets,
 reference focus/return and seven fabrication explanations. Canvas is stubbed
 in the DOM checks, so those results do not establish visual correctness.
 
 The separate browser regression test also passes in headless Chromium, with
 real canvas rendering and desktop (1440 px) plus mobile (390 px) light/dark
 layout checks. Focused screenshots of the workspace, metrics and a reference
-entry were visually reviewed. Test screenshots are written to `test-results/`
+entry, plus the MOCVD workspace, were visually reviewed. Test screenshots are written to `test-results/`
 and are not committed.
 
 The Streamlit launcher is unchanged by this audit. It uses the documented
