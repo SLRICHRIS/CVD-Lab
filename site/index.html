@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Explore chemical vapour deposition with a rotatable 3D chamber cutaway, six precursors, nine reference recipes and animated molecular reactions.">
+  <meta name="description" content="Explore chemical vapour deposition with rotatable 3D chamber cutaways, seven precursors, ten reference recipes, GaN MOCVD and animated molecular reactions.">
   <title>CVD Lab — 3D Chemical Vapour Deposition</title>
   <meta name="author" content="S L RICHRIS">
   <meta name="copyright" content="© 2026 S L RICHRIS. All rights reserved.">
@@ -25,7 +25,7 @@
     #cvd-recipe-accuracy {
       --cv-panel:light-dark(#ffffff,#142139); --cv-text:light-dark(#172b4a,#eff4ff); --cv-muted:light-dark(#52627a,#b0bed2); --cv-line:light-dark(#dce3ed,#334562); --cv-active:light-dark(#244bc2,#87b0ff); --cv-active-text:light-dark(#ffffff,#10204b);
       --cv-metal:light-dark(#bac7d1,#9cacb8); --cv-case:light-dark(#dce4ea,#677c8a); --cv-dark:light-dark(#344958,#304654); --cv-wafer:light-dark(#38435d,#566482); --cv-glass:light-dark(#b6dce3,#93bac6); --cv-heat:light-dark(#b46b33,#dd9961); --cv-plasma:light-dark(#8868bf,#bb9ae8); --cv-gas:light-dark(#377cad,#7eafd2); --cv-film:light-dark(#267f76,#70bcb0); --cv-floor:light-dark(#e9edf1,#202b34);
-      --cv-film-poly:light-dark(#62687b,#9da6b9); --cv-film-epi:light-dark(#555e70,#9aa7bc); --cv-film-oxide:light-dark(#bdd7dd,#aacbd4); --cv-film-nitride:light-dark(#c1c5ae,#d6dcc0); --cv-film-tungsten:light-dark(#969fa7,#bdc7cf); --cv-film-tin:light-dark(#b19b5f,#d6c48c);
+      --cv-film-poly:light-dark(#62687b,#9da6b9); --cv-film-epi:light-dark(#555e70,#9aa7bc); --cv-film-oxide:light-dark(#bdd7dd,#aacbd4); --cv-film-nitride:light-dark(#c1c5ae,#d6dcc0); --cv-film-tungsten:light-dark(#969fa7,#bdc7cf); --cv-film-tin:light-dark(#b19b5f,#d6c48c); --cv-film-gan:light-dark(#62a8b6,#83c8d6); --cv-atom-Ga:light-dark(#d39a7b,#e1b596);
       --cv-atom-H:light-dark(#e1e8ee,#c5d3dc); --cv-atom-Si:light-dark(#aa8057,#bd956e); --cv-atom-O:light-dark(#d46b6d,#d8787b); --cv-atom-N:light-dark(#6d94cf,#85a4d8); --cv-atom-Cl:light-dark(#78a768,#93bb83); --cv-atom-F:light-dark(#79b5ad,#8cc5bc); --cv-atom-C:light-dark(#7e8f9d,#86939d); --cv-atom-W:light-dark(#8e9ca8,#aebecb); --cv-atom-Ti:light-dark(#a789b6,#bba3c9); --cv-atom-ink:light-dark(#162632,#152430);
       --cv-soft:light-dark(#f6f8fc,#192840); --cv-accent:light-dark(#086b65,#66ded1); --cv-accent-soft:light-dark(#edf8f4,#123b35); --cv-stage:light-dark(#f8fafb,#13222c);
       --cv-blue:light-dark(#1c47b1,#9dbbff); --cv-blue-soft:light-dark(#f0f4ff,#192c4c); --cv-violet:light-dark(#6536b6,#c6a3ff); --cv-violet-soft:light-dark(#f6f1fc,#2b2045); --cv-teal-line:light-dark(#c6e3d8,#356b61);
@@ -53,7 +53,7 @@
     #cvd-recipe-accuracy button:hover:not(:disabled) { background:var(--cv-soft); border-color:var(--cv-muted); }
     #cvd-recipe-accuracy button:disabled { opacity:.34; cursor:not-allowed; }
     #cvd-recipe-accuracy select { width:100%; max-width:100%; min-height:44px; padding:9px 12px; background:var(--cv-soft); color:var(--cv-text); border:1px solid var(--cv-line); border-radius:8px; font-size:14px; cursor:pointer; }
-    #cvd-recipe-accuracy .cv-modes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); padding:3px; gap:3px; border:1px solid var(--cv-line); background:var(--cv-soft); border-radius:9px; }
+    #cvd-recipe-accuracy .cv-modes { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); padding:3px; gap:3px; border:1px solid var(--cv-line); background:var(--cv-soft); border-radius:9px; }
     #cvd-recipe-accuracy .cv-modes button { min-width:0; min-height:36px; padding:6px 14px; border-color:transparent; border-radius:6px; }
     #cvd-recipe-accuracy .cv-modes button[aria-pressed="true"] { color:var(--cv-active-text); background:var(--cv-active); border-color:var(--cv-active); box-shadow:0 1px 3px rgb(0 0 0 / 8%); }
     #cvd-recipe-accuracy .cv-modes button[aria-pressed="true"]:hover { background:var(--cv-active); }
@@ -287,6 +287,7 @@
     #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-ap { color:var(--cv-blue); background:var(--cv-blue-soft); font-weight:600; }
     #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-lp { color:var(--cv-accent); background:var(--cv-accent-soft); font-weight:600; }
     #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-pe { color:var(--cv-violet); background:var(--cv-violet-soft); font-weight:600; }
+    #cvd-recipe-accuracy .cv-recipes-table .cv-recipe-mo { color:var(--cv-accent); background:var(--cv-accent-soft); font-weight:600; }
     #cvd-recipe-accuracy .cv-recipes-count { font-weight:650; font-variant-numeric:tabular-nums; }
     #cvd-recipe-accuracy .cv-recipes-table tfoot :is(th,td) { border-bottom:0; font-weight:650; }
     #cvd-recipe-accuracy .cv-recipes-total { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:7px 24px; padding:15px 0 8px; font-size:12px; }
@@ -394,6 +395,20 @@
     }
     @media(pointer:coarse) { #cvd-recipe-accuracy .cv-nav a { padding:12px 0; } #cvd-recipe-accuracy .cv-modes button { min-height:44px; } }
     @media(prefers-reduced-motion:reduce) { #cvd-recipe-accuracy button { transition:none; } }
+
+    #cvd-recipe-accuracy .cv-citations { display:inline; margin-left:.28em; font-size:11px; line-height:1; vertical-align:super; white-space:nowrap; font-weight:500; }
+    #cvd-recipe-accuracy .cv-citations a { display:inline-block; color:var(--cv-accent); padding:4px 2px; text-decoration:underline; text-underline-offset:2px; }
+    #cvd-recipe-accuracy .cv-evidence-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 40px; padding-bottom:20px; }
+    #cvd-recipe-accuracy .cv-evidence-list>li { padding-left:4px; scroll-margin-top:28px; overflow-wrap:anywhere; }
+    #cvd-recipe-accuracy .cv-evidence-list>li:target { background:var(--cv-accent-soft); border-radius:6px; }
+    #cvd-recipe-accuracy .cv-ref-meta { display:block; color:var(--cv-muted); font-size:11px; margin-top:5px; }
+    #cvd-recipe-accuracy .cv-ref-type { display:inline-block; padding:2px 6px; border:1px solid var(--cv-line); border-radius:4px; margin-right:6px; font-size:10px; color:var(--cv-text); }
+    #cvd-recipe-accuracy .cv-reference-back { display:inline-block; margin-top:6px; font-size:11px; }
+    #cvd-recipe-accuracy .cv-chemistry-note { color:var(--cv-muted); font-size:11px; line-height:1.8; margin:0 0 14px; }
+    #cvd-recipe-accuracy .cv-drawing-note { padding:0 24px 14px; color:var(--cv-muted); font-size:11px; line-height:1.7; }
+    #cvd-recipe-accuracy .cv-recipe .cv-citations { font-size:10px; }
+    #cvd-recipe-accuracy .cv-evidence-list .cv-ref-use { display:block; margin-top:4px; font-size:12px; }
+    @media(max-width:700px) { #cvd-recipe-accuracy .cv-evidence-list { grid-template-columns:minmax(0,1fr); gap:18px; } #cvd-recipe-accuracy .cv-drawing-note { padding:0 18px 14px; } }
   </style>
 </head>
 <body>
@@ -403,136 +418,146 @@
     <div class="cv-topbar"><span class="cv-wordmark">CVD Lab<span>Process studio</span></span><nav class="cv-nav" aria-label="Site sections"><a href="#cv-studio">Simulator</a><a href="#cv-cvd-guide">CVD explained</a><a href="#cv-references">References</a></nav></div>
     <div class="cv-hero">
       <div class="cv-brand"><p class="cv-overline">Semiconductor process lab</p><h1 class="cv-name">CVD Lab<span class="cv-title-point">.</span></h1><p class="cv-byline">By S L RICHRIS</p></div>
-      <div class="cv-head-note"><p>Chemical vapour deposition,<br> made visible.</p><div class="cv-head-facts" aria-label="Six precursors, nine reference recipes, three CVD techniques"><span><b>06</b>Precursors</span><a href="#cv-recipes-guide" class="cv-recipe-link" aria-label="Why 9 reference recipes? View the recipe matrix"><b>09</b><span>Reference recipes</span></a><span><b>03</b>CVD techniques</span></div></div>
+      <div class="cv-head-note"><p>Chemical vapour deposition,<br> made visible.</p><div class="cv-head-facts" aria-label="Seven precursors, ten reference recipes, four CVD process views"><span><b>07</b>Precursors</span><a href="#cv-recipes-guide" class="cv-recipe-link" aria-label="Why 10 reference recipes? View the recipe matrix"><b>10</b><span>Reference recipes</span></a><span><b>04</b>Process views</span></div></div>
     </div>
   </header>
   <section class="cv-about" aria-labelledby="cv-about-title">
     <h2 id="cv-about-title" class="cv-about-title">What is CVD?</h2>
-    <p class="cv-about-definition"><strong>CVD means Chemical Vapour Deposition.</strong> It forms a thin solid film on a wafer through chemical reactions involving gases or vapours. The film stays on the wafer; volatile reaction products and unused gases leave through the exhaust. These films can insulate, connect or protect chip features, or form semiconductor layers.</p>
+    <p class="cv-about-definition"><span data-cite="cvd-definition"><strong>CVD means Chemical Vapour Deposition.</strong> Gas or vapour reactions form a solid film on a substrate; volatile products and unused feed leave through the exhaust.</span> <span data-cite="film-functions">These films can insulate, connect or protect chip features, or form semiconductor layers.</span></p>
     <details id="cv-cvd-guide" class="cv-cvd-guide">
       <summary>How CVD works · gas roles · CVD types</summary>
       <div class="cv-guide-grid">
         <section aria-labelledby="cv-guide-steps-title">
           <h3 id="cv-guide-steps-title" class="cv-guide-heading">How the film forms</h3>
           <ol class="cv-guide-steps">
-            <li><strong>Prepare the surface.</strong> Load the prepared wafer and establish the recipe’s temperature and pressure.</li>
-            <li><strong>Deliver the chemicals.</strong> Feed the precursor and required co-reactants. Liquid precursors, such as TEOS, are vaporised first.</li>
-            <li><strong>Activate the reaction.</strong> Heat drives thermal CVD. In PECVD, RF plasma assists the chemistry, usually with wafer heating too.</li>
-            <li><strong>Grow the solid film.</strong> Species react at the wafer surface. Atoms become part of the growing layer.</li>
-            <li><strong>Remove reaction products.</strong> Exhaust carries away volatile by-products and unused gases during growth. Finish by stopping reactants, purging and cooling.</li>
+            <li data-cite="prepare"><strong>Prepare the surface.</strong> Load the prepared wafer and establish the recipe’s temperature and pressure.</li>
+            <li data-cite="delivery"><strong>Deliver the chemicals.</strong> Feed precursor and co-reactants. Liquid TEOS is delivered as vapour.</li>
+            <li data-cite="thermal-activation pecvd"><strong>Activate the reaction.</strong> Heat drives thermal CVD. In these PECVD examples, RF plasma assists the chemistry while the substrate is heated.</li>
+            <li data-cite="surface-growth"><strong>Grow the solid film.</strong> Species reach and react at the substrate; film-forming atoms enter the layer.</li>
+            <li data-cite="exhaust"><strong>Remove reaction products.</strong> Exhaust removes unused feed and volatile products during growth. Loading and finishing stages below are illustrative.</li>
           </ol>
         </section>
         <section aria-labelledby="cv-guide-terms-title">
           <h3 id="cv-guide-terms-title" class="cv-guide-heading">What each term means</h3>
           <dl class="cv-guide-terms">
-            <dt>Wafer</dt><dd>The silicon base used to build the chip.</dd>
-            <dt>Precursor</dt><dd>A starting compound that supplies atoms for the film.</dd>
-            <dt>Co-reactant</dt><dd>Another chemical that reacts with the precursor to form the desired deposit.</dd>
-            <dt>Carrier / diluent</dt><dd>Moves or dilutes the feed. Examples here are argon (Ar) and helium (He).</dd>
-            <dt>Plasma</dt><dd>Plasma is an ionised gas, often called the fourth state of matter. It forms when energy frees electrons from gas atoms or molecules. In PECVD, it contains free electrons, ions and neutral particles.</dd>
-            <dt>RF power</dt><dd>RF means radio frequency. The RF generator supplies electrical power that creates and sustains the plasma in these PECVD presets.</dd>
-            <dt>Deposit / film</dt><dd>The solid layer that remains. Its material determines its function.</dd>
-            <dt>By-product</dt><dd>Other reaction products. Volatile products leave through the exhaust.</dd>
+            <dt>Wafer / substrate</dt><dd><span data-cite="wafer">The supporting surface for device fabrication, usually silicon in these examples.</span> <span data-cite="gan-substrate">The GaN preset uses a prepared GaN template and buffer on sapphire.</span></dd>
+            <dt>Precursor</dt><dd data-cite="precursor">A starting compound that supplies atoms for the film.</dd>
+            <dt>Co-reactant</dt><dd data-cite="precursor">Another chemical that participates in forming the deposit.</dd>
+            <dt>Carrier / diluent</dt><dd data-cite="carrier">Moves or dilutes a feed. Ar and He are used in the cited TiN and TEOS examples.</dd>
+            <dt>Plasma</dt><dd data-cite="plasma">An ionised gas containing free electrons, ions and neutral species.</dd>
+            <dt>RF power</dt><dd data-cite="rf-power">Radio-frequency electrical power used to sustain the discharge in these PECVD presets.</dd>
+            <dt>Deposit / film</dt><dd data-cite="cvd-definition film-functions">The solid layer left on the substrate. Its material and properties determine its function.</dd>
+            <dt>By-product</dt><dd data-cite="exhaust">Another reaction product; volatile products can leave through the exhaust.</dd>
           </dl>
         </section>
       </div>
       <section class="cv-guide-silicon" aria-labelledby="cv-guide-silicon-title">
         <h3 id="cv-guide-silicon-title" class="cv-guide-heading">Polysilicon and epitaxial silicon</h3>
         <dl class="cv-silicon-terms">
-          <dt>Polysilicon</dt>
-          <dd><p id="cv-polysilicon-definition"><strong>Polysilicon, or polycrystalline silicon,</strong> is silicon made up of many small crystal grains separated by grain boundaries. The grains can have different crystal orientations.</p><p>The silane LPCVD preset deposits a polysilicon film on the heated wafer. With suitable doping and patterning, polysilicon can form gate electrodes and resistors.</p></dd>
-          <dt>Epitaxial silicon</dt>
-          <dd><p id="cv-epitaxial-definition"><strong>Epitaxial silicon</strong> is a single-crystal silicon layer grown on a crystalline silicon wafer. Its atomic lattice follows the underlying wafer’s crystal orientation.</p><p>The SiCl₄/H₂ APCVD preset grows this layer on a prepared crystalline silicon surface. It provides a crystalline layer for building semiconductor devices.</p></dd>
+          <dt>Polysilicon</dt><dd><p id="cv-polysilicon-definition" data-cite="poly-structure"><strong>Polycrystalline silicon</strong> contains many crystal grains, with differing orientations and grain boundaries.</p><p data-cite="chem-silane-LPCVD poly-role">The silane LPCVD example forms a poly-Si film. Suitable doping and patterning allow gate-electrode and resistor applications.</p></dd>
+          <dt>Epitaxial silicon</dt><dd><p id="cv-epitaxial-definition" data-cite="epi-structure"><strong>Silicon homoepitaxy</strong> grows a single-crystal silicon layer whose crystal orientation follows the underlying crystalline silicon wafer.</p><p data-cite="chem-sicl4-APCVD role-epi">The SiCl₄/H₂ example illustrates growth of this crystalline device layer on a prepared silicon surface.</p></dd>
         </dl>
-        <p class="cv-guide-takeaway"><strong>Purity is a separate property.</strong> Polysilicon's name describes its crystal-grain structure. High-purity bulk polysilicon can be produced by purifying metallurgical-grade silicon for wafer manufacture. This simulator shows a thin polysilicon film deposited from silane.</p>
-        <p class="cv-guide-footer">The material grade and manufacturing process determine chemical purity. <a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm" target="_blank" rel="noopener noreferrer">Crystal structures</a> · <a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm" target="_blank" rel="noopener noreferrer">Polysilicon films</a> · <a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">Epitaxial growth</a> · <a href="https://www.osha.gov/semiconductors/silicon/substrate-manufacture" target="_blank" rel="noopener noreferrer">Bulk silicon and wafer manufacture</a></p>
+        <p class="cv-guide-takeaway" data-cite="bulk-purity"><strong>Structure and purity describe different properties.</strong> Polycrystalline refers to grain structure. Purification of metallurgical silicon can also produce high-purity bulk polysilicon for wafer manufacture.</p>
+        <p class="cv-guide-footer">This lab illustrates a deposited thin poly-Si film; it does not model bulk feedstock purification.</p>
       </section>
       <section class="cv-guide-example" aria-labelledby="cv-guide-example-title">
         <h3 id="cv-guide-example-title" class="cv-guide-heading">One clear example · silane / LPCVD</h3>
-        <div class="cv-guide-equation" aria-label="Silane gas forms solid silicon and hydrogen gas"><span>SiH<sub>4</sub> (gas)</span><span>→</span><span>Si (solid)</span><span>+</span><span>2H<sub>2</sub> (gas)</span></div>
-        <p>Silicon stays in the polysilicon film; hydrogen leaves as gas. This recipe uses thermal activation. Different co-reactants can produce a different film from the same precursor.</p>
+        <div class="cv-guide-equation" data-cite="chem-silane-LPCVD" aria-label="Idealised net equation: silane gas forms solid silicon and hydrogen gas"><span>SiH<sub>4</sub> (gas)</span><span>→</span><span>Si (solid)</span><span>+</span><span>2H<sub>2</sub> (gas)</span></div>
+        <p data-cite="chem-silane-LPCVD recipe-definition">The net equation puts silicon in the film and hydrogen in the gas phase. A different co-reactant can give a different film from the same precursor.</p>
       </section>
       <section aria-labelledby="cv-guide-pecvd-title">
         <h3 id="cv-guide-pecvd-title" class="cv-guide-heading">What is PECVD?</h3>
-        <p id="cv-pecvd-definition" class="cv-guide-takeaway"><strong>Plasma-enhanced chemical vapour deposition (PECVD)</strong> uses plasma to make precursor gases and other reactants more reactive. Energetic electrons help break gas molecules into reactive particles. These particles react at the wafer surface to form a thin solid film. Plasma activation often allows lower wafer temperatures than thermal CVD.</p>
-        <p class="cv-guide-footer">A common RF frequency is <strong>13.56 MHz</strong>. Equipment can use other frequencies or combinations. The wafer temperature depends on the recipe. In this lab, the silane oxide PECVD example uses <strong>300 °C</strong>, and the TEOS oxide example starts at <strong>350 °C</strong> within its 350–400 °C reference window. <a href="https://www.pppl.gov/about/about-plasmas-and-fusion" target="_blank" rel="noopener noreferrer">Plasma explained</a> · <a href="https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition" target="_blank" rel="noopener noreferrer">PECVD and RF activation</a> · <a href="https://plasma.oxinst.com/technologies/pecvd" target="_blank" rel="noopener noreferrer">PECVD equipment</a></p>
+        <p id="cv-pecvd-definition" class="cv-guide-takeaway" data-cite="pecvd"><strong>Plasma-enhanced chemical vapour deposition (PECVD)</strong> uses plasma-created reactive species to form a film at the substrate. Plasma activation often permits lower wafer temperatures than thermal CVD.</p>
+        <p class="cv-guide-footer"><span data-cite="rf-frequency">One documented RF example is <strong>13.56 MHz</strong>; equipment can use other frequencies or combinations.</span> <span data-cite="conditions-silane-PECVD">The silane oxide example uses <strong>300 °C</strong>.</span> <span data-cite="conditions-teos-PECVD">The TEOS example starts at <strong>350 °C</strong>, an endpoint of the cited 350–400 °C patent range for its 300 mm equipment.</span></p>
       </section>
-      <h3 id="cv-guide-types-title" class="cv-guide-heading">The three CVD techniques in this lab</h3>
+      <section aria-labelledby="cv-guide-mocvd-title">
+        <h3 id="cv-guide-mocvd-title" class="cv-guide-heading">What is MOCVD?</h3>
+        <p id="cv-mocvd-definition" class="cv-guide-takeaway" data-cite="mocvd-definition"><strong>Metal-organic chemical vapour deposition (MOCVD)</strong>, also called MOVPE for epitaxial growth, uses metal-organic precursors to grow semiconductor layers. The GaN example uses heat, TMGa and ammonia.</p>
+        <div class="cv-guide-equation" data-cite="chem-tmga-MOCVD" aria-label="Idealised net equation: trimethylgallium and ammonia form gallium nitride and methane"><span>Ga(CH<sub>3</sub>)<sub>3</sub></span><span>+</span><span>NH<sub>3</sub></span><span>→</span><span>GaN (solid)</span><span>+</span><span>3CH<sub>4</sub></span></div>
+        <p class="cv-guide-footer"><span data-cite="chem-tmga-MOCVD">TMGa supplies Ga and ammonia supplies N. This net equation simplifies many reactions; methane is not a complete measured exhaust analysis.</span> <span data-cite="part-mo-delivery">A carrier gas transports TMGa vapour from a temperature-controlled bubbler.</span></p>
+        <p class="cv-guide-footer"><span data-cite="conditions-tmga-MOCVD gan-substrate">The preset illustrates the final GaN layer of Liang et al.’s sample T2: 1050 °C, 200 Torr, on a prepared buffer/template on sapphire.</span> <span data-cite="role-gan">GaN is a compound semiconductor used in LED heterostructures.</span> Choose TMGa in the simulator to explore it.</p>
+      </section>
+      <h3 id="cv-guide-types-title" class="cv-guide-heading">Four CVD process views in this lab</h3>
+      <p class="cv-guide-takeaway" data-cite="mocvd-classification">These labels describe different attributes: AP/LP specify pressure, PE specifies plasma assistance, and MO specifies metal-organic chemistry. They can overlap; this MOCVD preset uses reduced pressure and thermal activation.</p>
       <div class="cv-guide-table-wrap" tabindex="0" role="region" aria-labelledby="cv-guide-types-title">
         <table class="cv-guide-table">
           <thead><tr><th scope="col">Technique</th><th scope="col">Pressure and activation</th><th scope="col">Typical benefit</th><th scope="col">Main tradeoff</th></tr></thead>
           <tbody>
-            <tr><th scope="row">APCVD</th><td>Atmospheric pressure; thermal activation in these presets.</td><td>Simple equipment and potentially high throughput.</td><td>Uniformity is sensitive to gas flow and gas-phase reactions.</td></tr>
-            <tr><th scope="row">LPCVD</th><td>Reduced pressure; thermal activation.</td><td>Often good uniformity and film quality.</td><td>Many recipes require high wafer temperatures.</td></tr>
-            <tr><th scope="row">PECVD</th><td>Reduced pressure; RF plasma assists the reaction.</td><td>Lower wafer temperatures for many dielectric films.</td><td>Plasma damage and film properties depend on the recipe.</td></tr>
+            <tr><th scope="row">APCVD</th><td data-cite="type-ap">Atmospheric pressure; thermal activation here.</td><td data-cite="type-ap">Simple equipment and potentially high throughput.</td><td data-cite="type-ap">Flow and gas-phase reactions can affect uniformity.</td></tr>
+            <tr><th scope="row">LPCVD</th><td data-cite="type-lp">Reduced pressure; thermal activation here.</td><td data-cite="type-lp">Often good uniformity and film quality.</td><td data-cite="type-lp">Many recipes need high wafer temperatures.</td></tr>
+            <tr><th scope="row">PECVD</th><td data-cite="type-pe">Reduced pressure and RF plasma in these presets.</td><td data-cite="pecvd">Lower wafer temperatures for many films.</td><td data-cite="type-pe">Plasma damage and film properties depend on conditions.</td></tr>
+            <tr><th scope="row">MOCVD</th><td data-cite="conditions-tmga-MOCVD mocvd-definition">Metal-organic feed; thermal, 200 Torr in this GaN preset.</td><td data-cite="mocvd-definition role-gan">Grows compound-semiconductor epitaxial layers.</td><td data-cite="part-mocvd part-mo-delivery">Requires controlled precursor delivery and substrate heating.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="cv-guide-takeaway">The precursor, co-reactants, activation and process conditions work together to determine the film.</p>
-      <p class="cv-guide-footer">Choose a precursor and an available CVD technique, then play or inspect the reaction below. <a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">CVD principles</a> · <a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html" target="_blank" rel="noopener noreferrer">Net reaction examples</a></p>
+      <p class="cv-guide-takeaway" data-cite="recipe-definition">Precursor, co-reactants, activation and process conditions work together to determine the film.</p>
+      <p class="cv-guide-footer">Select a precursor and an available technique, then play or inspect the reaction below. Numbered citations open the relevant reference.</p>
     </details>
     <details id="cv-recipes-guide" class="cv-recipes-guide">
-      <summary>Why 9 recipes?<span class="cv-recipes-summary-note">6 precursors, 9 process presets</span></summary>
-      <p class="cv-recipes-definition">A CVD recipe specifies the precursor and other gases, the CVD technique, temperature, pressure and activation conditions. The same precursor can have more than one recipe.</p>
+      <summary>Why 10 recipes?<span class="cv-recipes-summary-note">7 precursors, 10 process presets</span></summary>
+      <p class="cv-recipes-definition" data-cite="recipe-definition">A recipe specifies the chemicals, technique, temperature, pressure and activation. The same precursor can have several recipes.</p>
       <div class="cv-recipes-scroll" tabindex="0" role="region" aria-labelledby="cv-recipes-caption">
         <table class="cv-recipes-table">
-          <caption id="cv-recipes-caption">Deposited film for each included precursor and CVD technique</caption>
-          <thead><tr><th scope="col">Precursor</th><th scope="col">APCVD</th><th scope="col">LPCVD</th><th scope="col">PECVD</th><th scope="col">Recipes</th></tr></thead>
+          <caption id="cv-recipes-caption">Selected teaching presets, with citations for each precursor / film pairing</caption>
+          <thead><tr><th scope="col">Precursor</th><th scope="col">APCVD</th><th scope="col">LPCVD</th><th scope="col">PECVD</th><th scope="col">MOCVD</th><th scope="col">Recipes</th></tr></thead>
           <tbody>
-            <tr data-precursor="silane"><th scope="row">Silane (SiH₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap">SiO₂</td><td data-cvd-type="LPCVD" class="cv-recipe-lp">Polysilicon</td><td data-cvd-type="PECVD" class="cv-recipe-pe">SiO₂</td><td class="cv-recipes-count">3</td></tr>
-            <tr data-precursor="dcs"><th scope="row">Dichlorosilane (SiH₂Cl₂)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">Si₃N₄</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
-            <tr data-precursor="teos"><th scope="row">TEOS [Si(OC₂H₅)₄]</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">SiO₂</td><td data-cvd-type="PECVD" class="cv-recipe-pe">SiO₂</td><td class="cv-recipes-count">2</td></tr>
-            <tr data-precursor="sicl4"><th scope="row">Silicon tetrachloride (SiCl₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap">Epitaxial Si</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
-            <tr data-precursor="wf6"><th scope="row">Tungsten hexafluoride (WF₆)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">W</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
-            <tr data-precursor="ticl4"><th scope="row">Titanium tetrachloride (TiCl₄)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp">TiN</td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="silane"><th scope="row">Silane (SiH₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap" data-cite="chem-silane-APCVD">SiO₂</td><td data-cvd-type="LPCVD" class="cv-recipe-lp" data-cite="chem-silane-LPCVD">Polysilicon</td><td data-cvd-type="PECVD" class="cv-recipe-pe" data-cite="chem-silane-PECVD">SiO₂</td><td aria-label="No preset included"></td><td class="cv-recipes-count">3</td></tr>
+            <tr data-precursor="dcs"><th scope="row">Dichlorosilane (SiH₂Cl₂)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp" data-cite="chem-dcs-LPCVD">Si₃N₄</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="teos"><th scope="row">TEOS [Si(OC₂H₅)₄]</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp" data-cite="chem-teos-LPCVD">SiO₂</td><td data-cvd-type="PECVD" class="cv-recipe-pe" data-cite="chem-teos-PECVD">SiO₂</td><td aria-label="No preset included"></td><td class="cv-recipes-count">2</td></tr>
+            <tr data-precursor="sicl4"><th scope="row">Silicon tetrachloride (SiCl₄)</th><td data-cvd-type="APCVD" class="cv-recipe-ap" data-cite="chem-sicl4-APCVD">Epitaxial Si</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="wf6"><th scope="row">Tungsten hexafluoride (WF₆)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp" data-cite="chem-wf6-LPCVD">W</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="ticl4"><th scope="row">Titanium tetrachloride (TiCl₄)</th><td aria-label="No preset included"></td><td data-cvd-type="LPCVD" class="cv-recipe-lp" data-cite="chem-ticl4-LPCVD">TiN</td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td class="cv-recipes-count">1</td></tr>
+            <tr data-precursor="tmga"><th scope="row">Trimethylgallium [Ga(CH₃)₃]</th><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td aria-label="No preset included"></td><td data-cvd-type="MOCVD" class="cv-recipe-mo" data-cite="chem-tmga-MOCVD">GaN</td><td class="cv-recipes-count">1</td></tr>
           </tbody>
-          <tfoot><tr><th scope="row">Total selected recipes</th><td>2</td><td>5</td><td>2</td><td>9</td></tr></tfoot>
+          <tfoot><tr><th scope="row">Total selected recipes</th><td>2</td><td>5</td><td>2</td><td>1</td><td>10</td></tr></tfoot>
         </table>
       </div>
-      <p class="cv-recipes-total"><strong>3 + 1 + 2 + 1 + 1 + 1 = 9 recipes</strong><span>Each coloured cell is one recipe. Its label names the deposited film.</span></p>
-      <p class="cv-recipes-note">For example, the silane LPCVD preset forms polysilicon. The silane PECVD preset uses nitrous oxide (N₂O) to help form silicon dioxide (SiO₂). These are selected teaching presets. Other CVD recipes exist.</p>
+      <p class="cv-recipes-total"><strong>3 + 1 + 2 + 1 + 1 + 1 + 1 = 10 recipes</strong><span>Each coloured cell is one included teaching preset.</span></p>
+      <p class="cv-recipes-note"><span data-cite="chem-silane-LPCVD">Silane LPCVD forms polysilicon in the selected example.</span> <span data-cite="chem-silane-PECVD">With N₂O, the silane PECVD example forms SiO₂.</span> Empty cells mean no preset is included, not that the process is impossible.</p>
     </details>
   </section>
   <section class="cv-fabrication" aria-labelledby="cv-fab-title" aria-describedby="cv-fab-note">
-    <div class="cv-fab-heading"><h2 id="cv-fab-title" class="cv-fab-title">VLSI fabrication flow</h2><span class="cv-secondary">Thin-film deposition · current view</span></div>
-    <div class="cv-fab-track" tabindex="0" role="region" aria-label="Fabrication pipeline, scroll horizontally to see all seven steps">
-      <ol class="cv-fab-flow" role="list" aria-label="Illustrative VLSI fabrication pipeline">
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Cleans and prepares a flat silicon wafer for device fabrication." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">01</span><span>Wafer<br>preparation</span></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Grows silicon dioxide on the silicon surface for insulation and protection." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">02</span><span>Oxidation</span></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Transfers a pattern into photoresist using light exposure and development." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">03</span><span>Photolithography</span></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Removes selected material to transfer the pattern into the layer below." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">04</span><span>Etching</span></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" aria-current="step" data-inspected="true" data-fab-summary="Uses gas reactions to deposit a solid thin film on the wafer." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">05</span><span>Thin-film<br>deposition (CVD)</span><small>Current view</small></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Adds controlled impurities to silicon to set its electrical properties." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">06</span><span>Doping / ion<br>implantation</span></button></li>
-        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-summary="Builds metal contacts and wiring that connect devices on the chip." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">07</span><span>Metallization<br>&amp; interconnects</span></button></li>
+    <div class="cv-fab-heading"><h2 id="cv-fab-title" class="cv-fab-title">VLSI fabrication overview</h2><span class="cv-secondary">Illustrative process groups</span></div>
+    <div class="cv-fab-track" tabindex="0" role="region" aria-label="Fabrication overview, scroll horizontally to see all seven process groups">
+      <ol class="cv-fab-flow" role="list" aria-label="Illustrative fabrication process groups">
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-prepare" data-fab-summary="Cleans and prepares the wafer surface for subsequent fabrication." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">01</span><span>Wafer<br>preparation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-oxidation" data-fab-summary="Thermally grows oxide on a silicon surface." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">02</span><span>Oxidation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-lithography" data-fab-summary="Transfers a pattern into photoresist through exposure and development." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">03</span><span>Photolithography</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-etch" data-fab-summary="Removes selected material through a patterned mask." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">04</span><span>Etching</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" aria-current="step" data-inspected="true" data-fab-cite="cvd-definition" data-fab-summary="Uses gas or vapour reactions to form a solid film on the substrate." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">05</span><span>Thin-film<br>deposition (CVD)</span><small>Current view</small></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-doping" data-fab-summary="Introduces dopants to alter a semiconductor’s electrical properties." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">06</span><span>Doping / ion<br>implantation</span></button></li>
+        <li class="cv-fab-item"><button type="button" class="cv-fab-node" data-fab-cite="fab-metal" data-fab-summary="Builds patterned metal contacts and interconnect wiring." aria-controls="cv-fab-description" aria-describedby="cv-fab-description"><span class="cv-fab-number" aria-hidden="true">07</span><span>Metallization<br>&amp; interconnects</span></button></li>
       </ol>
     </div>
-    <p class="cv-fab-swipe">Scroll or swipe horizontally to follow the flow.</p>
-    <p id="cv-fab-description" class="cv-fab-description" role="status" aria-live="polite" aria-atomic="true">Uses gas reactions to deposit a solid thin film on the wafer.</p>
-    <p class="cv-fab-hint">Hover or tap a step to see what it does.</p>
-    <p id="cv-fab-note" class="cv-fab-note">Simplified overview. Deposition, lithography and etching repeat across layers; the exact sequence depends on the device process. <a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html" target="_blank" rel="noopener noreferrer">Process integration reference</a></p>
+    <p class="cv-fab-swipe">Scroll or swipe horizontally to see each process group.</p>
+    <p id="cv-fab-description" class="cv-fab-description" data-cite="cvd-definition" role="status" aria-live="polite" aria-atomic="true">Uses gas or vapour reactions to form a solid film on the substrate.</p>
+    <p class="cv-fab-hint">Hover, focus or tap a process to see its explanation and citation.</p>
+    <p id="cv-fab-note" class="cv-fab-note" data-cite="fab-repeat">Simplified overview, not a universal seven-step sequence. Deposition, lithography and etching repeat across layers; the order depends on the device process.</p>
   </section>
   <section id="cv-studio" class="cv-setup" aria-label="Choose a deposition recipe">
     <div class="cv-setup-row">
-      <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option></select></label></div>
-      <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD technique</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button></div></div>
+      <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option><option value="tmga">Trimethylgallium (TMGa) · Ga(CH₃)₃</option></select></label></div>
+      <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD process view</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button><button type="button" data-process="MOCVD" aria-pressed="false" title="Metal-organic CVD · select TMGa for the GaN preset">MOCVD</button></div></div>
       <div class="cv-run"><button type="button" id="cv-play">Play reaction</button></div>
     </div>
-    <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 9 recipes</a></div>
+    <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
   </section>
-  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" aria-live="polite">SiO₂ forms an insulating layer; H₂ and N₂ leave through the exhaust.</p></div>
+  <div class="cv-effect"><p class="cv-overline">What forms</p><p id="cv-effect" data-cite="chem-silane-PECVD role-oxide" aria-live="polite">SiO₂ forms an insulating layer; H₂ and N₂ leave through the exhaust.</p></div>
   <div class="cv-workspace">
     <section class="cv-chamber" aria-labelledby="cv-machine">
-      <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
+      <div class="cv-chamber-head"><div><p class="cv-overline">Chamber cutaway</p><h2 id="cv-machine" data-cite="part-showerhead" class="cv-panel-title">PECVD · parallel-plate reactor</h2></div><button type="button" id="cv-reset-view" class="cv-text-button">Reset view</button></div>
       <div class="cv-viewport"><canvas id="cv-canvas" tabindex="0" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown + -" role="img" aria-label="Rotatable 3D PECVD reactor design">3D CVD reactor with gas delivery and exhaust equipment.</canvas><svg id="cv-callouts" class="cv-callouts" role="img" aria-label="Machine part names"></svg></div>
       <p id="cv-hint" class="cv-camera-hint">Drag to rotate · scroll to zoom</p>
-      <div class="cv-caption"><label for="cv-component">Inspect a machine part<select id="cv-component"></select></label><div id="cv-inspector" class="cv-part-description" aria-live="polite">Silicon wafer · surface on which the film forms.</div></div>
+      <div class="cv-caption"><label for="cv-component">Inspect a machine part<select id="cv-component"></select></label><div id="cv-inspector" data-cite="part-reactor" class="cv-part-description" aria-live="polite">Silicon wafer · surface on which the film forms.</div></div>
+      <p class="cv-drawing-note">Illustrative architecture, not a drawing of the cited equipment. Part citations explain component functions.</p>
       <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
     </section>
     <section class="cv-reaction" aria-labelledby="cv-reaction-title">
       <div class="cv-reaction-head"><p class="cv-overline">Surface chemistry</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Reactants approach the surface</span></div>
       <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Molecular reaction at the wafer surface">Ball-and-stick reactants change into solid film atoms and gaseous by-products.</canvas></div>
-      <div id="cv-equation" class="cv-equation" aria-label="Overall reaction"></div>
-      <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" class="cv-role-use">Separates metal wiring layers and prevents unintended current flow.</span></div>
+      <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
+      <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
+      <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" data-cite="role-oxide" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" data-cite="role-oxide" class="cv-role-use">Provides electrical insulation between metal wiring layers.</span></div>
       <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
       <div class="cv-seek"><label for="cv-reaction-progress">Inspect the reaction</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Reaction animation position"></div>
     </section>
@@ -541,86 +566,1630 @@
     <summary id="cv-details-summary">Process details · Silane / PECVD</summary>
     <div class="cv-detail-controls"><label for="cv-stage">Process stage<select id="cv-stage"><option value="load">Load</option><option value="condition">Condition</option><option value="deposit" selected>Deposit</option><option value="purge">Purge and cool</option><option value="unload">Unload</option></select></label><div class="cv-flow-control"><label><input id="cv-flow" class="cv-check" type="checkbox">Gas path overlay</label><span class="cv-secondary">Schematic inlet-to-exhaust guide</span></div></div>
     <dl class="cv-recipe">
-      <div><dt><label for="cv-temperature">Reference wafer setpoint</label></dt><dd><output id="cv-temp" for="cv-temperature">300 °C</output><span id="cv-temp-window" class="cv-setting-note">Documented example</span><input id="cv-temperature" type="range" min="300" max="300" step="5" value="300" hidden disabled></dd></div>
-      <div><dt>Reference pressure</dt><dd id="cv-pressure">1.0 Torr</dd></div>
-      <div><dt>Reactant delivery</dt><dd id="cv-feed">5% SiH₄ in N₂ + N₂O</dd></div>
-      <div><dt>Activation</dt><dd><span id="cv-activation-state">RF plasma</span><label class="cv-rf"><input id="cv-rf-on" type="checkbox" checked>Enable RF during deposition</label><span id="cv-rf-reference" class="cv-setting-note">RF example: 30 W</span></dd></div>
+      <div><dt><label for="cv-temperature">Illustrative wafer setpoint</label></dt><dd><output id="cv-temp" data-cite="conditions-silane-PECVD" for="cv-temperature">300 °C</output><span id="cv-temp-window" data-cite="conditions-silane-PECVD" class="cv-setting-note">Documented example</span><input id="cv-temperature" type="range" min="300" max="300" step="5" value="300" hidden disabled></dd></div>
+      <div><dt>Nominal example pressure</dt><dd id="cv-pressure" data-cite="conditions-silane-PECVD">1.0 Torr</dd></div>
+      <div><dt>Reactant delivery</dt><dd id="cv-feed" data-cite="conditions-silane-PECVD">5% SiH₄ in N₂ + N₂O</dd></div>
+      <div><dt>Activation</dt><dd><span id="cv-activation-state" data-cite="pecvd rf-power">RF plasma</span><label class="cv-rf"><input id="cv-rf-on" type="checkbox" checked>Enable RF during deposition</label><span id="cv-rf-reference" data-cite="conditions-silane-PECVD" class="cv-setting-note">RF example: 30 W</span></dd></div>
     </dl>
-    <div id="cv-reference-note" class="cv-detail-line">Reference conditions · University of Toronto oxide recipe</div>
-    <div id="cv-stage-detail" class="cv-detail-line" aria-live="polite">Idealised reaction by-products: H₂ + N₂.</div>
-    <div class="cv-detail-line cv-source-line"><a id="cv-setup-source" target="_blank" rel="noopener noreferrer">Process conditions</a> · <a id="cv-window-source" target="_blank" rel="noopener noreferrer" hidden>Temperature range</a><span id="cv-window-divider" hidden> · </span><a id="cv-chem-source" target="_blank" rel="noopener noreferrer">Reaction</a> · <a id="cv-role-source" target="_blank" rel="noopener noreferrer">Deposit role</a></div>
+    <div id="cv-reference-note" data-cite="conditions-silane-PECVD" class="cv-detail-line">Reference conditions · University of Toronto oxide recipe</div>
+    <div id="cv-stage-detail" data-cite="chem-silane-PECVD exhaust" class="cv-detail-line" aria-live="polite">Idealised reaction by-products: H₂ + N₂.</div>
+    <div class="cv-detail-line cv-source-line"><a id="cv-setup-source" target="_blank" rel="noopener noreferrer">Conditions source</a> · <a id="cv-window-source" target="_blank" rel="noopener noreferrer" hidden>Independent temperature range</a><span id="cv-window-divider" hidden> · </span><a id="cv-chem-source" target="_blank" rel="noopener noreferrer">Net chemistry source</a> · <a id="cv-role-source" target="_blank" rel="noopener noreferrer">Film application source</a></div>
   </details>
   <details id="cv-references">
-    <summary>References · 22 sources</summary>
-    <p class="cv-refs-intro">Sources used to build the recipe settings, chemical reaction schematics and deposit-role explanations in CVD Lab. Each entry identifies what the source supports.</p>
-    <div class="cv-refs-grid">
-      <section aria-labelledby="cv-ref-settings">
-        <h2 id="cv-ref-settings" class="cv-ref-heading">Process conditions and equipment</h2>
-        <ol class="cv-ref-list">
-          <li><a href="https://www.ece.utoronto.ca/equipmentcapabilities/" target="_blank" rel="noopener noreferrer">University of Toronto · Equipment Capabilities</a><span class="cv-ref-use">Used for: the silane/N₂O PECVD oxide example, nitrogen dilution, temperature, pressure and RF power.</span></li>
-          <li><a href="https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/" target="_blank" rel="noopener noreferrer">National Yang Ming Chiao Tung University · LPCVD system</a><span class="cv-ref-use">Used for: nominal temperatures, pressures and feeds for polysilicon, DCS/ammonia nitride and thermal TEOS oxide.</span></li>
-          <li><a href="https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf" target="_blank" rel="noopener noreferrer">Alan Doolittle, Georgia Tech · ECE6450, lectures 13–14 (PDF)</a><span class="cv-ref-use">Used for: CVD reactor concepts, epitaxial growth following the substrate crystal structure, and LPCVD temperature windows for polysilicon, silicon nitride and TEOS oxide.</span></li>
-          <li><a href="https://www.m-watanabe.co.jp/en/product/apcvd/" target="_blank" rel="noopener noreferrer">M. Watanabe · APCVD systems</a><span class="cv-ref-use">Used for: the atmospheric silane/oxygen oxide process and its published temperature window.</span></li>
-          <li><a href="https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf" target="_blank" rel="noopener noreferrer">European Patent Office · EP0114876B1, silicon epitaxy (PDF)</a><span class="cv-ref-use">Used for: atmospheric SiCl₄/H₂ epitaxy, the crystalline substrate requirement and reference temperature conditions.</span></li>
-          <li><a href="https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor" target="_blank" rel="noopener noreferrer">NIST · W CVD process diagnostics and thickness metrology (2000)</a><span class="cv-ref-use">Used for: the WF₆/H₂ tungsten process, low-pressure temperature window, HF by-product and nucleation context.</span></li>
-          <li><a href="https://patents.google.com/patent/US5348587A/en" target="_blank" rel="noopener noreferrer">US5348587A · TiCl₄/NH₃ CVD apparatus</a><span class="cv-ref-use">Used for: thermal TiN deposition, argon carrier, reference conditions and the balanced overall reaction.</span></li>
-          <li><a href="https://patents.google.com/patent/US7923376B1/en" target="_blank" rel="noopener noreferrer">US7923376B1 · Reducing defects in PECVD TEOS films</a><span class="cv-ref-use">Used for: the TEOS/O₂/He PECVD recipe, temperature and pressure windows, and equipment-specific RF example.</span></li>
-        </ol>
-      </section>
-      <section aria-labelledby="cv-ref-chemistry">
-        <h2 id="cv-ref-chemistry" class="cv-ref-heading">Chemistry and CVD background</h2>
-        <ol class="cv-ref-list" start="9">
-          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html" target="_blank" rel="noopener noreferrer">NPTEL · Chemical Vapor Deposition, lecture 11</a><span class="cv-ref-use">Used for: selected net reactions for silicon, silicon dioxide and tungsten, plus chamber-operation concepts.</span></li>
-          <li><a href="https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf" target="_blank" rel="noopener noreferrer">Micromachining Processes · ENE5400 lecture notes, NTHU-hosted (PDF)</a><span class="cv-ref-use">Used for: the idealised thermal TEOS decomposition equation, oxide chemistry and the LPCVD furnace schematic.</span></li>
-          <li><a href="https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2" target="_blank" rel="noopener noreferrer">Stanford Nanofabrication Facility · Silicon Dioxide</a><span class="cv-ref-use">Used for: oxide precursor/process pairings and silicon-dioxide deposition background.</span></li>
-          <li><a href="https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride" target="_blank" rel="noopener noreferrer">Stanford Nanofabrication Facility · Tystar B2T7 nitride tube</a><span class="cv-ref-use">Used for: LPCVD silicon-nitride equipment and the dichlorosilane/ammonia precursor pairing.</span></li>
-          <li><a href="https://plasma.oxinst.com/technologies/pecvd" target="_blank" rel="noopener noreferrer">Oxford Instruments · PECVD</a><span class="cv-ref-use">Used for: plasma-assisted deposition, lower wafer temperatures, equipment-dependent RF frequencies and TEOS oxide application background.</span></li>
-          <li><a href="https://www.pppl.gov/about/about-plasmas-and-fusion" target="_blank" rel="noopener noreferrer">Princeton Plasma Physics Laboratory · About Plasmas and Fusion</a><span class="cv-ref-use">Used for: the plasma definition, ionisation, free electrons, ions and neutral particles.</span></li>
-          <li><a href="https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition" target="_blank" rel="noopener noreferrer">CORIAL / Plasma-Therm · PECVD technology</a><span class="cv-ref-use">Used for: the PECVD definition, plasma activation of gas mixtures, the 13.56 MHz RF example and film formation at the substrate surface.</span></li>
-          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm" target="_blank" rel="noopener noreferrer">NPTEL · CMOS fabrication: Crystals and Growth</a><span class="cv-ref-use">Used for: the polycrystalline-silicon definition, crystal grains, grain boundaries and crystal orientation.</span></li>
-          <li><a href="https://www.osha.gov/semiconductors/silicon/substrate-manufacture" target="_blank" rel="noopener noreferrer">OSHA · Semiconductor Substrate Manufacture</a><span class="cv-ref-use">Used for: high-purity bulk polysilicon production and subsequent single-crystal ingot and wafer manufacture.</span></li>
-        </ol>
-      </section>
-      <section aria-labelledby="cv-ref-roles">
-        <h2 id="cv-ref-roles" class="cv-ref-heading">VLSI deposit roles</h2>
-        <ol class="cv-ref-list" start="18">
-          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html" target="_blank" rel="noopener noreferrer">NPTEL · BEOL issues and aluminium metallization, lecture 30</a><span class="cv-ref-use">Used for: SiO₂ insulation, Ti/TiN barriers, tungsten via filling and repeated interconnect patterning/deposition.</span></li>
-          <li><a href="https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html" target="_blank" rel="noopener noreferrer">TU Wien, Institute for Microelectronics · Annual Review 2006</a><span class="cv-ref-use">Used for: silicon-nitride passivation and moisture-barrier context.</span></li>
-          <li><a href="https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm" target="_blank" rel="noopener noreferrer">NPTEL · CMOS fabrication: LPCVD</a><span class="cv-ref-use">Used for: polysilicon gate contacts, short interconnects and resistor applications.</span></li>
-          <li><a href="https://www.appliedmaterials.com/us/en/semiconductor/products/processes/epitaxy.html" target="_blank" rel="noopener noreferrer">Applied Materials · Epitaxy</a><span class="cv-ref-use">Used for: crystalline epitaxial layers and their role in semiconductor devices.</span></li>
-          <li><a href="https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html" target="_blank" rel="noopener noreferrer">Zhebo Chen, Applied Materials · Introducing a Breakthrough in 2D Scaling (2020)</a><span class="cv-ref-use">Used for: tungsten contact-metal filling and conventional TiN liner/nucleation context.</span></li>
-        </ol>
-      </section>
-    </div>
-    <p class="cv-ref-note">These sources support representative recipes and process concepts. Chamber geometry, molecular motion and demonstration thickness are schematic. Links reviewed 13 October 2026.</p>
+    <summary id="cv-references-summary">References and evidence</summary>
+    <p class="cv-refs-intro">Numbered citations identify the source for the adjacent claim. Select a number to see the title, source type and exact table, page or section. Source conditions describe the cited equipment; they do not validate this animation.</p>
+    <p class="cv-ref-note">The bibliography includes research articles, university material, facility recipes, manufacturer documentation and patents. Patents are labelled and are not presented as peer-reviewed research. Broad lecture ranges combined with a facility setpoint are marked as teaching combinations.</p>
+    <ol id="cv-reference-list" class="cv-ref-list cv-evidence-list" aria-label="Numbered scientific references"></ol>
+    <noscript><p>Reference rendering requires JavaScript, as does the simulator. The full claim-to-source register is also available in docs/CLAIMS.md in the repository.</p></noscript>
+  </details>
+  <details id="cv-model-scope">
+    <summary>What the simulation represents</summary>
+    <ul id="cv-model-choices" class="cv-guide-steps"></ul>
+    <p class="cv-ref-note">Citations support the stated concepts and source values. Geometry, playback and interaction rules are original teaching choices; they are not literature-validated process outputs.</p>
   </details>
   <p id="cv-model-note" class="cv-model-note">Net reaction schematic · enlarged atoms and film · playback speed is not a deposition rate</p>
   <footer class="cv-footer"><span class="cv-footer-brand">CVD Lab<span>Semiconductor process studio</span></span><p>© 2026 S L RICHRIS. All rights reserved.</p></footer>
+  <script id="cv-evidence-data" type="application/json">
+{
+  "version": 2,
+  "reviewed": "2026-10-23",
+  "sources": [
+    {
+      "id": 1,
+      "author": "University of Toronto, ECE / Toronto Nanofabrication Centre",
+      "title": "Equipment Capabilities",
+      "year": "n.d.",
+      "kind": "Facility recipe",
+      "url": "https://www.ece.utoronto.ca/equipmentcapabilities/",
+      "locator": "Deposition User Recipes → PECVD Recipes → Oxide & Nitride Deposition Recipes, second SiO₂ row; Photolithography Wetbench",
+      "scope": "Second oxide row: 300 °C, 1000 mTorr, 5% SiH₄/N₂ with N₂O, 30 W. Photolithography Wetbench: substrate cleaning and resist processing.",
+      "limits": "One facility recipe; its measured deposition rate is not used to drive the animation.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Official facility page",
+        "url": "https://www.ece.utoronto.ca/equipmentcapabilities/",
+        "note": "Oxide table row and the separate cleaning/wetbench description checked."
+      }
+    },
+    {
+      "id": 2,
+      "author": "National Yang Ming Chiao Tung University",
+      "title": "Low Pressure Chemical Vapor Deposition System (LPCVD)",
+      "year": "n.d.",
+      "kind": "Facility recipe",
+      "url": "https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/",
+      "locator": "Equipment Details → Description → service items (2), (3), (4)",
+      "scope": "Poly-Si: 620 °C / 300 mTorr; nitride: 800 °C / 120 mTorr; TEOS: 700 °C / 120 mTorr, with listed gases.",
+      "limits": "The wider temperature sliders are independent teaching ranges, not NYCU tool-qualified windows.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Official facility page",
+        "url": "https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/",
+        "note": "Service items (2)–(4) checked; the selected values are examples, not independently qualified simulator windows."
+      }
+    },
+    {
+      "id": 3,
+      "author": "A. Doolittle, Georgia Institute of Technology",
+      "title": "ECE6450, Lectures 13–14: Thin Film Deposition and Epitaxy",
+      "year": "n.d.",
+      "kind": "University lecture",
+      "url": "https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf",
+      "locator": "PDF pp. 2–9, 14–15, 19",
+      "scope": "CVD principles and tradeoffs; poly-Si 575–650 °C (p. 4), TEOS 650–750 °C (p. 7), DCS nitride about 700–800 °C (p. 9); epitaxy (pp. 14–15).",
+      "limits": "Broad lecture ranges are not a qualified operating envelope. The printed nitride equation contains an error; use [21] for that equation.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University lecture PDF",
+        "url": "https://alan.ece.gatech.edu/ECE6450/Lectures/ECE6450L13and14-CVD%20and%20Epitaxy.pdf",
+        "note": "Physical PDF pages checked for process comparison, three temperature ranges, nitride encapsulation and epitaxy. Erroneous printed chemistry is excluded."
+      }
+    },
+    {
+      "id": 4,
+      "author": "M. Watanabe & Co., Ltd.",
+      "title": "Atmospheric Pressure CVD (APCVD) System",
+      "year": "n.d.",
+      "kind": "Manufacturer documentation",
+      "url": "https://www.m-watanabe.co.jp/en/product/apcvd/",
+      "locator": "A200V → BASIC INFORMATION; AMAX system descriptions",
+      "scope": "A200V SiH₄/O₂ feed and 350–450 °C range; atmospheric single-wafer and conveyor reactor examples.",
+      "limits": "400 °C is a teaching selection within the A200V range. The drawing is not an A200V engineering model.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer page",
+        "url": "https://www.m-watanabe.co.jp/en/product/apcvd/",
+        "note": "A200V gas/temperature fields and the separate AMAX conveyor description checked. Geometry remains representative."
+      }
+    },
+    {
+      "id": 5,
+      "author": "J. C. Schumacher",
+      "title": "Ultra-pure epitaxial silicon and process for its manufacture, EP0114876B1",
+      "year": "1990",
+      "kind": "Patent",
+      "url": "https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf",
+      "locator": "Description: PDF p. 2, atmospheric-pressure paragraph and Table I, SiCl₄ row; PDF p. 3, Table II, SiCl₄/H₂ row",
+      "scope": "Background Table I: atmospheric SiCl₄/H₂ epitaxy at 1150–1250 °C. Background Table II: a conventional SiCl₄/H₂ epitaxy example at 1200 °C.",
+      "limits": "Both tables describe conventional background processes, not experimental validation of the patent’s bromosilane invention or of this schematic.",
+      "alternate": "https://patents.google.com/patent/EP0114876B1/en",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Patent PDF and bibliographic record",
+        "url": "https://patents.google.com/patent/EP0114876B1/en",
+        "note": "Table I on PDF p. 2 and Table II on PDF p. 3 checked. The nominal 1200 °C appears explicitly in the background table."
+      },
+      "alternate_label": "Patent bibliographic record"
+    },
+    {
+      "id": 6,
+      "author": "T. Gougousi, Y. Xu, J. N. Kidder, G. W. Rubloff and C. R. Tilford",
+      "title": "Process Diagnostics and Thickness Metrology Using in Situ Mass Spectrometry for the Chemical Vapor Deposition of W from H₂/WF₆",
+      "year": "2000",
+      "kind": "Research article",
+      "url": "https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor",
+      "locator": "Journal of Vacuum Science & Technology B 18(3), 1352–1363 (2000), abstract; DOI 10.1116/1.591478",
+      "scope": "H₂/WF₆ at 0.5 Torr and 400–500 °C; measured HF and silicon-containing nucleation products.",
+      "limits": "The animation shows idealised bulk growth; it does not reproduce nucleation kinetics or metrology.",
+      "alternate": "https://doi.org/10.1116/1.591478",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "NIST author record and publisher metadata",
+        "url": "https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor",
+        "note": "Abstract conditions and HF observation checked; journal, pages and DOI checked against the publisher record."
+      },
+      "alternate_label": "Publisher record / DOI"
+    },
+    {
+      "id": 7,
+      "author": "E. C. Eichman, B. A. Sommer, M. J. Churley and W. C. Ramsey",
+      "title": "Apparatus for elimination of low temperature ammonia salts in TiCl₄ NH₃ CVD reaction, US5348587A",
+      "year": "1994",
+      "kind": "Patent",
+      "url": "https://patents.google.com/patent/US5348587A/en",
+      "locator": "Description → Background equation; preferred primary-reaction conditions; preferred embodiment",
+      "scope": "TiN net equation; about 150 mTorr, TiCl₄/NH₃/Ar, wafer 450–650 °C, preferred wafer temperature about 650 °C.",
+      "limits": "The patent also heats downstream walls with a secondary plasma. That hardware is omitted from this thermal-growth schematic; this is not a complete reproduction.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Patent text",
+        "url": "https://patents.google.com/patent/US5348587A/en",
+        "note": "Background net equation, preferred primary conditions and the separately heated liner checked."
+      }
+    },
+    {
+      "id": 8,
+      "author": "N. Arul Dhas and J. Henri",
+      "title": "Method of reducing defects in PECVD TEOS films, US7923376B1",
+      "year": "2011",
+      "kind": "Patent",
+      "url": "https://patents.google.com/patent/US7923376B1/en",
+      "locator": "Description → process conditions for 300 mm wafers, following the helium-flow discussion",
+      "scope": "TEOS/O₂/He; typical 350–400 °C, 2–4 Torr and 2000–3000 W for the described equipment.",
+      "limits": "Equipment-specific ranges, not universal PECVD values. No balanced plasma-exhaust equation or elementary reaction mechanism is provided.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Patent text",
+        "url": "https://patents.google.com/patent/US7923376B1/en",
+        "note": "TEOS/O₂/He and general 300 mm conditions checked. Lower-power specific examples are distinguished from the displayed general range."
+      }
+    },
+    {
+      "id": 9,
+      "author": "NPTEL, Introduction to Microelectronic Fabrication Processes",
+      "title": "Module 3, Lecture 11: Chemical Vapor Deposition — continued",
+      "year": "n.d.",
+      "kind": "University lecture",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html",
+      "locator": "Operation paragraph; example reactions for silicon, silicon dioxide and tungsten",
+      "scope": "SiH₄ decomposition; SiH₄/O₂ and SiH₄/N₂O oxide net equations; SiCl₄/H₂ silicon; WF₆/H₂ tungsten; reactor functions.",
+      "limits": "Do not use the malformed nitride equation on this page. These selected overall equations do not predict all actual exhaust species.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University course text",
+        "url": "https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html",
+        "note": "Only the stated silicon, oxide and H₂-reduced tungsten equations are used; malformed nitride and Si-reduced tungsten equations are excluded."
+      }
+    },
+    {
+      "id": 10,
+      "author": "Shiang-Cheng Lu (盧向成), National Tsing Hua University",
+      "title": "Lecture 2: Micromachining Processes",
+      "year": "2004",
+      "kind": "University lecture",
+      "url": "https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf",
+      "locator": "PDF p. 9 (slides 17–18), p. 13 (slides 25–26), p. 14 (slide 28), p. 15 (slide 30)",
+      "scope": "Surface transport and reaction steps, furnace parts, idealised TEOS decomposition and silane/N₂O oxide equations, polysilicon and oxidation.",
+      "limits": "University teaching material, Spring 2004. Idealised net equations only. Slide 18 prints “Absorption”; the linked claim is limited to transport, reaction and desorption. Only the atom-balanced dry-oxidation equation on slide 30 is used.",
+      "alternate": "https://www.ee.nthu.edu.tw/sclu/ene5400.htm",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University-hosted teaching PDF",
+        "url": "https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf",
+        "note": "PDF footer credit and course instructor checked. Slides 18, 25, 26 and 30 checked, including the furnace drawing and displayed net equations."
+      },
+      "alternate_label": "Course and instructor"
+    },
+    {
+      "id": 11,
+      "author": "Stanford Nanofabrication Facility",
+      "title": "Silicon Dioxide",
+      "year": "n.d.",
+      "kind": "Facility documentation",
+      "url": "https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2",
+      "locator": "Opening material/process description",
+      "scope": "Silane/N₂O PECVD and silane or TEOS oxide precursor pairings.",
+      "limits": "Stanford lists helium-diluted silane for its CCP tool. Nitrogen dilution in this lab comes from Toronto [1], not Stanford.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Official facility page",
+        "url": "https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2",
+        "note": "Feed pairing checked; He dilution is not used to justify the Toronto N₂ recipe or net stoichiometry."
+      }
+    },
+    {
+      "id": 12,
+      "author": "Stanford Nanofabrication Facility",
+      "title": "Tystar Bank 2 Tube 7 Nitride (B2T7 Flexible Nitride)",
+      "year": "n.d.",
+      "kind": "Facility documentation",
+      "url": "https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride",
+      "locator": "Overview; Processing Techniques; Gases",
+      "scope": "Nitride LPCVD equipment with dichlorosilane and ammonia; different nitride processes.",
+      "limits": "Supports the process pairing, not the exact coefficients in the net equation or the NYCU setpoint.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Official facility page",
+        "url": "https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride",
+        "note": "LPCVD nitride and the ammonia/dichlorosilane gas list checked; equation is independently supported by [21]."
+      }
+    },
+    {
+      "id": 13,
+      "author": "Oxford Instruments Plasma Technology",
+      "title": "Plasma enhanced chemical vapour deposition (PECVD)",
+      "year": "n.d.",
+      "kind": "Manufacturer documentation",
+      "url": "https://plasma.oxinst.com/technologies/pecvd",
+      "locator": "PECVD feature list: RF-driven top electrode, heated lower electrode, showerhead inlet and frequency mixing",
+      "scope": "Representative PECVD electrode, heating and showerhead functions; RF frequency mixing and lower-temperature processing.",
+      "limits": "Supports the cited architecture and activation concepts. The retrieved page does not establish the specific TEOS feed pairing; that claim uses [8].",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer page",
+        "url": "https://plasma.oxinst.com/technologies/pecvd",
+        "note": "RF, heated electrode, showerhead and frequency-mixing features checked. TEOS-specific attribution removed."
+      }
+    },
+    {
+      "id": 14,
+      "author": "Princeton Plasma Physics Laboratory",
+      "title": "About Plasmas and Fusion",
+      "year": "n.d.",
+      "kind": "Research laboratory explanation",
+      "url": "https://www.pppl.gov/about/about-plasmas-and-fusion",
+      "locator": "What is Plasma?",
+      "scope": "Partially ionised gas containing ions, electrons and neutral species.",
+      "limits": "General plasma definition, not a model of the electron distribution in this simulator.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Laboratory educational page",
+        "url": "https://www.pppl.gov/about/about-plasmas-and-fusion",
+        "note": "The plasma-composition definition checked."
+      }
+    },
+    {
+      "id": 15,
+      "author": "CORIAL / Plasma-Therm",
+      "title": "Plasma Enhanced Chemical Vapor Deposition (PECVD)",
+      "year": "n.d.",
+      "kind": "Manufacturer documentation",
+      "url": "https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition",
+      "locator": "PECVD technology",
+      "scope": "13.56 MHz example, collisional creation of reactive species, surface film formation and exhaust removal.",
+      "limits": "One equipment family; RF frequency is not a universal PECVD constant.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer technology page",
+        "url": "https://corial.plasmatherm.com/en/technologies/pecvd-plasma-enhanced-chemical-vapor-deposition",
+        "note": "Plasma-assisted surface growth, 13.56 MHz example and pumped products checked."
+      }
+    },
+    {
+      "id": 16,
+      "author": "NPTEL, CMOS Integrated Circuit Fabrication",
+      "title": "Chapter 3, §3.1.1: Crystals",
+      "year": "n.d.",
+      "kind": "University lecture",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm",
+      "locator": "Polycrystalline-material definition",
+      "scope": "Crystal grains, differing orientations and grain boundaries.",
+      "limits": "A structural definition does not specify chemical purity.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University course text",
+        "url": "https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide2.htm",
+        "note": "Opening silicon context and §3.1.1 grain/boundary definition checked."
+      }
+    },
+    {
+      "id": 17,
+      "author": "Wacker Chemie AG",
+      "title": "Purity Is Our Recipe for Success, Annual Report 2022",
+      "year": "2023",
+      "kind": "Manufacturer process report",
+      "url": "https://reports.wacker.com/2022/annual-report/sustainable-solutions/purity-is-our-recipe-for-success.html",
+      "locator": "Siemens-process and metallurgical-silicon purification paragraphs; Polysilicon glossary",
+      "scope": "Purification of metallurgical silicon and production of high-purity bulk polysilicon for wafer makers.",
+      "limits": "Manufacturer account of bulk silicon purification. Annual Report 2022 is the reporting-year title; the report was issued in 2023. It does not support the simulator’s thin-film recipe values.",
+      "alternate": "https://reports.wacker.com/2022/annual-report/for-our-shareholders/letter-to-our-shareholders.html",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer annual report",
+        "url": "https://reports.wacker.com/2022/annual-report/sustainable-solutions/purity-is-our-recipe-for-success.html",
+        "note": "Purification and wafer-feedstock text checked; report year 2022 is distinguished from 2023 issue year."
+      },
+      "alternate_label": "Report issue-year context"
+    },
+    {
+      "id": 18,
+      "author": "NPTEL, Introduction to Microelectronic Fabrication Processes",
+      "title": "Module 9, Lecture 30: BEOL Issues and Aluminum Metallization",
+      "year": "n.d.",
+      "kind": "University lecture",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html",
+      "locator": "Opening paragraph; Fig. 9.3 and repeated interconnect sequence",
+      "scope": "SiO₂ insulation, Ti/TiN barrier/adhesion role, CVD tungsten via fill and repeated lithography/etch/deposition.",
+      "limits": "Its illustrated Ti/TiN liner is deposited by PVD. This source supports the material role, not a TiN CVD recipe.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University course text",
+        "url": "https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html",
+        "note": "Insulator, liner and tungsten roles checked against the interconnect sequence; deposition methods in the example are not generalised."
+      }
+    },
+    {
+      "id": 19,
+      "author": "Alireza Sheikholeslami, TU Wien Institute for Microelectronics",
+      "title": "Annual Review 2006: Topography Simulation",
+      "year": "2006",
+      "kind": "Research group report",
+      "url": "https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html",
+      "locator": "Topography Simulation → passivation and moisture-barrier discussion",
+      "scope": "PECVD TEOS oxide with silicon-nitride passivation and moisture-barrier context.",
+      "limits": "Supports this application; it does not validate the exact film properties of the NYCU nitride recipe.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Institutional annual-review page",
+        "url": "https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html",
+        "note": "Passivation stack and moisture-barrier context checked; no oxidation-mask claim is inferred."
+      }
+    },
+    {
+      "id": 20,
+      "author": "NPTEL, CMOS Integrated Circuit Fabrication",
+      "title": "Chapter 3: Low Pressure Chemical Vapor Deposition (LPCVD)",
+      "year": "n.d.",
+      "kind": "University lecture",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm",
+      "locator": "First two paragraphs and doping discussion",
+      "scope": "Poly-Si gates, short interconnects and resistors; silane growth, temperature range and doping context.",
+      "limits": "Applications are examples, not a claim that every modern gate uses polysilicon.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University course text",
+        "url": "https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm",
+        "note": "Poly-Si gate/interconnect/resistor and doping passages checked."
+      }
+    },
+    {
+      "id": 21,
+      "author": "G. Peev, L. Zambov and Y. Yanakiev",
+      "title": "Kinetics of the chemical reaction between dichlorosilane and ammonia during silicon nitride film deposition",
+      "year": "1990",
+      "kind": "Research article",
+      "url": "https://doi.org/10.1016/0040-6090(90)90456-N",
+      "locator": "Thin Solid Films 189(2), pp. 275–282; p. 276, Eq. (1)",
+      "scope": "Balanced stoichiometric DCS/NH₃ → Si₃N₄ + HCl + H₂ net reaction.",
+      "limits": "Eq. (1) was checked in the author-uploaded full text. Actual composition and side products depend on process conditions.",
+      "alternate": "https://www.researchgate.net/publication/222199359_Kinetics_of_the_chemical_reaction_between_dichlorosilane_and_ammonia_during_silicon_nitride_film_deposition",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Author-uploaded primary paper",
+        "url": "https://www.researchgate.net/publication/222199359_Kinetics_of_the_chemical_reaction_between_dichlorosilane_and_ammonia_during_silicon_nitride_film_deposition",
+        "note": "Paper identity and p. 276, Eq. (1) checked in the full text; the DOI remains the canonical reference."
+      },
+      "alternate_label": "Author-uploaded full text"
+    },
+    {
+      "id": 22,
+      "author": "Zhebo Chen, Applied Materials",
+      "title": "Introducing a Breakthrough in 2D Scaling",
+      "year": "2020",
+      "kind": "Manufacturer technical article",
+      "url": "https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html",
+      "locator": "Opening contact-via discussion and Fig. 1",
+      "scope": "Conventional TiN liner/barrier, tungsten nucleation layer and tungsten contact-metal fill.",
+      "limits": "The article also discusses a different selective process that eliminates the liner; this lab illustrates the conventional context.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer-authored article",
+        "url": "https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html",
+        "note": "Author/date and conventional TiN liner, W nucleation and W contact-fill passage checked."
+      }
+    },
+    {
+      "id": 23,
+      "author": "MKS Instruments",
+      "title": "1179C01313CR1BV Mass Flow Controller",
+      "year": "n.d.",
+      "kind": "Manufacturer documentation",
+      "url": "https://www.mks.com/p/1179C01313CR1BV",
+      "locator": "Overview",
+      "scope": "A mass flow controller measures and controls a gas feed.",
+      "limits": "Supports the component function, not selection or qualification of this exact part for every precursor.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer product page",
+        "url": "https://www.mks.com/p/1179C01313CR1BV",
+        "note": "Overview explicitly states measurement and control of gas flow; vapour generation uses a separate citation."
+      }
+    },
+    {
+      "id": 24,
+      "author": "MKS Instruments",
+      "title": "Downstream Pressure Controllers and Valves — Product Selection Guide",
+      "year": "n.d.",
+      "kind": "Manufacturer technical guide",
+      "url": "https://www.mksinst.com/docs/UR/dwnstrem.pdf",
+      "locator": "PDF p. 1, pressure-control explanation",
+      "scope": "Pressure measurement, controller feedback and exhaust-throttle conductance to the vacuum pump.",
+      "limits": "The gauge, valve and pump functions are explained; no closed-loop pressure solver is implemented.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer technical PDF",
+        "url": "https://www.mksinst.com/docs/UR/dwnstrem.pdf",
+        "note": "PDF p. 1 explicitly describes gauge, feedback controller, throttle conductance and vacuum pump."
+      }
+    },
+    {
+      "id": 25,
+      "author": "MKS Instruments",
+      "title": "Pulsed Radio Frequency (RF) Solution for Critical Processes",
+      "year": "n.d.",
+      "kind": "Manufacturer technical article",
+      "url": "https://www.mks.com/n/pulsed-radio-frequency-rf-solution-for-critical-processes",
+      "locator": "Paragraphs on RF products igniting/controlling plasma and the matching network between generator and chamber",
+      "scope": "Generator sustains the discharge; impedance matching improves transfer of power to the plasma.",
+      "limits": "RF-off pause is an animation rule, not a prediction of residual physical deposition.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer technical page",
+        "url": "https://www.mks.com/n/pulsed-radio-frequency-rf-solution-for-critical-processes",
+        "note": "RF-plasma and intervening matching-network paragraphs checked."
+      }
+    },
+    {
+      "id": 26,
+      "author": "MKS Instruments",
+      "title": "1150C Vapor Source Mass-Flo® Controller",
+      "year": "2021",
+      "kind": "Manufacturer technical guide",
+      "url": "https://api.p1.mks.com/mam/celum/celum_assets/mks/resources/1150C-MFC-DS.pdf?0=",
+      "locator": "PDF pp. 2–3: vaporized-source list and System Integration; revision 1150C_10/21 on p. 4",
+      "scope": "Direct vapour delivery from a heated source; TEOS and TiCl₄ are listed examples. Delivery lines are heated to avoid condensation.",
+      "limits": "Discontinued-product datasheet, used for delivery concepts only. No claim that this specific controller or its specifications are implemented in the lab.",
+      "alternate": "",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer datasheet",
+        "url": "https://api.p1.mks.com/mam/celum/celum_assets/mks/resources/1150C-MFC-DS.pdf?0=",
+        "note": "Broken legacy link replaced with the official 1150C datasheet. TEOS/TiCl₄ and heated delivery lines checked; revision is October 2021."
+      }
+    },
+    {
+      "id": 27,
+      "author": "Vito Šimonka, TU Wien Institute for Microelectronics",
+      "title": "Thermal Oxidation and Dopant Activation of Silicon Carbide — Device Fabrication",
+      "year": "2018",
+      "kind": "University dissertation",
+      "url": "https://www.iue.tuwien.ac.at/phd/simonka/Device-Fabrication.html",
+      "locator": "§1.2, Fig. 1.7 and §§1.2.1–1.2.5",
+      "scope": "Wafer processing, photoresist exposure/development, etching, oxidation, implantation and patterned metal contacts.",
+      "limits": "Doctoral thesis dated September 2018. Its device example is SiC; only generic patterning, implantation and fabrication concepts are used. Silicon-specific oxidation is sourced to [10].",
+      "alternate": "https://www.iue.tuwien.ac.at/phd/simonka/index.html",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Institution-hosted doctoral thesis",
+        "url": "https://www.iue.tuwien.ac.at/phd/simonka/Device-Fabrication.html",
+        "note": "Author and September 2018 date checked on the title page; SiC example is used only for generic fabrication concepts."
+      },
+      "alternate_label": "Thesis title page (author/date)"
+    },
+    {
+      "id": 28,
+      "author": "AIXTRON",
+      "title": "AIXTRON Technologies: MOCVD",
+      "year": "n.d.",
+      "kind": "Manufacturer technology documentation",
+      "url": "https://www.aixtron.com/en/innovation/technologies/mocvd",
+      "locator": "MOCVD technology overview, opening explanation and LED multilayer example",
+      "scope": "Metal-organic precursors, thermal GaN growth from TMGa/NH3, semiconductor epitaxy and LED heterostructures.",
+      "limits": "Conceptual overview; no recipe setpoints, measured film properties or animation validation.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer technology page",
+        "url": "https://www.aixtron.com/en/innovation/technologies/mocvd",
+        "note": "GaN precursor, heating and LED multilayer explanations checked."
+      }
+    },
+    {
+      "id": 29,
+      "author": "Chenqi Zhu, University of Sheffield",
+      "title": "MOCVD Growth and characterisation of III-nitride semiconductor materials for monolithically integrated optoelectronics",
+      "year": "2022",
+      "kind": "Doctoral thesis",
+      "url": "https://etheses.whiterose.ac.uk/id/eprint/32396/1/MOCVD%20Growth%20and%20characterisation%20of%20III-nitride%20semiconductor%20materials%20for%20monolithically%20integrated%20optoelectronics.pdf",
+      "locator": "§§3.1.1–3.1.2, printed pp. 45–46, Eq. (3.1); §§3.1.3–3.1.4, printed pp. 50–54, Figs. 3.5–3.6",
+      "scope": "MOVPE terminology; idealised TMGa/ammonia GaN equation; liquid-source bubbler, carrier-gas and flow-control concepts.",
+      "limits": "Net chemistry and delivery concepts only. Typographic group-number and dopant assignments elsewhere in this thesis are not adopted; no source temperature or delivery flow is inferred.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Institution-hosted doctoral thesis",
+        "url": "https://etheses.whiterose.ac.uk/id/eprint/32396/1/MOCVD%20Growth%20and%20characterisation%20of%20III-nitride%20semiconductor%20materials%20for%20monolithically%20integrated%20optoelectronics.pdf",
+        "note": "Printed pp. 45–46 and 50–54 checked, including Eq. (3.1) and delivery figures. Unrelated source typos are not adopted."
+      }
+    },
+    {
+      "id": 30,
+      "author": "Feng Liang et al.",
+      "title": "Carbon-Related Defects as a Source for the Enhancement of Yellow Luminescence of Unintentionally Doped GaN",
+      "year": "2018",
+      "kind": "Peer-reviewed experimental research article",
+      "url": "https://doi.org/10.3390/nano8090744",
+      "alternate": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6163992/",
+      "locator": "Nanomaterials 8(9), 744 (2018): p. 2, §2 and Fig. 1; p. 3, Table 1, row T2; DOI 10.3390/nano8090744",
+      "scope": "TMGa/NH3 GaN growth; T2 temperature 1050 °C and pressure 200 Torr; final layer over a buffer and template on c-plane sapphire.",
+      "limits": "One reported final-layer setpoint, not a general MOCVD operating window. The schematic does not reconstruct the study’s reactor, nucleation sequence, impurity concentrations or luminescence.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Primary article full text and DOI record",
+        "url": "https://pdfs.semanticscholar.org/fd19/d460aa3cd602369575494bf06d5b452a0266.pdf",
+        "note": "§2, Fig. 1 and Table 1 row T2 checked; a readable copy of the published article was used when the DOI fetch was blocked."
+      },
+      "alternate_label": "PubMed Central full text"
+    },
+    {
+      "id": 31,
+      "author": "AIXTRON",
+      "title": "AIXTRON Technologies: Showerhead principle (MOCVD)",
+      "year": "n.d.",
+      "kind": "Manufacturer technology documentation",
+      "url": "https://www.aixtron.com/en/innovation/technologies/showerhead-principle",
+      "locator": "Close Coupled Showerhead® explanation, gas separation, cooling and heated susceptor paragraphs",
+      "scope": "Separate precursor channels, water-cooled showerhead and heated rotating susceptor.",
+      "limits": "Representative architecture only; dimensions and single-substrate simplification are teaching choices. Not evidence that Liang et al. used this specific showerhead.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "Manufacturer technology page",
+        "url": "https://www.aixtron.com/en/innovation/technologies/showerhead-principle",
+        "note": "Separated openings, water cooling, resistance heater and rotating susceptor checked; no identity with the cited experiment’s reactor is claimed."
+      }
+    }
+  ],
+  "claims": {
+    "cvd-definition": {
+      "statement": "CVD forms solid films by gas/vapour reactions at a substrate; volatile products are removed.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF p. 2"
+        },
+        {
+          "source": 9,
+          "locator": "Operation paragraph"
+        }
+      ],
+      "note": ""
+    },
+    "film-functions": {
+      "statement": "Deposited films can provide insulation, interconnect functions, protection or semiconductor layers.",
+      "evidence": [
+        {
+          "source": 18,
+          "locator": "Opening paragraph and Fig. 9.3"
+        },
+        {
+          "source": 20,
+          "locator": "First paragraph"
+        },
+        {
+          "source": 19,
+          "locator": "Topography Simulation"
+        }
+      ],
+      "note": ""
+    },
+    "prepare": {
+      "statement": "Prepare/load the substrate and establish process conditions.",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Operation paragraph"
+        }
+      ],
+      "note": ""
+    },
+    "delivery": {
+      "statement": "Feed precursor and co-reactants; TEOS is delivered as vapour.",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Operation paragraph"
+        },
+        {
+          "source": 26,
+          "locator": "1150C datasheet, PDF pp. 2–3, source materials and System Integration: heated source and delivery lines"
+        }
+      ],
+      "note": ""
+    },
+    "thermal-activation": {
+      "statement": "Heat activates thermal CVD in these presets.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF pp. 2–3"
+        }
+      ],
+      "note": ""
+    },
+    "surface-growth": {
+      "statement": "Gas transport, surface reaction and desorption are steps in CVD film formation.",
+      "evidence": [
+        {
+          "source": 10,
+          "locator": "PDF p. 9, slide 18, steps (a), (c), (d) and (e)"
+        }
+      ],
+      "note": "The slide’s printed “Absorption” is not used to establish a distinction between absorption and adsorption."
+    },
+    "exhaust": {
+      "statement": "Exhaust removes unused feed and volatile products; shown loading and finishing stages are illustrative.",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Operation paragraph"
+        },
+        {
+          "source": 15,
+          "locator": "PECVD technology, final paragraph"
+        }
+      ],
+      "note": "Exact purge, cool and vent procedures are tool-specific and are not supplied here."
+    },
+    "wafer": {
+      "statement": "Silicon is a substrate material used in the silicon-based examples in this lab.",
+      "evidence": [
+        {
+          "source": 16,
+          "locator": "§3.1, opening paragraph: crystalline silicon as the basic chip material"
+        }
+      ],
+      "note": "The selection of substrate materials is a model choice. The separate GaN/sapphire claim identifies the MOCVD stack."
+    },
+    "precursor": {
+      "statement": "A precursor supplies film-forming atoms; co-reactants participate in its conversion.",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions 1–5"
+        }
+      ],
+      "note": ""
+    },
+    "carrier": {
+      "statement": "Ar and He serve as carrier/diluent gases in the stated TiN and TEOS examples.",
+      "evidence": [
+        {
+          "source": 7,
+          "locator": "Preferred primary-reaction conditions: Ar flow",
+          "supports": "Ar in the stated primary TiN feed."
+        },
+        {
+          "source": 8,
+          "locator": "Description, helium-flow discussion",
+          "supports": "He in the stated TEOS PECVD feed."
+        }
+      ],
+      "note": ""
+    },
+    "plasma": {
+      "statement": "A partially ionised gas contains free electrons, ions and neutral species.",
+      "evidence": [
+        {
+          "source": 14,
+          "locator": "What is Plasma?"
+        }
+      ],
+      "note": ""
+    },
+    "rf-power": {
+      "statement": "RF means radio frequency; the generator supplies energy for the discharge.",
+      "evidence": [
+        {
+          "source": 25,
+          "locator": "Title and RF power discussion"
+        },
+        {
+          "source": 15,
+          "locator": "PECVD technology"
+        }
+      ],
+      "note": ""
+    },
+    "poly-structure": {
+      "statement": "Polycrystalline silicon has differently oriented grains separated by grain boundaries.",
+      "evidence": [
+        {
+          "source": 16,
+          "locator": "§3.1.1, polycrystalline-material definition"
+        }
+      ],
+      "note": ""
+    },
+    "poly-role": {
+      "statement": "Appropriately doped and patterned polysilicon can be used for gates, short interconnects or resistors.",
+      "evidence": [
+        {
+          "source": 20,
+          "locator": "First paragraph and doping discussion"
+        }
+      ],
+      "note": ""
+    },
+    "epi-structure": {
+      "statement": "Silicon homoepitaxy grows a single-crystal layer following its crystalline silicon substrate.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF pp. 14–15"
+        }
+      ],
+      "note": ""
+    },
+    "bulk-purity": {
+      "statement": "Polycrystalline describes grain structure; purified bulk polysilicon is also used as wafer feedstock.",
+      "evidence": [
+        {
+          "source": 16,
+          "locator": "§3.1.1"
+        },
+        {
+          "source": 17,
+          "locator": "Metallurgical-silicon purification paragraph and Polysilicon glossary"
+        }
+      ],
+      "note": "The distinction between structure and purity is an explanatory inference from these separate descriptions."
+    },
+    "pecvd": {
+      "statement": "Plasma creates reactive species for surface deposition and often permits lower wafer temperatures.",
+      "evidence": [
+        {
+          "source": 15,
+          "locator": "Opening definition and PECVD technology"
+        }
+      ],
+      "note": ""
+    },
+    "rf-frequency": {
+      "statement": "One documented RF equipment example is 13.56 MHz; other frequencies and combinations are used.",
+      "evidence": [
+        {
+          "source": 15,
+          "locator": "PECVD technology, first paragraph"
+        },
+        {
+          "source": 13,
+          "locator": "Top feature list; dual-frequency system description"
+        }
+      ],
+      "note": ""
+    },
+    "type-ap": {
+      "statement": "Atmospheric thermal CVD can give high throughput; flow/transport and unwanted gas-phase reactions affect uniformity.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF p. 3, APCVD comparison"
+        },
+        {
+          "source": 10,
+          "locator": "PDF pp. 10–12, transport, nucleation and APCVD"
+        }
+      ],
+      "note": ""
+    },
+    "type-lp": {
+      "statement": "Thermal LPCVD operates below atmospheric pressure and often provides uniform films at higher wafer temperatures.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF pp. 3–4, 7, 9"
+        }
+      ],
+      "note": ""
+    },
+    "type-pe": {
+      "statement": "The selected PECVD processes use reduced pressure and RF; plasma damage and film properties depend on conditions.",
+      "evidence": [
+        {
+          "source": 1,
+          "locator": "PECVD oxide recipe table"
+        },
+        {
+          "source": 8,
+          "locator": "300 mm wafer process conditions"
+        },
+        {
+          "source": 3,
+          "locator": "PDF p. 3, PECVD disadvantages"
+        },
+        {
+          "source": 13,
+          "locator": "PECVD feature list"
+        }
+      ],
+      "note": ""
+    },
+    "recipe-definition": {
+      "statement": "A recipe combines chemicals, pressure, temperature and activation; a precursor may give different films.",
+      "evidence": [
+        {
+          "source": 1,
+          "locator": "PECVD recipe table"
+        },
+        {
+          "source": 2,
+          "locator": "Equipment Details, service items"
+        },
+        {
+          "source": 9,
+          "locator": "Example reactions"
+        }
+      ],
+      "note": ""
+    },
+    "chem-silane-PECVD": {
+      "statement": "SiH4 + 2N2O -> SiO2 + 2N2 + 2H2",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions, silicon dioxide, second equation",
+          "supports": "Net equation."
+        },
+        {
+          "source": 11,
+          "locator": "Opening CCP precursor description",
+          "supports": "Silane/N₂O oxide feed pairing only; Stanford uses He dilution, not the Toronto N₂ recipe."
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-silane-LPCVD": {
+      "statement": "SiH4 -> Si + 2H2",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions, polysilicon"
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-silane-APCVD": {
+      "statement": "SiH4 + O2 -> SiO2 + 2H2",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions, silicon dioxide, first equation",
+          "supports": "Net equation."
+        },
+        {
+          "source": 4,
+          "locator": "A200V gas feed",
+          "supports": "Atmospheric SiH₄/O₂ oxide process pairing, not equation stoichiometry."
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-dcs-LPCVD": {
+      "statement": "3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2",
+      "evidence": [
+        {
+          "source": 21,
+          "locator": "p. 276, Eq. (1)",
+          "supports": "Balanced net equation (1)."
+        },
+        {
+          "source": 12,
+          "locator": "Overview and Gases",
+          "supports": "LPCVD nitride and DCS/NH₃ feed pairing only."
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-teos-LPCVD": {
+      "statement": "Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O",
+      "evidence": [
+        {
+          "source": 10,
+          "locator": "PDF p. 13, slide 26, thermal TEOS equation"
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-teos-PECVD": {
+      "statement": "TEOS and oxygen plasma form SiO2; the exhaust mixture is not specified stoichiometrically.",
+      "evidence": [
+        {
+          "source": 8,
+          "locator": "Detailed Description, TEOS/O₂/He process and silicon-oxide applications; 300 mm process-conditions paragraph",
+          "supports": "TEOS/O₂/He PECVD silicon oxide; no balanced exhaust equation is supplied."
+        }
+      ],
+      "note": "Qualitative species map; no gas ratio or balanced plasma equation is claimed."
+    },
+    "chem-sicl4-APCVD": {
+      "statement": "SiCl4 + 2H2 -> Si + 4HCl",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions, silicon, first equation",
+          "supports": "Net reduction equation."
+        },
+        {
+          "source": 5,
+          "locator": "Description, PDF pp. 2–3, background Tables I–II, SiCl₄/H₂ epitaxy rows",
+          "supports": "Conventional atmospheric epitaxy and SiCl₄/H₂ pairing."
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-wf6-LPCVD": {
+      "statement": "WF6 + 3H2 -> W + 6HF",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Example reactions, tungsten, H2 reduction",
+          "supports": "Net reduction equation."
+        },
+        {
+          "source": 6,
+          "locator": "Abstract, HF product and nucleation discussion",
+          "supports": "Experimental W deposition from H₂/WF₆ with observed HF; not a full elementary mechanism."
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "chem-ticl4-LPCVD": {
+      "statement": "6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl",
+      "evidence": [
+        {
+          "source": 7,
+          "locator": "Description, Background of the Invention, overall reaction"
+        }
+      ],
+      "note": "Idealised net stoichiometry; not an elementary pathway or a complete measured exhaust composition."
+    },
+    "conditions-silane-PECVD": {
+      "statement": "300 °C; 1.0 Torr; 5% SiH4 in N2 + N2O; 30 W.",
+      "evidence": [
+        {
+          "source": 1,
+          "locator": "PECVD oxide table, second SiO2 row"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-silane-LPCVD": {
+      "statement": "NYCU nominal poly-Si example: 620 °C, 300 mTorr, SiH4.",
+      "evidence": [
+        {
+          "source": 2,
+          "locator": "Service item (2), poly-Si entry"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-silane-APCVD": {
+      "statement": "A200V atmospheric SiH4/O2 example: 350–450 °C; 400 °C is the lab selection.",
+      "evidence": [
+        {
+          "source": 4,
+          "locator": "A200V BASIC INFORMATION"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-dcs-LPCVD": {
+      "statement": "NYCU nitride example: 800 °C, 120 mTorr, SiH2Cl2 and NH3.",
+      "evidence": [
+        {
+          "source": 2,
+          "locator": "Service item (3), nitride entry"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-teos-LPCVD": {
+      "statement": "NYCU thermal TEOS example: 700 °C, 120 mTorr, TEOS vapour.",
+      "evidence": [
+        {
+          "source": 2,
+          "locator": "Service item (4), TEOS entry"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-teos-PECVD": {
+      "statement": "Patent example for 300 mm equipment: TEOS/O2/He, 350–400 °C, 2–4 Torr, 2–3 kW.",
+      "evidence": [
+        {
+          "source": 8,
+          "locator": "Description, 300 mm wafer conditions after helium-flow discussion"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-sicl4-APCVD": {
+      "statement": "Conventional atmospheric SiCl4/H2 epitaxy: Table I gives 1150–1250 °C; Table II lists a 1200 °C example.",
+      "evidence": [
+        {
+          "source": 5,
+          "locator": "Description, PDF p. 2, atmospheric-pressure paragraph and Table I; PDF p. 3, Table II, SiCl₄/H₂ row"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-wf6-LPCVD": {
+      "statement": "NIST study: H2/WF6 at 0.5 Torr and 400–500 °C; 400 °C is the lab selection.",
+      "evidence": [
+        {
+          "source": 6,
+          "locator": "Abstract, experimental conditions"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "conditions-ticl4-LPCVD": {
+      "statement": "Patent primary TiN growth: about 150 mTorr, TiCl4/NH3/Ar, 450–650 °C; preferred wafer about 650 °C.",
+      "evidence": [
+        {
+          "source": 7,
+          "locator": "Description, preferred conditions and preferred embodiment"
+        }
+      ],
+      "note": "Source-specific conditions; no transferable or validated simulator recipe is implied."
+    },
+    "window-silane-LPCVD": {
+      "statement": "Independent lecture temperature range: 575–650 °C.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF p. 4"
+        }
+      ],
+      "note": "Combined with a separate NYCU nominal example for teaching; not a tool-qualified NYCU operating window."
+    },
+    "window-dcs-LPCVD": {
+      "statement": "Independent lecture temperature range: about 700–800 °C.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF p. 9"
+        }
+      ],
+      "note": "Combined with a separate NYCU nominal example for teaching; not a tool-qualified NYCU operating window."
+    },
+    "window-teos-LPCVD": {
+      "statement": "Independent lecture temperature range: 650–750 °C.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF p. 7"
+        }
+      ],
+      "note": "Combined with a separate NYCU nominal example for teaching; not a tool-qualified NYCU operating window."
+    },
+    "role-oxide": {
+      "statement": "Silicon dioxide provides electrical insulation between wiring layers.",
+      "evidence": [
+        {
+          "source": 18,
+          "locator": "Opening paragraph and Fig. 9.3(a)"
+        }
+      ],
+      "note": ""
+    },
+    "role-nitride": {
+      "statement": "Silicon nitride provides passivation and a moisture barrier in the cited application.",
+      "evidence": [
+        {
+          "source": 19,
+          "locator": "Topography Simulation, passivation discussion"
+        },
+        {
+          "source": 3,
+          "locator": "PDF p. 9, nitride encapsulation"
+        }
+      ],
+      "note": ""
+    },
+    "role-poly": {
+      "statement": "Polysilicon is a semiconductor; suitable doping/patterning permits gate and resistor applications.",
+      "evidence": [
+        {
+          "source": 20,
+          "locator": "First paragraph and doping discussion"
+        }
+      ],
+      "note": ""
+    },
+    "role-epi": {
+      "statement": "A silicon homoepitaxial layer follows the underlying crystal and can form a device layer.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "PDF pp. 14–15 and 19"
+        }
+      ],
+      "note": ""
+    },
+    "role-tungsten": {
+      "statement": "Tungsten contact/via fill provides an electrical connection to wiring.",
+      "evidence": [
+        {
+          "source": 18,
+          "locator": "Fig. 9.3(d)"
+        },
+        {
+          "source": 22,
+          "locator": "Opening contact-metal description"
+        }
+      ],
+      "note": ""
+    },
+    "role-tin": {
+      "statement": "TiN is used as a contact liner/diffusion barrier.",
+      "evidence": [
+        {
+          "source": 18,
+          "locator": "Opening barrier/adhesion description"
+        },
+        {
+          "source": 22,
+          "locator": "Opening TiN liner-barrier discussion"
+        }
+      ],
+      "note": ""
+    },
+    "part-reactor": {
+      "statement": "The schematic uses an enclosure, heated wafer support, gas feed and exhaust.",
+      "evidence": [
+        {
+          "source": 9,
+          "locator": "Chamber description and Operation"
+        },
+        {
+          "source": 10,
+          "locator": "PDF p. 13, slide 25"
+        }
+      ],
+      "note": ""
+    },
+    "part-flow": {
+      "statement": "A gas mass flow controller measures and controls gas feed.",
+      "evidence": [
+        {
+          "source": 23,
+          "locator": "Overview",
+          "supports": "Gas metering and control; vapour generation is a separate function."
+        }
+      ],
+      "note": ""
+    },
+    "part-vapour": {
+      "statement": "A source vessel and heated line can supply TEOS vapour.",
+      "evidence": [
+        {
+          "source": 26,
+          "locator": "1150C datasheet, PDF pp. 2–3, source materials and System Integration: heated source and delivery lines"
+        }
+      ],
+      "note": ""
+    },
+    "part-pressure": {
+      "statement": "A gauge senses pressure and a throttle valve varies conductance to the vacuum pump.",
+      "evidence": [
+        {
+          "source": 24,
+          "locator": "PDF p. 1, pressure-control sequence"
+        }
+      ],
+      "note": ""
+    },
+    "part-rf": {
+      "statement": "Generator and matching network deliver RF energy to a plasma.",
+      "evidence": [
+        {
+          "source": 25,
+          "locator": "RF power and matching-network paragraphs"
+        }
+      ],
+      "note": ""
+    },
+    "part-showerhead": {
+      "statement": "The depicted PECVD upper electrode distributes gas through a showerhead and receives RF.",
+      "evidence": [
+        {
+          "source": 13,
+          "locator": "PECVD feature list near page top"
+        }
+      ],
+      "note": ""
+    },
+    "part-furnace": {
+      "statement": "A batch LPCVD furnace can contain a reaction tube, spaced wafers, a boat, heaters and a pump.",
+      "evidence": [
+        {
+          "source": 10,
+          "locator": "PDF p. 13, slide 25"
+        },
+        {
+          "source": 2,
+          "locator": "Equipment description"
+        }
+      ],
+      "note": ""
+    },
+    "part-conveyor": {
+      "statement": "An inline APCVD design moves wafers beneath gas heads over a heater.",
+      "evidence": [
+        {
+          "source": 4,
+          "locator": "AMAX800V / AMAX1200 continuous-processing descriptions"
+        }
+      ],
+      "note": "Available architecture example only; no currently selected recipe uses the conveyor illustration."
+    },
+    "part-nucleation": {
+      "statement": "Bulk tungsten growth can use a prepared nucleation surface.",
+      "evidence": [
+        {
+          "source": 22,
+          "locator": "Opening contact-via/nucleation discussion"
+        },
+        {
+          "source": 6,
+          "locator": "Abstract, initial nucleation"
+        }
+      ],
+      "note": ""
+    },
+    "fab-prepare": {
+      "statement": "Wafer preparation cleans/prepares the substrate for patterning and fabrication.",
+      "evidence": [
+        {
+          "source": 1,
+          "locator": "Photolithography Wetbench: substrate cleaning, photoresist coating and processing"
+        }
+      ],
+      "note": ""
+    },
+    "fab-oxidation": {
+      "statement": "Thermal oxidation forms an oxide on a silicon surface.",
+      "evidence": [
+        {
+          "source": 10,
+          "locator": "PDF p. 15, slide 30, dry oxidation: Si + O₂ → SiO₂"
+        }
+      ],
+      "note": ""
+    },
+    "fab-lithography": {
+      "statement": "Photolithography exposes and develops photoresist to transfer a pattern.",
+      "evidence": [
+        {
+          "source": 27,
+          "locator": "§1.2.1"
+        }
+      ],
+      "note": ""
+    },
+    "fab-etch": {
+      "statement": "Etching removes selected wafer material through a patterned mask.",
+      "evidence": [
+        {
+          "source": 27,
+          "locator": "§1.2.2"
+        }
+      ],
+      "note": ""
+    },
+    "fab-doping": {
+      "statement": "Doping/implantation introduces impurities to alter semiconductor electrical properties.",
+      "evidence": [
+        {
+          "source": 27,
+          "locator": "§1.2.5"
+        }
+      ],
+      "note": ""
+    },
+    "fab-metal": {
+      "statement": "Patterned metal contacts and interconnects connect devices.",
+      "evidence": [
+        {
+          "source": 27,
+          "locator": "§1.2, device example"
+        },
+        {
+          "source": 18,
+          "locator": "Fig. 9.3, interconnect sequence"
+        }
+      ],
+      "note": ""
+    },
+    "fab-repeat": {
+      "statement": "Deposition, lithography and etching repeat across device and interconnect layers.",
+      "evidence": [
+        {
+          "source": 18,
+          "locator": "Fig. 9.3 and subsequent metal-level processing"
+        },
+        {
+          "source": 27,
+          "locator": "§1.2, Fig. 1.7"
+        }
+      ],
+      "note": "The seven displayed nodes are an illustrative overview, not a universal chronological fabrication sequence."
+    },
+    "mocvd-definition": {
+      "statement": "MOCVD uses metal-organic precursors for semiconductor epitaxy; the thermal GaN example uses TMGa and ammonia. MOVPE is an alternative name in epitaxial growth.",
+      "evidence": [
+        {
+          "source": 28,
+          "locator": "MOCVD technology overview, opening explanation",
+          "supports": "Thermal GaN growth and TMGa/NH₃ precursors."
+        },
+        {
+          "source": 29,
+          "locator": "§§3.1.1–3.1.2, pp. 45–46",
+          "supports": "MOVPE terminology and GaN net-chemistry context."
+        }
+      ],
+      "note": "This preset is thermal; MOCVD does not itself specify pressure or plasma activation."
+    },
+    "mocvd-classification": {
+      "statement": "AP/LP describe pressure, PE describes plasma assistance and MO describes precursor chemistry. The selected MOCVD example is also a reduced-pressure thermal process.",
+      "evidence": [
+        {
+          "source": 3,
+          "locator": "CVD methods comparison, pp. 2–3",
+          "supports": "Pressure and activation labels in the CVD comparison."
+        },
+        {
+          "source": 28,
+          "locator": "MOCVD technology overview, thermal decomposition explanation",
+          "supports": "Metal-organic precursor chemistry and thermal activation."
+        },
+        {
+          "source": 30,
+          "locator": "§2 and Table 1, T2 pressure 200 Torr",
+          "supports": "Reduced pressure (200 Torr) for this specific example."
+        }
+      ],
+      "note": "Classification is a teaching synthesis; the four selector labels are not mutually exclusive physical categories."
+    },
+    "chem-tmga-MOCVD": {
+      "statement": "Idealised GaN net growth: Ga(CH3)3 + NH3 → GaN + 3CH4; TMGa supplies Ga and ammonia supplies N.",
+      "evidence": [
+        {
+          "source": 29,
+          "locator": "§3.1.2, p. 46, Eq. (3.1) and surrounding discussion"
+        }
+      ],
+      "note": "Atom-balanced summary only. Molecular geometry, bond paths and exhaustive methane selectivity are not established by this equation."
+    },
+    "conditions-tmga-MOCVD": {
+      "statement": "Liang et al. sample T2 uses TMGa/NH3 at 1050 °C and 200 Torr for the final GaN layer.",
+      "evidence": [
+        {
+          "source": 30,
+          "locator": "p. 2, §2, TMGa/NH₃ sources; p. 3, Table 1, row T2"
+        }
+      ],
+      "note": "Fixed reported example. No continuous operating window, carrier selection or gas-flow ratio is inferred."
+    },
+    "role-gan": {
+      "statement": "GaN is a compound semiconductor used in LED heterostructures.",
+      "evidence": [
+        {
+          "source": 28,
+          "locator": "MOCVD technology overview, GaN and GaN/InGaN LED multilayer example"
+        }
+      ],
+      "note": "The illustrated GaN layer is not a complete LED or a prediction of light output."
+    },
+    "part-mocvd": {
+      "statement": "A close-coupled MOCVD architecture separates precursor streams, cools the showerhead and heats a rotating susceptor.",
+      "evidence": [
+        {
+          "source": 31,
+          "locator": "Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs"
+        }
+      ],
+      "note": "Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. Rotation is described, not mechanically simulated."
+    },
+    "part-mo-delivery": {
+      "statement": "Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control.",
+      "evidence": [
+        {
+          "source": 29,
+          "locator": "§§3.1.3–3.1.4, printed pp. 50–54, Figs. 3.5–3.6: MFCs, carrier gas, bubbler and bath"
+        }
+      ],
+      "note": "No bubbler temperature, delivery flow or source-consumption calculation is modelled."
+    },
+    "gan-substrate": {
+      "statement": "The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire.",
+      "evidence": [
+        {
+          "source": 30,
+          "locator": "p. 2, §2 and Fig. 1, sapphire/buffer/template/final-layer stack"
+        }
+      ],
+      "note": "Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic."
+    }
+  },
+  "model_choices": [
+    "Camera geometry, colours, atom sizes, bonds, lattice positions and trajectories are schematic design choices.",
+    "Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.",
+    "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.",
+    "Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.",
+    "Temperature exploration does not calculate a deposition rate or validate the chosen tool conditions.",
+    "Pausing PECVD when RF is off is a teaching control, not a physical prediction of residual growth.",
+    "Reactor drawings and load/purge/cool/vent stages do not reproduce a source tool or provide an operating procedure.",
+    "The MOCVD view combines one cited GaN final-layer setpoint with a separately sourced showerhead architecture. The prepared buffer/template is already present; delivery, crystal geometry and layer thickness are schematic."
+  ]
+}
+  </script>
+  <script>
+    (() => {
+      const root=document.getElementById('cvd-recipe-accuracy');
+      const data=JSON.parse(document.getElementById('cv-evidence-data').textContent);
+      const sources=new Map(data.sources.map(source=>[source.id,source]));
+      let returnTarget=null;
+      function cite(element,keys) {
+        if(!element)return;
+        const ids=(Array.isArray(keys)?keys:String(keys).split(/\s+/)).filter(Boolean);
+        element.dataset.cite=ids.join(' ');
+        element.querySelectorAll(':scope > .cv-citations').forEach(marker=>marker.remove());
+        const references=new Map();
+        for(const key of ids) {
+          const claim=data.claims[key];
+          if(!claim)throw new Error('Unknown evidence claim: '+key);
+          for(const item of claim.evidence) {
+            if(!sources.has(item.source))throw new Error('Unknown reference: '+item.source);
+            const locations=references.get(item.source)||[];
+            const detail=item.locator+(item.supports?' — Supports: '+item.supports:'');
+            if(!locations.includes(detail))locations.push(detail);
+            references.set(item.source,locations);
+          }
+        }
+        const marker=document.createElement('sup');marker.className='cv-citations';
+        marker.dataset.evidenceFor=ids.join(' ');
+        for(const [id,locations] of [...references].sort((a,b)=>a[0]-b[0])) {
+          const source=sources.get(id),link=document.createElement('a');
+          link.href='#cv-ref-'+id;link.className='cv-cite-link';link.dataset.reference=String(id);
+          link.textContent='['+id+']';
+          link.title=source.author+' — '+source.title+' ('+source.year+'). '+locations.join('; ');
+          link.setAttribute('aria-label','Reference '+id+': '+source.title+'. '+locations.join('; '));
+          marker.append(link);
+        }
+        element.append(marker);
+      }
+      function paragraph(className,text) {
+        const node=document.createElement('span');node.className=className;node.textContent=text;return node;
+      }
+      const list=root.querySelector('#cv-reference-list');
+      for(const source of data.sources) {
+        const item=document.createElement('li');item.id='cv-ref-'+source.id;item.value=source.id;item.tabIndex=-1;
+        const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=source.title;
+        item.append(document.createTextNode(source.author+'. '),link,document.createTextNode(' ('+source.year+').'));
+        const meta=paragraph('cv-ref-meta','');
+        meta.append(paragraph('cv-ref-type',source.kind),document.createTextNode(source.locator+' · Accessed '+source.accessed));
+        item.append(meta,paragraph('cv-ref-use','Supports: '+source.scope),paragraph('cv-ref-use','Scope: '+source.limits));
+        item.append(paragraph('cv-ref-meta','Verification: '+source.verification.method+'. '+source.verification.note));
+        if(source.alternate) {
+          const alternate=document.createElement('a');alternate.href=source.alternate;alternate.target='_blank';alternate.rel='noopener noreferrer';alternate.textContent=source.alternate_label;alternate.className='cv-reference-back';item.append(alternate,document.createTextNode(' · '));
+        }
+        if(source.verification.url!==source.url&&source.verification.url!==source.alternate) {
+          const checked=document.createElement('a');checked.href=source.verification.url;checked.target='_blank';checked.rel='noopener noreferrer';checked.textContent='Reviewed full text';checked.className='cv-reference-back';item.append(checked,document.createTextNode(' · '));
+        }
+        const back=document.createElement('a');back.href='#cv-studio';back.className='cv-reference-back';back.dataset.evidenceBack='true';back.textContent='Return to claim';item.append(back);
+        list.append(item);
+      }
+      root.querySelector('#cv-references-summary').textContent='References · '+sources.size+' sources · reviewed 23 October 2026';
+      const choices=root.querySelector('#cv-model-choices');
+      for(const text of data.model_choices){const item=document.createElement('li');item.textContent=text;choices.append(item);}
+      root.querySelectorAll('[data-cite]').forEach(element=>cite(element,element.dataset.cite));
+      function reveal(target) {
+        let node=target;
+        while(node&&node!==root){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}
+        target.scrollIntoView({block:'start',behavior:'instant'});
+        if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');
+        target.focus({preventScroll:true});
+      }
+      root.addEventListener('click',event=>{
+        const link=event.target.closest('a.cv-cite-link, a[data-evidence-back]');
+        if(!link||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+        event.preventDefault();
+        if(link.dataset.evidenceBack){reveal(returnTarget?.isConnected?returnTarget:root.querySelector('#cv-studio'));return;}
+        returnTarget=link;
+        const target=root.querySelector(link.hash);
+        if(target){
+          reveal(target);
+          // A Streamlit srcdoc iframe may forbid rewriting its history URL.
+          // Opening and focusing the evidence must still work in that context.
+          try{const url=new URL(location.href);url.hash=link.hash;history.replaceState(null,'',url.href);}catch{}
+        }
+      });
+      function revealHash(){if(/^#cv-ref-\d+$/.test(location.hash)){const target=root.querySelector(location.hash);if(target)reveal(target);}}
+      window.addEventListener('hashchange',revealHash);
+      window.CVDEvidence={cite,claims:data.claims,sources};
+      revealHash();
+    })();
+  </script>
   <script>
     (() => {
       const root=document.getElementById('cvd-recipe-accuracy'),canvas=root.querySelector('#cv-canvas'),ctx=canvas.getContext('2d'),viewport=root.querySelector('.cv-viewport');
       const state={process:'PECVD',precursor:'silane',stage:'deposit',component:'wafer',yaw:.64,pitch:.31,zoom:1,growth:0,temperature:300,rfOn:true,running:false};
       const precursors={
         silane:{name:'Silane',formula:'SiH₄',phase:'gas',presets:{
-          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂ + N₂',chamber:'single',effect:'SiO₂ forms an insulating layer; hydrogen and nitrogen leave through the exhaust.',equation:'SiH4 + 2N2O -> SiO2 + 2N2 + 2H2',source:'https://snfguide.stanford.edu/guide/materials/silicon-dioxide?qt-materials=2'},
+          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂ + N₂',chamber:'single',effect:'The idealised net reaction forms SiO₂, with H₂ and N₂ as by-products.',equation:'SiH4 + 2N2O -> SiO2 + 2N2 + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'},
           LPCVD:{film:'Poly-Si',material:'poly',property:'Semiconductor',byproducts:'H₂',chamber:'batch',effect:'Silane decomposes to silicon. This thermal preset forms polysilicon and releases hydrogen.',equation:'SiH4 -> Si + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'},
           APCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'H₂',chamber:'single',effect:'Silane reacts with oxygen to form an insulating SiO₂ film on the heated wafer.',equation:'SiH4 + O2 -> SiO2 + 2H2',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
         }},
         dcs:{name:'Dichlorosilane',formula:'SiH₂Cl₂',phase:'gas',presets:{
-          LPCVD:{film:'Si₃N₄',material:'nitride',property:'Insulator / barrier',byproducts:'HCl + H₂',chamber:'batch',effect:'Dichlorosilane and ammonia form a silicon-nitride barrier layer; HCl and hydrogen leave in the exhaust.',equation:'3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2',source:'https://snfguide.stanford.edu/guide/equipment/tystar-bank-2-tube-7-nitride-b2t7-flexible-nitride'}
+          LPCVD:{film:'Si₃N₄',material:'nitride',property:'Insulator / barrier',byproducts:'HCl + H₂',chamber:'batch',effect:'The stoichiometric net reaction forms silicon nitride, HCl and H₂.',equation:'3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2',source:'https://doi.org/10.1016/0040-6090(90)90456-N'}
         }},
         teos:{name:'TEOS',formula:'Si(OC₂H₅)₄',phase:'liquid',presets:{
           LPCVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'C₂H₄ + H₂O (idealised)',chamber:'batch',effect:'Liquid TEOS is vaporised before delivery. Thermal decomposition forms SiO₂ and organic gaseous by-products.',equation:'Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O',source:'https://www.ee.nthu.edu.tw/sclu/microfabrication.pdf'},
-          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'Oxidised organic gases',chamber:'single',effect:'Oxygen plasma activates the TEOS feed to form an insulating oxide at a lower wafer temperature.',equation:'TEOS + oxygen plasma -> SiO2 + oxidised organic by-products',source:'https://plasma.oxinst.com/technologies/pecvd'}
+          PECVD:{film:'SiO₂',material:'oxide',property:'Electrical insulator',byproducts:'Variable C/H/O-containing exhaust',chamber:'single',effect:'The cited TEOS/O₂/He PECVD process forms SiO₂; its exhaust is represented qualitatively.',equation:'TEOS + oxygen plasma -> SiO2 + variable C/H/O products',source:'https://patents.google.com/patent/US7923376B1/en'}
         }},
         sicl4:{name:'Silicon tetrachloride',formula:'SiCl₄',phase:'liquid',presets:{
-          APCVD:{film:'Epitaxial Si',material:'epi',property:'Semiconductor',byproducts:'HCl',chamber:'single',effect:'On a prepared crystalline silicon surface, hydrogen reduction deposits epitaxial silicon; HCl exits in the exhaust.',equation:'SiCl4 + 2H2 -> Si + 4HCl',source:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf'}
+          APCVD:{film:'Epitaxial Si',material:'epi',property:'Semiconductor',byproducts:'HCl',chamber:'single',effect:'On a prepared crystalline silicon surface, hydrogen reduction deposits epitaxial silicon; HCl exits in the exhaust.',equation:'SiCl4 + 2H2 -> Si + 4HCl',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
         }},
         wf6:{name:'Tungsten hexafluoride',formula:'WF₆',phase:'gas',presets:{
           LPCVD:{film:'W',material:'tungsten',property:'Metal conductor',byproducts:'HF',chamber:'single',effect:'Hydrogen reduces WF₆ to conductive tungsten on a nucleated surface. HF is the reaction by-product.',equation:'WF6 + 3H2 -> W + 6HF',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/Lecture11.html'}
         }},
         ticl4:{name:'Titanium tetrachloride',formula:'TiCl₄',phase:'liquid',presets:{
-          LPCVD:{film:'TiN',material:'tin',property:'Conductive diffusion barrier',byproducts:'HCl + N₂',chamber:'single',effect:'Titanium tetrachloride and ammonia form a conductive TiN barrier coating; HCl and nitrogen leave in the exhaust.',equation:'6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl',source:'https://patents.google.com/patent/US5348587A/en'}
+          LPCVD:{film:'TiN',material:'tin',property:'Diffusion barrier',byproducts:'HCl + N₂',chamber:'single',effect:'The idealised TiCl₄/NH₃ net reaction forms TiN, with HCl and N₂ as by-products.',equation:'6TiCl4 + 8NH3 -> 6TiN + N2 + 24HCl',source:'https://patents.google.com/patent/US5348587A/en'}
+        }},
+        tmga:{name:'Trimethylgallium (TMGa)',formula:'Ga(CH₃)₃',phase:'liquid',presets:{
+          MOCVD:{film:'GaN',material:'gan',property:'Compound semiconductor',byproducts:'CH₄ (idealised)',chamber:'single',effect:'TMGa and ammonia supply Ga and N for thermal GaN growth on a prepared template. The net equation simplifies the chemistry.',equation:'Ga(CH3)3 + NH3 -> GaN + 3CH4',source:'https://etheses.whiterose.ac.uk/id/eprint/32396/1/MOCVD%20Growth%20and%20characterisation%20of%20III-nitride%20semiconductor%20materials%20for%20monolithically%20integrated%20optoelectronics.pdf'}
         }}
       };
       const furnaceSource='https://scholar.nycu.edu.tw/en/equipments/low-pressure-chemical-vapor-deposition-system-lpcvd/';
@@ -628,32 +2197,49 @@
       const operatingConditions={
         silane:{
           PECVD:{temp:300,tempRange:[300,300],pressure:'1.0 Torr (1000 mTorr)',feed:'5% SiH₄ in N₂ + N₂O',rfReference:'30 W',setupName:'University of Toronto · SiO₂ PECVD example',setupSource:'https://www.ece.utoronto.ca/equipmentcapabilities/',deliveryNote:'Nitrogen diluent is omitted from the net reaction.'},
-          LPCVD:{temp:620,tempRange:[575,650],pressure:'0.300 Torr (300 mTorr)',feed:'SiH₄',setupName:'NYCU · polysilicon LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'The polysilicon temperature window is shown; lower-temperature amorphous silicon is a different recipe.'},
-          APCVD:{temp:400,tempRange:[350,450],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiH₄ + O₂',chamber:'single',effect:'Silane reacts with oxygen to deposit an insulating SiO₂ film on the heated wafer.',setupName:'M. Watanabe · SiH₄/O₂ APCVD operating window',setupSource:'https://www.m-watanabe.co.jp/en/product/apcvd/',deliveryNote:'400 °C is a teaching setpoint within the published 350–450 °C window.'}
+          LPCVD:{temp:620,tempRange:[575,650],pressure:'0.300 Torr (300 mTorr)',feed:'SiH₄',setupName:'NYCU · polysilicon LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'620 °C is the NYCU example. The wider lecture range is for teaching, not a qualified NYCU operating window.'},
+          APCVD:{temp:400,tempRange:[350,450],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiH₄ + O₂',chamber:'single',effect:'Silane reacts with oxygen to deposit an insulating SiO₂ film on the heated wafer.',setupName:'M. Watanabe · SiH₄/O₂ APCVD operating window',setupSource:'https://www.m-watanabe.co.jp/en/product/apcvd/',deliveryNote:'400 °C is a teaching selection within the A200V manufacturer range; chamber geometry is illustrative.'}
         },
-        dcs:{LPCVD:{temp:800,tempRange:[700,800],pressure:'0.120 Torr (120 mTorr)',feed:'SiH₂Cl₂ + NH₃',setupName:'NYCU · silicon nitride LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'Gas ratio also controls nitride composition and film stress.'}},
+        dcs:{LPCVD:{temp:800,tempRange:[700,800],pressure:'0.120 Torr (120 mTorr)',feed:'SiH₂Cl₂ + NH₃',setupName:'NYCU · silicon nitride LPCVD example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'800 °C is the NYCU example; the independent lecture range is not a qualified operating window for that tool.'}},
         teos:{
-          LPCVD:{temp:700,tempRange:[650,750],pressure:'0.120 Torr (120 mTorr)',feed:'TEOS vapour',setupName:'NYCU · thermal TEOS oxide example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'Liquid TEOS is vaporised; inert delivery gas, when used, is omitted from the net reaction.'},
-          PECVD:{temp:350,tempRange:[350,400],pressure:'2–4 Torr (published window)',feed:'TEOS vapour + O₂ + He',rfReference:'2–3 kW (source equipment)',setupName:'US7923376B1 · TEOS/O₂/He PECVD window',setupSource:'https://patents.google.com/patent/US7923376B1/en',deliveryNote:'Helium is a diluent. Oxygen feed and organic exhaust composition depend on the plasma recipe.'}
+          LPCVD:{temp:700,tempRange:[650,750],pressure:'0.120 Torr (120 mTorr)',feed:'TEOS vapour',setupName:'NYCU · thermal TEOS oxide example',setupSource:furnaceSource,windowSource:lectureSource,deliveryNote:'700 °C is the NYCU example. The wider lecture range is for teaching; the net equation is idealised.'},
+          PECVD:{temp:350,tempRange:[350,400],pressure:'2–4 Torr (published window)',feed:'TEOS vapour + O₂ + He',rfReference:'2–3 kW (source equipment)',setupName:'US7923376B1 · TEOS/O₂/He PECVD window',setupSource:'https://patents.google.com/patent/US7923376B1/en',deliveryNote:'Patent ranges refer to the described 300 mm equipment; 350 °C is the selected endpoint. Gas ratios and exhaust chemistry are not calculated.'}
         },
-        sicl4:{APCVD:{temp:1200,tempRange:[1150,1250],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiCl₄ vapour in H₂',setupName:'EP0114876B1 · atmospheric silicon epitaxy',setupSource:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf',deliveryNote:'Requires a prepared crystalline Si surface; hydrogen is both carrier and reducing reactant.'}},
-        wf6:{LPCVD:{temp:400,tempRange:[400,500],pressure:'0.500 Torr (500 mTorr)',feed:'WF₆ + H₂',setupName:'NIST · low-pressure W CVD study',setupSource:'https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor',deliveryNote:'The sourced temperature window is 400–500 °C. Bulk growth is shown on a prepared nucleation surface.'}},
-        ticl4:{LPCVD:{temp:650,tempRange:[450,650],pressure:'0.150 Torr (150 mTorr)',feed:'TiCl₄ vapour + NH₃ + Ar',setupName:'US5348587A · thermal TiN growth example',setupSource:'https://patents.google.com/patent/US5348587A/en',deliveryNote:'Argon is a carrier. This preset uses thermal surface chemistry.'}}
+        sicl4:{APCVD:{temp:1200,tempRange:[1150,1250],pressure:'Atmospheric · ≈1 atm (760 Torr)',feed:'SiCl₄ vapour in H₂',setupName:'EP0114876B1 · background Tables I–II, SiCl₄/H₂',setupSource:'https://data.epo.org/publication-server/rest/v1.2/patents/EP0114876NWB1/document.pdf',deliveryNote:'1200 °C is the conventional SiCl₄/H₂ example in background Table II; the slider uses the Table I range. These are not results of the patent’s bromosilane invention.'}},
+        wf6:{LPCVD:{temp:400,tempRange:[400,500],pressure:'0.500 Torr (500 mTorr)',feed:'WF₆ + H₂',setupName:'NIST · low-pressure W CVD study',setupSource:'https://www.nist.gov/publications/process-diagnostics-and-thickness-metrology-using-situ-mass-spectrometry-chemical-vapor',deliveryNote:'400 °C selects the low endpoint of the study’s 400–500 °C range. The drawing illustrates bulk growth, not initial nucleation.'}},
+        ticl4:{LPCVD:{temp:650,tempRange:[450,650],pressure:'0.150 Torr (150 mTorr)',feed:'TiCl₄ vapour + NH₃ + Ar',setupName:'US5348587A · thermal TiN growth example',setupSource:'https://patents.google.com/patent/US5348587A/en',deliveryNote:'650 °C is the preferred wafer example. The patent’s secondary wall-heating plasma is omitted; the primary growth reaction is illustrated thermally.'}},
+        tmga:{MOCVD:{temp:1050,tempRange:[1050,1050],pressure:'200 Torr (reduced pressure)',feed:'TMGa vapour + NH₃',setupName:'Liang et al. (2018) · sample T2, Table 1',setupSource:'https://doi.org/10.3390/nano8090744',deliveryNote:'Final GaN layer on a prepared buffer/template on sapphire. One published setpoint is shown; no operating window or gas-flow ratio is inferred. The separate showerhead drawing is representative, not a reconstruction of the study’s reactor.'}}
       };
+      // Source provenance is separate for nominal conditions, broader lecture
+      // ranges, net chemistry and film application. It follows the selected recipe.
+      const recipeEvidence={
+        'silane-PECVD':{conditions:'conditions-silane-PECVD',window:'conditions-silane-PECVD',chemistry:'chem-silane-PECVD',role:'role-oxide'},
+        'silane-LPCVD':{conditions:'conditions-silane-LPCVD',window:'window-silane-LPCVD',chemistry:'chem-silane-LPCVD',role:'role-poly'},
+        'silane-APCVD':{conditions:'conditions-silane-APCVD',window:'conditions-silane-APCVD',chemistry:'chem-silane-APCVD',role:'role-oxide'},
+        'dcs-LPCVD':{conditions:'conditions-dcs-LPCVD',window:'window-dcs-LPCVD',chemistry:'chem-dcs-LPCVD',role:'role-nitride'},
+        'teos-LPCVD':{conditions:'conditions-teos-LPCVD',window:'window-teos-LPCVD',chemistry:'chem-teos-LPCVD',role:'role-oxide'},
+        'teos-PECVD':{conditions:'conditions-teos-PECVD',window:'conditions-teos-PECVD',chemistry:'chem-teos-PECVD',role:'role-oxide'},
+        'sicl4-APCVD':{conditions:'conditions-sicl4-APCVD',window:'conditions-sicl4-APCVD',chemistry:'chem-sicl4-APCVD',role:'role-epi'},
+        'wf6-LPCVD':{conditions:'conditions-wf6-LPCVD',window:'conditions-wf6-LPCVD',chemistry:'chem-wf6-LPCVD',role:'role-tungsten'},
+        'ticl4-LPCVD':{conditions:'conditions-ticl4-LPCVD',window:'conditions-ticl4-LPCVD',chemistry:'chem-ticl4-LPCVD',role:'role-tin'},
+        'tmga-MOCVD':{conditions:'conditions-tmga-MOCVD',window:'conditions-tmga-MOCVD',chemistry:'chem-tmga-MOCVD',role:'role-gan'}
+      };
+      for(const [precursor,modes] of Object.entries(operatingConditions))for(const [process,conditions] of Object.entries(modes))conditions.evidence=recipeEvidence[precursor+'-'+process];
       // Chemistry and operating conditions resolve through one selected recipe.
       for(const [precursor,modes] of Object.entries(operatingConditions))for(const [process,conditions] of Object.entries(modes))Object.assign(precursors[precursor].presets[process],conditions);
       const recipe=()=>precursors[state.precursor].presets[state.process];
       const depositRoles={
-        oxide:{role:'Electrical insulator',use:'Separates metal wiring layers and prevents unintended current flow.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'},
-        nitride:{role:'Protective insulator and barrier',use:'Protects the chip from moisture; also masks selected areas during oxidation.',source:'https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html'},
+        oxide:{role:'Electrical insulator',use:'Provides electrical insulation between metal wiring layers.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'},
+        nitride:{role:'Protective insulator and barrier',use:'Used for passivation and as a moisture barrier in the cited application.',source:'https://www.iue.tuwien.ac.at/personal/jb2006/content/staff/Sheikholeslami.html'},
         poly:{role:'Semiconductor layer',use:'Contains many silicon crystal grains. With suitable doping and patterning, forms gate electrodes and resistors.',source:'https://archive.nptel.ac.in/content/storage2/courses/117103066/chap3/slides/slide103.htm'},
-        epi:{role:'Crystalline device layer',use:'A single-crystal silicon layer that follows the wafer’s crystal orientation and supports building semiconductor devices.',source:'https://www.appliedmaterials.com/us/en/semiconductor/products/processes/epitaxy.html'},
+        epi:{role:'Crystalline device layer',use:'A single-crystal silicon layer that follows the wafer’s crystal orientation and supports building semiconductor devices.',source:lectureSource},
         tungsten:{role:'Electrical conductor',use:'Used in contact and via plugs to connect devices with metal wiring.',source:'https://www.appliedmaterials.com/us/en/blog/blog-posts/introducing-a-breakthrough-in-2d-scaling.html'},
-        tin:{role:'Conductive diffusion barrier',use:'Lines contacts beneath metal, limiting interdiffusion and protecting underlying layers.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'}
+        tin:{role:'Diffusion barrier / liner',use:'Used as a contact liner and diffusion barrier beneath fill metal.',source:'https://archive.nptel.ac.in/content/storage2/courses/103106075/Courses/9_2.html'},
+        gan:{role:'Compound-semiconductor layer',use:'GaN layers are used in LED heterostructures; this view illustrates GaN growth, not a complete LED.',source:'https://www.aixtron.com/en/innovation/technologies/mocvd'}
       };
       const depositRole=()=>depositRoles[recipe().material];
       const reactionCanvas=root.querySelector('#cv-reaction-canvas'),reactionCtx=reactionCanvas.getContext('2d'),reactionViewport=root.querySelector('.cv-molecules');
-      const atomNames={H:'hydrogen',Si:'silicon',O:'oxygen',N:'nitrogen',Cl:'chlorine',F:'fluorine',C:'carbon',W:'tungsten',Ti:'titanium'};
+      const atomNames={H:'hydrogen',Si:'silicon',O:'oxygen',N:'nitrogen',Cl:'chlorine',F:'fluorine',C:'carbon',W:'tungsten',Ti:'titanium',Ga:'gallium'};
       const subscript=value=>value.replace(/\d/g,digit=>'₀₁₂₃₄₅₆₇₈₉'[Number(digit)]);
       const clamp=(value,min=0,max=1)=>Math.max(min,Math.min(max,value));
       const smooth=value=>{const t=clamp(value);return t*t*(3-2*t);};
@@ -687,9 +2273,17 @@
         const norm=p=>{const length=Math.hypot(...p);return p.map(v=>v/length);};
         const scale=(p,s)=>p.map(v=>v*s),plus=(a,b)=>a.map((v,i)=>v+b[i]);
         const tetra=[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]].map(norm);
-        if(['SiH4','SiH2Cl2','SiCl4','TiCl4'].includes(formula)){
-          const core=formula.startsWith('Ti')?'Ti':'Si',ligands=formula==='SiH4'?['H','H','H','H']:formula==='SiH2Cl2'?['H','H','Cl','Cl']:['Cl','Cl','Cl','Cl'];
+        if(['SiH4','SiH2Cl2','SiCl4','TiCl4','CH4'].includes(formula)){
+          const core=formula==='CH4'?'C':formula.startsWith('Ti')?'Ti':'Si',ligands=['SiH4','CH4'].includes(formula)?['H','H','H','H']:formula==='SiH2Cl2'?['H','H','Cl','Cl']:['Cl','Cl','Cl','Cl'];
           add(core,[0,0,0]);ligands.forEach((symbol,i)=>link(0,add(symbol,scale(tetra[i],1.25))));
+        }else if(formula==='Ga(CH3)3'){
+          // Monomer teaching geometry, with an explicit nine-hydrogen atom pool.
+          add('Ga',[0,0,0]);
+          for(let i=0;i<3;i++){
+            const angle=i*2*Math.PI/3-Math.PI/2,direction=[Math.cos(angle),Math.sin(angle),0],side=[-direction[1],direction[0],0],cp=scale(direction,1.45),carbon=add('C',cp);
+            link(0,carbon);
+            for(let j=0;j<3;j++){const a=j*2*Math.PI/3;link(carbon,add('H',plus(cp,plus(scale(direction,.45),plus(scale(side,.65*Math.cos(a)),[0,0,.65*Math.sin(a)])))));}
+          }
         }else if(formula==='WF6'){
           add('W',[0,0,0]);[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].forEach(p=>link(0,add('F',scale(p,1.3))));
         }else if(formula==='Si(OC2H5)4'){
@@ -759,7 +2353,7 @@
           // unbonded fragment pool instead of inventing exact product molecules.
           const columns=Math.min(8,Math.ceil(Math.sqrt(remaining.length*1.8))),spacing=Math.min(27,(w-38)/columns),rows=Math.ceil(remaining.length/columns);
           remaining.forEach((id,i)=>{atoms[id].target={symbol:atoms[id].symbol,x:w/2+((i%columns)-(columns-1)/2)*spacing,y:64+Math.floor(i/columns)*32,z:0,r:atoms[id].symbol==='H'?4.2:8,solid:false};});
-          output.labels=[{text:'C / H / O fragment pool',x:w/2,y:31}];
+          output.labels=[{text:'Illustrative C / H / O fragments',x:w/2,y:31}];
         }else if(remaining.length)throw new Error('Unassigned atoms in '+recipe().equation);
         reactionScene={spec,atoms,inputBonds:input.bonds,productBonds,inputLabels:input.labels,productLabels:output.labels,solidIds,w,h};
         return reactionScene;
@@ -780,13 +2374,17 @@
         root.querySelector('#cv-role-source').setAttribute('href',deposited.source);
         const term=(text)=>{const span=document.createElement('span');span.textContent=text;equation.appendChild(span);};
         const speciesText=species=>(species.count>1?species.count+' ':'')+subscript(species.formula);
-        spec.inputs.forEach((species,i)=>{if(i)term('+');term(speciesText(species));});term('→');term(speciesText(spec.solid)+' (solid)');
-        if(spec.qualitative){term('+');term('organic gas mixture');}
-        else spec.outputs.forEach(species=>{term('+');term(speciesText(species)+' (gas)');});
+        if(spec.qualitative){
+          term('TEOS vapour + oxygen plasma');term('→');term('SiO₂ (solid) + variable C/H/O products');
+        }else{
+          spec.inputs.forEach((species,i)=>{if(i)term('+');term(speciesText(species)+' (gas)');});term('→');term(speciesText(spec.solid)+' (solid)');
+          spec.outputs.forEach(species=>{term('+');term(speciesText(species)+' (gas)');});
+        }
+        root.querySelector('#cv-chemistry-note').textContent=spec.qualitative?'Qualitative species map: molecule counts are illustrative, not gas ratios or a balanced equation.':'Idealised net stoichiometry, not an elementary pathway or a complete exhaust analysis.';
         const legend=root.querySelector('#cv-atoms');legend.replaceChildren();
         const elements=[...new Set(spec.inputs.flatMap(species=>formulaAtoms(species.formula)))];
         for(const element of elements){const span=document.createElement('span'),dot=document.createElement('i');dot.style.setProperty('--atom-color','var(--cv-atom-'+element+')');dot.setAttribute('aria-hidden','true');span.appendChild(dot);const label=document.createElement('span');label.textContent=element+' '+atomNames[element];span.appendChild(label);legend.appendChild(span);}
-        root.querySelector('#cv-model-note').textContent=spec.qualitative?'Species schematic · oxygen and organic exhaust vary · playback speed is not a deposition rate':'Net reaction schematic · enlarged atoms and film · playback speed is not a deposition rate';
+        root.querySelector('#cv-model-note').textContent=spec.qualitative?'Qualitative species map · molecule counts are not gas ratios · thickness and playback are schematic':'Net stoichiometry only · bond paths, lattice, thickness and playback are schematic';
       }
       function ball(context,atom,opacity=1,labels=true){
         const color='atom-'+atom.symbol,r=atom.r;context.globalAlpha=opacity;
@@ -831,19 +2429,20 @@
         const inputOpacity=1-smooth((g-.27)/.21),productOpacity=smooth((g-.56)/.19);
         c.globalAlpha=inputOpacity;scene.inputLabels.forEach(label=>c.fillText(label.text,label.x,label.y));
         c.globalAlpha=productOpacity;scene.productLabels.forEach(label=>c.fillText(label.text,label.x,label.y));c.globalAlpha=1;
-        c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'Organic fragments · mixture varies':'Gaseous by-products',8,13);
+        c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'C/H/O fragments · mixture varies':'Gaseous by-products',8,13);
         c.textAlign='center';c.fillText('Wafer surface · '+recipe().film+(g<.5?' growth sites':' solid'),w/2,h-5);
         const phase=reactionPhase(),phaseElement=root.querySelector('#cv-reaction-phase');if(phaseElement.textContent!==phase)phaseElement.textContent=phase;
-        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'TEOS and oxygen plasma form a silicon dioxide solid. Organic C, H and O fragments represent a variable exhaust mixture.':recipe().equation+'. All reactant atoms are tracked into the solid film or gas molecules.'));
+        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'Qualitative TEOS PECVD species map. Displayed molecule counts and C, H and O fragments are illustrative, not reaction coefficients or measured exhaust species.':recipe().equation+'. All reactant atoms are tracked into the solid film or gas molecules.'));
       }
       function drawChamberMolecules(project){
         if(state.stage!=='deposit')return;
         const spec=reactionSpec(),model=molecule(spec.inputs[0].formula),progress=clamp(state.growth/.65);
         let center;
-        if(recipe().chamber==='single')center=[-.18,3.02-progress*.56,.55];
+        if(state.process==='MOCVD')center=[-.18,2.65-progress*.19,.55];
+        else if(recipe().chamber==='single')center=[-.18,3.02-progress*.56,.55];
         else if(recipe().chamber==='batch')center=[-.5+progress*.6,3.4-progress*.2,.92];
         else center=[0,2.77-progress*.55,.48];
-        const atomScale=state.precursor==='teos'?.085:.14;
+        const atomScale=state.precursor==='teos'?.085:state.precursor==='tmga'?.1:.14;
         const points=model.atoms.map(atom=>{const p=project([center[0]+atom.q[0]*atomScale,center[1]-atom.q[1]*atomScale,center[2]+atom.q[2]*atomScale]);return {...p,symbol:atom.symbol,r:atom.symbol==='H'?2:3.6};});
         const opacity=1-smooth((state.growth-.24)/.34);
         for(const bond of model.bonds)molecularBond(ctx,points[bond.a],points[bond.b],1,opacity*.75);
@@ -901,8 +2500,8 @@
         state.temperature=clamp(Number(state.temperature),slider.min,slider.max);slider.value=state.temperature;
         slider.hidden=slider.disabled=slider.min===slider.max;
         root.querySelector('#cv-rf-on').disabled=state.process!=='PECVD';
-        const available=['APCVD','LPCVD','PECVD'].filter(process=>precursors[state.precursor].presets[process]);
-        root.querySelector('#cv-preset-note').textContent='Reference recipes: '+available.join(' · ');
+        const available=['APCVD','LPCVD','PECVD','MOCVD'].filter(process=>precursors[state.precursor].presets[process]);
+        root.querySelector('#cv-preset-note').textContent='Reference recipes: '+available.join(' · ')+(state.process==='MOCVD'?' · GaN on a prepared template':' · Choose TMGa for GaN / MOCVD.');
         root.querySelectorAll('[data-process]').forEach(button=>{button.disabled=!precursors[state.precursor].presets[button.dataset.process];button.setAttribute('aria-pressed',String(button.dataset.process===state.process));});
       }
       function addFilm(){
@@ -914,10 +2513,24 @@
       }
       const V={add:(a,b)=>a.map((v,i)=>v+b[i]),sub:(a,b)=>a.map((v,i)=>v-b[i]),scale:(a,k)=>a.map(v=>v*k),dot:(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0),cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]};V.norm=a=>V.scale(a,1/(Math.hypot(...a)||1));
       let faces=[],lines=[],labels=[],projected=[],palette={},width=800,height=400,eye;
-      const descriptions={gas:'Gas delivery · flow controllers meter each reactant.',chamber:'Chamber · directs gas through the deposition region.',wafer:'Wafer holder · supports and heats the wafer.',pump:'Vacuum exhaust · pumping and a throttle valve regulate pressure.',rf:'RF chain · generator and matching network power the showerhead.',heater:'Heater zones · heat the quartz tube and wafer batch.',exhaust:'Exhaust · removes residual gases and reaction by-products.',vaporizer:'Vapour delivery · TEOS is vaporised and carried through heated lines.',belt:'Conveyor · moves wafers through the atmospheric deposition zones.'};
+      const descriptions={gas:'Gas delivery · flow controllers meter each reactant.',chamber:'Chamber · directs gas through the deposition region.',wafer:'Wafer holder · supports and heats the wafer.',pump:'Vacuum exhaust · pumping and a throttle valve regulate pressure.',rf:'RF chain · generator and matching network power the showerhead.',heater:'Heater zones · heat the furnace tube and wafer batch.',exhaust:'Exhaust · removes residual gases and reaction by-products.',vaporizer:'Vapour delivery · TEOS is vaporised and carried through heated lines.',belt:'Conveyor · moves wafers through the atmospheric deposition zones.'};
       function parts(){
         const part=(id,text,p,side,group,role)=>({id,text,p,side,group,role});
         const loaded=state.stage!=='unload',shift=state.stage==='load'||state.stage==='unload'?.75:0;
+        if(state.process==='MOCVD')return [
+          part('bubbler','TMGa bubbler + bath',[-3.25,1.8,.1],'left','gas','provides metal-organic vapour from a temperature-controlled liquid source.'),
+          part('flowControllers','Carrier + vapour flow control',[-2.8,3.2,-.2],'left','gas','controls carrier-gas delivery through the source line; flow is not calculated.'),
+          part('ammonia','Separate NH₃ line',[-1.75,3.85,-.55],'left','gas','delivers the nitrogen precursor separately to the showerhead.'),
+          part('gasInlet','Separated precursor inlets',[0,3.65,-.35],'left','gas','keep the group-III and group-V streams apart before injection.'),
+          part('chamber','MOCVD chamber',[0,2.8,-1.17],'left','chamber','encloses the reduced-pressure growth region.'),
+          part('showerhead','Water-cooled showerhead',[0,2.84+shift,-.55],'left','gas','distributes separated precursor streams near the heated substrate.'),
+          ...(loaded?[part('wafer','GaN template on sapphire',[0,2.224,.45],'left','wafer','is a prepared buffer/template stack; initial nucleation is omitted.'),part('film','GaN growth layer',[0,2.23+.07*state.growth,.72],'left','film','is the compound-semiconductor layer added in this demonstration.')]:[]),
+          part('holder','Heated rotating susceptor',[0,2.1,.85],'right','wafer','supports the substrate; rotation is described but not mechanically animated.'),
+          part('heater','Resistance heater',[0,1.92,.72],'right','wafer','heats the susceptor for thermal growth.'),
+          part('gauge','Pressure gauge',[.65,3.91,-.97],'right','chamber','measures chamber pressure.'),
+          part('throttle','Throttle valve',[1.82,2.47,0],'right','pump','adjusts exhaust conductance for pressure control.'),
+          part('pump','Vacuum exhaust',[3.25,.74,.1],'right','pump','removes unused gases and volatile products.')
+        ];
         if(recipe().chamber==='single')return [
           part('gasInlet','Gas inlet',[0,4.05,-.2],'left','gas','feeds reactants into the showerhead.'),
           part('flowControllers',precursors[state.precursor].phase==='liquid'?'Vapour delivery + MFC':'Flow controllers (MFC)',[-2.3,2.65,-.2],'left','gas',precursors[state.precursor].phase==='liquid'?'vaporises the liquid precursor and meters the feed.':'meter the flow of each reactant gas.'),
@@ -932,8 +2545,8 @@
         ];
         if(recipe().chamber==='batch')return [
           part('vaporizer',precursors[state.precursor].phase==='liquid'?'Precursor vaporiser':'Gas flow controller',[-4.08,2.5,-.22],'left','vaporizer',precursors[state.precursor].phase==='liquid'?'converts the liquid precursor into vapour.':'meters the gaseous precursor.'),
-          part('gasInlet','Gas inlet',[-3.58,2.88,0],'left','vaporizer','introduces precursor vapour and carrier gas.'),
-          part('chamber','Quartz tube',[.7,3,.92],'left','chamber','contains the heated wafer batch.'),
+          part('gasInlet','Gas inlet',[-3.58,2.88,0],'left','vaporizer','introduces the selected reactant feed.'),
+          part('chamber','Reactor tube',[.7,3,.92],'left','chamber','contains the heated wafer batch.'),
           part('boat','Wafer boat',[0,2.4,.55],'left','wafer','holds wafers upright with controlled spacing.'),
           ...(loaded?[part('wafer','Wafer batch',[.4,3.04,.70],'left','wafer','receives the deposited film.'),part('film',recipe().film+' film',[.42+.07*state.growth,3.05,.7],'left','film',recipe().property+' · growth is shown on both wafer faces.')]:[]),
           part('heater','Furnace heater zones',[-1.9,3.5,-.7],'right','heater','heat different sections of the tube.'),
@@ -980,7 +2593,7 @@
         }
         overlay.innerHTML=markup;
       }
-      function colors(){const probe=document.createElement('span');probe.style.position='absolute';probe.style.visibility='hidden';root.appendChild(probe);for(const name of ['metal','case','dark','wafer','glass','heat','plasma','gas','film','floor','line','text','muted','panel','film-poly','film-epi','film-oxide','film-nitride','film-tungsten','film-tin','atom-ink',...Object.keys(atomNames).map(symbol=>'atom-'+symbol)]){probe.style.color='var(--cv-'+name+')';const values=getComputedStyle(probe).color.match(/[\d.]+/g);palette[name]=values?values.slice(0,3).map(Number):[120,130,140];}probe.remove();}
+      function colors(){const probe=document.createElement('span');probe.style.position='absolute';probe.style.visibility='hidden';root.appendChild(probe);for(const name of ['metal','case','dark','wafer','glass','heat','plasma','gas','film','floor','line','text','muted','panel','film-poly','film-epi','film-oxide','film-nitride','film-tungsten','film-tin','film-gan','atom-ink',...Object.keys(atomNames).map(symbol=>'atom-'+symbol)]){probe.style.color='var(--cv-'+name+')';const values=getComputedStyle(probe).color.match(/[\d.]+/g);palette[name]=values?values.slice(0,3).map(Number):[120,130,140];}probe.remove();}
       const face=(p,material,component,alpha=1)=>faces.push({p,material,component,alpha});
       function box(center,size,material,component){const [cx,cy,cz]=center,[a,b,c]=size.map(v=>v/2),p=(x,y,z)=>[cx+x*a,cy+y*b,cz+z*c];const sides=[[[1,-1,1],[1,-1,-1],[1,1,-1],[1,1,1]],[[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]],[[-1,1,1],[1,1,1],[1,1,-1],[-1,1,-1]],[[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1]],[[-1,-1,-1],[-1,1,-1],[1,1,-1],[1,-1,-1]],[[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]]];sides.forEach(s=>face(s.map(a=>p(...a)),material,component));}
       function tube(p0,p1,r,material,component,{segments=24,alpha=1,caps=true,start=0,end=Math.PI*2}={}){const axis=V.norm(V.sub(p1,p0)),helper=Math.abs(axis[1])<.9?[0,1,0]:[1,0,0],e1=V.norm(V.cross(axis,helper)),e2=V.cross(axis,e1),point=(p,t)=>V.add(p,V.add(V.scale(e1,r*Math.cos(t)),V.scale(e2,r*Math.sin(t))));const a=[],b=[];for(let i=0;i<=segments;i++){const t=start+(end-start)*i/segments;a.push(point(p0,t));b.push(point(p1,t));}for(let i=0;i<segments;i++)face([a[i],a[i+1],b[i+1],b[i]],material,component,alpha);if(caps){face(a.slice(0,-1).reverse(),material,component,alpha);face(b.slice(0,-1),material,component,alpha);}}
@@ -994,7 +2607,51 @@
       function lpcvd(){const cut=true;base(6.7,2.65);cabinet(-4.75,-.1,'vaporizer');pump(4.4,.1);if(!cut){box([0,3,0],[6.5,2.45,2.6],'case','heater');box([0,3.06,1.31],[6.1,1.87,.02],'metal','heater');for(const x of [-1.04,1.04])box([x,3.06,1.34],[.025,1.87,.03],'dark','heater');}else{tube([-3.2,3,0],[3.2,3,0],1.2,'case','heater',{caps:false,start:Math.PI/2,end:Math.PI*1.5,segments:32});for(let j=0;j<3;j++)for(let i=0;i<8;i++)ring([-2.6+j*2+i*.15,3,0],1.08,1.045,.032,state.stage==='deposit'||state.stage==='condition'?'heat':'metal','heater','x',Math.PI,Math.PI*2);}tube([-3.5,3,0],[3.5,3,0],.98,'glass','chamber',{caps:false,alpha:cut?.08:.35,segments:32});for(const x of [-3.55,3.55])ring([x,3,0],1.04,.89,.1,'metal','chamber','x');for(const z of [-.55,.55])pipe([[-2.9,2.40,z],[2.9,2.40,z]],.042,'wafer','glass');if(state.stage!=='unload')for(let i=0;i<13;i++){const x=-2.55+i*.41;tube([x,3.04,0],[x+.025,3.04,0],.78,'wafer','wafer',{segments:32});}box([-4.08,2.5,-.22],[.39,.6,.39],precursors[state.precursor].phase==='liquid'?'heat':'metal','vaporizer');pipe([[-4.75,2.3,-.10],[-4.75,2.88,-.1],[-3.58,2.88,0]],.06,'vaporizer');pipe([[3.55,3,0],[4.68,3,0],[4.68,1.5,0],[3.9,1.5,.1]],.13,'pump');box([4.2,3,0],[.2,.44,.38],'metal','pump');pipe([[3.2,3.4,0],[3.2,3.98,0]],.06,'chamber');box([3.2,4.1,0],[.26,.25,.26],'case','chamber');if(root.querySelector('#cv-flow').checked)trace([[-4.75,2.4,-.1],[-4.75,2.88,-.1],[-3.58,2.88,0],[-2.8,3.04,.15],[2.8,3.04,.15],[4.68,3,0],[4.68,1.4,0]]);}
       function apcvd(){const cut=true;base(7.4,2.6);cabinet(-5,-.1);box([0,1.78,0],[8.3,.12,2],'dark','belt');for(let i=0;i<27;i++)box([-3.95+i*.3,1.85,0],[.035,.016,1.97],'metal','belt');for(const x of [-4.1,4.1])tube([x,1.74,-1.05],[x,1.74,1.05],.16,'metal','belt',{segments:20});box([0,2.86,-1.08],[5.3,2.02,.12],'case','chamber');if(!cut){box([0,3.85,0],[5.5,.16,2.32],'case','chamber');box([0,2.90,1.08],[5.3,1.83,.12],'metal','chamber');}else for(const x of [-2.68,2.68])box([x,2.9,-.25],[.08,1.98,1.85],'metal','chamber');if(state.stage!=='unload')for(const x of [-3.15,-1.6,0,1.6,3.15])tube([x,1.87,0],[x,1.884,0],.65,'wafer','wafer',{segments:36});for(const x of [-1.7,0,1.7]){box([x,3.09,0],[.56,.23,1.9],'metal','gas');box([x,2.968,0],[.045,.025,1.82],'dark','gas');pipe([[x,3.22,-.25],[x,4.08,-.25]],.055,'gas');}pipe([[-5,2.3,-.1],[-5,4.1,-.1],[1.7,4.1,-.25]],.065,'gas');box([0,1.48,0],[5.2,.14,1.85],state.stage==='condition'||state.stage==='deposit'?'heat':'dark','wafer');pipe([[2.65,3.2,-.6],[3.55,3.2,-.6],[3.55,4.8,-.6]],.22,'exhaust');box([3.55,4.7,-.6],[.7,.27,.7],'case','exhaust');if(root.querySelector('#cv-flow').checked)trace([[-5,2.3,-.1],[-5,4.1,-.1],[0,4.1,-.25],[0,3.1,0],[0,2.12,0],[2.7,2.12,0],[3.55,3.2,-.6],[3.55,4.8,-.6]]);}
 
-      function geometry(){faces=[];lines=[];labels=[];if(recipe().chamber==='single')pecvd();else if(recipe().chamber==='batch')lpcvd();else apcvd();addFilm();}
+      function mocvd(){
+        const open=state.stage==='load'||state.stage==='unload',shift=open?.75:0,hot=state.stage==='condition'||state.stage==='deposit';
+        base();pump(3.25,.1);
+        // Separate metal-organic source/bath and ammonia supply.
+        box([-3.25,.65,.1],[1.05,1.15,.95],'case','gas');
+        box([-3.25,.82,.59],[.55,.22,.03],'dark','gas');
+        tube([-3.25,1.24,.1],[-3.25,2.16,.1],.37,'metal','gas',{segments:24});
+        ring([-3.25,1.65,.1],.43,.38,.5,'gas','gas');
+        pipe([[-3.62,2.65,.1],[-3.62,2.33,.1],[-3.38,2.33,.1],[-3.38,1.4,.1]],.035);
+        pipe([[-3.12,2.16,.1],[-3.12,3.2,-.2],[-.42,3.2,-.2],[-.42,3.65,-.35],[-.42,2.84+shift,-.35]],.045);
+        box([-2.8,3.2,-.2],[.35,.42,.3],'metal','gas');
+        tube([-2.1,.2,-1.1],[-2.1,2.4,-1.1],.25,'case','gas',{segments:20});
+        pipe([[-2.1,2.4,-1.1],[-2.1,3.85,-.55],[.42,3.85,-.35],[.42,2.84+shift,-.35]],.045);
+        box([-1.75,3.85,-.55],[.35,.42,.3],'metal','gas');
+        // Cutaway chamber and prepared substrate stack.
+        tube([0,1.82,0],[0,3.48,0],1.17,'metal','chamber',{caps:false,start:-Math.PI/2,end:Math.PI/2,segments:40});
+        ring([0,1.85,0],1.23,1.12,.12,'metal','chamber');
+        ring([0,3.48+shift,0],1.26,.12,.12,'metal','chamber','y',-Math.PI/2,Math.PI/2);
+        tube([0,1.66,0],[0,2.02,0],.25,'metal','wafer');
+        for(const radius of [.37,.57,.77])ring([0,1.94,0],radius+.035,radius,.045,hot?'heat':'dark','wafer');
+        tube([0,2.02,0],[0,2.19,0],.98,'dark','wafer',{segments:40});
+        if(state.stage!=='unload'){
+          tube([0,2.195,0],[0,2.215,0],.91,'glass','wafer',{segments:48});
+          tube([0,2.215,0],[0,2.224,0],.91,'film-gan','wafer',{segments:48});
+        }
+        // Water-cooled distribution head with two sets of injection openings.
+        ring([0,2.84+shift,0],1,.02,.12,'metal','gas','y',-Math.PI/2,Math.PI/2);
+        ring([0,2.94+shift,0],.92,.82,.04,'gas','gas','y',-Math.PI/2,Math.PI/2);
+        pipe([[-.8,2.96+shift,-.5],[-1.35,2.96+shift,-.5],[-1.35,3.45+shift,-.5]],.035,'gas','gas');
+        pipe([[.8,2.96+shift,-.5],[1.35,2.96+shift,-.5],[1.35,3.45+shift,-.5]],.035,'gas','gas');
+        for(let i=0;i<24;i++){
+          const angle=i*2.399,r=.17+.7*Math.sqrt(i/24),x=r*Math.sin(angle),z=-Math.abs(r*Math.cos(angle));
+          tube([x,2.77+shift,z],[x,2.795+shift,z],.023,i%2?'gas':'dark','gas',{segments:8});
+        }
+        pipe([[1.12,2.47,0],[2.55,2.47,0],[2.55,1.43,0],[2.75,1.43,.1]],.145,'pump');
+        box([1.82,2.47,0],[.18,.53,.47],'metal','pump');
+        box([1.82,2.89,0],[.39,.25,.29],'dark','pump');
+        pipe([[.65,3.25,-.97],[.65,3.78,-.97]],.065,'chamber');
+        box([.65,3.91,-.97],[.33,.33,.26],'case','chamber');
+        if(root.querySelector('#cv-flow').checked){
+          trace([[-3.25,1.8,.1],[-3.12,2.16,.1],[-3.12,3.2,-.2],[-.42,3.2,-.2],[-.42,3.65,-.35],[-.42,2.8,-.35],[0,2.39,0],[1.1,2.39,0],[2.55,2.39,0],[2.55,1.3,0]]);
+          trace([[-2.1,2.4,-1.1],[-2.1,3.85,-.55],[.42,3.85,-.35],[.42,2.8,-.35],[0,2.39,0]]);
+        }
+      }
+      function geometry(){faces=[];lines=[];labels=[];if(state.process==='MOCVD')mocvd();else if(recipe().chamber==='single')pecvd();else if(recipe().chamber==='batch')lpcvd();else apcvd();addFilm();}
       function projection(){const target=[0,2,0],distance=(recipe().chamber==='single'?13.5:18.7)/state.zoom;eye=V.add(target,[distance*Math.sin(state.yaw)*Math.cos(state.pitch),distance*Math.sin(state.pitch),distance*Math.cos(state.yaw)*Math.cos(state.pitch)]);const forward=V.norm(V.sub(target,eye)),right=V.norm(V.cross(forward,[0,1,0])),up=V.cross(right,forward),f=Math.min(width-(width>=700?320:0),height*1.75)*1.19;return p=>{const v=V.sub(p,eye),z=V.dot(v,forward);return {x:width/2+V.dot(v,right)*f/z,y:height*.54-V.dot(v,up)*f/z,z};};}
       function rgb(name,light=1){return 'rgb('+(palette[name]||palette.metal).map(v=>Math.max(0,Math.min(255,Math.round(v*light)))).join(',')+')';}
       function polygon(points,fill,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1;}
@@ -1002,14 +2659,14 @@
       function componentOptions(){const names=parts();if(!names.some(p=>p.id===state.component))state.component=names[0].id;const select=root.querySelector('#cv-component');select.replaceChildren();for(const part of names){const option=document.createElement('option');option.value=part.id;option.textContent=part.text;select.appendChild(option);}select.value=state.component;}
       function text(){
         const r=recipe(),p=state.process;
-        root.querySelector('#cv-machine').textContent=p+' · '+(r.chamber==='single'?(p==='PECVD'?'parallel-plate plasma reactor':'single-wafer thermal reactor'):r.chamber==='batch'?'horizontal batch furnace':'inline conveyor');
+        root.querySelector('#cv-machine').textContent=p+' · '+(p==='MOCVD'?'thermal showerhead reactor':r.chamber==='single'?(p==='PECVD'?'parallel-plate plasma reactor':'single-wafer thermal reactor'):r.chamber==='batch'?'horizontal batch furnace':'inline conveyor');
         root.querySelector('#cv-hint').textContent='Drag to rotate · scroll to zoom';
         root.querySelector('#cv-temp').textContent=state.temperature+' °C';
-        root.querySelector('#cv-temp-window').textContent=r.tempRange[0]===r.tempRange[1]?'Documented example · fixed reference':'Reference window: '+r.tempRange[0]+'–'+r.tempRange[1]+' °C';
+        root.querySelector('#cv-temp-window').textContent=r.tempRange[0]===r.tempRange[1]?'Published example · fixed reference':(r.windowSource?'Independent lecture range: ':'Source range: ')+r.tempRange[0]+'–'+r.tempRange[1]+' °C · nominal lab selection: '+r.temp+' °C';
         root.querySelector('#cv-pressure').textContent=r.pressure;
         root.querySelector('#cv-feed').textContent=r.feed;
         root.querySelector('.cv-rf').hidden=p!=='PECVD';
-        root.querySelector('#cv-activation-state').textContent=p==='PECVD'?(state.stage!=='deposit'?'RF off · non-deposition stage':state.rfOn?'RF plasma':'RF off · reaction paused'):'Thermal heat · no deposition plasma';
+        root.querySelector('#cv-activation-state').textContent=p==='PECVD'?(state.stage!=='deposit'?'RF off · non-deposition stage':state.rfOn?'RF plasma':'RF off · reaction paused'):p==='MOCVD'?'Thermal epitaxial growth (schematic)':'Thermal primary growth (schematic)';
         root.querySelector('#cv-rf-reference').hidden=p!=='PECVD';
         root.querySelector('#cv-rf-reference').textContent=p==='PECVD'?'RF reference: '+r.rfReference:'';
         root.querySelector('#cv-details-summary').textContent='Process details · '+precursors[state.precursor].name+' / '+p;
@@ -1024,7 +2681,24 @@
         reactionLabels();
         root.querySelector('#cv-chem-source').setAttribute('href',r.source);
         const stages={load:r.chamber==='conveyor'?'Wafers enter on the conveyor.':'Position the prepared wafer or wafer boat.',condition:p==='APCVD'?'Establish temperature and atmospheric gas flow.':'Pump down and establish wafer temperature.',deposit:p==='PECVD'?(state.rfOn?'RF sustains the plasma-assisted reaction.':'RF is off; plasma-assisted target growth is paused.'):'Thermal surface reactions form the selected film.',purge:p==='PECVD'?'Stop RF and reactants, purge and cool.':'Stop reactants, purge and cool.',unload:p==='APCVD'?'Remove the coated wafers.':'After cooling, vent and unload the coated wafer.'};
-        root.querySelector('#cv-stage-detail').textContent=(reactionSpec().qualitative?'Variable organic exhaust: ':'Idealised reaction by-products: ')+r.byproducts+' · '+stages[state.stage];
+        root.querySelector('#cv-stage-detail').textContent=(reactionSpec().qualitative?'Qualitative exhaust: ':'Idealised reaction by-products: ')+r.byproducts+' · '+stages[state.stage];
+        const cite=window.CVDEvidence.cite,ev=r.evidence;
+        for(const [selector,claims] of [
+          ['#cv-temp',state.temperature===r.temp?ev.conditions:ev.window],['#cv-temp-window',ev.window],
+          ['#cv-pressure',ev.conditions],['#cv-feed',ev.conditions],
+          ['#cv-activation-state',p==='PECVD'?'pecvd rf-power':p==='MOCVD'?'mocvd-definition':'thermal-activation'],
+          ['#cv-rf-reference',ev.conditions],['#cv-reference-note',ev.conditions+' '+ev.window],
+          ['#cv-effect',ev.chemistry+' '+ev.role+(p==='MOCVD'?' gan-substrate':'')],['#cv-equation',ev.chemistry],
+          ['#cv-chemistry-note',ev.chemistry],['#cv-role-label',ev.role],['#cv-role-use',ev.role],
+          ['#cv-stage-detail',ev.chemistry+' exhaust'],
+          ['#cv-machine',p==='MOCVD'?'part-mocvd':r.chamber==='batch'?'part-furnace':r.chamber==='conveyor'?'part-conveyor':p==='PECVD'?'part-showerhead':'part-reactor']
+        ])cite(root.querySelector(selector),claims);
+        if(selected){
+          const componentClaims={flowControllers:'part-flow',vaporizer:precursors[state.precursor].phase==='liquid'?'part-vapour':'part-flow',gauge:'part-pressure',throttle:'part-pressure',pump:'part-pressure',matching:'part-rf',rfGenerator:'part-rf',plasma:'plasma pecvd',showerhead:p==='PECVD'?'part-showerhead':'part-reactor',boat:'part-furnace',heater:r.chamber==='batch'?'part-furnace':'part-reactor',belt:'part-conveyor',film:ev.role,wafer:state.precursor==='wf6'?'part-nucleation':state.precursor==='sicl4'?'epi-structure':'part-reactor'};
+          const key=selected.id==='flowControllers'&&precursors[state.precursor].phase==='liquid'?(state.precursor==='teos'?'delivery part-flow':ev.conditions+' part-flow'):componentClaims[selected.id]||'part-reactor';
+          const moClaims={bubbler:'part-mo-delivery',flowControllers:'part-mo-delivery',ammonia:'chem-tmga-MOCVD part-mocvd',gasInlet:'part-mocvd',chamber:'part-mocvd',showerhead:'part-mocvd',holder:'part-mocvd',heater:'part-mocvd',wafer:'gan-substrate',film:'role-gan',gauge:'part-pressure',throttle:'part-pressure',pump:'part-pressure'};
+          cite(root.querySelector('#cv-inspector'),p==='MOCVD'?(moClaims[selected.id]||'part-mocvd'):key);
+        }
         growthText();
       }
       function update(){componentOptions();text();draw();}
@@ -1048,9 +2722,11 @@
       const steps=[...document.querySelectorAll('.cv-fab-node[data-fab-summary]')];
       const description=document.getElementById('cv-fab-description');
       const explain=step => {
-        if(description.textContent===step.dataset.fabSummary) return;
+        if(description.dataset.activeClaim===step.dataset.fabCite) return;
         steps.forEach(item => item.setAttribute('data-inspected',String(item===step)));
         description.textContent=step.dataset.fabSummary;
+        description.dataset.activeClaim=step.dataset.fabCite;
+        window.CVDEvidence.cite(description,step.dataset.fabCite);
       };
       steps.forEach(step => {
         step.addEventListener('pointerenter',event => { if(event.pointerType!=='touch') explain(step); });
@@ -1072,3 +2748,4 @@
 </main>
 </body>
 </html>
+
