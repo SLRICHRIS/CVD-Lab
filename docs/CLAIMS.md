@@ -26,6 +26,7 @@ This document is generated from the evidence registry embedded in `site/index.ht
 - Added a GaN MOCVD preset with the TMGa/ammonia net equation, sample T2 conditions from Liang et al., a prepared sapphire/buffer/template stack and separately sourced showerhead architecture. Pressure, activation and precursor-chemistry labels are distinguished.
 - Checked all 31 references against their linked assertions. Replaced the broken vapour-delivery URL with the official 1150C datasheet, corrected bibliography dates, rebound wafer cleaning and silicon-substrate claims, and removed the TEOS-specific attribution to an Oxford page that does not establish that feed pairing.
 - Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.
+- Scientific proofreading corrected film-backdrop elemental proportions, removed unsupported solid-network bonds, clarified animation and RF-off scope, and distinguished vapour supply from gas metering. Added a precisely located source for the N₂O resonance contributor and its displayed formal charges.
 
 ## Claim register
 
@@ -103,11 +104,13 @@ This document is generated from the evidence registry embedded in `site/index.ht
 | `role-gan` | GaN is a compound semiconductor used in LED heterostructures. | [28](#ref-28): MOCVD technology overview, GaN and GaN/InGaN LED multilayer example | The illustrated GaN layer is not a complete LED or a prediction of light output. |
 | `part-mocvd` | A close-coupled MOCVD architecture separates precursor streams, cools the showerhead and heats a rotating susceptor. | [31](#ref-31): Close Coupled Showerhead® explanation, gas separation, water cooling and resistance-heated susceptor paragraphs | Representative cutaway; not the dimensions or confirmed geometry of the cited growth experiment. Rotation is described, not mechanically simulated. |
 | `part-mo-delivery` | Liquid TMGa can be delivered from a temperature-controlled bubbler using carrier gas and flow control. | [29](#ref-29): §§3.1.3–3.1.4, printed pp. 50–54, Figs. 3.5–3.6: MFCs, carrier gas, bubbler and bath | No bubbler temperature, delivery flow or source-consumption calculation is modelled. |
+| `structure-n2o` | N≡N⁺–O⁻ is one Lewis resonance contributor for nitrous oxide; the signs are formal charges. | [32](#ref-32): PDF p. 11, GCh24-11, second Lewis structure; PDF p. 9, resonance definition | The molecular drawing shows this contributor with formal charges and omits lone pairs. It does not assert measured atomic charges or a plasma reaction mechanism. Charge labels fade with the illustrated input bonds. |
 | `gan-substrate` | The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire. | [30](#ref-30): p. 2, §2 and Fig. 1, sapphire/buffer/template/final-layer stack | Loading starts with the prepared stack; nucleation and buffer growth are omitted. Layer thicknesses are schematic. |
 
 ## Model choices
 
-- Camera geometry, colours, atom sizes, bonds, lattice positions and trajectories are schematic design choices.
+- Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.
+- Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.
 - Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.
 - TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.
 - Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.
@@ -534,3 +537,16 @@ Supports: Separate precursor channels, water-cooled showerhead and heated rotati
 Scope: Representative architecture only; dimensions and single-substrate simplification are teaching choices. Not evidence that Liang et al. used this specific showerhead.
 
 Verification (2026-10-23): [Manufacturer technology page](https://www.aixtron.com/en/innovation/technologies/showerhead-principle). Separated openings, water cooling, resistance heater and rotating susceptor checked; no identity with the cited experiment’s reactor is claimed.
+
+<a id="ref-32"></a>
+### [32] Southern Methodist University, Department of Chemistry
+
+[General Chemistry, Chapter 24: Organic Chemistry — chemical bonding review](https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf) (n.d.). **University teaching notes.** Accessed 2026-10-23.
+
+Locator: PDF p. 11, GCh24-11: Lewis structures of nitrous oxide (N₂O); PDF p. 9, resonance definition.
+
+Supports: N₂O resonance contributors and formal charges, including N≡N⁺–O⁻. The page identifies this as the most important contributor.
+
+Scope: Lewis representation only; integer bond orders and formal charges are not measurements of the actual charge distribution. Lone pairs are omitted from the animation. No plasma mechanism, recipe or kinetic claim is inferred.
+
+Verification (2026-10-23): [University-hosted teaching PDF and visual inspection](https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf#page=11). PDF p. 11 was read and visually checked: N≡N⁺–O⁻ has a positive formal charge on the central N and a negative formal charge on O. Only the stated bonding/resonance material is used.
