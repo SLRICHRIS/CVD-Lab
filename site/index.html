@@ -474,7 +474,7 @@
         <h3 id="cv-guide-mocvd-title" class="cv-guide-heading">What is MOCVD?</h3>
         <p id="cv-mocvd-definition" class="cv-guide-takeaway" data-cite="mocvd-definition"><strong>Metal-organic chemical vapour deposition (MOCVD)</strong>, also called MOVPE for epitaxial growth, uses metal-organic precursors to grow semiconductor layers. The GaN example uses heat, TMGa and ammonia.</p>
         <div class="cv-guide-equation" data-cite="chem-tmga-MOCVD" aria-label="Idealised net equation: trimethylgallium and ammonia form gallium nitride and methane"><span>Ga(CH<sub>3</sub>)<sub>3</sub></span><span>+</span><span>NH<sub>3</sub></span><span>→</span><span>GaN (solid)</span><span>+</span><span>3CH<sub>4</sub></span></div>
-        <p class="cv-guide-footer"><span data-cite="chem-tmga-MOCVD">TMGa supplies Ga and ammonia supplies N. This net equation simplifies many reactions; methane is not a complete measured exhaust analysis.</span> <span data-cite="part-mo-delivery">A carrier gas transports TMGa vapour from a temperature-controlled bubbler.</span></p>
+        <p class="cv-guide-footer"><span data-cite="chem-tmga-MOCVD">TMGa supplies Ga and ammonia supplies N. This net equation summarises many reaction steps; CH₄ represents an idealised net product, not a measured exhaust composition.</span> <span data-cite="part-mo-delivery">A carrier gas transports TMGa vapour from a temperature-controlled bubbler.</span></p>
         <p class="cv-guide-footer"><span data-cite="conditions-tmga-MOCVD gan-substrate">The preset illustrates the final GaN layer of Liang et al.’s sample T2: 1050 °C, 200 Torr, on a prepared buffer/template on sapphire.</span> <span data-cite="role-gan">GaN is a compound semiconductor used in LED heterostructures.</span> Choose TMGa in the simulator to explore it.</p>
       </section>
       <h3 id="cv-guide-types-title" class="cv-guide-heading">Four CVD process views in this lab</h3>
@@ -538,7 +538,7 @@
     <div class="cv-setup-row">
       <div class="cv-chem-controls"><label for="cv-precursor">Precursor<select id="cv-precursor"><option value="silane">Silane · SiH₄</option><option value="dcs">Dichlorosilane · SiH₂Cl₂</option><option value="teos">TEOS · Si(OC₂H₅)₄</option><option value="sicl4">Silicon tetrachloride · SiCl₄</option><option value="wf6">Tungsten hexafluoride · WF₆</option><option value="ticl4">Titanium tetrachloride · TiCl₄</option><option value="tmga">Trimethylgallium (TMGa) · Ga(CH₃)₃</option></select></label></div>
       <div class="cv-toolbar"><span class="cv-control-label" id="cv-technique-label">CVD process view</span><div class="cv-modes" role="group" aria-labelledby="cv-technique-label" aria-describedby="cv-preset-note"><button type="button" data-process="APCVD" aria-pressed="false" title="Atmospheric-pressure CVD">APCVD</button><button type="button" data-process="LPCVD" aria-pressed="false" title="Low-pressure CVD">LPCVD</button><button type="button" data-process="PECVD" aria-pressed="true" title="Plasma-enhanced CVD">PECVD</button><button type="button" data-process="MOCVD" aria-pressed="false" title="Metal-organic CVD · select TMGa for the GaN preset">MOCVD</button></div></div>
-      <div class="cv-run"><button type="button" id="cv-play">Play reaction</button></div>
+      <div class="cv-run"><button type="button" id="cv-play">Play animation</button></div>
     </div>
     <div class="cv-preset-info"><p id="cv-preset-note" class="cv-preset-note" aria-live="polite">Reference recipes: APCVD · LPCVD · PECVD</p><a class="cv-recipe-link" href="#cv-recipes-guide">View all 10 recipes</a></div>
   </section>
@@ -553,13 +553,13 @@
       <div class="cv-growth"><div class="cv-growth-row"><span id="cv-growth-status">SiO₂ · demonstration paused</span><output id="cv-growth-value">0% of demonstration thickness</output></div><div id="cv-growth-track" class="cv-growth-track" role="progressbar" aria-label="Normalised film growth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="cv-growth-fill" class="cv-growth-fill"></div></div></div>
     </section>
     <section class="cv-reaction" aria-labelledby="cv-reaction-title">
-      <div class="cv-reaction-head"><p class="cv-overline">Surface chemistry</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Reactants approach the surface</span></div>
-      <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Molecular reaction at the wafer surface">Ball-and-stick reactants change into solid film atoms and gaseous by-products.</canvas></div>
+      <div class="cv-reaction-head"><p class="cv-overline">Net chemistry schematic</p><h2 id="cv-reaction-title" class="cv-reaction-title" aria-live="polite">Silane (SiH₄) · PECVD</h2><span id="cv-reaction-phase" class="cv-reaction-phase" aria-live="polite">Net-reaction illustration · reactants</span></div>
+      <div class="cv-molecules"><canvas id="cv-reaction-canvas" role="img" aria-label="Idealised net-reaction illustration">Schematic atom redistribution from reactants into an idealised film composition and gas products; atomic positions do not depict a crystal structure.</canvas></div>
       <div id="cv-equation" data-cite="chem-silane-PECVD" class="cv-equation" aria-label="Idealised overall reaction"></div>
       <p id="cv-chemistry-note" data-cite="chem-silane-PECVD" class="cv-chemistry-note"></p>
       <div class="cv-deposit-role" aria-live="polite"><span id="cv-role-label" data-cite="role-oxide" class="cv-role-label">Role of SiO₂ deposit · Electrical insulator</span><span id="cv-role-use" data-cite="role-oxide" class="cv-role-use">Provides electrical insulation between metal wiring layers.</span></div>
       <div id="cv-atoms" class="cv-atoms" aria-label="Atom colour key"></div>
-      <div class="cv-seek"><label for="cv-reaction-progress">Inspect the reaction</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Reaction animation position"></div>
+      <div class="cv-seek"><label for="cv-reaction-progress">Inspect the illustration</label><input id="cv-reaction-progress" type="range" min="0" max="1000" step="1" value="0" aria-label="Net-reaction animation position"></div>
     </section>
   </div>
   <details open>
@@ -1185,6 +1185,24 @@
         "method": "Manufacturer technology page",
         "url": "https://www.aixtron.com/en/innovation/technologies/showerhead-principle",
         "note": "Separated openings, water cooling, resistance heater and rotating susceptor checked; no identity with the cited experiment’s reactor is claimed."
+      }
+    },
+    {
+      "id": 32,
+      "author": "Southern Methodist University, Department of Chemistry",
+      "title": "General Chemistry, Chapter 24: Organic Chemistry — chemical bonding review",
+      "year": "n.d.",
+      "kind": "University teaching notes",
+      "url": "https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf",
+      "locator": "PDF p. 11, GCh24-11: Lewis structures of nitrous oxide (N₂O); PDF p. 9, resonance definition",
+      "scope": "N₂O resonance contributors and formal charges, including N≡N⁺–O⁻. The page identifies this as the most important contributor.",
+      "limits": "Lewis representation only; integer bond orders and formal charges are not measurements of the actual charge distribution. Lone pairs are omitted from the animation. No plasma mechanism, recipe or kinetic claim is inferred.",
+      "accessed": "2026-10-23",
+      "verification": {
+        "date": "2026-10-23",
+        "method": "University-hosted teaching PDF and visual inspection",
+        "url": "https://s2.smu.edu/mfreindorf/GenChem/CheChem24.pdf#page=11",
+        "note": "PDF p. 11 was read and visually checked: N≡N⁺–O⁻ has a positive formal charge on the central N and a negative formal charge on O. Only the stated bonding/resonance material is used."
       }
     }
   ],
@@ -2052,6 +2070,16 @@
       ],
       "note": "No bubbler temperature, delivery flow or source-consumption calculation is modelled."
     },
+    "structure-n2o": {
+      "statement": "N≡N⁺–O⁻ is one Lewis resonance contributor for nitrous oxide; the signs are formal charges.",
+      "evidence": [
+        {
+          "source": 32,
+          "locator": "PDF p. 11, GCh24-11, second Lewis structure; PDF p. 9, resonance definition"
+        }
+      ],
+      "note": "The molecular drawing shows this contributor with formal charges and omits lone pairs. It does not assert measured atomic charges or a plasma reaction mechanism. Charge labels fade with the illustrated input bonds."
+    },
     "gan-substrate": {
       "statement": "The GaN example grows a final layer over a prepared buffer and template on c-plane sapphire.",
       "evidence": [
@@ -2064,7 +2092,8 @@
     }
   },
   "model_choices": [
-    "Camera geometry, colours, atom sizes, bonds, lattice positions and trajectories are schematic design choices.",
+    "Camera geometry, colours, atom sizes, molecular bonds, atom positions and trajectories are schematic design choices; film atoms do not depict a crystal structure or bonding network.",
+    "Film formulae and atom counts represent idealised compositions. Impurities, defects and deviations from stoichiometry are not modelled. The film backdrop repeats complete formula units to preserve the displayed elemental proportions.",
     "Nine displayed equations conserve element counts; this does not establish an elementary reaction mechanism.",
     "TEOS PECVD is qualitative. Displayed molecule counts are illustrative and are not flow ratios or reaction coefficients.",
     "Film thickness and eight-second playback are normalised animation controls, not measured growth or kinetic predictions.",
@@ -2298,7 +2327,8 @@
         }else if(formula==='NH3'){
           add('N',[0,-.25,0]);[[1,.18,.57],[-1,.18,.57],[0,.18,-1.15]].forEach(p=>link(0,add('H',p)));
         }else if(formula==='N2O'){
-          add('N',[-1.15,0,0]);add('N',[0,0,0]);add('O',[1.15,0,0]);link(0,1,2);link(1,2,2);
+          // One Lewis resonance contributor, N≡N⁺–O⁻ (source [32]).
+          add('N',[-1.15,0,0]);add('N',[0,0,0]);add('O',[1.15,0,0]);atoms[1].formalCharge=1;atoms[2].formalCharge=-1;link(0,1,3);link(1,2);
         }else if(formula==='H2O'){
           add('O',[0,.15,0]);add('H',[-.8,.73,0]);add('H',[.8,.73,0]);link(0,1);link(0,2);
         }else if(formula==='C2H4'){
@@ -2326,7 +2356,7 @@
             const column=copy%columns,row=Math.floor(copy/columns),rowCount=Math.min(columns,n-row*columns);
             const cx=group*groupWidth+(groupWidth-rowCount*cellWidth)/2+(column+.5)*cellWidth,cy=47+(row+.5)*cellHeight;
             const offset=result.atoms.length;
-            for(const atom of model.atoms)result.atoms.push({symbol:atom.symbol,x:cx+(atom.q[0]-centerX)*scale,y:cy+(atom.q[1]-centerY)*scale,z:atom.q[2],r:atom.symbol==='H'?clamp(scale*.18,3.1,6.6):clamp(scale*.37,6.8,13.5),solid:false});
+            for(const atom of model.atoms)result.atoms.push({symbol:atom.symbol,formalCharge:atom.formalCharge||0,x:cx+(atom.q[0]-centerX)*scale,y:cy+(atom.q[1]-centerY)*scale,z:atom.q[2],r:atom.symbol==='H'?clamp(scale*.18,3.1,6.6):clamp(scale*.37,6.8,13.5),solid:false});
             for(const bond of model.bonds)result.bonds.push({...bond,a:bond.a+offset,b:bond.b+offset});
           }
         });
@@ -2337,6 +2367,14 @@
         const symbols=[];while(Object.values(counts).some(count=>count>0))for(const element of Object.keys(counts))if(counts[element]>0){symbols.push(element);counts[element]--;}
         const baseline=h-37,columns=Math.min(symbols.length,6),spacing=28,rows=Math.ceil(symbols.length/columns);
         return symbols.map((symbol,i)=>{const row=Math.floor(i/columns),rowCount=Math.min(columns,symbols.length-row*columns),column=row%2?rowCount-1-i%columns:i%columns;return {symbol,x:w/2+(column-(rowCount-1)/2)*spacing,y:baseline-12-(rows-1-row)*26,z:0,r:symbol==='W'?13:11,solid:true};});
+      }
+      function filmBackdrop(formula,w,baseline){
+        // Repeat whole formula units: alternating unique elements gives the
+        // wrong composition for compounds such as SiO2 and Si3N4.
+        const unit=formulaAtoms(formula),repeats=Math.max(1,Math.round(8/unit.length)),symbols=Array.from({length:repeats},()=>unit).flat(),background=[];
+        const spacing=Math.min(27,(w-48)/(symbols.length-1||1));
+        for(let row=0;row<2;row++)symbols.forEach((symbol,i)=>background.push({symbol,x:w/2+(i-(symbols.length-1)/2)*spacing,y:baseline-2+row*8,r:6,z:0}));
+        return background;
       }
       function buildReaction(w,h){
         const key=state.precursor+'|'+state.process+'|'+w+'|'+h;if(key===reactionCache)return reactionScene;
@@ -2359,10 +2397,10 @@
         return reactionScene;
       }
       function reactionPhase(){
-        if(state.stage!=='deposit')return 'Reaction paused · '+state.stage;
-        if(state.process==='PECVD'&&!state.rfOn)return 'Reaction paused · RF off';
+        if(state.stage!=='deposit')return 'Animation paused · '+state.stage;
+        if(state.process==='PECVD'&&!state.rfOn)return 'Animation paused · RF off';
         const g=state.growth;
-        return g<.24?'Reactants approach the wafer':g<.49?(state.process==='PECVD'?'Plasma activation · bonds rearrange':'Surface activation · bonds rearrange'):g<.75?'Film atoms attach · gas bonds form':g<1?'By-products move toward the exhaust':'Solid film remains · gases leave';
+        return g<.24?'Net-reaction illustration · reactants':g<.49?'Illustrative atom redistribution':g<.75?'Illustrative product formation':g<1?'Illustrative gas-product departure':'Net products · animation complete';
       }
       function reactionLabels(){
         const spec=reactionSpec(),equation=root.querySelector('#cv-equation');equation.replaceChildren();
@@ -2380,11 +2418,12 @@
           spec.inputs.forEach((species,i)=>{if(i)term('+');term(speciesText(species)+' (gas)');});term('→');term(speciesText(spec.solid)+' (solid)');
           spec.outputs.forEach(species=>{term('+');term(speciesText(species)+' (gas)');});
         }
-        root.querySelector('#cv-chemistry-note').textContent=spec.qualitative?'Qualitative species map: molecule counts are illustrative, not gas ratios or a balanced equation.':'Idealised net stoichiometry, not an elementary pathway or a complete exhaust analysis.';
+        const structureNote=state.precursor==='silane'&&state.process==='PECVD'?' N₂O is drawn as one resonance contributor, N≡N⁺–O⁻ (formal charges shown; lone pairs omitted).':'';
+        root.querySelector('#cv-chemistry-note').textContent=(spec.qualitative?'Qualitative species map: molecule counts are illustrative, not gas ratios or a balanced equation.':'Idealised net stoichiometry, not an elementary pathway or a complete exhaust analysis.')+structureNote;
         const legend=root.querySelector('#cv-atoms');legend.replaceChildren();
         const elements=[...new Set(spec.inputs.flatMap(species=>formulaAtoms(species.formula)))];
         for(const element of elements){const span=document.createElement('span'),dot=document.createElement('i');dot.style.setProperty('--atom-color','var(--cv-atom-'+element+')');dot.setAttribute('aria-hidden','true');span.appendChild(dot);const label=document.createElement('span');label.textContent=element+' '+atomNames[element];span.appendChild(label);legend.appendChild(span);}
-        root.querySelector('#cv-model-note').textContent=spec.qualitative?'Qualitative species map · molecule counts are not gas ratios · thickness and playback are schematic':'Net stoichiometry only · bond paths, lattice, thickness and playback are schematic';
+        root.querySelector('#cv-model-note').textContent=spec.qualitative?'Qualitative species map · molecule counts are not gas ratios · idealised film composition · atomic positions, thickness and playback are schematic':'Net stoichiometry only · idealised film composition · atomic positions, thickness and playback are schematic';
       }
       function ball(context,atom,opacity=1,labels=true){
         const color='atom-'+atom.symbol,r=atom.r;context.globalAlpha=opacity;
@@ -2392,6 +2431,7 @@
         gradient.addColorStop(0,rgb(color,1.2));gradient.addColorStop(.4,rgb(color,1.04));gradient.addColorStop(1,rgb(color,.74));
         context.beginPath();context.arc(atom.x,atom.y,r,0,Math.PI*2);context.fillStyle=gradient;context.fill();
         if(labels&&atom.symbol!=='H'&&r>=8.4){context.font='11px system-ui,sans-serif';context.textAlign='center';context.textBaseline='middle';context.fillStyle=rgb('atom-ink');context.fillText(atom.symbol,atom.x,atom.y+.3);}
+        if(labels&&atom.formalCharge){context.globalAlpha=opacity*(1-smooth((state.growth-.26)/.25));context.font='bold 11px system-ui,sans-serif';context.textAlign='center';context.textBaseline='middle';context.fillStyle=rgb('text');context.fillText(atom.formalCharge>0?'+':'−',atom.x+r*.85,atom.y-r*.8);}
         context.globalAlpha=1;
       }
       function molecularBond(context,a,b,order=1,opacity=1){
@@ -2413,26 +2453,21 @@
         const scene=buildReaction(w,h),positions=atomPositions(scene),g=state.growth,baseline=h-37;
         c.fillStyle=rgb('wafer',.92);c.beginPath();c.moveTo(12,baseline+7);c.lineTo(w-23,baseline+7);c.lineTo(w-9,baseline+23);c.lineTo(23,baseline+23);c.closePath();c.fill();
         c.fillStyle=rgb('film-'+recipe().material);c.globalAlpha=.35;c.fillRect(20,baseline+3,w-42,5);c.globalAlpha=1;
-        const filmElements=[...new Set(formulaAtoms(scene.spec.solid.formula))],background=[];
-        for(let row=0;row<2;row++)for(let i=0;i<8;i++)background.push({symbol:filmElements[(i+row)%filmElements.length],x:w/2+(i-3.5)*27,y:baseline-2+row*8,r:6,z:0});
-        if(!['tungsten','tin'].includes(recipe().material))for(let i=1;i<background.length;i++)if(i%8)molecularBond(c,background[i-1],background[i],1,.25);
+        const background=filmBackdrop(scene.spec.solid.formula,w,baseline);
         background.forEach(atom=>ball(c,atom,.32,false));
         for(const bond of scene.inputBonds)molecularBond(c,positions[bond.a],positions[bond.b],bond.order,1-smooth((g-.26)/.25));
         for(const bond of scene.productBonds)molecularBond(c,positions[bond.a],positions[bond.b],bond.order,smooth((g-.49)/.22));
-        const solidOpacity=smooth((g-.5)/.24),solidAtoms=scene.solidIds.map(id=>positions[id]);
-        if(!['tungsten','tin'].includes(recipe().material)){
-          for(let i=0;i<solidAtoms.length;i++)for(let j=i+1;j<solidAtoms.length;j++){const a=solidAtoms[i],b=solidAtoms[j];if(Math.hypot(a.x-b.x,a.y-b.y)<42&&(filmElements.length===1||a.symbol!==b.symbol))molecularBond(c,a,b,1,solidOpacity*.7);}
-          for(const atom of solidAtoms){const site=background.filter(site=>filmElements.length===1||site.symbol!==atom.symbol).sort((a,b)=>Math.hypot(a.x-atom.x,a.y-atom.y)-Math.hypot(b.x-atom.x,b.y-atom.y))[0];if(site)molecularBond(c,atom,site,1,solidOpacity*.45);}
-        }
+        // Film spheres show composition only; arbitrary proximity bonds would
+        // imply an unsupported crystal structure or coordination network.
         positions.sort((a,b)=>a.z-b.z).forEach(atom=>ball(c,atom));
         c.textAlign='center';c.textBaseline='alphabetic';c.font='13px system-ui,sans-serif';c.fillStyle=rgb('text');
         const inputOpacity=1-smooth((g-.27)/.21),productOpacity=smooth((g-.56)/.19);
         c.globalAlpha=inputOpacity;scene.inputLabels.forEach(label=>c.fillText(label.text,label.x,label.y));
         c.globalAlpha=productOpacity;scene.productLabels.forEach(label=>c.fillText(label.text,label.x,label.y));c.globalAlpha=1;
         c.font='12px system-ui,sans-serif';c.fillStyle=rgb('muted');c.textAlign='left';c.fillText(g<.49?'Reactant molecules':scene.spec.qualitative?'C/H/O fragments · mixture varies':'Gaseous by-products',8,13);
-        c.textAlign='center';c.fillText('Wafer surface · '+recipe().film+(g<.5?' growth sites':' solid'),w/2,h-5);
+        c.textAlign='center';c.fillText(recipe().film+' · composition schematic',w/2,h-5);
         const phase=reactionPhase(),phaseElement=root.querySelector('#cv-reaction-phase');if(phaseElement.textContent!==phase)phaseElement.textContent=phase;
-        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'Qualitative TEOS PECVD species map. Displayed molecule counts and C, H and O fragments are illustrative, not reaction coefficients or measured exhaust species.':recipe().equation+'. All reactant atoms are tracked into the solid film or gas molecules.'));
+        reactionCanvas.setAttribute('aria-label',phase+'. '+(scene.spec.qualitative?'Qualitative TEOS PECVD species map. Displayed molecule counts and C, H and O fragments are illustrative, not reaction coefficients or measured exhaust species.':recipe().equation+'. Within this idealised atom-balance illustration, every displayed reactant atom is assigned to the film or gas products.')+(state.precursor==='silane'&&state.process==='PECVD'?' N2O is drawn as a resonance contributor with a positive formal charge on the central N and a negative formal charge on O; these labels fade with the input structure.':'')+' Film atoms show idealised composition, not a crystal structure.');
       }
       function drawChamberMolecules(project){
         if(state.stage!=='deposit')return;
@@ -2466,9 +2501,9 @@
         root.querySelector('#cv-growth-track').setAttribute('aria-valuenow',percent);
         root.querySelector('#cv-reaction-progress').value=Math.round(state.growth*1000);
         root.querySelector('#cv-reaction-progress').setAttribute('aria-valuetext',reactionPhase());
-        const status=state.stage!=='deposit'?'growth paused outside deposition':state.process==='PECVD'&&!state.rfOn?'growth paused: RF off':state.growth>=1?'demonstration complete':state.running?'layer forming':'demonstration paused';
+        const status=state.stage!=='deposit'?'animation paused outside deposition':state.process==='PECVD'&&!state.rfOn?'animation paused: RF off':state.growth>=1?'demonstration complete':state.running?'animation playing':'demonstration paused';
         root.querySelector('#cv-growth-status').textContent=r.film+' · '+status;
-        root.querySelector('#cv-play').textContent=state.running?'Pause reaction':state.growth>=1?'Replay reaction':'Play reaction';
+        root.querySelector('#cv-play').textContent=state.running?'Pause animation':state.growth>=1?'Replay animation':'Play animation';
       }
       function tick(timestamp){
         if(!state.running)return;
@@ -2533,7 +2568,7 @@
         ];
         if(recipe().chamber==='single')return [
           part('gasInlet','Gas inlet',[0,4.05,-.2],'left','gas','feeds reactants into the showerhead.'),
-          part('flowControllers',precursors[state.precursor].phase==='liquid'?'Vapour delivery + MFC':'Flow controllers (MFC)',[-2.3,2.65,-.2],'left','gas',precursors[state.precursor].phase==='liquid'?'vaporises the liquid precursor and meters the feed.':'meter the flow of each reactant gas.'),
+          part('flowControllers',precursors[state.precursor].phase==='liquid'?'Vapour delivery + MFC':'Flow controllers (MFC)',[-2.3,2.65,-.2],'left','gas',precursors[state.precursor].phase==='liquid'?'supplies precursor vapour from a source vessel; the MFC meters the gas stream.':'meter the flow of each reactant gas.'),
           part('chamber','Chamber wall',[0,2.95,-1.17],'left','chamber','encloses the deposition region.'),
           part('showerhead',state.process==='PECVD'?'Showerhead electrode':'Gas distribution plate',[0,3.26+shift,-.55],'left',state.process==='PECVD'?'rf':'gas',state.process==='PECVD'?'distributes gas and receives RF power.':'distributes reactants above the heated wafer.'),
           ...(loaded?[part('wafer',state.precursor==='wf6'?'Nucleated wafer':state.precursor==='sicl4'?'Crystalline silicon wafer':'Silicon wafer',[0,2.224,.45],'left','wafer',state.precursor==='wf6'?'has a prepared nucleation surface for tungsten growth.':state.precursor==='sicl4'?'is a prepared crystal that seeds the epitaxial silicon layer.':'surface on which the film forms.'),part('film',recipe().film+' film',[0,2.23+.07*state.growth,.72],'left','film',recipe().property+' · thickness is enlarged in this demonstration.')]:[]),
@@ -2666,7 +2701,7 @@
         root.querySelector('#cv-pressure').textContent=r.pressure;
         root.querySelector('#cv-feed').textContent=r.feed;
         root.querySelector('.cv-rf').hidden=p!=='PECVD';
-        root.querySelector('#cv-activation-state').textContent=p==='PECVD'?(state.stage!=='deposit'?'RF off · non-deposition stage':state.rfOn?'RF plasma':'RF off · reaction paused'):p==='MOCVD'?'Thermal epitaxial growth (schematic)':'Thermal primary growth (schematic)';
+        root.querySelector('#cv-activation-state').textContent=p==='PECVD'?(state.stage!=='deposit'?'RF off · non-deposition stage':state.rfOn?'RF plasma':'RF off · animation paused'):p==='MOCVD'?'Thermal epitaxial growth (schematic)':'Thermal primary growth (schematic)';
         root.querySelector('#cv-rf-reference').hidden=p!=='PECVD';
         root.querySelector('#cv-rf-reference').textContent=p==='PECVD'?'RF reference: '+r.rfReference:'';
         root.querySelector('#cv-details-summary').textContent='Process details · '+precursors[state.precursor].name+' / '+p;
@@ -2680,7 +2715,7 @@
         root.querySelector('#cv-effect').textContent=r.effect;
         reactionLabels();
         root.querySelector('#cv-chem-source').setAttribute('href',r.source);
-        const stages={load:r.chamber==='conveyor'?'Wafers enter on the conveyor.':'Position the prepared wafer or wafer boat.',condition:p==='APCVD'?'Establish temperature and atmospheric gas flow.':'Pump down and establish wafer temperature.',deposit:p==='PECVD'?(state.rfOn?'RF sustains the plasma-assisted reaction.':'RF is off; plasma-assisted target growth is paused.'):'Thermal surface reactions form the selected film.',purge:p==='PECVD'?'Stop RF and reactants, purge and cool.':'Stop reactants, purge and cool.',unload:p==='APCVD'?'Remove the coated wafers.':'After cooling, vent and unload the coated wafer.'};
+        const stages={load:r.chamber==='conveyor'?'Wafers enter on the conveyor.':'Position the prepared wafer or wafer boat.',condition:p==='APCVD'?'Establish temperature and atmospheric gas flow.':'Pump down and establish wafer temperature.',deposit:p==='PECVD'?(state.rfOn?'RF sustains the plasma-assisted reaction.':'RF-off pauses this demonstration; residual thermal chemistry is not modelled.'):'Thermal surface reactions form the selected film.',purge:p==='PECVD'?'Stop RF and reactants, purge and cool.':'Stop reactants, purge and cool.',unload:p==='APCVD'?'Remove the coated wafers.':'After cooling, vent and unload the coated wafer.'};
         root.querySelector('#cv-stage-detail').textContent=(reactionSpec().qualitative?'Qualitative exhaust: ':'Idealised reaction by-products: ')+r.byproducts+' · '+stages[state.stage];
         const cite=window.CVDEvidence.cite,ev=r.evidence;
         for(const [selector,claims] of [
@@ -2689,7 +2724,7 @@
           ['#cv-activation-state',p==='PECVD'?'pecvd rf-power':p==='MOCVD'?'mocvd-definition':'thermal-activation'],
           ['#cv-rf-reference',ev.conditions],['#cv-reference-note',ev.conditions+' '+ev.window],
           ['#cv-effect',ev.chemistry+' '+ev.role+(p==='MOCVD'?' gan-substrate':'')],['#cv-equation',ev.chemistry],
-          ['#cv-chemistry-note',ev.chemistry],['#cv-role-label',ev.role],['#cv-role-use',ev.role],
+          ['#cv-chemistry-note',ev.chemistry+(state.precursor==='silane'&&p==='PECVD'?' structure-n2o':'')],['#cv-role-label',ev.role],['#cv-role-use',ev.role],
           ['#cv-stage-detail',ev.chemistry+' exhaust'],
           ['#cv-machine',p==='MOCVD'?'part-mocvd':r.chamber==='batch'?'part-furnace':r.chamber==='conveyor'?'part-conveyor':p==='PECVD'?'part-showerhead':'part-reactor']
         ])cite(root.querySelector(selector),claims);

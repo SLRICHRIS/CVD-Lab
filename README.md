@@ -5,7 +5,7 @@
 This package contains the latest professional site design and a Python
 launcher for hosting it on Streamlit Community Cloud from GitHub.
 
-Scientific citation audit, 23 October 2026: 73 claim records map to 31 sources,
+Scientific citation audit and proofreading, 23 October 2026: 74 claim records map to 32 sources,
 with numbered citations beside definitions, recipe values, net equations,
 material roles, component explanations and fabrication descriptions.
 
@@ -82,7 +82,7 @@ Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 - Seven process groups in an illustrative VLSI fabrication overview, with
   cited hover, tap and keyboard-focus explanations.
 - CVD teaching guide, ten-recipe comparison, plasma / PECVD, MOCVD and silicon
-  definitions, and 31 numbered references with source types and exact locators.
+  definitions, and 32 numbered references with source types and exact locators.
 - Navy, cobalt, teal, and violet design accents, responsive layouts,
   keyboard controls, and S L RICHRIS copyright.
 
@@ -134,7 +134,7 @@ patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
-All 31 references were checked against their linked assertions. The register
+All 32 references were checked against their linked assertions. The register
 records the checked copy and verification method. Mixed citations identify the
 specific source's role: a facility gas list supports a feed pairing, while a
 separate equation source establishes net stoichiometry. The obsolete vapour
@@ -154,6 +154,17 @@ is a qualitative species map; displayed molecule counts are not reaction
 coefficients or gas-flow ratios. The source patent does not provide a complete
 plasma-exhaust mechanism. See the register for the corresponding source and
 scope for each reaction.
+
+Scientific proofreading also corrected the film backdrop to preserve complete
+formula-unit proportions, including Si:O = 1:2 and Si:N = 3:4. Film spheres
+represent idealised composition; their positions do not depict crystal structure
+or a bonding network. Impurities, defects and nonstoichiometry are omitted.
+Reaction phases illustrate net atom redistribution rather than an elementary
+mechanism. RF-off pauses the demonstration and does not predict residual thermal
+growth. Vapour generation and gas-flow metering are described as separate functions.
+The N₂O drawing now uses the cited N≡N⁺–O⁻ resonance contributor with formal
+charge labels; lone pairs are omitted. This representation does not assert
+measured atomic charges or a plasma reaction pathway.
 
 After changing scientific content or reference metadata, update the relevant
 claim in `cv-evidence-data`, bind the displayed claim using `data-cite` or its
@@ -185,7 +196,8 @@ Set `CVD_CHROMIUM_EXECUTABLE` to use an existing compatible Chromium executable.
 
 The evidence graph and generated register pass the dependency-free integrity
 check. DOM checks pass for all ten presets, 107 component states, stage/RF/
-temperature changes, nine rendered balanced equations, citation targets,
+temperature changes, nine rendered balanced equations, the formula-unit
+proportions of the film backdrops and animated films, citation targets,
 reference focus/return and seven fabrication explanations. Canvas is stubbed
 in the DOM checks, so those results do not establish visual correctness.
 

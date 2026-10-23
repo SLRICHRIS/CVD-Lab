@@ -11,7 +11,16 @@ const errors = [];
 const virtualConsole = new VirtualConsole();
 virtualConsole.on('jsdomError', error => { if (error.type !== 'css-parsing') errors.push(error.message); });
 const html = fs.readFileSync(path.resolve(__dirname, '../site/index.html'), 'utf8');
-const dom = new JSDOM(html, {
+// Observe the actual atoms passed to the renderer without adding a production
+// debug API. This checks composition, not canvas pixels or crystal geometry.
+const drawHook = 'function drawReaction(){';
+const atomHook = 'function ball(context,atom,opacity=1,labels=true){';
+const bondHook = 'function molecularBond(context,a,b,order=1,opacity=1){';
+for (const hook of [drawHook, atomHook, bondHook]) assert.equal(html.split(hook).length, 2, `Missing or ambiguous renderer observation point: ${hook}`);
+const observedHtml = html.replace(drawHook, drawHook + 'window.__reactionAtoms=[];window.__reactionBonds=[];')
+  .replace(atomHook, atomHook + 'if(context===reactionCtx)window.__reactionAtoms.push({symbol:atom.symbol,solid:Boolean(atom.target?.solid),opacity,formalCharge:atom.formalCharge||0});')
+  .replace(bondHook, bondHook + 'if(context===reactionCtx&&opacity>0)window.__reactionBonds.push({a:a.symbol,b:b.symbol,order});');
+const dom = new JSDOM(observedHtml, {
   url: 'https://cvd-lab.test/', runScripts: 'dangerously', virtualConsole,
   beforeParse(window) {
     window.matchMedia = query => ({ matches: query.includes('reduced-motion'), addEventListener() {}, removeEventListener() {} });
@@ -25,7 +34,12 @@ const dom = new JSDOM(html, {
       return { x: 0, y: 0, left: 0, top: 0, right: width, bottom: height, width, height };
     };
     window.HTMLCanvasElement.prototype.getContext = function () {
-      const context = { measureText: text => ({ width: String(text).length * 7 }), createRadialGradient: () => ({ addColorStop() {} }) };
+      const reaction = this.id === 'cv-reaction-canvas';
+      const context = {
+        measureText: text => ({ width: String(text).length * 7 }), createRadialGradient: () => ({ addColorStop() {} }),
+        clearRect() { if (reaction) window.__reactionTexts = []; },
+        fillText(text) { if (reaction && context.globalAlpha > 0) window.__reactionTexts.push(text); },
+      };
       return new Proxy(context, { get(target, key) { return key in target ? target[key] : () => {}; } });
     };
   },
@@ -62,6 +76,22 @@ function totals(side) {
   }
   return result;
 }
+function renderedCounts(atoms) {
+  const result = {};
+  for (const atom of atoms) result[atom.symbol] = (result[atom.symbol] || 0) + 1;
+  return result;
+}
+function expectFilmComposition(formula, coefficient, label) {
+  const unit = atoms(formula), rendered = dom.window.__reactionAtoms;
+  const background = renderedCounts(rendered.filter(atom => atom.opacity === .32));
+  assert.deepEqual(Object.keys(background).sort(), Object.keys(unit).sort(), `${label}: background elements`);
+  const first = Object.keys(unit)[0], units = background[first] / unit[first];
+  assert.ok(Number.isInteger(units) && units > 0, `${label}: complete background formula units`);
+  for (const [element, count] of Object.entries(unit)) assert.equal(background[element], count * units, `${label}: background ${element} ratio`);
+  const film = renderedCounts(rendered.filter(atom => atom.solid));
+  const expected = Object.fromEntries(Object.entries(unit).map(([element, count]) => [element, count * coefficient]));
+  assert.deepEqual(film, expected, `${label}: animated film composition`);
+}
 const cases = [
   ['silane', 'PECVD', [1], [1], [9, 11], [18]],
   ['silane', 'LPCVD', [2], [3], [9], [20]],
@@ -81,13 +111,30 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   for (const field of ['#cv-temp', '#cv-pressure', '#cv-feed']) expectRefs(field, conditions);
   expectRefs('#cv-temp-window', range);
   expectRefs('#cv-equation', chemistry);
+  expectRefs('#cv-chemistry-note', precursor === 'silane' && mode === 'PECVD' ? [...chemistry, 32] : chemistry);
   expectRefs('#cv-role-use', role);
   const renderedEquation = withoutCitations(query('#cv-equation')).replace(/[₀-₉]/g, digit => String('₀₁₂₃₄₅₆₇₈₉'.indexOf(digit))).replace(/\((?:gas|solid)\)/g, '').replace('→', '->');
   if (precursor === 'teos' && mode === 'PECVD') {
     assert.match(query('#cv-chemistry-note').textContent, /not gas ratios or a balanced equation/);
     assert.match(renderedEquation, /variable C\/H\/O/);
+    expectFilmComposition('SiO2', 1, `${precursor}/${mode}`);
   } else {
     const [left, right] = renderedEquation.split('->'); assert.deepEqual(totals(left), totals(right), renderedEquation); equations++;
+    const [, coefficient, formula] = right.split('+')[0].trim().match(/^(\d+)?\s*(.+)$/);
+    expectFilmComposition(formula, Number(coefficient || 1), `${precursor}/${mode}`);
+  }
+  if (precursor === 'silane' && mode === 'PECVD') {
+    const seek = query('#cv-reaction-progress');
+    seek.value = 0; seek.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+    const charged = dom.window.__reactionAtoms.filter(atom => atom.formalCharge);
+    assert.equal(charged.filter(atom => atom.symbol === 'N' && atom.formalCharge === 1).length, 2);
+    assert.equal(charged.filter(atom => atom.symbol === 'O' && atom.formalCharge === -1).length, 2);
+    const bonds = dom.window.__reactionBonds;
+    assert.deepEqual(Array.from(bonds.filter(bond => bond.a === 'N' && bond.b === 'N'), bond => bond.order), [3, 3]);
+    assert.deepEqual(Array.from(bonds.filter(bond => bond.a === 'N' && bond.b === 'O'), bond => bond.order), [1, 1]);
+    for (const sign of ['+', '−']) assert.equal(dom.window.__reactionTexts.filter(text => text === sign).length, 2);
+    seek.value = 1000; seek.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+    for (const sign of ['+', '−']) assert.equal(dom.window.__reactionTexts.filter(text => text === sign).length, 0, 'Input formal charges must fade before neutral products');
   }
   const options = [...query('#cv-component').options].map(option => option.value);
   if (mode === 'MOCVD') {
@@ -116,11 +163,13 @@ for (const [precursor, mode, conditions, range, chemistry, role] of cases) {
   if (!temperature.disabled) { temperature.value = Number(temperature.value) === Number(temperature.max) ? temperature.min : temperature.max; temperature.dispatchEvent(new dom.window.Event('input', { bubbles: true })); expectRefs('#cv-temp', range); expectRefs('#cv-temp-window', range); }
   if (mode === 'PECVD') {
     query('#cv-rf-on').checked = false; query('#cv-rf-on').dispatchEvent(new dom.window.Event('change', { bubbles: true }));
-    assert.match(query('#cv-growth-status').textContent, /RF off/); expectRefs('#cv-equation', chemistry);
+    assert.match(query('#cv-growth-status').textContent, /animation paused: RF off/);
+    assert.match(query('#cv-stage-detail').textContent, /residual thermal chemistry is not modelled/);
+    expectRefs('#cv-equation', chemistry);
   }
 }
 assert.equal(equations, 9);
-assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 31);
+assert.equal(document.querySelectorAll('#cv-reference-list > li').length, 32);
 assert.equal(query('#cv-precursor').options.length, 7);
 assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
 assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);
@@ -164,4 +213,4 @@ for (const step of document.querySelectorAll('[data-fab-cite]')) {
 }
 assert.deepEqual(errors, [], 'JavaScript execution errors');
 dom.window.close();
-console.log(`DOM evidence checks passed: ${cases.length} presets, ${parts} component states, stage/RF/temperature changes, nine rendered balanced equations, MOCVD delivery/substrate/activation, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);
+console.log(`DOM evidence checks passed: ${cases.length} presets, formula-unit proportions in all rendered film backdrops and animated films, ${parts} component states, stage/RF/temperature changes, nine rendered balanced equations, MOCVD delivery/substrate/activation, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);
