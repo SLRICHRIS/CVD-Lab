@@ -333,14 +333,21 @@ reactor/atom-balance panels share the available width more evenly. Figure keys
 and citation numbers use 14 px type. The larger reference material follows the
 lab, with the transport model and background topics available as disclosures.
 All three Canvas 2D renderers rebuild their drawing buffers when display pixel
-density changes, including while playback is paused and the CSS dimensions stay
-fixed. Resolution, resize and page-restore events trigger repainting. A visible-page
-check also detects density changes without browser events and repaints only when
-the density changes. Buffers use
-at least one pixel per CSS pixel and up to three for higher-density displays.
+density or pinch zoom changes, including while playback is paused and the CSS
+dimensions stay fixed. The effective scale includes `VisualViewport.scale` from
+the top page in the same-origin Streamlit host. Pinch zoom does not change
+`devicePixelRatio`; see [MDN's explanation](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio)
+and [VisualViewport documentation](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport).
+Resolution, visual-viewport resize and page-restore events trigger repainting.
+A visible-page check also detects changes without browser events and repaints
+only when the effective scale changes. Buffers retain the existing one-to-three
+pixels per CSS pixel limit; magnification beyond that limit does not add resolution.
 The browser check changes pixel density from one-third through 1, 1.25, 2 and 3
 and back to 1, verifies the buffers and unchanged simulation state, and repeats
-the checks inside the Streamlit iframe.
+the checks inside the Streamlit iframe. It also checks 1.5x, 2x and 3x pinch
+zoom, combined display/pinch scaling, return to normal zoom and the resolution
+cap. The parent page is zoomed in the Streamlit test, with the iframe's CSS size
+and simulation state checked independently.
 If the entire app appears as a tiny central column, reset browser zoom to
 100% with Ctrl+0 (Windows/Linux) or Command+0 (macOS). Browser zoom scales both
 the Streamlit toolbar and the embedded lab; the app does not override it.

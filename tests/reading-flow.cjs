@@ -16,7 +16,7 @@ const {chromium}=require('playwright');
   try {
     const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),errors=[];
     page.on('pageerror',error=>errors.push(error.message));
-    // Change pixel density without changing the CSS viewport. This reproduces
+    // Change pixel density and pinch zoom without changing the CSS viewport. This reproduces
     // the paused-canvas blur after zooming on a fixed-width desktop layout.
     const checkCanvasResolution=async(scope,label)=>{
       await page.setViewportSize({width:1906,height:1000});
@@ -32,9 +32,11 @@ const {chromium}=require('playwright');
           assert.equal(state.running,false,label+': resolution checks require paused playback');
           const before=await pixels();
           assert.equal(before.length,view==='environment'?1:2,label+': missing visible canvas');
-          for(const density of [1/3,1,1.25,2,3,1]) {
+          for(const [density,pinch] of [[1/3,1],[1,1],[1.25,1],[2,1],[3,1],[1,1],[1,1.5],[1,2],[1,3],[1.25,2],[2,1.5],[3,2],[1,1]]) {
             await session.send('Emulation.setDeviceMetricsOverride',{width:1906,height:1000,deviceScaleFactor:density,mobile:false});
-            const ratio=Math.min(3,Math.max(1,density));
+            await session.send('Emulation.setPageScaleFactor',{pageScaleFactor:pinch});
+            assert.ok(Math.abs(await page.evaluate(()=>visualViewport.scale)-pinch)<.01,label+': pinch zoom was not exercised');
+            const ratio=Math.min(3,Math.max(1,density*pinch));
             let measured;
             for(let attempt=0;attempt<30;attempt++) {
               measured=await pixels();
@@ -43,16 +45,21 @@ const {chromium}=require('playwright');
             }
             for(const c of measured) {
               assert.ok(Math.abs(c.width-c.cssWidth*ratio)<=1&&Math.abs(c.height-c.cssHeight*ratio)<=1,
-                `${label} ${c.id}: stale bitmap at density ${density} (${c.width} x ${c.height})`);
+                `${label} ${c.id}: stale bitmap at density ${density}, pinch ${pinch} (${c.width} x ${c.height})`);
               const original=before.find(old=>old.id===c.id);
               assert.ok(Math.abs(c.cssWidth-original.cssWidth)<1&&Math.abs(c.cssHeight-original.cssHeight)<1,
                 label+': the canvas CSS size changed, so the density-only regression was not exercised');
             }
             assert.deepEqual(await root.evaluate(()=>window.CVDLab.snapshot()),state,label+': resizing changed simulation state');
+            if(density===1&&pinch===2) {
+              await scope.locator('canvas:visible').first().evaluate(c=>c.scrollIntoView({block:'start'}));
+              await page.screenshot({path:path.join(output,`pinch-${label}-${view}.png`),timeout:60000});
+            }
           }
           for(const c of await pixels()) await scope.locator('#'+c.id).screenshot({path:path.join(output,`resolution-${label}-${c.id}.png`),timeout:60000});
         }
       } finally {
+        await session.send('Emulation.setPageScaleFactor',{pageScaleFactor:1});
         await session.send('Emulation.clearDeviceMetricsOverride');await session.detach();
         await page.setViewportSize({width:1440,height:1000});
       }
@@ -295,7 +302,7 @@ const {chromium}=require('playwright');
       console.log('Streamlit 1.65 checks passed: guide/reference expansion and collapse, three view heights, mobile/desktop/wide-screen resizing, centered usable workspace width, compact host padding and no unused footer tail.');
     }
     assert.deepEqual(errors,[],'Browser JavaScript errors');
-    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast, three paused canvas buffers across display-density changes, bounded reading widths and 320/390/768/1440/1906/2560 px layouts.');
+    console.log('Reading-flow checks passed: nine contents routes, sixteen Unit III topics and study gaps, six cited study launches, qualified exam priorities, source transcription, feedback links, hidden-view reveal, history, cited film roles, light/dark prose contrast, three paused canvas buffers across display-density and parent-page pinch-zoom changes, bounded reading widths and 320/390/768/1440/1906/2560 px layouts.');
   } finally {
     await browser.close();
     if(server)server.kill('SIGTERM');

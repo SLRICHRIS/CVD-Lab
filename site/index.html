@@ -3614,6 +3614,13 @@
   <script>
     (() => {
       const root=document.getElementById('cvd-recipe-accuracy'),canvas=root.querySelector('#cv-canvas'),ctx=canvas.getContext('2d'),viewport=root.querySelector('.cv-viewport');
+      const displayPixelRatio=()=>{
+        let pinchScale=window.visualViewport?.scale||1;
+        // Streamlit's same-origin iframe has its own layout viewport. Pinch
+        // zoom belongs to the top page and does not change devicePixelRatio.
+        try {pinchScale=window.top.visualViewport?.scale||pinchScale;} catch { /* Use this frame's available viewport. */ }
+        return Math.min(3,Math.max(1,(window.devicePixelRatio||1)*pinchScale));
+      };
       const state={process:'PECVD',precursor:'silane',stage:'deposit',component:'wafer',yaw:.64,pitch:.31,zoom:1,growth:0,temperature:300,rfOn:true,running:false,elapsed:0,speed:1,loop:true};
       const precursors={
         silane:{name:'Silane',formula:'SiH₄',phase:'gas',presets:{
@@ -3878,7 +3885,7 @@
         });
       }
       function drawReaction(){
-        const bounds=reactionCanvas.getBoundingClientRect(),w=Math.max(200,bounds.width),h=bounds.height||280,dpr=Math.min(3,Math.max(1,window.devicePixelRatio||1));
+        const bounds=reactionCanvas.getBoundingClientRect(),w=Math.max(200,bounds.width),h=bounds.height||280,dpr=displayPixelRatio();
         if(reactionCanvas.width!==Math.round(w*dpr)||reactionCanvas.height!==Math.round(h*dpr)){reactionCanvas.width=Math.round(w*dpr);reactionCanvas.height=Math.round(h*dpr);}
         const c=reactionCtx;c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
         const scene=buildReaction(w,h),positions=atomPositions(scene),g=state.growth,baseline=h-37;
@@ -4123,7 +4130,7 @@
       function projection(){const target=[0,2,0],distance=(recipe().chamber==='single'?13.5:18.7)/state.zoom;eye=V.add(target,[distance*Math.sin(state.yaw)*Math.cos(state.pitch),distance*Math.sin(state.pitch),distance*Math.cos(state.yaw)*Math.cos(state.pitch)]);const forward=V.norm(V.sub(target,eye)),right=V.norm(V.cross(forward,[0,1,0])),up=V.cross(right,forward),f=Math.min(width-(width>=700?320:0),height*1.75)*1.19;return p=>{const v=V.sub(p,eye),z=V.dot(v,forward);return {x:width/2+V.dot(v,right)*f/z,y:height*.54-V.dot(v,up)*f/z,z};};}
       function rgb(name,light=1){return 'rgb('+(palette[name]||palette.metal).map(v=>Math.max(0,Math.min(255,Math.round(v*light)))).join(',')+')';}
       function polygon(points,fill,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1;}
-      function draw(){const bounds=canvas.getBoundingClientRect();width=Math.max(200,bounds.width);height=bounds.height||400;const ratio=Math.min(3,Math.max(1,window.devicePixelRatio||1));if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);geometry();const project=projection();polygon([[-14,-.02,-7],[14,-.02,-7],[14,-.02,7],[-14,-.02,7]].map(project),rgb('floor'),.23);for(const [x,z,rx,rz]of (recipe().chamber==='single'?[[0,0,1.8,1.65],[-3.2,0,.8,.8],[3.25,.1,1.2,.7]]:[[0,0,4.3,1.7],[-4.8,0,.8,.8],[4.4,0,1.1,.7]])){const points=Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return project([x+rx*Math.cos(a),.01,z+rz*Math.sin(a)]);});polygon(points,rgb('dark'),.065);}const light=V.norm([-.4,.9,.6]);projected=faces.map(face=>{const points=face.p.map(project),center=V.scale(face.p.reduce((a,p)=>V.add(a,p),[0,0,0]),1/face.p.length),normal=V.norm(V.cross(V.sub(face.p[1],face.p[0]),V.sub(face.p[2],face.p[0]))),toward=V.norm(V.sub(eye,center)),base=.56+.36*Math.max(0,V.dot(normal,light)),half=V.norm(V.add(light,toward)),spec=(face.material==='metal'?.14:.04)*Math.pow(Math.max(0,V.dot(normal,half)),18);return {...face,points,depth:points.reduce((s,p)=>s+p.z,0)/points.length,shade:face.material==='plasma'?1:base+spec};}).filter(f=>f.points.every(p=>p.z>.1)).sort((a,b)=>b.depth-a.depth);for(const face of projected)polygon(face.points,rgb(face.material,face.shade),face.alpha);for(const line of lines){const points=line.points.map(project);ctx.strokeStyle=rgb(line.color);ctx.lineWidth=line.width;ctx.globalAlpha=.7;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.globalAlpha=1;}drawChamberMolecules(project);drawPartLabels(project);drawReaction();canvas.setAttribute('aria-label',state.process+' chamber cutaway. Parts: '+parts().map(p=>p.text).join(', '));}
+      function draw(){const bounds=canvas.getBoundingClientRect();width=Math.max(200,bounds.width);height=bounds.height||400;const ratio=displayPixelRatio();if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,width,height);geometry();const project=projection();polygon([[-14,-.02,-7],[14,-.02,-7],[14,-.02,7],[-14,-.02,7]].map(project),rgb('floor'),.23);for(const [x,z,rx,rz]of (recipe().chamber==='single'?[[0,0,1.8,1.65],[-3.2,0,.8,.8],[3.25,.1,1.2,.7]]:[[0,0,4.3,1.7],[-4.8,0,.8,.8],[4.4,0,1.1,.7]])){const points=Array.from({length:36},(_,i)=>{const a=i*Math.PI/18;return project([x+rx*Math.cos(a),.01,z+rz*Math.sin(a)]);});polygon(points,rgb('dark'),.065);}const light=V.norm([-.4,.9,.6]);projected=faces.map(face=>{const points=face.p.map(project),center=V.scale(face.p.reduce((a,p)=>V.add(a,p),[0,0,0]),1/face.p.length),normal=V.norm(V.cross(V.sub(face.p[1],face.p[0]),V.sub(face.p[2],face.p[0]))),toward=V.norm(V.sub(eye,center)),base=.56+.36*Math.max(0,V.dot(normal,light)),half=V.norm(V.add(light,toward)),spec=(face.material==='metal'?.14:.04)*Math.pow(Math.max(0,V.dot(normal,half)),18);return {...face,points,depth:points.reduce((s,p)=>s+p.z,0)/points.length,shade:face.material==='plasma'?1:base+spec};}).filter(f=>f.points.every(p=>p.z>.1)).sort((a,b)=>b.depth-a.depth);for(const face of projected)polygon(face.points,rgb(face.material,face.shade),face.alpha);for(const line of lines){const points=line.points.map(project);ctx.strokeStyle=rgb(line.color);ctx.lineWidth=line.width;ctx.globalAlpha=.7;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();ctx.globalAlpha=1;}drawChamberMolecules(project);drawPartLabels(project);drawReaction();canvas.setAttribute('aria-label',state.process+' chamber cutaway. Parts: '+parts().map(p=>p.text).join(', '));}
       function componentOptions(){const names=parts();if(!names.some(p=>p.id===state.component))state.component=names[0].id;const select=root.querySelector('#cv-component');select.replaceChildren();for(const part of names){const option=document.createElement('option');option.value=part.id;option.textContent=part.text;select.appendChild(option);}select.value=state.component;}
       function text(){
         const r=recipe(),p=state.process;
@@ -4186,6 +4193,7 @@
       window.CVDLab={
         snapshot:()=>{const r=recipe();return {process:state.process,precursor:state.precursor,precursorName:precursors[state.precursor].name,formula:precursors[state.precursor].formula,stage:state.stage,temperature:state.temperature,temperatureClaims:state.temperature===r.temp?r.evidence.conditions:r.evidence.window,rfOn:state.rfOn,running:state.running,elapsed:state.elapsed,speed:state.speed,loop:state.loop,growth:state.growth,film:r.film,material:r.material,feed:r.feed,pressure:r.pressure,rfReference:r.rfReference||'',deliveryNote:r.deliveryNote,byproducts:r.byproducts,chamber:r.chamber,evidence:r.evidence,spec:reactionSpec()};},
         molecularStructure:formula=>molecule(formula),
+        displayPixelRatio,
         redraw:()=>draw(),
         setPlaybackOptions:options=>{if([.25,.5,1,2].includes(options.speed))state.speed=options.speed;if(typeof options.loop==='boolean')state.loop=options.loop;growthText();}
       };
@@ -4267,7 +4275,7 @@
       }
       function clock(now){return snapshot.elapsed+(snapshot.running?Math.min(.3,Math.max(0,(now-received)/1000))*snapshot.speed:0);}
       function render(now=performance.now()){
-        const rect=canvas.getBoundingClientRect(),w=Math.max(260,rect.width||800),h=rect.height||465,dpr=Math.min(3,Math.max(1,window.devicePixelRatio||1));
+        const rect=canvas.getBoundingClientRect(),w=Math.max(260,rect.width||800),h=rect.height||465,dpr=bridge.displayPixelRatio();
         if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
         ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
         const s=snapshot,t=clock(now),small=w<500,scale=Math.min(w/8.8,h/6.9)*ui.zoom,cy=h*.63;
@@ -4592,8 +4600,8 @@
       // A fixed-width, paused canvas may keep the same CSS size when browser
       // zoom or monitor density changes. ResizeObserver alone misses that case.
       // Re-arm the resolution query after each change and repaint all canvases.
-      let displayQuery,displayRatio=window.devicePixelRatio||1;
-      const refreshDisplay=()=>{displayRatio=window.devicePixelRatio||1;window.dispatchEvent(new Event('cvd:display'));};
+      let displayQuery,displayRatio=window.CVDLab.displayPixelRatio();
+      const refreshDisplay=()=>{displayRatio=window.CVDLab.displayPixelRatio();window.dispatchEvent(new Event('cvd:display'));};
       const watchResolution=()=>{
         if(displayQuery) displayQuery.removeEventListener('change',resolutionChanged);
         displayQuery=window.matchMedia('(resolution: '+(window.devicePixelRatio||1)+'dppx)');
@@ -4602,10 +4610,15 @@
       function resolutionChanged(){watchResolution();refreshDisplay();}
       watchResolution();
       window.addEventListener('resize',refreshDisplay);
-      window.addEventListener('pageshow',refreshDisplay);
+      let displayViewport=window.visualViewport;
+      try {displayViewport=window.top.visualViewport||displayViewport;} catch { /* Parent viewport is available only in same-origin hosts. */ }
+      const attachViewport=()=>displayViewport?.addEventListener('resize',refreshDisplay);
+      attachViewport();
+      window.addEventListener('pageshow',()=>{attachViewport();refreshDisplay();});
+      window.addEventListener('pagehide',()=>displayViewport?.removeEventListener('resize',refreshDisplay));
       // Some display/automation paths update devicePixelRatio without a media
       // event. Read it twice per second while visible; repaint only if it changed.
-      const checkResolution=()=>{if(!document.hidden&&(window.devicePixelRatio||1)!==displayRatio)resolutionChanged();};
+      const checkResolution=()=>{if(!document.hidden&&window.CVDLab.displayPixelRatio()!==displayRatio)resolutionChanged();};
       window.setInterval(checkResolution,500);
       document.addEventListener('visibilitychange',checkResolution);
 
