@@ -5,6 +5,10 @@ __pycache__/
 venv/
 .pytest_cache/
 
+# Optional JavaScript verification dependencies
+node_modules/
+test-results/
+
 # Local credentials and settings
 .env
 .env.*
@@ -19,3 +23,4 @@ Thumbs.db
 # Generated archives and local logs
 *.zip
 *.log
+
