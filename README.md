@@ -134,6 +134,14 @@ patents are identified separately. The three LPCVD teaching sliders combine
 a nominal NYCU example with a separate lecture range; the resulting combinations
 are not claimed to be qualified for NYCU's tool.
 
+All 31 references were checked against their linked assertions. The register
+records the checked copy and verification method. Mixed citations identify the
+specific source's role: a facility gas list supports a feed pairing, while a
+separate equation source establishes net stoichiometry. The obsolete vapour
+delivery link was replaced with the official 1150C datasheet; bibliography dates
+and silicon/SiC, cleaning and TEOS citation scopes were corrected. This source
+review is separate from the automated citation-integrity checks.
+
 The process labels describe different attributes: AP/LP concern pressure, PE
 concerns plasma activation, and MO concerns precursor chemistry. They can overlap.
 Select **Trimethylgallium (TMGa)** to open the thermal, reduced-pressure GaN MOCVD

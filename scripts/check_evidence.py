@@ -64,7 +64,7 @@ def markdown(data: dict) -> str:
         "",
         "- Replaced the DCS/ammonia equation attribution to a facility gas list with Peev et al., Eq. (1), a research article with the actual balanced equation. The malformed nitride lines in the lecture sources are not used as chemical evidence.",
         "- Kept Toronto nitrogen dilution separate from Stanford’s helium dilution; Toronto supports the displayed 300 °C / 1000 mTorr / 30 W example.",
-        "- Identified the SiCl₄ range as background Table I in EP0114876B1, not an experiment implementing that patent’s bromosilane invention.",
+        "- Identified the SiCl₄ range as background Table I and its 1200 °C example as background Table II in EP0114876B1, not results of that patent’s bromosilane invention.",
         "- Marked the TEOS PECVD window and RF power as equipment-specific patent values for the described 300 mm equipment.",
         "- Made the TEOS PECVD view a qualitative species map. Its illustrative atom pool does not assert a 1:1 TEOS:O₂ reaction or a measured organic-exhaust composition.",
         "- Disclosed the omitted secondary wall-heating plasma in the TiN patent. The drawing illustrates the primary thermal growth reaction only.",
@@ -72,6 +72,8 @@ def markdown(data: dict) -> str:
         "- Limited the silicon-nitride role text to cited passivation/moisture-barrier applications; removed the oxidation-mask extension from a source that did not establish it.",
         "- Added sources for gas metering, vapour delivery, RF matching, pressure feedback and each fabrication explanation.",
         "- Added a GaN MOCVD preset with the TMGa/ammonia net equation, sample T2 conditions from Liang et al., a prepared sapphire/buffer/template stack and separately sourced showerhead architecture. Pressure, activation and precursor-chemistry labels are distinguished.",
+        "- Checked all 31 references against their linked assertions. Replaced the broken vapour-delivery URL with the official 1150C datasheet, corrected bibliography dates, rebound wafer cleaning and silicon-substrate claims, and removed the TEOS-specific attribution to an Oxford page that does not establish that feed pairing.",
+        "- Added source-specific roles to mixed citations, so a facility gas list cannot be mistaken for the source of a balanced equation. Reference verification methods and checked copies are recorded below.",
         "",
         "## Claim register",
         "",
@@ -81,7 +83,7 @@ def markdown(data: dict) -> str:
     escape = lambda text: str(text).replace("|", "\\|").replace("\n", " ")
     for key, claim in data["claims"].items():
         evidence = "; ".join(
-            f"[{item['source']}](#ref-{item['source']}): {item['locator']}"
+            f"[{item['source']}](#ref-{item['source']}): {item['locator']}" + (f" — supports: {item['supports']}" if item.get('supports') else "")
             for item in claim["evidence"]
         )
         lines.append(f"| `{key}` | {escape(claim['statement'])} | {escape(evidence)} | {escape(claim.get('note', ''))} |")
@@ -102,7 +104,9 @@ def markdown(data: dict) -> str:
             f"Scope: {source['limits']}",
         ]
         if source.get("alternate"):
-            lines += ["", f"[Alternate / author full text]({source['alternate']})."]
+            lines += ["", f"[{source['alternate_label']}]({source['alternate']})."]
+        verification = source["verification"]
+        lines += ["", f"Verification ({verification['date']}): [{verification['method']}]({verification['url']}). {verification['note']}"]
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
 
@@ -127,11 +131,21 @@ def main() -> None:
         for field in ("author", "title", "year", "kind", "url", "locator", "scope", "limits", "accessed"):
             assert source.get(field), f"Reference {source['id']} has no {field}"
         assert urlparse(source["url"]).scheme == "https", f"Untrusted source scheme: {source['url']}"
+        if source.get("alternate"):
+            assert urlparse(source["alternate"]).scheme == "https", f"Untrusted alternate source: {source['id']}"
+            assert source.get("alternate_label"), f"Reference {source['id']} needs a precise alternate-link label"
+        verification = source.get("verification", {})
+        for field in ("date", "method", "url", "note"):
+            assert verification.get(field), f"Reference {source['id']} has no verification {field}"
+        assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", verification["date"]), f"Invalid verification date: {source['id']}"
+        assert urlparse(verification["url"]).scheme == "https", f"Untrusted checked copy: {source['id']}"
     for key, claim in claims.items():
         assert claim["statement"] and claim["evidence"], f"Unsupported claim record: {key}"
         for item in claim["evidence"]:
             assert item["source"] in sources, f"{key}: missing source {item['source']}"
             assert item["locator"], f"{key}: missing claim-specific locator"
+            if "supports" in item:
+                assert item["supports"].strip(), f"{key}: empty source-support qualification"
             referenced.add(item["source"])
     assert referenced == sources.keys(), f"Unreferenced sources: {sources.keys() - referenced}"
     for key in parsed.bindings:

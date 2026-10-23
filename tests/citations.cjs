@@ -28,7 +28,7 @@ const { chromium } = require('playwright');
     { p: 'silane', mode: 'APCVD', conditions: [4], chemistry: [4, 9], role: [18], t: '400', window: [4], eq: 'SiH4 + O2 -> SiO2 + 2H2' },
     { p: 'dcs', mode: 'LPCVD', conditions: [2], chemistry: [12, 21], role: [3, 19], t: '800', window: [3], eq: '3SiH2Cl2 + 4NH3 -> Si3N4 + 6HCl + 6H2' },
     { p: 'teos', mode: 'LPCVD', conditions: [2], chemistry: [10], role: [18], t: '700', window: [3], eq: 'Si(OC2H5)4 -> SiO2 + 4C2H4 + 2H2O' },
-    { p: 'teos', mode: 'PECVD', conditions: [8], chemistry: [8, 13], role: [18], t: '350', window: [8] },
+    { p: 'teos', mode: 'PECVD', conditions: [8], chemistry: [8], role: [18], t: '350', window: [8] },
     { p: 'sicl4', mode: 'APCVD', conditions: [5], chemistry: [5, 9], role: [3], t: '1200', window: [5], eq: 'SiCl4 + 2H2 -> Si + 4HCl' },
     { p: 'wf6', mode: 'LPCVD', conditions: [6], chemistry: [6, 9], role: [18, 22], t: '400', window: [6], eq: 'WF6 + 3H2 -> W + 6HF' },
     { p: 'tmga', mode: 'MOCVD', conditions: [30], chemistry: [29], role: [28], t: '1050', window: [30], eq: 'Ga(CH3)3 + NH3 -> GaN + 3CH4' },
@@ -152,6 +152,7 @@ const { chromium } = require('playwright');
     await page.screenshot({ path: path.join(outputDir, `cvd-qa-${width}-${colorScheme}.png`), fullPage: true });
     await page.locator('.cv-workspace').screenshot({ path: path.join(outputDir, `mocvd-workspace-${width}-${colorScheme}.png`) });
     await page.locator('#cv-studio').screenshot({ path: path.join(outputDir, `mocvd-controls-${width}-${colorScheme}.png`) });
+    await page.locator('#cv-ref-26').screenshot({ path: path.join(outputDir, `citation-reference-${width}-${colorScheme}.png`) });
   }
   assert.deepEqual(errors, [], 'Browser JavaScript errors');
   await browser.close();

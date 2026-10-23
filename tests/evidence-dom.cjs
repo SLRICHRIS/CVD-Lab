@@ -68,7 +68,7 @@ const cases = [
   ['silane', 'APCVD', [4], [4], [4, 9], [18]],
   ['dcs', 'LPCVD', [2], [3], [12, 21], [3, 19]],
   ['teos', 'LPCVD', [2], [3], [10], [18]],
-  ['teos', 'PECVD', [8], [8], [8, 13], [18]],
+  ['teos', 'PECVD', [8], [8], [8], [18]],
   ['sicl4', 'APCVD', [5], [5], [5, 9], [3]],
   ['wf6', 'LPCVD', [6], [6], [6, 9], [18, 22]],
   ['tmga', 'MOCVD', [30], [30], [29], [28]],
@@ -125,6 +125,23 @@ assert.equal(query('#cv-precursor').options.length, 7);
 assert.equal(document.querySelectorAll('.cv-recipes-table [data-cvd-type]').length, cases.length);
 assert.equal(document.querySelectorAll('.cv-recipes-table thead th').length, 6);
 assert.match(query('#cv-mocvd-definition').textContent, /MOVPE/);
+// A gas-list citation must identify its narrower role beside a net equation.
+change('#cv-precursor', 'silane'); query('[data-process="PECVD"]').click();
+assert.match(query('#cv-equation a[data-reference="11"]').title, /feed pairing only/);
+assert.match(query('#cv-equation a[data-reference="9"]').title, /Net equation/);
+assert.match(query('#cv-ref-26').textContent, /1150C/);
+assert.match(query('#cv-ref-27').textContent, /2018/);
+assert.match(query('#cv-ref-17').textContent, /2023/);
+assert.match(query('#cv-ref-10').textContent, /Shiang-Cheng Lu/);
+assert.match(query('#cv-ref-30').textContent, /Reviewed full text/);
+assert.match(query('#cv-ref-26 > a').href, /1150C-MFC-DS\.pdf/);
+expectRefs('[data-cite="wafer"]', [16]);
+for (const source of dom.window.CVDEvidence.sources.values()) {
+  assert.ok(source.verification?.method, source.id);
+  assert.match(query(`#cv-ref-${source.id}`).textContent, /Verification:/);
+}
+// Restore the last recipe before checking reference focus/return below.
+change('#cv-precursor', 'ticl4');
 const allIds = [...document.querySelectorAll('[id]')].map(element => element.id);
 assert.equal(new Set(allIds).size, allIds.length, 'Duplicate element IDs');
 for (const claim of document.querySelectorAll('[data-cite]')) assert.ok(claim.querySelector(':scope > .cv-citations a'), `Uncited claim: ${claim.dataset.cite}`);
@@ -140,7 +157,11 @@ query('#cv-references').open = false;
 query('#cv-pressure > .cv-citations a').click();
 assert.equal(query('#cv-references').open, true);
 assert.equal(document.activeElement.id, 'cv-ref-7');
-for (const step of document.querySelectorAll('[data-fab-cite]')) { step.click(); assert.equal(query('#cv-fab-description').dataset.cite, step.dataset.fabCite); }
+for (const step of document.querySelectorAll('[data-fab-cite]')) {
+  step.click(); assert.equal(query('#cv-fab-description').dataset.cite, step.dataset.fabCite);
+  if (step.dataset.fabCite === 'fab-prepare') expectRefs('#cv-fab-description', [1]);
+  if (step.dataset.fabCite === 'fab-oxidation') expectRefs('#cv-fab-description', [10]);
+}
 assert.deepEqual(errors, [], 'JavaScript execution errors');
 dom.window.close();
 console.log(`DOM evidence checks passed: ${cases.length} presets, ${parts} component states, stage/RF/temperature changes, nine rendered balanced equations, MOCVD delivery/substrate/activation, all citation targets, reference focus/return and seven fabrication explanations. Canvas is stubbed; no visual-layout claim is made.`);
