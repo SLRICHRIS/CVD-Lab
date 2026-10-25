@@ -1,0 +1,26 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Optional JavaScript verification dependencies
+node_modules/
+test-results/
+
+# Local credentials and settings
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated archives and local logs
+*.zip
+*.log
+
